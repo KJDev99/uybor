@@ -1,4 +1,4 @@
-import AllElon from "@/components/AllElon";
+import TopElon from "@/components/TopElon";
 import Categorys from "@/components/Categorys";
 import Hero from "@/components/Hero";
 import React from "react";
@@ -8,7 +8,7 @@ const page = () => {
     <>
       <Hero />
       <Categorys />
-      <AllElon />
+      <TopElon />
     </>
   );
 };

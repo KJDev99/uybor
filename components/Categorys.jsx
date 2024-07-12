@@ -9,7 +9,7 @@ import Mehmonxona from "@/assets/images/Mehmonxona.png";
 const Categorys = () => {
   return (
     <div className="flex flex-col container">
-      <h2 className="mt-[50px] mb-[30px] text-2xl text-qora">Kategoriyalar</h2>
+      <h2 className="mt-[50px] mb-[30px] text-2xl text-qora font-semibold">Kategoriyalar</h2>
       <div className="flex justify-between flex-wrap">
         <Category image={Kvartiralar} text="Kvartiralar" v/>
         <Category image={Xovlilar} text="Xovlilar" />
