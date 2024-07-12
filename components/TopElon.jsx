@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setView } from "@/store";
 import Image from "next/image";
 import SeeBlock from "@/assets/images/seeblock.svg";
 import SeeLine from "@/assets/images/seeline.svg";
@@ -7,9 +9,107 @@ import SeeBlockAct from "@/assets/images/seeblockact.svg";
 import SeeLineAct from "@/assets/images/seelineact.svg";
 import MainImg from "@/assets/images/asosiyrasm.png";
 import ElonBlock from "./ElonBlock";
+
 const TopElon = () => {
-  const [view, setView] = useState("block");
   const [valyuta, setValyuta] = useState("uzs");
+
+  const view = useSelector((state) => state.view);
+  const dispatch = useDispatch();
+
+  const handleViewChange = (newView) => {
+    dispatch(setView(newView));
+  };
+
+  const allElonlar = [
+    {
+      image: MainImg,
+      top: true,
+      save: true,
+      turi: "sotiladi",
+      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
+      address: "Toshkent, Yakksaroy",
+      data: "17.05.2024",
+      price: "1 250 000 000 so‘m ",
+      view: view,
+    },
+    {
+      image: MainImg,
+      top: true,
+      save: true,
+      turi: "sotiladi",
+      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
+      address: "Toshkent, Yakksaroy",
+      data: "17.05.2024",
+      price: "1 250 000 000 so‘m ",
+      view: view,
+    },
+    {
+      image: MainImg,
+      top: true,
+      save: true,
+      turi: "sotiladi",
+      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
+      address: "Toshkent, Yakksaroy",
+      data: "17.05.2024",
+      price: "1 250 000 000 so‘m ",
+      view: view,
+    },
+    {
+      image: MainImg,
+      top: true,
+      save: true,
+      turi: "sotiladi",
+      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
+      address: "Toshkent, Yakksaroy",
+      data: "17.05.2024",
+      price: "1 250 000 000 so‘m ",
+      view: view,
+    },
+    {
+      image: MainImg,
+      top: true,
+      save: false,
+      turi: "ijara",
+      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
+      address: "Toshkent, Yakksaroy",
+      data: "17.05.2024",
+      price: "1 250 000 000 so‘m ",
+      view: view,
+    },
+    {
+      image: MainImg,
+      top: true,
+      save: true,
+      turi: "sotiladi",
+      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
+      address: "Toshkent, Yakksaroy",
+      data: "17.05.2024",
+      price: "1 250 000 000 so‘m ",
+      view: view,
+    },
+    {
+      image: MainImg,
+      top: true,
+      save: true,
+      turi: "sotiladi",
+      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
+      address: "Toshkent, Yakksaroy",
+      data: "17.05.2024",
+      price: "1 250 000 000 so‘m ",
+      view: view,
+    },
+    {
+      image: MainImg,
+      top: true,
+      save: true,
+      turi: "sotiladi",
+      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
+      address: "Toshkent, Yakksaroy",
+      data: "17.05.2024",
+      price: "1 250 000 000 so‘m ",
+      view: view,
+    },
+  ];
 
   return (
     <div className="flex flex-col container  ">
@@ -23,13 +123,13 @@ const TopElon = () => {
             <Image
               src={view == "block" ? SeeBlockAct : SeeBlock}
               alt="SeeBlock"
-              onClick={() => setView("block")}
+              onClick={() => handleViewChange("block")}
               className="mx-5 cursor-pointer"
             />
             <Image
               src={view == "line" ? SeeLineAct : SeeLine}
               alt="SeeLine"
-              onClick={() => setView("line")}
+              onClick={() => handleViewChange("line")}
               className="cursor-pointer"
             />
           </div>
@@ -65,94 +165,9 @@ const TopElon = () => {
               : "grid grid-cols-1 gap-5"
           }`}
         >
-          <ElonBlock
-            image={MainImg}
-            top={true}
-            save={true}
-            turi={"sotiladi"}
-            name={"Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida"}
-            address={"Toshkent, Yakksaroy"}
-            data={"17.05.2024"}
-            price={"1 250 000 000 so‘m "}
-            view={view}
-          />
-          <ElonBlock
-            image={MainImg}
-            top={true}
-            save={false}
-            turi={"ijara"}
-            name={"Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida"}
-            address={"Toshkent, Yakksaroy"}
-            data={"17.05.2024"}
-            price={"1 250 000 000 so‘m "}
-            view={view}
-          />
-          <ElonBlock
-            image={MainImg}
-            top={true}
-            save={false}
-            turi={"sotiladi"}
-            name={"Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida"}
-            address={"Toshkent, Yakksaroy"}
-            data={"17.05.2024"}
-            price={"1 250 000 000 so‘m "}
-            view={view}
-          />
-          <ElonBlock
-            image={MainImg}
-            top={true}
-            save={true}
-            turi={"ijara"}
-            name={"Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida"}
-            address={"Toshkent, Yakksaroy"}
-            data={"17.05.2024"}
-            price={"1 250 000 000 so‘m "}
-            view={view}
-          />
-          <ElonBlock
-            image={MainImg}
-            top={true}
-            save={false}
-            turi={"ijara"}
-            name={"Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida"}
-            address={"Toshkent, Yakksaroy"}
-            data={"17.05.2024"}
-            price={"1 250 000 000 so‘m "}
-            view={view}
-          />
-          <ElonBlock
-            image={MainImg}
-            top={true}
-            save={false}
-            turi={"sotiladi"}
-            name={"Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida"}
-            address={"Toshkent, Yakksaroy"}
-            data={"17.05.2024"}
-            price={"1 250 000 000 so‘m "}
-            view={view}
-          />
-          <ElonBlock
-            image={MainImg}
-            top={true}
-            save={false}
-            turi={"ijara"}
-            name={"Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida"}
-            address={"Toshkent, Yakksaroy"}
-            data={"17.05.2024"}
-            price={"1 250 000 000 so‘m "}
-            view={view}
-          />
-          <ElonBlock
-            image={MainImg}
-            top={true}
-            save={false}
-            turi={"ijara"}
-            name={"Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida"}
-            address={"Toshkent, Yakksaroy"}
-            data={"17.05.2024"}
-            price={"1 250 000 000 so‘m "}
-            view={view}
-          />
+          {allElonlar.map((elon, index) => (
+            <ElonBlock key={index} {...elon} />
+          ))}
         </div>
       </div>
     </div>

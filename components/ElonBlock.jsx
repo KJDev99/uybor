@@ -1,21 +1,14 @@
+'use client'
 import Image from "next/image";
 import SavedImg from "@/assets/images/saveelon.svg";
 import NoSavedImg from "@/assets/images/nosaveelon.svg";
 import { CiLocationOn } from "react-icons/ci";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
-const ElonBlock = ({
-  top,
-  image,
-  save,
-  turi,
-  name,
-  address,
-  data,
-  price,
-  view,
-}) => {
+const ElonBlock = ({ top, image, save, turi, name, address, data, price }) => {
   const [saved, setSaved] = useState(save);
+  const view = useSelector((state) => state.view);
   return (
     <>
       {view == "block" ? (
