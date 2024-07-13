@@ -1,6 +1,5 @@
-import Button from "./Button";
-import Search from "@/assets/images/search.svg";
-import { IoMdClose } from "react-icons/io";
+import Filter from "./Filter";
+import Search from "./Search";
 
 const Hero = () => {
   return (
@@ -9,16 +8,9 @@ const Hero = () => {
       style={{ backgroundImage: "url('./images/mainbg.webp')" }}
     >
       <div className="container pt-[50px]">
-        <div className="flex justify-between mx-[70px] bg-white h-[60px] rounded-2xl relative">
-          <input
-            type="text"
-            className="ml-10 h-full border-none outline-none text-kulrang  w-[calc(100%-200px)]"
-            placeholder="Qidirish"
-          />
-          <IoMdClose className="absolute right-[176px] top-[22px] text-xl text-qora cursor-pointer"/>
-          <div className="mr-[10px] my-[10px] ml-[30px] w-[136px] h-10">
-            <Button main image={Search} text="E’lon&nbsp;joylash" color="white" />
-          </div>
+        <div className="flex flex-col bg-[#FDFEFF] rounded-2xl p-5">
+          <Search />
+          <Filter />
         </div>
       </div>
     </div>

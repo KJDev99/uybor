@@ -4,7 +4,6 @@ import Hero from "@/components/Hero";
 import React from "react";
 import InnerBg from "@/components/InnerBg";
 import Tavfsiya from "@/components/Tavfsiya";
-import Footer from "@/components/Footer";
 
 const page = () => {
   return (
