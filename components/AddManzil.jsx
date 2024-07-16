@@ -94,9 +94,12 @@ const AddManzil = () => {
 
   return (
     <div className="flex flex-col relative mr-[10px]">
-      <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm">
-        Kategoriyani tanlang
+      <h2 className="text-qora text-2xl font-semibold ml-[20px] mt-5 mb-2">
+        Manzil
       </h2>
+      <p className="text-sm text-kulrang mb-2 ml-[20px]">
+        Manzilni qo’lda yozing yoki xaritadan belgilang
+      </p>
       <div className="flex gap-5" ref={categoryRef}>
         <div
           className={`flex p-[10px] h-10 w-1/2 rounded-[10px] justify-between items-center cursor-pointer bg-white border border-kulrangOch`}
@@ -208,9 +211,16 @@ const AddManzil = () => {
         )}
       </div>
       <input
-          type="text"
-          className="mb-5 mt-[10px] outline-none pr-4 overflow-hidden text-qora font-medium flex p-[10px] h-10 w-full rounded-[10px] justify-between items-center cursor-pointer border border-yozish"
-        />
+        type="text"
+        className="mb-5 mt-[10px] outline-none pr-4 overflow-hidden text-qora font-medium flex p-[10px] h-10 w-full rounded-[10px] justify-between items-center cursor-pointer border border-yozish"
+      />
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24537.891990688517!2d64.43917506583864!3d39.756798174628564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f5005d07f3e5d61%3A0x23e40e8c2b477b21!2sTURON%20PLAZA!5e0!3m2!1sru!2s!4v1721148984897!5m2!1sru!2s"
+        width="100%"
+        height="413"
+        loading="lazy"
+        className="mb-5 rounded-[10px] border-none outline-none"
+      ></iframe>
     </div>
   );
 };

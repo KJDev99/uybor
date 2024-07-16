@@ -21,7 +21,7 @@ const ElonBlock = ({
   const [saved, setSaved] = useState(save);
   let view = useSelector((state) => state.view);
   if (viewBlock) {
-    view = (viewBlock);
+    view = viewBlock;
   } else {
   }
   return (
@@ -92,7 +92,11 @@ const ElonBlock = ({
               src={saved ? SavedImg : NoSavedImg}
               alt={image}
               className="absolute top-4 right-4 h-[30px] w-[30px] cursor-pointer"
-              onClick={() => setSaved((prev) => !prev)}
+              onClick={(event) => {
+                event.stopPropagation();
+                event.preventDefault();
+                setSaved((prev) => !prev);
+              }}
             />
             <div className="py-5 px-5 flex flex-col flex-grow">
               <h3 className="line-clamp-2 text-qora text-xl font-semibold flex-grow">

@@ -85,7 +85,7 @@ const ManzilSelect = () => {
 
   return (
     <div className="flex flex-col relative mr-[10px]">
-      <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">Kategoriya</h2>
+      <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">Manzil</h2>
       <div className="flex flex-col" ref={categoryRef}>
         <div
           className={`flex p-[10px] h-10 w-[200px] rounded-[10px] justify-between items-center cursor-pointer ${

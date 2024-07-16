@@ -4,6 +4,9 @@ import KategoriyaTanlash from "@/components/kategoriyaTanlash";
 import SarlavhaKiritish from "@/components/SarlavhaKiritish";
 import AddManzil from "@/components/AddManzil";
 import React, { useState } from "react";
+import AddImage from "@/components/AddImage";
+import TopgaChiqarish from "@/components/TopgaChiqarish";
+import Button from "@/components/Button";
 
 const page = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -52,17 +55,84 @@ const page = () => {
             </span>
           </label>
         </form>
-        <div className="w-1/2 my-5">
-          <KategoriyaTanlash />
+        <div className="w-1/2">
+          <KategoriyaTanlash
+            categories={[
+              "Kvartiralar",
+              "Xovlilar",
+              "Ofislar",
+              "Do'konlar",
+              "Mehmonxona va dachalar",
+            ]}
+            heading="Kategoriyani tanlang"
+          />
         </div>
         <div className="w-1/2">
-          <SarlavhaKiritish />
+          <SarlavhaKiritish
+            label="Sarlavhani kiriting"
+            placeholder="Sarlavha"
+            message="Kamida 10 belgi"
+            type="text"
+          />
         </div>
         <div className="w-1/2">
           <AddNarx />
         </div>
         <div className="w-3/4">
           <AddManzil />
+        </div>
+        <div className="w-full">
+          <AddImage />
+        </div>
+        <div className="w-1/2 flex flex-col">
+          <h2 className="text-2xl font-medium ml-5">Qo’shimcha ma’lumotlar</h2>
+          <KategoriyaTanlash
+            categories={["1", "2", "3", "4", "5"]}
+            heading="Xonalar soni"
+          />
+          <KategoriyaTanlash
+            categories={["birlamchi", "Ikkilamchi"]}
+            heading="Turarjoy turi"
+          />
+          <KategoriyaTanlash
+            categories={["Panel", "G'isht"]}
+            heading="Qurilish turi"
+          />
+          <SarlavhaKiritish label="Uy qurilgan yil" type="number" />
+          <KategoriyaTanlash categories={["Bor", "Yo'q"]} heading="Mebel" />
+          <SarlavhaKiritish label="Yashash maydoni:" type="number" />
+          <SarlavhaKiritish label="Umumiy maydoni:" type="number" />
+          <SarlavhaKiritish label="Qavat" type="number" />
+          <SarlavhaKiritish label="Binoning qavatlari" type="number" />
+          <KategoriyaTanlash
+            categories={["Bor", "Yo'q"]}
+            heading="Vositachilik haqqi"
+          />
+        </div>
+        <div className="w-3/4 flex flex-col">
+          <h2 className="text-2xl font-medium ml-5 mt-5 mb-[10px]">Tavsif</h2>
+          <textarea
+            placeholder="O‘zingizni shu e’lonni ko‘rayotgan odam o’riniga qo’ying va tavsif yozing"
+            className="w-full h-[177px] px-3 py-4 border-kulrangOch  text-kulrang bg-yozish text-sm rounded-[10px] outline-none"
+          ></textarea>
+          <p className="ml-5 text-kulrang mt-1 mb-5 text-sm">
+            Kamida 40ta belgi
+          </p>
+        </div>
+
+        <div className="w-1/2 flex flex-col">
+          <h2 className="text-2xl font-medium ml-5">E’lon beruvchi</h2>
+          <SarlavhaKiritish label="Ism" type="text" />
+          <SarlavhaKiritish label="Telefon raqam" type="number" />
+          <SarlavhaKiritish label="Qo’shimcha telefon raqam" type="number" />
+        </div>
+        <div className="w-3/4">
+          <TopgaChiqarish />
+        </div>
+        <div className="w-full flex justify-center mb-10">
+          <div className="w-1/2 h-[50px]">
+            <Button main text='E’lonni joylash' color='white'/>
+          </div>
         </div>
       </div>
     </div>
