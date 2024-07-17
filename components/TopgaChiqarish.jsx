@@ -14,8 +14,8 @@ const TopgaChiqarish = () => {
   };
 
   return (
-    <div className="flex flex-col">
-      <h2 className="text-qora text-2xl font-semibold ml-[20px] mt-5 mb-2">
+    <div className="flex flex-col mt-[10px]">
+      <h2 className="text-qora text-xl font-semibold">
         Topga chiqarish
       </h2>
       <p className="text-sm text-kulrang mb-2 ml-[20px]">

@@ -21,9 +21,11 @@ const Navbar = () => {
               <Button color="qora" image={Savedmsg} text="Tanlanganlar" />
             </div>
           </Link>
-          <div className="ml-8">
-            <Button color="qora" image={Profil} text="Profil" />
-          </div>
+          <Link href="/profil">
+            <div className="ml-8">
+              <Button color="qora" image={Profil} text="Profil" />
+            </div>
+          </Link>
           <Link href="/addelon">
             <div className="w-[200px] h-10 ml-10">
               <Button

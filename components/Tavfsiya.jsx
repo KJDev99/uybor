@@ -1,6 +1,5 @@
 "use client";
 import { useSelector, useDispatch } from "react-redux";
-import { setView } from "@/store";
 import { useState } from "react";
 import MainImg from "@/assets/images/asosiyrasm.png";
 import ElonBlock from "./ElonBlock";
@@ -9,12 +8,9 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 const itemsPerPage = 20;
 const Tavfsiya = () => {
   const view = useSelector((state) => state.view);
-  const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleViewChange = (newView) => {
-    dispatch(setView(newView));
-  };
+
   const allElonlar = [
     {
       image: MainImg,
