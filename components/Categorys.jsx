@@ -1,10 +1,10 @@
 import React from "react";
 import Category from "./Category";
-import Kvartiralar from "@/assets/images/Kvartiralar.png";
-import Xovlilar from "@/assets/images/Xovlilar.png";
-import Ofislar from "@/assets/images/Ofislar.png";
-import Dokonlar from "@/assets/images/Dokonlar.png";
-import Mehmonxona from "@/assets/images/Mehmonxona.png";
+import Kvartiralar from "@/assets/images/kvartiralar.webp";
+import Xovlilar from "@/assets/images/xovlilar.webp";
+import Ofislar from "@/assets/images/ofislar.webp";
+import Dokonlar from "@/assets/images/dokonlar.webp";
+import Mehmonxona from "@/assets/images/mehmonxona.webp";
 
 const Categorys = () => {
   return (
