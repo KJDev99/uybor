@@ -5,7 +5,7 @@ import NoSavedImg from "@/assets/images/nosaveelon.svg";
 import ShareElonImg from "@/assets/images/shareelon.svg";
 import Image from "next/image";
 import DetailPageImg from "./DetailPageImg";
-import AddInfos from "./addInfos";
+import AddInfos from "./AddInfos";
 
 import ElonSlider from "./ElonSlider";
 
