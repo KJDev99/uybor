@@ -1,5 +1,3 @@
-import React from "react";
-
 const AddInfos = ({ bg, text1, text2 }) => {
   return (
     <div

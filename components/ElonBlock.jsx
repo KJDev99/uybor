@@ -89,7 +89,7 @@ const ElonBlock = ({
               </div>
             </div>
             <Image
-              src={saved ? SavedImg : NoSavedImg}
+              src={saved?SavedImg:NoSavedImg}
               alt={image}
               className="absolute top-4 right-4 h-[30px] w-[30px] cursor-pointer"
               onClick={(event) => {
