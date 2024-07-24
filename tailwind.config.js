@@ -29,12 +29,16 @@ module.exports = {
         sans: ["DM Sans", "sans-serif"],
       },
       container: {
-        center: true, 
+        center: true,
+        padding: {
+          DEFAULT: "20px",
+          md: "0",
+        },
         screens: {
-          sm: "100%", 
-          md: "728px", 
-          lg: "1024px", 
-          xl: "1240px", 
+          sm: "100%",
+          md: "728px",
+          lg: "1024px",
+          xl: "1240px",
         },
       },
     },

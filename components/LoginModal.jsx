@@ -11,12 +11,6 @@ const LoginModal = () => {
   const [step, setStep] = useState(2);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const backStep = () => {
-    if (step > 2) {
-      setStep(step - 1);
-    }
-  };
-
   const handleTogglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
@@ -50,7 +44,7 @@ const LoginModal = () => {
             <input
               type="tel"
               placeholder="Telefon raqam"
-              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra"
+              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora"
             />
             <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
               Parol
@@ -59,7 +53,7 @@ const LoginModal = () => {
               <input
                 type={isPasswordVisible ? "text" : "password"}
                 placeholder="Parol"
-                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra w-full"
+                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full"
               />
               <button
                 type="button"
@@ -122,7 +116,7 @@ const LoginModal = () => {
             <input
               type="text"
               placeholder="Ism"
-              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra"
+              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora"
             />
             <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
               Telefon qaramingiz
@@ -130,7 +124,7 @@ const LoginModal = () => {
             <input
               type="tel"
               placeholder="Telefon raqam"
-              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra"
+              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora"
             />
             <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
               Parol
@@ -139,7 +133,7 @@ const LoginModal = () => {
               <input
                 type={isPasswordVisible ? "text" : "password"}
                 placeholder="Parol"
-                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra w-full"
+                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full"
               />
               <button
                 type="button"
@@ -160,7 +154,7 @@ const LoginModal = () => {
               <input
                 type={isPasswordVisible ? "text" : "password"}
                 placeholder=" Parolni tasdiqlash"
-                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra w-full"
+                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full"
               />
               <button
                 type="button"
@@ -207,7 +201,7 @@ const LoginModal = () => {
             <input
               type="tel"
               placeholder="Telefon raqam"
-              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra"
+              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora"
             />
             <button
               className="bg-main text-white h-[50px] mb-2  text-lg rounded-[5px] mt-5"
@@ -236,7 +230,7 @@ const LoginModal = () => {
             <input
               type="text"
               placeholder="kod"
-              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra"
+              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora"
             />
             <p className="mt-5 text-kulrang text-sm font-semibold">
               Agar kod kelmagan bo'lsa
@@ -275,7 +269,7 @@ const LoginModal = () => {
               <input
                 type={isPasswordVisible ? "text" : "password"}
                 placeholder="Parol"
-                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra w-full"
+                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full"
               />
               <button
                 type="button"
@@ -296,7 +290,7 @@ const LoginModal = () => {
               <input
                 type={isPasswordVisible ? "text" : "password"}
                 placeholder=" Parolni tasdiqlash"
-                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qpra w-full"
+                className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full"
               />
               <button
                 type="button"
@@ -330,14 +324,7 @@ const LoginModal = () => {
 
   return (
     <div className=" flex flex-col items-center justify-center ">
-      {/* {step > 2 && (
-        <button onClick={backStep} className="absolute top-5 left-5 text-qora">
-          <AiOutlineLeft size={24} />
-        </button>
-      )} */}
-
       <Image src={LogoImage} alt="image" className="mb-[40px] mt-[10px]" />
-
       {renderContent()}
     </div>
   );

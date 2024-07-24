@@ -23,7 +23,7 @@ const Navbar = () => {
     document.body.style.overflow = "auto";
   };
   return (
-    <div className="bg-[#EDF7FF]">
+    <div className="bg-[#EDF7FF] max-md:hidden">
       <div className="container h-20 flex justify-between border-b-[0.5px] border-logoKok">
         <Link href="/">
           <Image src={LogoImg} alt="Logo" className="w-[74px] ml-[70px] mt-4" />

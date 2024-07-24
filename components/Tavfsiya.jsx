@@ -10,7 +10,6 @@ const Tavfsiya = () => {
   const view = useSelector((state) => state.view);
   const [currentPage, setCurrentPage] = useState(1);
 
-
   const allElonlar = [
     {
       image: MainImg,
@@ -361,7 +360,9 @@ const Tavfsiya = () => {
             key={pageNumber}
             onClick={() => handlePageClick(pageNumber)}
             className={`w-10 h-10 rounded-md  font-semibold mx-1 ${
-              currentPage === pageNumber ? "bg-ochKok text-logoKok" : "text-qora bg-white"
+              currentPage === pageNumber
+                ? "bg-ochKok text-logoKok"
+                : "text-qora bg-white"
             }`}
           >
             {pageNumber}
@@ -383,13 +384,13 @@ const Tavfsiya = () => {
   return (
     <div className="flex flex-col container  ">
       <div className="flex flex-col">
-        <h2 className="text-main mb-[30px] font-semibold text-2xl">
+        <h2 className="text-main mb-[30px] font-semibold text-2xl max-md:text-sm max-md:mb-[10px]">
           Tavsiya etamiz
         </h2>
         <div
           className={`flex flex-wrap ${
             view == "block"
-              ? "grid grid-cols-4 gap-7"
+              ? "grid grid-cols-4 gap-7 max-md:gap-[15px] max-md:grid-cols-2"
               : "grid grid-cols-1 gap-5"
           }`}
         >
