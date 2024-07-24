@@ -94,15 +94,15 @@ const AddManzil = () => {
 
   return (
     <div className="flex flex-col relative mr-[10px]">
-      <h2 className="text-qora text-2xl font-semibold ml-[20px] mt-5 mb-2">
+      <h2 className="text-qora text-2xl font-semibold ml-[20px] mt-5 mb-2 max-md:ml-0 max-md:text-[16px] max-md:mb-1">
         Manzil
       </h2>
-      <p className="text-sm text-kulrang mb-2 ml-[20px]">
+      <p className="text-sm text-kulrang mb-2 ml-[20px] max-md:ml-0">
         Manzilni qo’lda yozing yoki xaritadan belgilang
       </p>
-      <div className="flex gap-5" ref={categoryRef}>
+      <div className="flex gap-5 max-md:flex-col" ref={categoryRef}>
         <div
-          className={`flex p-[10px] h-10 w-1/2 rounded-[10px] justify-between items-center cursor-pointer bg-white border border-kulrangOch`}
+          className={`flex p-[10px] h-10 w-1/2 max-md:w-full rounded-[10px] justify-between items-center cursor-pointer bg-white border border-kulrangOch`}
           onClick={toggleCategory}
         >
           <p
@@ -117,7 +117,7 @@ const AddManzil = () => {
           />
         </div>
         {isCategoryOpen && (
-          <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-1/2 top-[90px] z-10">
+          <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-1/2 max-md:w-full top-[90px] z-[11]">
             {categories.map((category, index) => (
               <div
                 key={index}
@@ -153,7 +153,7 @@ const AddManzil = () => {
           </div>
         )}
         {selectedCategory && (
-          <div className="flex relative mr-[10px] w-1/2 border border-kulrangOch rounded-[10px]">
+          <div className="flex relative mr-[10px] w-1/2 max-md:w-full  border border-kulrangOch rounded-[10px]">
             <div className="flex flex-col w-full" ref={districtRef}>
               <div
                 className={`flex p-[10px] h-10 w-full rounded-[10px] justify-between items-center cursor-pointer bg-white`}
@@ -216,10 +216,8 @@ const AddManzil = () => {
       />
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24537.891990688517!2d64.43917506583864!3d39.756798174628564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f5005d07f3e5d61%3A0x23e40e8c2b477b21!2sTURON%20PLAZA!5e0!3m2!1sru!2s!4v1721148984897!5m2!1sru!2s"
-        width="100%"
-        height="380"
         loading="lazy"
-        className="mb-5 rounded-[10px] border-none outline-none"
+        className="mb-5 rounded-[10px] border-none outline-none h-[380px] w-full max-md:h-[335px]"
       ></iframe>
     </div>
   );

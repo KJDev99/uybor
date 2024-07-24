@@ -7,6 +7,8 @@ import React, { useState } from "react";
 import AddImage from "@/components/AddImage";
 import TopgaChiqarish from "@/components/TopgaChiqarish";
 import Button from "@/components/Button";
+import { FaAngleLeft } from "react-icons/fa6";
+import Link from "next/link";
 
 const page = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -15,10 +17,19 @@ const page = () => {
     setSelectedOption(e.target.id);
   };
   return (
-    <div className="container bg-white p-[30px]">
-      <h1 className=" text-qora text-2xl font-semibold">E’lonni tahrirlash</h1>
+    <div className="container md:bg-white p-[30px] max-md:p-0">
+      <Link
+        href={"/profil/myelon"}
+        className="md:hidden text-lg font-medium flex items-center"
+      >
+        {" "}
+        <FaAngleLeft />
+        Mening e'lonlarim
+      </Link>
+      <h1 className=" text-qora text-2xl font-semibold max-md:my-2 max-md:text-lg px-5">
+        E’lonni tahrirlash
+      </h1>
       <div className="px-5">
-      
         <div className="w-full">
           <TopgaChiqarish />
         </div>
@@ -49,10 +60,12 @@ const page = () => {
           <AddManzil />
         </div>
         <div className="w-full">
-          <AddImage textImage={true} size={'120'}/>
+          <AddImage textImage={true} size={"120"} />
         </div>
         <div className="w-full flex flex-col">
-          <h2 className="text-2xl font-medium ml-5">Ko’proq ma’lumotlar</h2>
+          <h2 className="text-2xl font-medium ml-5 max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
+            Ko’proq ma’lumotlar
+          </h2>
           <KategoriyaTanlash
             categories={["1", "2", "3", "4", "5"]}
             heading="Xonalar soni"
@@ -77,7 +90,9 @@ const page = () => {
           />
         </div>
         <div className="w-full flex flex-col">
-          <h2 className="text-2xl font-medium ml-5 mt-5 mb-[10px]">Tavsif</h2>
+          <h2 className="text-2xl font-medium ml-5 mt-5 mb-[10px] max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
+            Tavsif
+          </h2>
           <textarea
             placeholder="O‘zingizni shu e’lonni ko‘rayotgan odam o’riniga qo’ying va tavsif yozing"
             className="w-full h-[177px] px-3 py-4 border-kulrangOch  text-kulrang bg-yozish text-sm rounded-[10px] outline-none"
@@ -88,7 +103,9 @@ const page = () => {
         </div>
 
         <div className="w-full flex flex-col">
-          <h2 className="text-2xl font-medium ml-5">E’lon beruvchi</h2>
+          <h2 className="text-2xl font-medium ml-5 max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
+            E’lon beruvchi
+          </h2>
           <SarlavhaKiritish label="Ism" type="text" />
           <SarlavhaKiritish label="Telefon raqam" type="number" />
           <SarlavhaKiritish label="Qo’shimcha telefon raqam" type="number" />

@@ -33,7 +33,7 @@ const KategoriyaTanlash = ({ categories, heading }) => {
 
   return (
     <div className="flex flex-col relative mr-[10px]">
-      <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm">
+      <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm max-md:mt-2">
         {heading}
       </h2>
       <div
@@ -56,7 +56,7 @@ const KategoriyaTanlash = ({ categories, heading }) => {
           />
         </div>
         {isCategoryOpen && (
-          <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-full top-[90px] z-20">
+          <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-full top-[90px] z-20 max-md:top-[70px]">
             {categories.map((category, index) => (
               <div
                 key={index}

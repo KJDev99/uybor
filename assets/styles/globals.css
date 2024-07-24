@@ -111,3 +111,19 @@ body {
     rgb(255, 245, 251) 86.886%
   );
 }
+
+@media (max-width: 768px) {
+  .mySwiper1 {
+    display: none !important;
+  }
+  .mySwiper2 {
+    height: max-content;
+  }
+  .mySwiper2 .swiper-button-prev {
+    margin-left: 0px;
+  }
+
+  .mySwiper2 .swiper-button-next {
+    margin-right: 0px;
+  }
+}

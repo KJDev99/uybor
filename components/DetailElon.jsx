@@ -14,9 +14,9 @@ const DetailElon = () => {
   return (
     <div className="container">
       <div className="grid grid-cols-3">
-        <div className="flex flex-col col-span-2 p-[30px]">
+        <div className="flex flex-col col-span-2 max-md:col-span-3 md:p-[30px]">
           <div className="flex justify-between">
-            <h1 className="font-qora font-semibold text-2xl">
+            <h1 className="font-qora font-semibold text-2xl max-md:text-lg max-md:mt-[10px]">
               Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida{" "}
             </h1>
             <Image
@@ -32,14 +32,16 @@ const DetailElon = () => {
           </div>
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <h2 className="text-logoKok text-2xl font-semibold mb-[10px]">
+              <h2 className="text-logoKok text-2xl font-semibold mb-[10px] max-md:mb-1 max-md:text-[16px]">
                 1 250 000 000 so’m
               </h2>
               <div className="flex items-center">
-                <p className="text-sm font-medium mr-5 text-kulrang">
+                <p className="text-sm max-md:text-xs font-medium mr-5 text-kulrang">
                   Joyalangan sana:
                 </p>
-                <p className="text-qora font-medium">18.06.2024</p>
+                <p className="text-qora max-md:text-xs font-medium">
+                  18.06.2024
+                </p>
               </div>
             </div>
             <div className="h-[33px] w-[33px] bbg-white rounded-full flex items-center  justify-center">
@@ -54,7 +56,7 @@ const DetailElon = () => {
             <DetailPageImg />
           </div>
           <div className="flex flex-col">
-            <h2 className="mt-[30px] mb-[10px] text-qora font-semibold">
+            <h2 className="mt-[30px] mb-[10px] text-qora font-semibold max-md:text-lg max-md:mb-3">
               Qo’shimcha ma’lumotlar
             </h2>
             <AddInfos bg text1={"Turarjoy turi:"} text2={"Ikkilamchi"} />
@@ -69,10 +71,10 @@ const DetailElon = () => {
             <AddInfos text1={"Vositachilik haqi:"} text2={"Yo’q"} />
           </div>
           <div className="flex flex-col">
-            <h2 className="mt-[20px] mb-[10px] text-qora font-semibold">
+            <h2 className="mt-[20px] mb-[10px] text-qora font-semibold  max-md:text-lg max-md:mb-3">
               Tavsif
             </h2>
-            <p className="p-5 bg-white rounded-[10px] text-qora text-xl">
+            <p className="p-5 bg-white rounded-[10px] text-qora text-xl max-md:text-sm max-md:p-[10px]">
               Uy zo’r chotkiy daxshat o’ta baquvat. Har bitta g’ishti mehr bilan
               qo’yilgan, suvoqlarini juda chiroyli qilib o’zim qilganman. Remont
               qimisiz. O’zi zo’r. Hamma sharoitlari bor. WiFi, kirmoshina...
@@ -81,18 +83,18 @@ const DetailElon = () => {
             </p>
           </div>
         </div>
-        <div className="col-span-1 flex flex-col mt-[30px]">
-          <div className="bg-white shadow-lg p-[30px] rounded-[10px]">
-            <h2 className="text-xl mb-5 font-semibold text-qora">
+        <div className="col-span-1 max-md:col-span-3 flex flex-col max-md:flex-col-reverse mt-[30px]">
+          <div className="bg-white shadow-lg p-[30px] rounded-[10px] max-md:my-5 ">
+            <h2 className="text-xl mb-5 font-semibold text-qora ">
               E’lon muallifi
             </h2>
             <div className="flex items-center">
               <img
                 src="https://picsum.photos/75/75"
                 alt="img"
-                className="rounded-full"
+                className="rounded-full max-md:h-[54px] max-md:w-[54px]"
               />
-              <p className="text-2xl ml-[30px] font-semibold text-qora">
+              <p className="text-2xl ml-[30px] font-semibold text-qora max-md:text-[16px]">
                 Xoshimjon
               </p>
             </div>
@@ -109,16 +111,18 @@ const DetailElon = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <h2 className="mt-[30px] mb-5 text-qora font-semibold">Manzil</h2>
+            <h2 className="mt-[30px] mb-5 text-qora font-semibold max-md:mt-5 max-md:mb-2">
+              Manzil
+            </h2>
             <div className="flex">
-              <p className="border border-yozish rounded-[10px] bg-white py-[6px] px-5  text-qora text-lg font-medium mr-5">
+              <p className="border border-yozish rounded-[10px] bg-white py-[6px] px-5  text-qora text-lg font-medium mr-5 max-md:text-xs max-md:p-1">
                 Toshkent shahar
               </p>
-              <p className="border border-yozish rounded-[10px] bg-white py-[6px] px-5  text-qora text-lg font-medium">
+              <p className="border border-yozish rounded-[10px] bg-white py-[6px] px-5  text-qora text-lg font-medium max-md:text-xs max-md:p-1">
                 Yunusobod tuman
               </p>
             </div>
-            <p className="text-qora text-lg font-medium mt-[10px] mb-5">
+            <p className="text-qora text-lg font-medium mt-[10px] mb-5 max-md:text-sm">
               Yunusobod 10-daha, Farogat ko’chasi 21
             </p>
             <iframe
@@ -133,7 +137,7 @@ const DetailElon = () => {
       </div>
       <div className="flex flex-col mb-10">
         <h2 className="text-main mb-[30px] font-semibold text-2xl">
-          Muallifning barcha e’lonlari
+          Muallifning boshqa e’lonlari
         </h2>
         <ElonSlider />
       </div>

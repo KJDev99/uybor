@@ -47,7 +47,7 @@ const ElonBlock = ({
                 }}
               />
               <div
-                className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full max-md:w-[48px] max-md:h-4 text-[10px] ${
+                className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full max-md:w-[48px] max-md:h-4 max-md:text-[10px] ${
                   turi == "ijara" ? "bg-ijara" : "bg-ochYashil"
                 }`}
               >
@@ -61,7 +61,7 @@ const ElonBlock = ({
               <p className="text-sm text-qora font-medium md:hidden">{price}</p>
               <div className="flex mt-2 mb-1">
                 <CiLocationOn className="text-lg" />
-                <p className="text-sm text-kulrang ml-2 ">{address}</p>
+                <p className="text-sm text-kulrang ml-2 max-md:text-xs">{address}</p>
               </div>
               <div className="flex justify-between mb-3 max-md:mb-2">
                 <p className="text-sm text-kulrang">{data}</p>
@@ -75,7 +75,7 @@ const ElonBlock = ({
       ) : (
         <Link href="/detailspage">
           <div className="flex bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg md:relative">
-            <div className="relative">
+            <div className="relative max-md:w-[130px] max-md:flex-shrink-0">
               {top && (
                 <div className="absolute left-0 top-0 bg-sariq rounded-tl-[20px] rounded-tr-[0px] rounded-br-[15px] rounded-bl-[0px] color-white flex item items-center justify-center font-medium text-white h-[30px] w-[78px] max-md:w-[45px] max-md:h-[22px] max-md:rounded-tl-[5px] max-md:rounded-tr-[0px] max-md:rounded-br-[5px] max-md:rounded-bl-[0px] max-md:text-xs">
                   Top
@@ -88,7 +88,7 @@ const ElonBlock = ({
               />
 
               <div
-                className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full ${
+                className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full  max-md:w-[48px] max-md:h-4 max-md:text-[10px] ${
                   turi == "ijara" ? "bg-ijara" : "bg-ochYashil"
                 }`}
               >
@@ -124,7 +124,7 @@ const ElonBlock = ({
               </p>
               <div className="flex mt-2 mb-4 max-md:mb-1">
                 <CiLocationOn className="text-lg" />
-                <p className="text-sm text-kulrang ml-2 ">{address}</p>
+                <p className="text-sm text-kulrang ml-2 max-md:text-xs">{address}</p>
               </div>
               <div className="flex justify-between mb-3 items-center">
                 <p className="text-sm text-kulrang">{data}</p>

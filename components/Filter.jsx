@@ -6,58 +6,77 @@ import XonaSelect from "./XonaSelect";
 import NarxSelect from "./NarxSelect";
 import Button from "./Button";
 import FilterImg from "@/assets/images/filter.svg";
+import Image from "next/image";
 
 const Filter = () => {
   const [selectedOption, setSelectedOption] = useState("");
+  const [filterHidden, setFilterHidden] = useState(true);
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.id);
   };
 
   return (
-    <div className="flex flex-col">
-      <form className="flex">
-        <label htmlFor="sotish" className="flex items-center mr-4">
-          <input
-            type="radio"
-            id="sotish"
-            name="ijara"
-            onChange={handleOptionChange}
-          />
-          <span
-            className={`ml-2 text-lg font-medium ${
-              selectedOption === "sotish" ? "text-logoKok" : "text-kulrang"
-            }`}
-          >
-            Sotish
-          </span>
-        </label>
-        <label htmlFor="ijara" className="flex items-center ml-[50px]">
-          <input
-            type="radio"
-            id="ijara"
-            name="ijara"
-            onChange={handleOptionChange}
-          />
-          <span
-            className={`ml-2 text-lg font-medium ${
-              selectedOption === "ijara" ? "text-logoKok" : "text-kulrang"
-            }`}
-          >
-            Ijara
-          </span>
-        </label>
-      </form>
-      <div className="flex">
-        <CategorySelect />
-        <ManzilSelect />
-        <XonaSelect />
-        <NarxSelect />
-        <div className="w-[136px] h-10 mt-12 ml-4">
-          <Button main image={FilterImg} text="Saralash" color="white" />
+    <>
+      <div
+        className="!h-10 !w-10 flex items-center justify-center flex-shrink-0 bg-logoKok rounded-[10px] md:hidden cursor-pointer"
+        onClick={() => setFilterHidden((prev) => !prev)}
+      >
+        <Image src={FilterImg} alt="Filter" />
+      </div>
+      <div
+        className={`flex flex-col ${
+          filterHidden
+            ? "max-md:hidden"
+            : "max-md:absolute max-md:top-[90px] max-md:bg-white max-md:p-[10px] max-md:rounded-[10px]"
+        }`}
+      >
+        <form className="flex">
+          <label htmlFor="sotish" className="flex items-center mr-4">
+            <input
+              type="radio"
+              id="sotish"
+              name="ijara"
+              onChange={handleOptionChange}
+            />
+            <span
+              className={`ml-2 text-lg font-medium ${
+                selectedOption === "sotish" ? "text-logoKok" : "text-kulrang"
+              }`}
+            >
+              Sotish
+            </span>
+          </label>
+          <label htmlFor="ijara" className="flex items-center ml-[50px]">
+            <input
+              type="radio"
+              id="ijara"
+              name="ijara"
+              onChange={handleOptionChange}
+            />
+            <span
+              className={`ml-2 text-lg font-medium ${
+                selectedOption === "ijara" ? "text-logoKok" : "text-kulrang"
+              }`}
+            >
+              Ijara
+            </span>
+          </label>
+        </form>
+        <div className="flex max-md:flex-col">
+          <CategorySelect />
+          <ManzilSelect />
+          <XonaSelect />
+          <NarxSelect />
+          <div className="w-[136px] h-10 mt-12 ml-4 max-md:hidden">
+            <Button main image={FilterImg} text="Saralash" color="white" />
+          </div>
+          <div className="w-full h-10 my-5 md:hidden">
+            <Button main text="Saralash" color="white" />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

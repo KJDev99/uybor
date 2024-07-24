@@ -17,7 +17,7 @@ const SarlavhaKiritish = ({ label, placeholder, message, type }) => {
 
   return (
     <div className="flex flex-col relative mr-[10px]">
-      <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm">
+      <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm max-md:mt-2">
         {label}
       </h2>
       <div className="flex flex-col">

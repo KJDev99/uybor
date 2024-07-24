@@ -24,7 +24,7 @@ const NarxSelect = () => {
       <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">Narx</h2>
       <div className="flex">
         <div
-          className={`flex p-[10px] h-10 w-[200px] rounded-[10px] justify-between items-center cursor-pointer mr-[5px] ${
+          className={`flex p-[10px] h-10 w-[200px] max-md:w-1/2 rounded-[10px] justify-between items-center cursor-pointer mr-[5px] ${
             fromValue ? "bg-ochKok" : "border border-kulrang"
           }`}
         >
@@ -37,7 +37,7 @@ const NarxSelect = () => {
           />
         </div>
         <div
-          className={`flex p-[10px] h-10 w-[200px] rounded-[10px] justify-between items-center cursor-pointer ${
+          className={`flex p-[10px] h-10 w-[200px] max-md:w-1/2 rounded-[10px] justify-between items-center cursor-pointer ${
             toValue ? "bg-ochKok" : "border border-kulrang"
           }`}
         >

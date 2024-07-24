@@ -6,18 +6,37 @@ import Tolovlar from "@/assets/images/tolovlar.svg";
 import Sozlamalar from "@/assets/images/sozlamalar.svg";
 import Profilchiqish from "@/assets/images/profilchiqish.svg";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const ProfilMenu = () => {
   const [selectedDuration, setSelectedDuration] = useState("meningelonlarim");
-
+  const pathname = usePathname();
   const handleDurationClick = (duration) => {
     setSelectedDuration(duration);
   };
+  console.log(pathname);
 
   return (
-    <div className="flex flex-col mt-[30px]">
+    <div
+      className={`flex flex-col mt-[30px] max-md:mt-5 ${
+        selectedDuration === "meningelonlarim"
+      }`}
+    >
       <div className="w-full gap-5 flex flex-col mb-10">
-        <Link href={"/profil"}>
+        <Link className="max-md:hidden" href={"/profil"}>
+          <div
+            className={`flex rounded-[10px] px-5 py-3 cursor-pointer text-xl font-semibold ${
+              selectedDuration === "meningelonlarim"
+                ? " bg-ochKok text-logoKok"
+                : "bg-transparent text-qora"
+            }`}
+            onClick={() => handleDurationClick("meningelonlarim")}
+          >
+            <Image src={MeningElonlarim} alt="MeningElonlarim" />
+            <p className="ml-4">Mening e’lonlarim</p>
+          </div>
+        </Link>
+        <Link className="md:hidden" href={"/profil/myelon"}>
           <div
             className={`flex rounded-[10px] px-5 py-3 cursor-pointer text-xl font-semibold ${
               selectedDuration === "meningelonlarim"

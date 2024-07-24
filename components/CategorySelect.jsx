@@ -50,7 +50,7 @@ const CategorySelect = () => {
       <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">Kategoriya</h2>
       <div className="flex flex-col" ref={categoryRef}>
         <div
-          className={`flex p-[10px] h-10 w-[200px] rounded-[10px] justify-between items-center  cursor-pointer ${
+          className={`flex p-[10px] h-10 w-[200px] max-md:w-full rounded-[10px] justify-between items-center  cursor-pointer ${
             selectedCategories.length !== 0
               ? "bg-ochKok"
               : "border border-kulrang"
@@ -73,7 +73,7 @@ const CategorySelect = () => {
           />
         </div>
         {isCategoryOpen && (
-          <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-[280px] top-[90px]">
+          <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-[280px] max-md:w-full top-[90px] z-[11]">
             {[
               "Kvartiralar",
               "Xovlilar",

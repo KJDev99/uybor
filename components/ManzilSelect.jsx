@@ -88,7 +88,7 @@ const ManzilSelect = () => {
       <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">Manzil</h2>
       <div className="flex flex-col" ref={categoryRef}>
         <div
-          className={`flex p-[10px] h-10 w-[200px] rounded-[10px] justify-between items-center cursor-pointer ${
+          className={`flex p-[10px] h-10 w-[200px] max-md:w-full rounded-[10px] justify-between items-center cursor-pointer ${
             displaySelectedCategory() !== "Hammasi"
               ? "bg-ochKok"
               : "border border-kulrang"
@@ -96,7 +96,7 @@ const ManzilSelect = () => {
           onClick={toggleCategory}
         >
           <p
-            className={`text-nowrap w-[150px] pr-4 overflow-hidden ${
+            className={`text-nowrap w-[150px] max-md:w-full pr-4 overflow-hidden ${
               displaySelectedCategory() !== "Hammasi"
                 ? "text-qora font-medium"
                 : "text-kulrang"
@@ -111,7 +111,7 @@ const ManzilSelect = () => {
           />
         </div>
         {isCategoryOpen && (
-          <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-[216px] top-[90px]">
+          <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-[216px] max-md:w-[60%] top-[90px] z-[11]">
             {categories.map((category, index) => (
               <div
                 key={index}
@@ -148,7 +148,7 @@ const ManzilSelect = () => {
                   </p>
                 </label>
                 {hoveredCategory === category && districts[category] && (
-                  <div className="absolute left-full top-0 mt-[-10px] bg-white w-[216px] shadow-lg p-[10px] rounded-[10px]">
+                  <div className="absolute left-full top-0 mt-[-10px] bg-white w-[216px] max-md:w-[80%] shadow-lg p-[10px] rounded-[10px]">
                     {districts[category].map((district, idx) => (
                       <div
                         key={idx}

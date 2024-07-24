@@ -25,19 +25,19 @@ const AddImage = ({ textImage, size }) => {
 
   return (
     <div className="flex flex-col">
-      <h2 className="text-qora text-2xl font-semibold ml-[20px] mt-5 mb-2">
+      <h2 className="text-qora text-2xl font-semibold ml-[20px] mt-5 mb-2 max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
         Rasmlar
       </h2>
       {!textImage && (
-        <p className="text-lg text-kulrang mb-5 ml-[20px]">
+        <p className="text-lg text-kulrang mb-5 ml-[20px] max-md:text-xs max-md:ml-[10px]">
           Birinchi yuklangan surat asosiy bo‘ladi. Fayl .jpg yoki .png formatda
           va hajmi 10MBdan oshmasligi kerak
         </p>
       )}
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap max-md:justify-around">
         <label
           className={`border border-dashed border-logoKok flex flex-col items-center justify-center rounded-[10px] mb-5 mr-5 cursor-pointer ${
-            size ? "w-[115px] h-[115px] mr-3 mb-3" : "w-[150px] h-[150px] mr-5 mb-5"
+            size ? "w-[115px] h-[115px] max-md:w-[140px] max-md:h-[140px] mr-3 mb-3" : "w-[150px] h-[150px] max-md:w-full max-md:h-[140px] mr-5 mb-5"
           }`}
         >
           <input
@@ -54,7 +54,7 @@ const AddImage = ({ textImage, size }) => {
           <div
             key={index}
             className={`flex flex-col items-center justify-center relative rounded-[10px] bg-white ${
-              size ? "w-[115px] h-[115px] mr-3 mb-3" : "w-[150px] h-[150px] mr-5 mb-5"
+              size ? "w-[115px] h-[115px] mr-3 mb-3 max-md:w-[140px] max-md:h-[140px]" : "w-[150px] h-[150px] max-md:w-[140px] max-md:h-[140px] mr-5 mb-5"
             }`}
           >
             {images[index] ? (

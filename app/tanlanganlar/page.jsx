@@ -394,8 +394,8 @@ const Tanlanganlar = () => {
 
   return (
     <div className="flex flex-col container">
-      <div className="flex justify-between mt-[50px] mb-[30px]">
-        <h2 className="text-2xl text-qora font-semibold">Tanlanganlar</h2>
+      <div className="flex max-md:flex-col justify-between mt-[50px] mb-[30px]  max-md:mt-[10px]">
+        <h2 className="text-2xl text-qora font-semibold max-md:text-[16px]">Tanlanganlar</h2>
         <div className="flex">
           <div className="flex items-center">
             <p className="text-qora font-medium">Ko'rinishi:</p>
@@ -435,7 +435,7 @@ const Tanlanganlar = () => {
       </div>
       <div
         className={`flex flex-wrap ${
-          view == "block" ? "grid grid-cols-4 gap-7" : "grid grid-cols-1 gap-5"
+          view == "block" ? "grid grid-cols-4 gap-7 max-md:gap-[15px] max-md:grid-cols-2" : "grid grid-cols-1 gap-5"
         }`}
       >
         {currentElonlar.map((elon, index) => (
