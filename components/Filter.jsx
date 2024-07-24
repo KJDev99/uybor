@@ -28,7 +28,7 @@ const Filter = () => {
         className={`flex flex-col ${
           filterHidden
             ? "max-md:hidden"
-            : "max-md:absolute max-md:top-[90px] max-md:bg-white max-md:p-[10px] max-md:rounded-[10px]"
+            : "max-md:absolute max-md:top-[90px] max-md:bg-white max-md:p-[10px] max-md:left-0 max-md:w-[90%] max-md:translate-x-[5%] max-md:rounded-[10px] "
         }`}
       >
         <form className="flex">

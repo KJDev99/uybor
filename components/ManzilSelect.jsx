@@ -61,12 +61,6 @@ const ManzilSelect = () => {
     }
   };
 
-  const handleRadioChange = (event) => {
-    const category = event.target.id;
-    setSelectedCategory(category === "Hammasi" ? "" : category);
-    setIsCategoryOpen(false);
-  };
-
   const handleDistrictClick = (district) => {
     setSelectedCategory(district);
     setIsCategoryOpen(false);
@@ -118,36 +112,23 @@ const ManzilSelect = () => {
                 className="relative"
                 onMouseEnter={() => setHoveredCategory(category)}
                 onMouseLeave={() => setHoveredCategory(null)}
+                onClick={() => setHoveredCategory(category)}
               >
-                <label
-                  className={`flex items-center mb-2 cursor-pointer`}
-                  htmlFor={category}
+                <p
+                  className={`w-full px-4 py-2 rounded-md flex items-center justify-between cursor-pointer ${
+                    hoveredCategory === category
+                      ? "bg-ochKok text-qora font-medium"
+                      : "text-kulrang"
+                  }`}
                 >
-                  <input
-                    type="radio"
-                    id={category}
-                    name="category"
-                    className="hidden"
-                    checked={selectedCategory === category}
-                    onChange={handleRadioChange}
-                  />
-                  <p
-                    className={`w-full px-4 py-2 rounded-md flex items-center justify-between ${
-                      selectedCategory === category ||
-                      hoveredCategory === category
-                        ? "bg-ochKok text-qora font-medium"
-                        : "text-kulrang"
-                    }`}
-                  >
-                    {category}
-                    {category !== "Hammasi" && (
-                      <FaChevronLeft
-                        className={`text-kulrang transition-transform z-10 rotate-180`}
-                      />
-                    )}
-                  </p>
-                </label>
-                {hoveredCategory === category && districts[category] && (
+                  {category}
+                  {category !== "Hammasi" && (
+                    <FaChevronLeft
+                      className={`text-kulrang transition-transform z-10 rotate-180`}
+                    />
+                  )}
+                </p>
+                {(hoveredCategory === category) && districts[category] && (
                   <div className="absolute left-full top-0 mt-[-10px] bg-white w-[216px] max-md:w-[80%] shadow-lg p-[10px] rounded-[10px]">
                     {districts[category].map((district, idx) => (
                       <div
