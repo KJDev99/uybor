@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineLeft } from "react-icons/ai";
 import LoginModal from "./LoginModal";
+import MobileNavBar from "./MobileNavBar";
 
 const Navbar = () => {
   const [isOpenLogin, setIsOpenLogin] = useState(false);
@@ -23,8 +24,8 @@ const Navbar = () => {
     document.body.style.overflow = "auto";
   };
   return (
-    <div className="bg-[#EDF7FF] max-md:hidden">
-      <div className="container h-20 flex justify-between border-b-[0.5px] border-logoKok">
+    <div className="bg-[#EDF7FF] max-md:mx-5 ">
+      <div className="container h-20 flex justify-between border-b-[0.5px] border-logoKok max-md:hidden">
         <Link href="/">
           <Image src={LogoImg} alt="Logo" className="w-[74px] ml-[70px] mt-4" />
         </Link>
@@ -76,6 +77,43 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      <MobileNavBar />
+      {/* <div className="fixed md:hidden bg-white left-[50%] translate-x-[-50%] bottom-[10px] max-md:py-2 max-md:px-5 z-[999] rounded-[10px] flex shadow-lg">
+        <Link
+          href="/"
+          className="mx-[12px] flex flex-col items-center justify-center my-2"
+        >
+          <Image src={Profil} alt="Image" />
+          <p className="text-[#343434] font-medium mt-2 text-xs">
+            Bosh&nbsp;sahifa
+          </p>
+        </Link>
+        <Link
+          href="/addelon"
+          className="mx-[12px] flex flex-col items-center justify-center my-2"
+        >
+          <Image src={Profil} alt="Image" />
+          <p className="text-[#343434] font-medium mt-2 text-xs">
+            E'lon&nbsp;joylash
+          </p>
+        </Link>
+        <Link
+          href="/tanlanganlar"
+          className="mx-[12px] flex flex-col items-center justify-center my-2"
+        >
+          <Image src={Savedmsg} alt="Image" />
+          <p className="text-[#343434] font-medium mt-2 text-xs">
+            Tanlanganlar
+          </p>
+        </Link>
+        <Link
+          href="/profil"
+          className="mx-[12px] flex flex-col items-center justify-center my-2"
+        >
+          <Image src={Profil} alt="Image" />
+          <p className="text-[#343434] font-medium mt-2 text-xs">Profil</p>
+        </Link>
+      </div> */}
     </div>
   );
 };
