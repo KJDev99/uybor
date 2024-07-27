@@ -1,9 +1,10 @@
 "use client";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MainImg from "@/assets/images/asosiyrasm.png";
 import ElonBlock from "./ElonBlock";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import api from "@/lib/api";
 
 const itemsPerPage = 20;
 const Tavfsiya = () => {
@@ -22,293 +23,25 @@ const Tavfsiya = () => {
       price: "1 250 000 000 so‘m ",
       view: view,
     },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: false,
-      turi: "ijara",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: false,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
+
   ];
+
+  const [ads, setAds] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAds = async () => {
+      try {
+        const response = await api.get("/api/v1/ads/list?is_top=false");
+        setAds(response.data);
+        console.log(response.data);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchAds();
+  }, []);
 
   const totalPages = Math.ceil(allElonlar.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
@@ -382,7 +115,7 @@ const Tavfsiya = () => {
   };
 
   return (
-    <div className="flex flex-col container  ">
+    <div className="flex flex-col container  mb-[60px]">
       <div className="flex flex-col">
         <h2 className="text-main mb-[30px] font-semibold text-2xl max-md:text-sm max-md:mb-[10px]">
           Tavsiya etamiz

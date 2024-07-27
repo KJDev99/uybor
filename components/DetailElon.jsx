@@ -8,6 +8,7 @@ import DetailPageImg from "./DetailPageImg";
 import AddInfos from "./AddInfos";
 
 import ElonSlider from "./ElonSlider";
+import Link from "next/link";
 
 const DetailElon = () => {
   const [saved, setSaved] = useState(false);
@@ -106,9 +107,11 @@ const DetailElon = () => {
                 +99890 123 45 67
               </a>
             </div>
-            <div className="h-10 w-full border rounded-[10px] flex items-center justify-center text-white bg-main">
-              Muallifning barcha e’lonlari
-            </div>
+            <Link href={"/userelon"}>
+              <div className="h-10 w-full border rounded-[10px] flex items-center justify-center text-white bg-main">
+                Muallifning barcha e’lonlari
+              </div>
+            </Link>
           </div>
           <div className="flex flex-col">
             <h2 className="mt-[30px] mb-5 text-qora font-semibold max-md:mt-5 max-md:mb-2">
