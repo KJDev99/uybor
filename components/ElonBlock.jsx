@@ -35,7 +35,7 @@ const ElonBlock = ({
                   Top
                 </div>
               )}
-              <Image src={image} alt={image} className="w-full" />
+              <img src={image} alt={image} className="w-full h-[237px] object-cover max-md:h-[138px]" />
               <Image
                 src={saved ? SavedImg : NoSavedImg}
                 alt={image}
@@ -48,10 +48,10 @@ const ElonBlock = ({
               />
               <div
                 className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full max-md:w-[48px] max-md:h-4 max-md:text-[10px] ${
-                  turi == "ijara" ? "bg-ijara" : "bg-ochYashil"
+                  turi == "rent" ? "bg-ijara" : "bg-ochYashil"
                 }`}
               >
-                {turi}
+                {turi == "rent" ? "Ijara" : "Sotiladi"}
               </div>
             </div>
             <div className="py-2 px-4 max-md:px-2 flex flex-col">
@@ -61,7 +61,9 @@ const ElonBlock = ({
               <p className="text-sm text-qora font-medium md:hidden">{price}</p>
               <div className="flex mt-2 mb-1">
                 <CiLocationOn className="text-lg" />
-                <p className="text-sm text-kulrang ml-2 max-md:text-xs">{address}</p>
+                <p className="text-sm text-kulrang ml-2 max-md:text-xs line-clamp-1">
+                  {address}
+                </p>
               </div>
               <div className="flex justify-between mb-3 max-md:mb-2">
                 <p className="text-sm text-kulrang">{data}</p>
@@ -74,17 +76,17 @@ const ElonBlock = ({
         </Link>
       ) : (
         <Link href="/detailspage">
-          <div className="flex bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg md:relative">
+          <div className="flex bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg md:relative md:h-[190px]">
             <div className="relative max-md:w-[130px] max-md:flex-shrink-0">
               {top && (
                 <div className="absolute left-0 top-0 bg-sariq rounded-tl-[20px] rounded-tr-[0px] rounded-br-[15px] rounded-bl-[0px] color-white flex item items-center justify-center font-medium text-white h-[30px] w-[78px] max-md:w-[45px] max-md:h-[22px] max-md:rounded-tl-[5px] max-md:rounded-tr-[0px] max-md:rounded-br-[5px] max-md:rounded-bl-[0px] max-md:text-xs">
                   Top
                 </div>
               )}
-              <Image
+              <img
                 src={image}
                 alt={image}
-                className="w-full h-full object-cover"
+                className="w-[268px] max-md:w-[136px] h-full object-cover"
               />
 
               <div
@@ -124,7 +126,9 @@ const ElonBlock = ({
               </p>
               <div className="flex mt-2 mb-4 max-md:mb-1">
                 <CiLocationOn className="text-lg" />
-                <p className="text-sm text-kulrang ml-2 max-md:text-xs">{address}</p>
+                <p className="text-sm text-kulrang ml-2 max-md:text-xs">
+                  {address}
+                </p>
               </div>
               <div className="flex justify-between mb-3 items-center">
                 <p className="text-sm text-kulrang">{data}</p>

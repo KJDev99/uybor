@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setView } from "@/store";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import SeeBlockAct from "@/assets/images/seeblockact.svg";
 import SeeLineAct from "@/assets/images/seelineact.svg";
 import MainImg from "@/assets/images/asosiyrasm.png";
 import ElonBlock from "./ElonBlock";
+import api from "@/lib/api";
 
 const TopElon = () => {
   const [valyuta, setValyuta] = useState("uzs");
@@ -20,96 +21,33 @@ const TopElon = () => {
     dispatch(setView(newView));
   };
 
-  const allElonlar = [
-    {
-      image: MainImg,
-      top: true,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: true,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: true,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: true,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: true,
-      save: false,
-      turi: "ijara",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: true,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: true,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-    {
-      image: MainImg,
-      top: true,
-      save: true,
-      turi: "sotiladi",
-      name: "Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida",
-      address: "Toshkent, Yakksaroy",
-      data: "17.05.2024",
-      price: "1 250 000 000 so‘m ",
-      view: view,
-    },
-  ];
+  const [ads, setAds] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAds = async () => {
+      try {
+        const response = await api.get("/api/v1/ads/list?is_top=true");
+        const transformedAds = response.data.results.map((ad) => ({
+          image: ad.media,
+          top: ad.is_top,
+          save: true,
+          turi: ad.ad_type.toLowerCase(),
+          name: ad.title,
+          address: `${ad.region.name_uz} ${ad.district.name_uz}`,
+          data: new Date(ad.created).toLocaleDateString("en-GB"),
+          price: `${ad.price.toLocaleString()} ${ad.currency}`,
+          view: view,
+        }));
+        setAds(transformedAds);
+        console.log(transformedAds);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    fetchAds();
+  }, []);
 
   return (
     <div className="flex flex-col container  ">
@@ -165,7 +103,7 @@ const TopElon = () => {
               : "grid grid-cols-1 gap-5"
           }`}
         >
-          {allElonlar.map((elon, index) => (
+          {ads.map((elon, index) => (
             <ElonBlock key={index} {...elon} />
           ))}
         </div>
