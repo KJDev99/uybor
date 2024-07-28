@@ -8,6 +8,7 @@ import LogoImage from "@/assets/images/logo.svg";
 import Image from "next/image";
 import ModalRegistr from "./ModalRegistr";
 import ModalLogin from "./ModalLogin";
+import ModalTastiq from "./ModalTastiq";
 
 const LoginModal = ({ closeModal }) => {
   const [step, setStep] = useState(2);
@@ -57,41 +58,7 @@ const LoginModal = ({ closeModal }) => {
           </div>
         );
       case 5:
-        return (
-          <div className="flex flex-col w-full">
-            <button
-              onClick={() => setStep(4)}
-              className="absolute top-5 left-5 text-qora"
-            >
-              <AiOutlineLeft size={24} />
-            </button>
-            <h3 className="text-center text-qora text-2xl mb-5">Tasdiqlash</h3>
-            <p className="text-kulrang text-sm">
-              Telefon raqamingizga yuborilgan kodni kiriting
-            </p>
-            <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
-              Tasdiqlash kodi
-            </p>
-            <input
-              type="text"
-              placeholder="kod"
-              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora"
-            />
-            <p className="mt-5 text-kulrang text-sm font-semibold">
-              Agar kod kelmagan bo'lsa
-              <span className="text-main cursor-pointer">
-                qayta yuborish
-              </span>{" "}
-              bosing.
-            </p>
-            <button
-              className="bg-main text-white h-[50px] mb-2  text-lg rounded-[5px] mt-5"
-              onClick={() => setStep(6)}
-            >
-              Tasdiqlash
-            </button>
-          </div>
-        );
+        return <ModalTastiq setStep={setStep} step={step} />;
       case 6:
         return (
           <div className="flex flex-col w-full">

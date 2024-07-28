@@ -5,6 +5,7 @@ import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
+import InputMask from "react-input-mask";
 
 const ModalRegistr = ({ setStep, step }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -16,22 +17,34 @@ const ModalRegistr = ({ setStep, step }) => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
+  const validatePhone = () => {
+    const phonePattern = /^\+998-\d{2}-\d{3}-\d{2}-\d{2}$/;
+    if (!phonePattern.test(phone)) {
+      setError("Telefon raqam to'liq va to'g'ri formatda kiritilishi kerak.");
+      return false;
+    }
+    setError("");
+    return true;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    setSuccess(null);
+    if (validatePhone()) {
+      setError(null);
+      setSuccess(null);
 
-    try {
-      const response = await api.post("/api/v1/user/register", {
-        phone,
-        password,
-        confirm_password: confirmPassword,
-        full_name: fullName,
-      });
-      setSuccess("User verified successfully!");
-      setStep(2);
-    } catch (err) {
-      setError(err.response.data.message || "An error occurred");
+      try {
+        const response = await api.post("/api/v1/user/register", {
+          phone,
+          password,
+          confirm_password: confirmPassword,
+          full_name: fullName,
+        });
+        setSuccess("User verified successfully!");
+        setStep(5);
+      } catch (err) {
+        setError(err.response.data.message || "An error occurred");
+      }
     }
   };
 
@@ -76,15 +89,21 @@ const ModalRegistr = ({ setStep, step }) => {
         className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora  max-md:text-sm"
       />
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
-        Telefon qaramingiz
+        Telefon raqamingiz
       </p>
-      <input
-        type="tel"
-        placeholder="Telefon raqam"
+      <InputMask
+        mask="+998-__-___-__-__"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora max-md:text-sm"
-      />
+        formatChars={{
+          _: "[0-9]", // `_` ni faqat raqamlar uchun ruxsat beradi
+        }}
+      >
+        {(inputProps) => (
+          <input type="tel" placeholder="Telefon raqam" {...inputProps} />
+        )}
+      </InputMask>
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">Parol</p>
       <div className="relative w-full">
         <input

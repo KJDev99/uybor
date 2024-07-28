@@ -6,6 +6,7 @@ import {
   AiOutlineEye,
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
+import InputMask from "react-input-mask";
 
 const ModalLogin = ({ step, setStep, closeModal }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -13,24 +14,35 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
+  const validatePhone = () => {
+    // Format: +998-__-___-__-__
+    const phonePattern = /^\+998-\d{2}-\d{3}-\d{2}-\d{2}$/;
+    if (!phonePattern.test(phone)) {
+      setError("Telefon raqam to'liq va to'g'ri formatda kiritilishi kerak.");
+      return false;
+    }
+    setError("");
+    return true;
+  };
   const handleTogglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(null);
-
-    try {
-      const response = await api.post("/api/v1/user/login", {
-        phone,
-        password,
-      });
-      Cookies.set("authToken", response.data.access);
-      closeModal();
-      window.location.reload();
-    } catch (err) {
-      setError("Login xatosi");
+    if (validatePhone()) {
+      setError(null);
+      try {
+        const response = await api.post("/api/v1/user/login", {
+          phone,
+          password,
+        });
+        Cookies.set("authToken", response.data.access);
+        closeModal();
+        window.location.reload();
+      } catch (err) {
+        setError("Login xatosi");
+      }
     }
   };
 
@@ -59,13 +71,20 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
         Telefon raqamingiz
       </p>
-      <input
-        type="tel"
-        placeholder="Telefon raqam"
+      <InputMask
+        mask="+998-__-___-__-__"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora max-md:text-sm"
-      />
+        formatChars={{
+          _: "[0-9]", // `_` ni faqat raqamlar uchun ruxsat beradi
+        }}
+      >
+        {(inputProps) => (
+          <input type="tel" placeholder="Telefon raqam" {...inputProps} />
+        )}
+      </InputMask>
+
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">Parol</p>
       <div className="relative w-full">
         <input
