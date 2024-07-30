@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { AiOutlineLeft } from "react-icons/ai";
+import api from "@/lib/api";
 
 const ModalTastiq = ({ setStep, phone }) => {
   const [code, setCode] = useState("");
@@ -17,7 +18,7 @@ const ModalTastiq = ({ setStep, phone }) => {
     setError("");
 
     try {
-      const response = await axios.post("/api/v1/user/verify", {
+      const response = await api.post("/api/v1/user/verify", {
         phone,
         code: parseInt(code, 10),
       });

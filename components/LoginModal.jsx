@@ -9,6 +9,7 @@ import Image from "next/image";
 import ModalRegistr from "./ModalRegistr";
 import ModalLogin from "./ModalLogin";
 import ModalTastiq from "./ModalTastiq";
+import ModalNewPass from "./ModalNewPass";
 
 const LoginModal = ({ closeModal }) => {
   const [step, setStep] = useState(2);
@@ -28,34 +29,7 @@ const LoginModal = ({ closeModal }) => {
         return <ModalRegistr setStep={setStep} step={step} />;
       case 4:
         return (
-          <div className="flex flex-col w-full">
-            <button
-              onClick={() => setStep(2)}
-              className="absolute top-5 left-5 text-qora"
-            >
-              <AiOutlineLeft size={24} />
-            </button>
-            <h3 className="text-center text-qora text-2xl mb-5">
-              Parolni unutdingizmi?
-            </h3>
-            <p className="text-kulrang text-sm">
-              Tasdiqlash jarayoni uchun telefon raqam kiriting
-            </p>
-            <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
-              Telefon raramingiz
-            </p>
-            <input
-              type="tel"
-              placeholder="Telefon raqam"
-              className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora"
-            />
-            <button
-              className="bg-main text-white h-[50px] mb-2  text-lg rounded-[5px] mt-5"
-              onClick={() => setStep(5)}
-            >
-              Davom etish
-            </button>
-          </div>
+          <ModalNewPass setStep={setStep} step={step}/>
         );
       case 5:
         return <ModalTastiq setStep={setStep} step={step} />;
