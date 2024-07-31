@@ -151,7 +151,7 @@ const DetailElon = () => {
                {adDetail.phone}
               </a>
             </div>
-            <Link href={"/userelon"}>
+            <Link href={`/ads/${adDetail.user.id}`}>
               <div className="h-10 w-full border rounded-[10px] flex items-center justify-center text-white bg-main">
                 Muallifning barcha e’lonlari
               </div>
