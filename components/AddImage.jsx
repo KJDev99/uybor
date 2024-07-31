@@ -61,7 +61,7 @@ const AddImage = ({ textImage, size }) => {
               <>
                 <Image
                   src={images[index]}
-                  alt={`Rasm ${index + 1}`}
+                  alt={`Rasm`}
                   layout="fill"
                   objectFit="cover"
                   className="rounded-[10px]"

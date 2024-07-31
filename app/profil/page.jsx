@@ -23,7 +23,7 @@ const page = () => {
             <div className="flex items-center ">
               <img
                 src="/images/person.png"
-                alt=""
+                alt="img"
                 className="h-10 w-10 mr-[30px] "
               />
               <h2 className="text-qora text-2xl font-medium">Xoshimjon</h2>

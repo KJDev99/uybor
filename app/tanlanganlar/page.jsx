@@ -368,9 +368,9 @@ const Tanlanganlar = () => {
         >
           <FaChevronLeft />
         </button>
-        {pageNumbers.map((pageNumber) => (
+        {pageNumbers.map((pageNumber, id) => (
           <button
-            key={pageNumber}
+            key={id}
             onClick={() => handlePageClick(pageNumber)}
             className={`w-10 h-10 rounded-md font-semibold mx-1 ${
               currentPage === pageNumber ? "bg-ochKok text-logoKok" : "text-qora bg-white"

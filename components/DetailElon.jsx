@@ -12,12 +12,12 @@ import Link from "next/link";
 import api from "@/lib/api";
 import { usePathname } from "next/navigation";
 
-import { format, parseISO } from 'date-fns';
+import { format, parseISO } from "date-fns";
 import MapComponent from "./MapContainer";
 
 const formatDate = (dateString) => {
   const date = parseISO(dateString);
-  return format(date, 'dd.MM.yyyy');
+  return format(date, "dd.MM.yyyy");
 };
 
 const DetailElon = () => {
@@ -33,7 +33,8 @@ const DetailElon = () => {
     const fetchAdDetail = async () => {
       try {
         const response = await api.get(`api/v1/ads/${adId}/detail`);
-        setAdDetail(response.data);``
+        setAdDetail(response.data);
+        ``;
         console.log(response.data.user.id);
       } catch (err) {
         setError(err);
@@ -48,7 +49,6 @@ const DetailElon = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
-
   const infos = [
     { text1: "Turarjoy turi:", text2: adDetail.accommodation_type },
     { text1: "Qurilish turi:", text2: adDetail.construction_type },
@@ -59,7 +59,10 @@ const DetailElon = () => {
     { text1: "Yashash maydoni:", text2: adDetail.living_area },
     { text1: "Umumiy maydoni:", text2: adDetail.total_area },
     { text1: "Mebel:", text2: adDetail.have_furniture ? "Bor" : "Yo'q" },
-    { text1: "Vositachilik haqi:", text2: adDetail.have_broker_fee ? "Bor" : "Yo'q" },
+    {
+      text1: "Vositachilik haqi:",
+      text2: adDetail.have_broker_fee ? "Bor" : "Yo'q",
+    },
   ];
 
   return (
@@ -104,20 +107,20 @@ const DetailElon = () => {
             </div>
           </div>
           <div className="mt-5">
-            <DetailPageImg imgs = {adDetail.media} />
+            <DetailPageImg imgs={adDetail.media} />
           </div>
           <div className="flex flex-col">
             <h2 className="mt-[30px] mb-[10px] text-qora font-semibold max-md:text-lg max-md:mb-3">
               Qo’shimcha ma’lumotlar
             </h2>
             {infos.map((info, index) => (
-        <AddInfos
-          key={index}
-          bg={index % 2 === 0} // Har ikki element uchun bg klassini qo'shadi
-          text1={info.text1}
-          text2={info.text2}
-        />
-      ))}
+              <AddInfos
+                key={index}
+                bg={index % 2 === 0} // Har ikki element uchun bg klassini qo'shadi
+                text1={info.text1}
+                text2={info.text2}
+              />
+            ))}
           </div>
           <div className="flex flex-col">
             <h2 className="mt-[20px] mb-[10px] text-qora font-semibold  max-md:text-lg max-md:mb-3">
@@ -148,7 +151,7 @@ const DetailElon = () => {
                 href={adDetail.phone}
                 className="text-xl font-semibold text-qora "
               >
-               {adDetail.phone}
+                {adDetail.phone}
               </a>
             </div>
             <Link href={`/ads/${adDetail.user.id}`}>
@@ -172,15 +175,18 @@ const DetailElon = () => {
             <p className="text-qora text-lg font-medium mt-[10px] mb-5 max-md:text-sm">
               {adDetail.address}
             </p>
-            <MapComponent latitude={adDetail.latitude} longitude={adDetail.longitude} />
+            <MapComponent
+              latitude={adDetail.latitude}
+              longitude={adDetail.longitude}
+            />
           </div>
         </div>
       </div>
       <div className="flex flex-col mb-10">
         <h2 className="text-main mb-[30px] font-semibold text-2xl">
-          Muallifning boshqa e’lonlari 
+          Muallifning boshqa e’lonlari
         </h2>
-        <ElonSlider userId={adDetail.user.id}/>
+        <ElonSlider userId={adDetail.user.id} />
       </div>
       <div className="flex flex-col mb-[50px]">
         <h2 className="text-main mb-[30px] font-semibold text-2xl">
