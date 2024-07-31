@@ -31,6 +31,7 @@ const Tavfsiya = () => {
         data: new Date(ad.created).toLocaleDateString("en-GB"),
         price: `${ad.price.toLocaleString()} ${ad.currency}`,
         view: view,
+        id: ad.id
       }));
       setAds(transformedAds);
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));

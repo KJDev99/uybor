@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SavedImg from "@/assets/images/saveelon.svg";
 import NoSavedImg from "@/assets/images/nosaveelon.svg";
 import ShareElonImg from "@/assets/images/shareelon.svg";
@@ -9,16 +9,66 @@ import AddInfos from "./AddInfos";
 
 import ElonSlider from "./ElonSlider";
 import Link from "next/link";
+import api from "@/lib/api";
+import { usePathname } from "next/navigation";
+
+import { format, parseISO } from 'date-fns';
+import MapComponent from "./MapContainer";
+
+const formatDate = (dateString) => {
+  const date = parseISO(dateString);
+  return format(date, 'dd.MM.yyyy');
+};
 
 const DetailElon = () => {
   const [saved, setSaved] = useState(false);
+
+  const [adDetail, setAdDetail] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const pathname = usePathname();
+  const adId = pathname.split("/").pop();
+  console.log(adId);
+  useEffect(() => {
+    const fetchAdDetail = async () => {
+      try {
+        const response = await api.get(`api/v1/ads/${adId}/detail`);
+        setAdDetail(response.data);``
+        console.log(response.data.user.id);
+      } catch (err) {
+        setError(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAdDetail();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+
+  const infos = [
+    { text1: "Turarjoy turi:", text2: adDetail.accommodation_type },
+    { text1: "Qurilish turi:", text2: adDetail.construction_type },
+    { text1: "Xonalar soni:", text2: adDetail.room },
+    { text1: "Qavat:", text2: adDetail.floor },
+    { text1: "Binoning qavatlari:", text2: adDetail.total_floor },
+    { text1: "Uy qurilgan yil:", text2: adDetail.house_built_year },
+    { text1: "Yashash maydoni:", text2: adDetail.living_area },
+    { text1: "Umumiy maydoni:", text2: adDetail.total_area },
+    { text1: "Mebel:", text2: adDetail.have_furniture ? "Bor" : "Yo'q" },
+    { text1: "Vositachilik haqi:", text2: adDetail.have_broker_fee ? "Bor" : "Yo'q" },
+  ];
+
   return (
     <div className="container">
       <div className="grid grid-cols-3">
         <div className="flex flex-col col-span-2 max-md:col-span-3 md:p-[30px]">
           <div className="flex justify-between">
             <h1 className="font-qora font-semibold text-2xl max-md:text-lg max-md:mt-[10px]">
-              Srochni sotiladi 6 xonali Yakkasaroy Rovd orqasida{" "}
+              {adDetail.title}
             </h1>
             <Image
               src={saved ? SavedImg : NoSavedImg}
@@ -34,14 +84,14 @@ const DetailElon = () => {
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
               <h2 className="text-logoKok text-2xl font-semibold mb-[10px] max-md:mb-1 max-md:text-[16px]">
-                1 250 000 000 so’m
+                {adDetail.price} $
               </h2>
               <div className="flex items-center">
                 <p className="text-sm max-md:text-xs font-medium mr-5 text-kulrang">
                   Joyalangan sana:
                 </p>
                 <p className="text-qora max-md:text-xs font-medium">
-                  18.06.2024
+                  {formatDate(adDetail.created)}
                 </p>
               </div>
             </div>
@@ -54,33 +104,27 @@ const DetailElon = () => {
             </div>
           </div>
           <div className="mt-5">
-            <DetailPageImg />
+            <DetailPageImg imgs = {adDetail.media} />
           </div>
           <div className="flex flex-col">
             <h2 className="mt-[30px] mb-[10px] text-qora font-semibold max-md:text-lg max-md:mb-3">
               Qo’shimcha ma’lumotlar
             </h2>
-            <AddInfos bg text1={"Turarjoy turi:"} text2={"Ikkilamchi"} />
-            <AddInfos text1={"Qurilish turi:"} text2={"Panel"} />
-            <AddInfos bg text1={"Xonalar soni:"} text2={"2"} />
-            <AddInfos text1={"Qavat:"} text2={"3"} />
-            <AddInfos bg text1={"Binoning qavatlari:"} text2={"9"} />
-            <AddInfos text1={"Uy qurilgan yil:"} text2={"2004"} />
-            <AddInfos bg text1={"Yashash maydoni:"} text2={"82"} />
-            <AddInfos text1={"Umumiy maydoni:"} text2={"125"} />
-            <AddInfos bg text1={"Mebel:"} text2={"Yo’q"} />
-            <AddInfos text1={"Vositachilik haqi:"} text2={"Yo’q"} />
+            {infos.map((info, index) => (
+        <AddInfos
+          key={index}
+          bg={index % 2 === 0} // Har ikki element uchun bg klassini qo'shadi
+          text1={info.text1}
+          text2={info.text2}
+        />
+      ))}
           </div>
           <div className="flex flex-col">
             <h2 className="mt-[20px] mb-[10px] text-qora font-semibold  max-md:text-lg max-md:mb-3">
               Tavsif
             </h2>
             <p className="p-5 bg-white rounded-[10px] text-qora text-xl max-md:text-sm max-md:p-[10px]">
-              Uy zo’r chotkiy daxshat o’ta baquvat. Har bitta g’ishti mehr bilan
-              qo’yilgan, suvoqlarini juda chiroyli qilib o’zim qilganman. Remont
-              qimisiz. O’zi zo’r. Hamma sharoitlari bor. WiFi, kirmoshina...
-              hamma narsa bor. Mazza qilib kotta xolezi uyida yashagande
-              yashorasiz
+              {adDetail.description}
             </p>
           </div>
         </div>
@@ -91,20 +135,20 @@ const DetailElon = () => {
             </h2>
             <div className="flex items-center">
               <img
-                src="https://picsum.photos/75/75"
+                src={adDetail.user.photo}
                 alt="img"
                 className="rounded-full max-md:h-[54px] max-md:w-[54px]"
               />
               <p className="text-2xl ml-[30px] font-semibold text-qora max-md:text-[16px]">
-                Xoshimjon
+                {adDetail.user.full_name}
               </p>
             </div>
             <div className="h-10 w-full border rounded-[10px] mt-[30px] mb-[15px] flex items-center justify-center">
               <a
-                href="tel:+998901234567"
+                href={adDetail.phone}
                 className="text-xl font-semibold text-qora "
               >
-                +99890 123 45 67
+               {adDetail.phone}
               </a>
             </div>
             <Link href={"/userelon"}>
@@ -119,30 +163,24 @@ const DetailElon = () => {
             </h2>
             <div className="flex">
               <p className="border border-yozish rounded-[10px] bg-white py-[6px] px-5  text-qora text-lg font-medium mr-5 max-md:text-xs max-md:p-1">
-                Toshkent shahar
+                {adDetail.region.name_uz}
               </p>
               <p className="border border-yozish rounded-[10px] bg-white py-[6px] px-5  text-qora text-lg font-medium max-md:text-xs max-md:p-1">
-                Yunusobod tuman
+                {adDetail.district.name_uz}
               </p>
             </div>
             <p className="text-qora text-lg font-medium mt-[10px] mb-5 max-md:text-sm">
-              Yunusobod 10-daha, Farogat ko’chasi 21
+              {adDetail.address}
             </p>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12269.151690810271!2d64.44374555!3d39.755643449999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f5005d07f3e5d61%3A0x23e40e8c2b477b21!2sTURON%20PLAZA!5e0!3m2!1sru!2s!4v1720971052104!5m2!1sru!2s"
-              width="full"
-              height="280"
-              loading="lazy"
-              className="rounded-[10px]"
-            ></iframe>
+            <MapComponent latitude={adDetail.latitude} longitude={adDetail.longitude} />
           </div>
         </div>
       </div>
       <div className="flex flex-col mb-10">
         <h2 className="text-main mb-[30px] font-semibold text-2xl">
-          Muallifning boshqa e’lonlari
+          Muallifning boshqa e’lonlari 
         </h2>
-        <ElonSlider />
+        <ElonSlider userId={adDetail.user.id}/>
       </div>
       <div className="flex flex-col mb-[50px]">
         <h2 className="text-main mb-[30px] font-semibold text-2xl">

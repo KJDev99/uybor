@@ -4,7 +4,7 @@ import Hero from "@/components/Hero";
 import React from "react";
 import InnerBg from "@/components/InnerBg";
 import Tavfsiya from "@/components/Tavfsiya";
-
+import 'leaflet/dist/leaflet.css';
 const page = () => {
   return (
     <>

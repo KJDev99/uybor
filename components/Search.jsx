@@ -40,7 +40,7 @@ const Search = () => {
         <Button
           main
           image={SearchImg}
-          text="E’lon&nbsp;joylash"
+          text="Qidirish"
           color="white"
         />
       </div>

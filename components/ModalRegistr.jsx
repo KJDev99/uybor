@@ -7,7 +7,7 @@ import {
 } from "react-icons/ai";
 import InputMask from "react-input-mask";
 
-const ModalRegistr = ({ setStep, step }) => {
+const ModalRegistr = ({ setStep, step, setNumber }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [phone, setPhone] = useState("");
@@ -16,6 +16,9 @@ const ModalRegistr = ({ setStep, step }) => {
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [isChecked, setIsChecked] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
+  const [checkboxError, setCheckboxError] = useState(false);
 
   const validatePhone = () => {
     const phonePattern = /^\+998-\d{2}-\d{3}-\d{2}-\d{2}$/;
@@ -29,7 +32,27 @@ const ModalRegistr = ({ setStep, step }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validatePhone()) {
+
+    let valid = true;
+    if (!validatePhone()) valid = false;
+    if (!isChecked) {
+      setCheckboxError(true);
+      valid = false;
+    } else {
+      setCheckboxError(false);
+    }
+
+    if (password !== confirmPassword) {
+      setPasswordError(true);
+      valid = false;
+    } else {
+      setPasswordError(false);
+    }
+    console.log(checkboxError, "checkboxError");
+    console.log(passwordError, "passwordError");
+    console.log(valid, "valid");
+
+    if (valid) {
       setError(null);
       setSuccess(null);
 
@@ -42,6 +65,7 @@ const ModalRegistr = ({ setStep, step }) => {
         });
         setSuccess("User verified successfully!");
         setStep(5);
+        setNumber(phone);
       } catch (err) {
         setError(err.response.data.message || "An error occurred");
       }
@@ -54,12 +78,6 @@ const ModalRegistr = ({ setStep, step }) => {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col  w-full">
-      <button
-        onClick={() => setStep(2)}
-        className="absolute top-5 left-5 text-qora"
-      >
-        <AiOutlineLeft size={24} />
-      </button>
       <div className="flex w-full bg-yozish">
         <button
           className={`h-[50px] w-1/2 border-2 border-yozish text-xl font-medium rounded max-md:text-[16px] ${
@@ -111,7 +129,9 @@ const ModalRegistr = ({ setStep, step }) => {
           placeholder="Parol"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full  max-md:text-sm"
+          className={`border  outline-none px-5 py-3 rounded-[5px] ${
+            passwordError ? "border-red-500" : "border-transparent"
+          } bg-yozish text-qora w-full max-md:text-sm`}
         />
         <button
           type="button"
@@ -130,7 +150,9 @@ const ModalRegistr = ({ setStep, step }) => {
           placeholder="Parolni tasdiqlash"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full max-md:text-sm"
+          className={`border  outline-none px-5 py-3 rounded-[5px] ${
+            passwordError ? "border-red-500" : "border-transparent"
+          } bg-yozish text-qora w-full max-md:text-sm`}
         />
         <button
           type="button"
@@ -140,8 +162,16 @@ const ModalRegistr = ({ setStep, step }) => {
           {isPasswordVisible ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
         </button>
       </div>
-      <label className="flex items-center mb-3 mt-5">
-        <input type="checkbox" className="mr-3" />
+      <label
+        className={`flex items-center mb-3 mt-5 border-b ${
+          checkboxError ? "border-b-red-500" : "border-b-transparent"
+        }`}
+      >
+        <input
+          type="checkbox"
+          className={`mr-3 `}
+          onChange={(e) => setIsChecked(e.target.checked)}
+        />
         <p className="text-sm font-semibold text-kulrang  max-md:text-xs">
           Men <span className="text-main">Foydalanish shartlari</span>ni qabul
           qilaman

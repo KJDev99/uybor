@@ -17,6 +17,7 @@ const ElonBlock = ({
   data,
   price,
   viewBlock,
+  id
 }) => {
   const [saved, setSaved] = useState(save);
   let view = useSelector((state) => state.view);
@@ -27,7 +28,7 @@ const ElonBlock = ({
   return (
     <>
       {view == "block" ? (
-        <Link href="/detailspage">
+        <Link href={`/${id}`}>
           <div className="flex flex-col bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg">
             <div className="relative">
               {top && (
@@ -75,7 +76,7 @@ const ElonBlock = ({
           </div>
         </Link>
       ) : (
-        <Link href="/detailspage">
+        <Link href={`/${id}`}>
           <div className="flex bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg md:relative md:h-[190px]">
             <div className="relative max-md:w-[130px] max-md:flex-shrink-0">
               {top && (

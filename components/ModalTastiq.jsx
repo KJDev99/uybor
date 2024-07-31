@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { AiOutlineLeft } from "react-icons/ai";
 import api from "@/lib/api";
 

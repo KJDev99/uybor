@@ -38,6 +38,7 @@ const TopElon = () => {
           data: new Date(ad.created).toLocaleDateString("en-GB"),
           price: `${ad.price.toLocaleString()} ${ad.currency}`,
           view: view,
+          id: ad.id,
         }));
         setAds(transformedAds);
         console.log(transformedAds);

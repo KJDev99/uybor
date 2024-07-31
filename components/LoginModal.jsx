@@ -14,6 +14,7 @@ import ModalNewPass from "./ModalNewPass";
 const LoginModal = ({ closeModal }) => {
   const [step, setStep] = useState(2);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [number, setNumber] = useState("");
 
   const handleTogglePasswordVisibility = () => {
     setIsPasswordVisible(!isPasswordVisible);
@@ -26,13 +27,13 @@ const LoginModal = ({ closeModal }) => {
           <ModalLogin setStep={setStep} step={step} closeModal={closeModal} />
         );
       case 3:
-        return <ModalRegistr setStep={setStep} step={step} />;
+        return <ModalRegistr setStep={setStep} step={step}  setNumber={setNumber} />;
       case 4:
         return (
           <ModalNewPass setStep={setStep} step={step}/>
         );
       case 5:
-        return <ModalTastiq setStep={setStep} step={step} />;
+        return <ModalTastiq setStep={setStep} step={step} phone={number} />;
       case 6:
         return (
           <div className="flex flex-col w-full">

@@ -4,7 +4,7 @@ import Search from "./Search";
 const Hero = () => {
   return (
     <div
-      className="main_bg h-[calc(100vh-80px)] max-md:h-[295px] bg-no-repeat bg-cover bg-center"
+      className="main_bg h-[calc(550px-80px)] max-md:h-[295px] bg-no-repeat bg-cover bg-center"
       style={{ backgroundImage: "url('./images/mainbg.webp')" }}
     >
       <div className="container pt-[50px] max-md:pt-[30px]">
