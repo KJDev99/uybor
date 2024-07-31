@@ -91,7 +91,7 @@ const DetailElon = () => {
               </h2>
               <div className="flex items-center">
                 <p className="text-sm max-md:text-xs font-medium mr-5 text-kulrang">
-                  Joyalangan sana:
+                  Joyalangan sana!:
                 </p>
                 <p className="text-qora max-md:text-xs font-medium">
                   {formatDate(adDetail.created)}
