@@ -33,7 +33,7 @@ const LoginModal = ({ closeModal }) => {
           <ModalNewPass setStep={setStep} step={step}/>
         );
       case 5:
-        return <ModalTastiq setStep={setStep} step={step} phone={number} />;
+        return <ModalTastiq setStep={setStep} step={step} phone={number} closeModal={closeModal}/>;
       case 6:
         return (
           <div className="flex flex-col w-full">

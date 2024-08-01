@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
-const CategorySelect = () => {
+const CategorySelect = ({setSeachQuery}) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const categoryRef = useRef(null);
@@ -36,6 +36,7 @@ const CategorySelect = () => {
   }, []);
 
   const displaySelectedCategories = () => {
+    setSearchQuery(prevQuery => ({ ...prevQuery, category: selectedCategories.join(", ")}));
     if (selectedCategories.length === 0) {
       return "Hammasi";
     } else if (selectedCategories.length <= 1) {

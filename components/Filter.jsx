@@ -11,11 +11,18 @@ import Image from "next/image";
 const Filter = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [filterHidden, setFilterHidden] = useState(true);
-
+  const [seachQuery, setSeachQuery] = useState({
+    category: "",
+    address: "",
+    min_room: "",
+    max_room: "",
+    price_min: "",
+    price_max: "",
+  });
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.id);
   };
-
+  console.log(seachQuery);
   return (
     <>
       <div
@@ -64,7 +71,7 @@ const Filter = () => {
           </label>
         </form>
         <div className="flex max-md:flex-col">
-          <CategorySelect />
+          <CategorySelect setSeachQuery={setSeachQuery}/>
           <ManzilSelect />
           <XonaSelect />
           <NarxSelect />

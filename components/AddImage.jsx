@@ -1,26 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import rasmYuklash from "@/assets/images/rasmyuklash.svg";
 import Camera from "@/assets/images/camera.svg";
 import { FaTimes } from "react-icons/fa";
 
-const AddImage = ({ textImage, size }) => {
+const AddImage = ({ textImage, size, formData, setFormData }) => {
   const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    // Initialize images state with images from formData if available
+    if (formData.media) {
+      setImages(formData.media.map((img) => img.file));
+    }
+  }, [formData]);
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
     if (files && files.length > 0) {
-      const uploadedImages = Array.from(files).map((file) =>
-        URL.createObjectURL(file)
-      );
-      setImages((prevImages) =>
-        [...prevImages, ...uploadedImages].slice(0, 10)
-      );
+      const newImages = Array.from(files).map((file, index) => ({
+        id: Date.now() + index, // Unique id for each image
+        file: URL.createObjectURL(file)
+      }));
+      
+      setImages((prevImages) => [
+        ...prevImages,
+        ...newImages.map((img) => img.file)
+      ].slice(0, 10));
+
+      // Update formData with new images
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        media: [
+          ...prevFormData.media || [],
+          ...newImages
+        ]
+      }));
     }
   };
 
   const removeImage = (index) => {
-    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    const updatedImages = images.filter((_, i) => i !== index);
+    const updatedMedia = formData.media.filter((_, i) => i !== index);
+
+    setImages(updatedImages);
+
+    // Update formData with updated images
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      media: updatedMedia
+    }));
   };
 
   return (
@@ -37,7 +65,9 @@ const AddImage = ({ textImage, size }) => {
       <div className="flex flex-wrap max-md:justify-around">
         <label
           className={`border border-dashed border-logoKok flex flex-col items-center justify-center rounded-[10px] mb-5 mr-5 cursor-pointer ${
-            size ? "w-[115px] h-[115px] max-md:w-[140px] max-md:h-[140px] mr-3 mb-3" : "w-[150px] h-[150px] max-md:w-full max-md:h-[140px] mr-5 mb-5"
+            size
+              ? "w-[115px] h-[115px] max-md:w-[140px] max-md:h-[140px] mr-3 mb-3"
+              : "w-[150px] h-[150px] max-md:w-full max-md:h-[140px] mr-5 mb-5"
           }`}
         >
           <input
@@ -54,17 +84,17 @@ const AddImage = ({ textImage, size }) => {
           <div
             key={index}
             className={`flex flex-col items-center justify-center relative rounded-[10px] bg-white ${
-              size ? "w-[115px] h-[115px] mr-3 mb-3 max-md:w-[140px] max-md:h-[140px]" : "w-[150px] h-[150px] max-md:w-[140px] max-md:h-[140px] mr-5 mb-5"
+              size
+                ? "w-[115px] h-[115px] mr-3 mb-3 max-md:w-[140px] max-md:h-[140px]"
+                : "w-[150px] h-[150px] max-md:w-[140px] max-md:h-[140px] mr-5 mb-5"
             }`}
           >
             {images[index] ? (
               <>
-                <Image
+                <img
                   src={images[index]}
                   alt={`Rasm`}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-[10px]"
+                  className="rounded-[10px] object-cover"
                 />
                 <button
                   className="absolute top-2 right-2 text-red-500 bg-white rounded-full p-1"

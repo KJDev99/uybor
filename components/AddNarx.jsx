@@ -2,9 +2,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
-const AddNarx = () => {
+const AddNarx = ({ formData, setFormData }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("So'm");
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const categoryRef = useRef(null);
 
@@ -14,12 +14,10 @@ const AddNarx = () => {
   const handleFromChange = (event) => {
     const inputValue = event.target.value;
     if (!isNaN(inputValue)) {
-      // Raqamni tekshirish
+      setFormData({...formData, "price":inputValue});
       setFromValue(inputValue);
     }
   };
-
-
 
   const categories = ["So'm", "Usd"];
 
@@ -32,11 +30,14 @@ const AddNarx = () => {
       setIsCategoryOpen(false);
     }
   };
-
+  
   const handleRadioChange = (event) => {
-    const category = event.target.id;
+    const category = event.target.value;
     setSelectedCategory(category);
     setIsCategoryOpen(false);
+    // setFormData({...formData, "currency":category});
+    if(category== "So'm") setFormData({ ...formData, "currency": 'UZS' });
+    else if(category== "Usd") setFormData({ ...formData, "currency": 'USD' });
   };
 
   useEffect(() => {
@@ -45,6 +46,7 @@ const AddNarx = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   return (
     <div className="flex flex-col relative mr-[10px]">
       <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm">
@@ -74,7 +76,7 @@ const AddNarx = () => {
             />
           </div>
           {isCategoryOpen && (
-            <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-yozish  w-[130px] top-[90px]">
+            <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-yozish  w-[130px] top-[90px] z-[11]">
               {categories.map((category, index) => (
                 <div
                   key={index}
@@ -90,6 +92,7 @@ const AddNarx = () => {
                       type="radio"
                       id={category}
                       name="category"
+                      value={category}
                       className="hidden"
                       checked={selectedCategory === category}
                       onChange={handleRadioChange}

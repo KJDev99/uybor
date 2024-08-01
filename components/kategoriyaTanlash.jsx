@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 
-const KategoriyaTanlash = ({ categories, heading }) => {
+const KategoriyaTanlash = ({ categories, heading, setFormData, formData, reqName }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -22,6 +22,12 @@ const KategoriyaTanlash = ({ categories, heading }) => {
     const category = event.target.id;
     setSelectedCategory(category);
     setIsCategoryOpen(false);
+    if(category== "Kvartiralar") setFormData({ ...formData, [reqName]: 'APARTMENT' });
+    else if(category== "Xovlilar") setFormData({ ...formData, [reqName]: 'HOUSE' });
+    else if(category== "Ofislar") setFormData({ ...formData, [reqName]: 'OFFICE' });
+    else if(category== "Do'konlar") setFormData({ ...formData, [reqName]: 'SHOP' });
+    else if(category== "Mehmonxona va dachalar") setFormData({ ...formData, [reqName]: 'HOTEL' });
+    console.log(formData, "formData");
   };
 
   useEffect(() => {

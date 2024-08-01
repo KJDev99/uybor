@@ -34,8 +34,7 @@ const DetailElon = () => {
       try {
         const response = await api.get(`api/v1/ads/${adId}/detail`);
         setAdDetail(response.data);
-        ``;
-        console.log(response.data.user.id);
+        console.log(response.data);
       } catch (err) {
         setError(err);
       } finally {

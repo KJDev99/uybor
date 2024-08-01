@@ -16,7 +16,7 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
 
   const validatePhone = () => {
     // Format: +998-__-___-__-__
-    const phonePattern = /^\+998-\d{2}-\d{3}-\d{2}-\d{2}$/;
+    const phonePattern = /^\+998\d{2}-\d{3}-\d{2}-\d{2}$/;
     if (!phonePattern.test(phone)) {
       setError("Telefon raqam to'liq va to'g'ri formatda kiritilishi kerak.");
       return false;
@@ -38,6 +38,7 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
           password,
         });
         Cookies.set("authToken", response.data.access);
+        localStorage.setItem("user", JSON.stringify(response.data))
         closeModal();
         window.location.reload();
       } catch (err) {
@@ -72,7 +73,7 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
         Telefon raqamingiz
       </p>
       <InputMask
-        mask="+998-__-___-__-__"
+        mask="+998__-___-__-__"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora max-md:text-sm"

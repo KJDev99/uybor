@@ -21,7 +21,7 @@ const ModalRegistr = ({ setStep, step, setNumber }) => {
   const [checkboxError, setCheckboxError] = useState(false);
 
   const validatePhone = () => {
-    const phonePattern = /^\+998-\d{2}-\d{3}-\d{2}-\d{2}$/;
+    const phonePattern = /^\+998\d{2}-\d{3}-\d{2}-\d{2}$/;
     if (!phonePattern.test(phone)) {
       setError("Telefon raqam to'liq va to'g'ri formatda kiritilishi kerak.");
       return false;
@@ -110,7 +110,7 @@ const ModalRegistr = ({ setStep, step, setNumber }) => {
         Telefon raqamingiz
       </p>
       <InputMask
-        mask="+998-__-___-__-__"
+        mask="+998__-___-__-__"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora max-md:text-sm"

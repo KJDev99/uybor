@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import api from "@/lib/api";
+import Cookies from "js-cookie";
 
-const ModalTastiq = ({ setStep, phone }) => {
+const ModalTastiq = ({ setStep, phone, closeModal }) => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,9 +23,11 @@ const ModalTastiq = ({ setStep, phone }) => {
         code: parseInt(code, 10),
       });
 
-      // Success handling
-      console.log("Kod tasdiqlandi:", response.data);
-      setStep(2); // Oqibatda keyingi qadamga o'tish
+      // Success handlin
+      Cookies.set("authToken", response.data.access);
+      localStorage.setItem("user", JSON.stringify(response.data))
+      closeModal();
+      window.location.reload();
     } catch (err) {
       setError("Kod noto‘g‘ri yoki serverda muammo bor.");
     } finally {

@@ -1,8 +1,9 @@
 "use client";
+import api from "@/lib/api";
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 
-const AddManzil = () => {
+const AddManzil = ({ formData, setFormData }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isDistrictOpen, setIsDistrictOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -11,48 +12,40 @@ const AddManzil = () => {
   const [hoveredDistrict, setHoveredDistrict] = useState(null);
   const categoryRef = useRef(null);
   const districtRef = useRef(null);
+  const [categories, setCategories] = useState([]);
+  const [districts, setDistricts] = useState({});
 
-  const categories = [
-    "Andijon",
-    "Buxoro",
-    "Fargʻona",
-    "Jizzax",
-    "Namangan",
-    "Navoiy",
-    "Qashqadaryo",
-    "Qoraqalpogʻiston",
-    "Samarqand",
-    "Sirdaryo",
-    "Surxondaryo",
-    "Toshkent shahar",
-    "Toshkent viloyati",
-    "Xorazm",
-  ];
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await api.get("/api/v1/region");
+        setCategories(response.data); // Assuming response.data is an array of categories
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
 
-  const districts = {
-    Andijon: ["Andijon", "Asaka", "Xo'jaobod"],
-    Buxoro: ["Buxoro", "Gʻijduvon", "Kogon"],
-    Fargʻona: ["Fargʻona", "Quva", "Rishton"],
-    Jizzax: ["Jizzax", "Forish", "Zafarobod"],
-    Namangan: ["Namangan", "Chortoq", "Uychi"],
-    Navoiy: ["Navoiy", "Konimex", "Karmana"],
-    Qashqadaryo: ["Qarshi", "Shahrisabz", "Kitob"],
-    Qoraqalpogʻiston: ["Nukus", "Mo'ynoq", "Xo'jayli"],
-    Samarqand: ["Samarqand", "Bulungʻur", "Jomboy"],
-    Sirdaryo: ["Guliston", "Sirdaryo", "Yangiyer"],
-    Surxondaryo: ["Termiz", "Denov", "Shahrisabz"],
-    "Toshkent shahar": ["Toshkent"],
-    "Toshkent viloyati": [
-      "Toshkent",
-      "Bektemir",
-      "Chirchiq",
-      "Olmaliq",
-      "Angren",
-      "Yangiobod",
-    ],
-    Xorazm: ["Urganch", "Xiva", "Shovot"],
-    Hammasi: [],
-  };
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    const fetchDistricts = async () => {
+      if (selectedCategory) {
+        try {
+          const response = await api.get(
+            `/api/v1/district?region=${selectedCategory}`
+          );
+          setDistricts({
+            [selectedCategory]: response.data, // Assuming response.data is an array of districts
+          });
+        } catch (error) {
+          console.error("Error fetching districts:", error);
+        }
+      }
+    };
+
+    fetchDistricts();
+  }, [selectedCategory]);
 
   const toggleCategory = () => {
     setIsCategoryOpen(!isCategoryOpen);
@@ -77,12 +70,23 @@ const AddManzil = () => {
     setSelectedDistrict("");
     setIsCategoryOpen(false);
     setIsDistrictOpen(true);
+    setFormData({ ...formData, region: category });
   };
 
   const handleDistrictChange = (event) => {
     const district = event.target.id;
     setSelectedDistrict(district);
     setIsDistrictOpen(false);
+
+    for (let i = 0; i < districts[selectedCategory].length; i++) {
+      
+      if (districts[selectedCategory][i].name_uz == district) {
+        setFormData((prevData) => ({
+          ...prevData,
+          district: districts[selectedCategory][i].id,
+        }));
+      }
+    }
   };
 
   useEffect(() => {
@@ -91,6 +95,14 @@ const AddManzil = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleAddressChange = (event) => {
+    const { value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      adress: value,
+    }));
+  };
 
   return (
     <div className="flex flex-col relative mr-[10px]">
@@ -108,7 +120,7 @@ const AddManzil = () => {
           <p
             className={`text-nowrap w-1/2 pr-4 overflow-hidden text-qora font-medium`}
           >
-            {selectedCategory}
+            {categories[selectedCategory - 1]?.name_uz}
           </p>
           <FaChevronLeft
             className={`text-qora transition-transform z-10 ${
@@ -122,30 +134,30 @@ const AddManzil = () => {
               <div
                 key={index}
                 className="relative"
-                onMouseEnter={() => setHoveredCategory(category)}
+                onMouseEnter={() => setHoveredCategory(category.id)}
                 onMouseLeave={() => setHoveredCategory(null)}
               >
                 <label
                   className={`flex items-center mb-2 cursor-pointer`}
-                  htmlFor={category}
+                  htmlFor={category.id}
                 >
                   <input
                     type="radio"
-                    id={category}
+                    id={category.id}
                     name="category"
                     className="hidden"
-                    checked={selectedCategory === category}
+                    checked={selectedCategory === category.id}
                     onChange={handleCategoryChange}
                   />
                   <p
                     className={`w-full px-4 py-2 rounded-md flex items-center justify-between ${
-                      selectedCategory === category ||
-                      hoveredCategory === category
+                      selectedCategory === category.name_uz ||
+                      hoveredCategory === category.id
                         ? "bg-ochKok text-qora font-medium"
                         : "text-kulrang"
                     }`}
                   >
-                    {category}
+                    {category.name_uz}
                   </p>
                 </label>
               </div>
@@ -172,38 +184,42 @@ const AddManzil = () => {
               </div>
               {isDistrictOpen && (
                 <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-full top-[40px] z-10">
-                  {districts[selectedCategory].map((district, index) => (
-                    <div
-                      key={index}
-                      className="relative"
-                      onMouseEnter={() => setHoveredDistrict(district)}
-                      onMouseLeave={() => setHoveredDistrict(null)}
-                    >
-                      <label
-                        className={`flex items-center mb-2 cursor-pointer`}
-                        htmlFor={district}
+                  {(districts[selectedCategory] || []).map(
+                    (district, index) => (
+                      <div
+                        key={index}
+                        className="relative"
+                        onMouseEnter={() =>
+                          setHoveredDistrict(district.name_uz)
+                        }
+                        onMouseLeave={() => setHoveredDistrict(null)}
                       >
-                        <input
-                          type="radio"
-                          id={district}
-                          name="district"
-                          className="hidden"
-                          checked={selectedDistrict === district}
-                          onChange={handleDistrictChange}
-                        />
-                        <p
-                          className={`w-full px-4 py-2 rounded-md flex items-center justify-between ${
-                            selectedDistrict === district ||
-                            hoveredDistrict === district
-                              ? "bg-ochKok text-qora font-medium"
-                              : "text-kulrang"
-                          }`}
+                        <label
+                          className={`flex items-center mb-2 cursor-pointer`}
+                          htmlFor={district.name_uz}
                         >
-                          {district}
-                        </p>
-                      </label>
-                    </div>
-                  ))}
+                          <input
+                            type="radio"
+                            id={district.name_uz}
+                            name="district"
+                            className="hidden"
+                            checked={selectedDistrict === district.name_uz}
+                            onChange={handleDistrictChange}
+                          />
+                          <p
+                            className={`w-full px-4 py-2 rounded-md flex items-center justify-between ${
+                              selectedDistrict === district.name_uz ||
+                              hoveredDistrict === district.name_uz
+                                ? "bg-ochKok text-qora font-medium"
+                                : "text-kulrang"
+                            }`}
+                          >
+                            {district.name_uz}
+                          </p>
+                        </label>
+                      </div>
+                    )
+                  )}
                 </div>
               )}
             </div>
@@ -212,6 +228,8 @@ const AddManzil = () => {
       </div>
       <input
         type="text"
+        value={formData.adress}
+        onChange={handleAddressChange}
         className="mb-5 mt-[10px] outline-none pr-4 overflow-hidden text-qora font-medium flex p-[10px] h-10 w-full rounded-[10px] justify-between items-center cursor-pointer border border-yozish"
       />
       <iframe
