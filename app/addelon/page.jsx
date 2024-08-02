@@ -17,7 +17,35 @@ const page = () => {
   const [formData, setFormData] = useState({
     ad_type: "",
   });
-
+  const data = new FormData()
+  data.append('ad_type', formData.ad_type)
+  data.append('phone', formData.phone)
+  data.append('title', formData.title)
+  data.append('category', formData.category)
+  data.append('price', formData.price)
+  data.append('currency', formData.currency)
+  data.append('region', formData.region)
+  data.append('district', formData.district)
+  data.append('adress', formData.adress)
+  data.append('room', formData.room)
+  data.append('accommodation_type', formData.accommodation_type)
+  data.append('construction_type', formData.construction_type)
+  data.append('house_built_year', formData.house_built_year)
+  data.append('have_furniture', formData.have_furniture)
+  data.append('living_area', formData.living_area)
+  data.append('total_area', formData.total_area)
+  data.append('floor', formData.floor)
+  data.append('total_floor', formData.total_floor)
+  data.append('have_broker_fee', formData.have_broker_fee)
+  data.append('description', formData.description)
+  data.append('extra_phone', formData.extra_phone)
+  if (formData.media && formData.media.length > 0) {
+    formData.media.forEach((fileObj) => {
+      data.append('media', fileObj.file); // Append each file under the key 'media'
+      console.log(fileObj.file, 'file'); // Debugging line to show file being appended
+    });
+  }
+  
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.id);
     setFormData({ ...formData, ad_type: e.target.id });
@@ -36,16 +64,16 @@ const page = () => {
 
     // Tokenni olish
     const token = getToken();
-    console.log("Token:", formData); // Tokenni tekshiring
 
     if (!token) {
       console.error("User is not authenticated");
       return;
     }
+    console.log(data, "data");
 
     try {
       // API so'rovini yuborish
-      const response = await api.post(`/api/v1/ads/create`, formData, {
+      const response = await api.post(`/api/v1/ads/create`, data, {
         headers: {
           "Content-Type": "multipart/form-data", // FormData yuborish uchun
           Authorization: `Bearer ${token}`, // Tokenni Authorization headerida yuborish

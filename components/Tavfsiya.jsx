@@ -5,7 +5,7 @@ import ElonBlock from "./ElonBlock";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import api from "@/lib/api";
 
-const Tavfsiya = () => {
+const Tavfsiya = ({ category, search }) => {
   const view = useSelector((state) => state.view);
 
   const [ads, setAds] = useState([]);
@@ -18,9 +18,17 @@ const Tavfsiya = () => {
   const fetchAds = async (pageNumber) => {
     setLoading(true);
     try {
-      const response = await api.get(
-        `/api/v1/ads/list?is_top=false&limit=${itemsPerPage}&offset=${(pageNumber - 1) * itemsPerPage}&page=${pageNumber}&size=${itemsPerPage}`
-      );
+      let url = "/api/v1/ads/list?is_top=false";
+      if (category) {
+        url += `&category=${encodeURIComponent(category)}`;
+      }
+      if (search) {
+        url += `&search=${encodeURIComponent(search)}`;
+      }
+      url += `&limit=${itemsPerPage}&offset=${
+        (pageNumber - 1) * itemsPerPage
+      }&page=${pageNumber}&size=${itemsPerPage}`;
+      const response = await api.get(url);
       const transformedAds = response.data.results.map((ad) => ({
         image: ad.media,
         top: ad.is_top,
@@ -31,7 +39,7 @@ const Tavfsiya = () => {
         data: new Date(ad.created).toLocaleDateString("en-GB"),
         price: `${ad.price.toLocaleString()} ${ad.currency}`,
         view: view,
-        id: ad.id
+        id: ad.id,
       }));
       setAds(transformedAds);
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));
@@ -44,7 +52,7 @@ const Tavfsiya = () => {
 
   useEffect(() => {
     fetchAds(page);
-  }, [page]);
+  }, [page, search]);
 
   const handleNextPage = () => {
     if (page < totalPages) {
@@ -67,35 +75,39 @@ const Tavfsiya = () => {
 
   const renderPagination = () => {
     if (totalPages <= 1) return null;
-  
+
     const pageNumbers = [];
-  
+
     // Always show the first page
     pageNumbers.push(1);
-  
+
     // Add ellipsis if there are pages between the first page and current page
     if (page > 4) {
-      pageNumbers.push('...');
+      pageNumbers.push("...");
     }
-  
+
     // Add the pages around the current page
-    for (let i = Math.max(2, page - 1); i <= Math.min(totalPages - 1, page + 1); i++) {
+    for (
+      let i = Math.max(2, page - 1);
+      i <= Math.min(totalPages - 1, page + 1);
+      i++
+    ) {
       pageNumbers.push(i);
     }
-  
+
     // Add ellipsis if there are pages between the current page and the last page
     if (page < totalPages - 3) {
-      pageNumbers.push('...');
+      pageNumbers.push("...");
     }
-  
+
     // Always show the last page
     if (totalPages > 1) {
       pageNumbers.push(totalPages);
     }
-  
+
     // Remove duplicates and ensure correct ordering
     const uniquePageNumbers = Array.from(new Set(pageNumbers));
-  
+
     return (
       <div className="flex justify-center mt-[50px] mb-5">
         <button
@@ -108,8 +120,13 @@ const Tavfsiya = () => {
           <FaChevronLeft />
         </button>
         {uniquePageNumbers.map((pageNumber, index) =>
-          pageNumber === '...' ? (
-            <span key={index} className="w-10 h-10 rounded-md font-semibold mx-1 text-qora bg-white flex justify-center items-center">...</span>
+          pageNumber === "..." ? (
+            <span
+              key={index}
+              className="w-10 h-10 rounded-md font-semibold mx-1 text-qora bg-white flex justify-center items-center"
+            >
+              ...
+            </span>
           ) : (
             <button
               key={pageNumber}
@@ -136,8 +153,6 @@ const Tavfsiya = () => {
       </div>
     );
   };
-  
-  
 
   return (
     <div className="flex flex-col container mb-[60px]">

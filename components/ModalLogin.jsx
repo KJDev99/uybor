@@ -7,6 +7,7 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import InputMask from "react-input-mask";
+import Link from "next/link";
 
 const ModalLogin = ({ step, setStep, closeModal }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -118,7 +119,7 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
       </button>
       <p className="text-center text-kulrang text-sm font-semibold max-md:text-xs">
         Tizimga kirish orqali siz{" "}
-        <span className="text-main">Foydalanish shartlarimizga</span> rozilik
+        <Link onClick={closeModal} href="/foydalanishshartlari" className="text-main  cursor-pointer">Foydalanish shartlarimizga</Link> rozilik
         bildirasiz.
       </p>
     </form>

@@ -27,7 +27,7 @@ const LoginModal = ({ closeModal }) => {
           <ModalLogin setStep={setStep} step={step} closeModal={closeModal} />
         );
       case 3:
-        return <ModalRegistr setStep={setStep} step={step}  setNumber={setNumber} />;
+        return <ModalRegistr setStep={setStep} step={step}  setNumber={setNumber} closeModal={closeModal} />;
       case 4:
         return (
           <ModalNewPass setStep={setStep} step={step}/>

@@ -36,7 +36,7 @@ const CategorySelect = ({setSeachQuery}) => {
   }, []);
 
   const displaySelectedCategories = () => {
-    // setSearchQuery(prevQuery => ({ ...prevQuery, category: selectedCategories.join(", ")}));
+    // setSearchQuery(prevQuery => ({ ...prevQuery, category: selectedCategories.join(", ")}));`
     if (selectedCategories.length === 0) {
       return "Hammasi";
     } else if (selectedCategories.length <= 1) {

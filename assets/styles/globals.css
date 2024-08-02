@@ -138,3 +138,42 @@ body {
   -ms-overflow-style: none; /* For Internet Explorer and Edge */
   scrollbar-width: none; /* For Firefox */
 }
+
+/* Replace $primary-color with the actual color value you want to use */
+.primary-color {
+  color: #fff; /* Replace with the actual value of $my-brand-color */
+}
+
+.loader-hidden {
+  display: none;
+}
+
+.loader-active {
+  display: block;
+}
+
+
+@keyframes ball-grid-beat {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.ball-grid-beat div {
+  width: 1rem;
+  height: 1rem;
+  background-color: #333;
+  border-radius: 50%;
+  animation: ball-grid-beat 1.4s infinite ease-in-out;
+}
+
+.ball-grid-beat {
+  width: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+}

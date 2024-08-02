@@ -11,7 +11,7 @@ import MainImg from "@/assets/images/asosiyrasm.png";
 import ElonBlock from "./ElonBlock";
 import api from "@/lib/api";
 
-const TopElon = () => {
+const TopElon = ({ category, search }) => {
   const [valyuta, setValyuta] = useState("uzs");
 
   const view = useSelector((state) => state.view);
@@ -27,7 +27,14 @@ const TopElon = () => {
   useEffect(() => {
     const fetchAds = async () => {
       try {
-        const response = await api.get("/api/v1/ads/list?is_top=true");
+        let url = "/api/v1/ads/list?is_top=true";
+        if (category) {
+          url += `&category=${encodeURIComponent(category)}`;
+        }
+        if (search) {
+          url += `&search=${encodeURIComponent(search)}`;
+        }
+        const response = await api.get(url);
         const transformedAds = response.data.results.map((ad) => ({
           image: ad.media,
           top: ad.is_top,
@@ -48,7 +55,7 @@ const TopElon = () => {
     };
 
     fetchAds();
-  }, []);
+  }, [search, category]);
 
   return (
     <div className="flex flex-col container  ">

@@ -1,3 +1,4 @@
+// components/Categorys.js
 import React from "react";
 import Category from "./Category";
 import Kvartiralar from "@/assets/images/kvartiralar.webp";
@@ -6,6 +7,14 @@ import Ofislar from "@/assets/images/ofislar.webp";
 import Dokonlar from "@/assets/images/dokonlar.webp";
 import Mehmonxona from "@/assets/images/mehmonxona.webp";
 
+const categories = [
+  { image: Kvartiralar, text: "Kvartiralar", category: "APARTMENT" },
+  { image: Xovlilar, text: "Xovlilar", category: "HOUSE" },
+  { image: Ofislar, text: "Ofislar", category: "OFFICE" },
+  { image: Dokonlar, text: "Do'konlar", category: "SHOP" },
+  { image: Mehmonxona, text: "Mehmonxona va dachalar", category: "HOTEL" },
+];
+
 const Categorys = () => {
   return (
     <div className="flex flex-col container">
@@ -13,11 +22,14 @@ const Categorys = () => {
         Kategoriyalar
       </h2>
       <div className="flex justify-between max-md:overflow-x-scroll category_scroll gap-[10px] max-md:pb-2">
-        <Category image={Kvartiralar} text="Kvartiralar" v />
-        <Category image={Xovlilar} text="Xovlilar" />
-        <Category image={Ofislar} text="Ofislar" />
-        <Category image={Dokonlar} text="Do'konlar" />
-        <Category image={Mehmonxona} text="Mehmonxona va dachalar" />
+        {categories.map((cat, index) => (
+          <Category
+            key={index}
+            image={cat.image}
+            text={cat.text}
+            category={cat.category}
+          />
+        ))}
       </div>
     </div>
   );

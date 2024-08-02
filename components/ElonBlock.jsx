@@ -17,7 +17,7 @@ const ElonBlock = ({
   data,
   price,
   viewBlock,
-  id
+  id,
 }) => {
   const [saved, setSaved] = useState(save);
   let view = useSelector((state) => state.view);
@@ -36,7 +36,11 @@ const ElonBlock = ({
                   Top
                 </div>
               )}
-              <img src={image} alt={image} className="w-full h-[237px] object-cover max-md:h-[138px]" />
+              <img
+                src={image}
+                alt={image}
+                className="w-full h-[237px] object-cover max-md:h-[138px]"
+              />
               <Image
                 src={saved ? SavedImg : NoSavedImg}
                 alt={image}
@@ -91,11 +95,11 @@ const ElonBlock = ({
               />
 
               <div
-                className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full  max-md:w-[48px] max-md:h-4 max-md:text-[10px] ${
-                  turi == "ijara" ? "bg-ijara" : "bg-ochYashil"
+                className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full max-md:w-[48px] max-md:h-4 max-md:text-[10px] ${
+                  turi == "rent" ? "bg-ijara" : "bg-ochYashil"
                 }`}
               >
-                {turi}
+                {turi == "rent" ? "Ijara" : "Sotiladi"}
               </div>
               <Image
                 src={saved ? SavedImg : NoSavedImg}

@@ -27,6 +27,13 @@ const KategoriyaTanlash = ({ categories, heading, setFormData, formData, reqName
     else if(category== "Ofislar") setFormData({ ...formData, [reqName]: 'OFFICE' });
     else if(category== "Do'konlar") setFormData({ ...formData, [reqName]: 'SHOP' });
     else if(category== "Mehmonxona va dachalar") setFormData({ ...formData, [reqName]: 'HOTEL' });
+    else if(category== "birlamchi") setFormData({ ...formData, [reqName]: 'NEW' });
+    else if(category== "Ikkilamchi") setFormData({ ...formData, [reqName]: 'OLD' });
+    else if(category== "G'isht") setFormData({ ...formData, [reqName]: 'BRICK' });
+    else if(category== "Panel") setFormData({ ...formData, [reqName]: 'PANEL' });
+    else if(category== "Bor") setFormData({ ...formData, [reqName]: true});
+    else if(category== "Yo'q") setFormData({ ...formData, [reqName]: false });
+    else setFormData({ ...formData, [reqName]: category})
     console.log(formData, "formData");
   };
 

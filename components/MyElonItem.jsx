@@ -19,10 +19,11 @@ const MyElonItem = ({
   price,
   edit,
   finish,
+  status,
 }) => {
   const [isOpenTop, setIsOpenTop] = useState(false);
   const [isOpenFinish, setIsOpenFinish] = useState(false);
-
+  console.log(status);
   const openModalTop = () => {
     setIsOpenTop(true);
     document.body.style.overflow = "hidden";
@@ -38,6 +39,14 @@ const MyElonItem = ({
     document.body.style.overflow = "auto";
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getUTCDate().toString().padStart(2, "0");
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, "0"); // Months are 0-based
+    const year = date.getUTCFullYear();
+    return `${day}.${month}.${year}`;
+  };
+
   return (
     <>
       <div className="flex bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg relative">
@@ -47,10 +56,10 @@ const MyElonItem = ({
               Top
             </div>
           )}
-          <Image
+          <img
             src={image}
             alt={image}
-            className="w-full h-full object-cover"
+            className="w-[230px] h-[190px] object-cover"
           />
 
           <div
@@ -66,20 +75,22 @@ const MyElonItem = ({
             {name}
           </h3>
           <p className="text-2xl text-qora font-semibold md:hidden max-md:text-sm max-md:font-bold max-md:mb-5">
-            {price}
+            {price} So'm
           </p>
           <div className="flex mt-2 mb-4 max-md:mb-1">
             <CiLocationOn className="text-lg" />
-            <p className="text-sm text-kulrang ml-2 max-md:text-xs">{address}</p>
+            <p className="text-sm text-kulrang ml-2 max-md:text-xs">
+              {address}
+            </p>
           </div>
           <div className="flex justify-between mb-3 items-center">
-            <p className="text-sm text-kulrang">{data}</p>
+            <p className="text-sm text-kulrang">{formatDate(data)}</p>
             <p className="text-2xl text-qora font-semibold max-md:hidden ">
-              {price}
+              {price} So'm
             </p>
           </div>
           <div className="flex justify-end gap-5 border-t border-kulrang pt-[10px] max-md:hidden">
-            {!top && (
+            {!top && status == "aktiv" && (
               <button
                 onClick={openModalTop}
                 className="text text-qora px-4 py-1 rounded-md font-medium bg-[#FFE8BC] outline-none border-none flex justify-center items-center"
@@ -88,7 +99,7 @@ const MyElonItem = ({
                 Topga chiqarish
               </button>
             )}
-            {edit && (
+            {(status == "aktiv" || status == "tasdiq") && (
               <Link href={"/profil/editelon"}>
                 <button className="text text-qora px-4 py-1 rounded-md font-medium bg-[#E7F4FF] outline-none border-none flex justify-center items-center">
                   <Image src={EditImg} alt="edit" className="mr-2" />
@@ -96,7 +107,7 @@ const MyElonItem = ({
                 </button>
               </Link>
             )}
-            {finish && (
+            {status == "aktiv" && (
               <button
                 onClick={openModalFinish}
                 className="text text-qora px-4 py-1 rounded-md font-medium bg-[#CFFFDD] outline-none border-none flex justify-center items-center"

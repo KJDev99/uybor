@@ -1,4 +1,5 @@
 import api from "@/lib/api";
+import Link from "next/link";
 import { useState } from "react";
 import {
   AiOutlineLeft,
@@ -7,7 +8,7 @@ import {
 } from "react-icons/ai";
 import InputMask from "react-input-mask";
 
-const ModalRegistr = ({ setStep, step, setNumber }) => {
+const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [phone, setPhone] = useState("");
@@ -173,7 +174,7 @@ const ModalRegistr = ({ setStep, step, setNumber }) => {
           onChange={(e) => setIsChecked(e.target.checked)}
         />
         <p className="text-sm font-semibold text-kulrang  max-md:text-xs">
-          Men <span className="text-main">Foydalanish shartlari</span>ni qabul
+          Men <Link onClick={closeModal} href="/foydalanishshartlari"  className="text-main cursor-pointer" >Foydalanish shartlari</Link>ni qabul
           qilaman
         </p>
       </label>
