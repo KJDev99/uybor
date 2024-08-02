@@ -5,7 +5,7 @@ import ElonBlock from "./ElonBlock";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import api from "@/lib/api";
 
-const Tavfsiya = ({ category, search }) => {
+const Tavfsiya = ({ category, search, setCount, count }) => {
   const view = useSelector((state) => state.view);
 
   const [ads, setAds] = useState([]);
@@ -37,11 +37,13 @@ const Tavfsiya = ({ category, search }) => {
         name: ad.title,
         address: `${ad.region.name_uz} ${ad.district.name_uz}`,
         data: new Date(ad.created).toLocaleDateString("en-GB"),
-        price: `${ad.price.toLocaleString()} ${ad.currency}`,
+        price: ad.price,
+        currency: ad.currency,
         view: view,
         id: ad.id,
       }));
       setAds(transformedAds);
+      setCount(transformedAds.length);
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));
     } catch (err) {
       setError(err.message);

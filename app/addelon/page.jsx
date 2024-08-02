@@ -80,6 +80,7 @@ const page = () => {
         },
       });
       console.log("Ad created successfully:", response.data);
+      
       // Formani tozalash yoki foydalanuvchiga tasdiq xabari ko'rsatish
     } catch (error) {
       console.error("Error creating ad:", error);

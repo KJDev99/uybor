@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setView } from "@/store";
+import { setView } from '@/store';
+import { setCurrency } from '@/store';
 import Image from "next/image";
 import SeeBlock from "@/assets/images/seeblock.svg";
 import SeeLine from "@/assets/images/seeline.svg";
@@ -11,14 +12,19 @@ import MainImg from "@/assets/images/asosiyrasm.png";
 import ElonBlock from "./ElonBlock";
 import api from "@/lib/api";
 
-const TopElon = ({ category, search }) => {
-  const [valyuta, setValyuta] = useState("uzs");
+const TopElon = ({ category, search, setCount, count }) => {
+  // const [valyuta, setValyuta] = useState("uzs");
 
   const view = useSelector((state) => state.view);
+  const currencyNow = useSelector((state) => state.currency);
   const dispatch = useDispatch();
 
   const handleViewChange = (newView) => {
     dispatch(setView(newView));
+  };
+
+  const handleCurrencyChange = (newCurrency) => {
+    dispatch(setCurrency(newCurrency));
   };
 
   const [ads, setAds] = useState([]);
@@ -43,12 +49,15 @@ const TopElon = ({ category, search }) => {
           name: ad.title,
           address: `${ad.region.name_uz} ${ad.district.name_uz}`,
           data: new Date(ad.created).toLocaleDateString("en-GB"),
-          price: `${ad.price.toLocaleString()} ${ad.currency}`,
+          price: ad.price,
+          currency: ad.currency,
           view: view,
           id: ad.id,
+          currencyNow: currencyNow
         }));
         setAds(transformedAds);
         console.log(transformedAds);
+        setCount(transformedAds.length);
       } catch (err) {
         setError(err.message);
       }
@@ -61,7 +70,7 @@ const TopElon = ({ category, search }) => {
     <div className="flex flex-col container  ">
       <div className="flex justify-between mt-[50px] md:mb-[30px] max-md:flex-col-reverse">
         <h2 className="text-2xl text-qora font-semibold max-md:text-lg  max-md:mt-5 max-md:mb-2">
-          1 420 ta e’lon mavjud
+          {count}ta e’lon mavjud
         </h2>
         <div className="flex max-md:justify-between">
           <div className="flex items-center ">
@@ -83,17 +92,17 @@ const TopElon = ({ category, search }) => {
             <p className="text-qora font-medium md:ml-16">Valyuta:</p>
             <p
               className={`mx-5 cursor-pointer font-medium ${
-                valyuta == "uzs" ? "text-logoKok" : "text-kulrang"
+                currencyNow == "UZS" ? "text-logoKok" : "text-kulrang"
               }`}
-              onClick={() => setValyuta("uzs")}
+              onClick={() => handleCurrencyChange("UZS")}
             >
               UZS
             </p>
             <p
               className={` cursor-pointer font-medium ${
-                valyuta == "usd" ? "text-logoKok" : "text-kulrang"
+                currencyNow == "USD" ? "text-logoKok" : "text-kulrang"
               }`}
-              onClick={() => setValyuta("usd")}
+              onClick={() => handleCurrencyChange("USD")}
             >
               USD
             </p>

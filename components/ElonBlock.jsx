@@ -6,6 +6,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import CurrencyComponent from "./CurrencyComponent";
 
 const ElonBlock = ({
   top,
@@ -16,15 +17,12 @@ const ElonBlock = ({
   address,
   data,
   price,
-  viewBlock,
   id,
 }) => {
   const [saved, setSaved] = useState(save);
   let view = useSelector((state) => state.view);
-  if (viewBlock) {
-    view = viewBlock;
-  } else {
-  }
+  let currencyNow = useSelector((state) => state.currency);
+ 
   return (
     <>
       {view == "block" ? (
@@ -73,7 +71,7 @@ const ElonBlock = ({
               <div className="flex justify-between mb-3 max-md:mb-2">
                 <p className="text-sm text-kulrang">{data}</p>
                 <p className="text-sm text-qora font-medium max-md:hidden">
-                  {price}
+                  <CurrencyComponent  amount={price} currency={currencyNow == 'UZS' ? "USD" : "UZS"}/>
                 </p>
               </div>
             </div>
