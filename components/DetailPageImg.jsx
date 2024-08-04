@@ -20,18 +20,23 @@ export default function DetailPageImg({ imgs }) {
       >
         {imgs.map((img) => (
           <SwiperSlide key={img.id}>
-            <img src={img.file} alt={`Slide ${img.id}`} />
+            <img
+              src={img.file}
+              alt={`Slide ${img.id}`}
+              className="h-full w-full object-cover"
+            />
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <Swiper
-        onSwiper={setThumbsSwiper}
-        className="mySwiper mySwiper1"
-      >
+      <Swiper onSwiper={setThumbsSwiper} className="mySwiper mySwiper1">
         {imgs.map((img) => (
           <SwiperSlide key={img.id}>
-            <img src={img.file} alt={`Thumbnail ${img.id}`} className="h-full" />
+            <img
+              src={img.file}
+              alt={`Thumbnail ${img.id}`}
+              className="h-full"
+            />
           </SwiperSlide>
         ))}
       </Swiper>
