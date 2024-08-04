@@ -14,6 +14,8 @@ import { usePathname } from "next/navigation";
 
 import { format, parseISO } from "date-fns";
 import MapComponent from "./MapContainer";
+import { useSelector } from "react-redux";
+import CurrencyComponent from "./CurrencyComponent";
 
 const formatDate = (dateString) => {
   const date = parseISO(dateString);
@@ -28,7 +30,9 @@ const DetailElon = () => {
   const [error, setError] = useState(null);
   const pathname = usePathname();
   const adId = pathname.split("/").pop();
-  console.log(adId);
+
+  let currencyNow = useSelector((state) => state.currency);
+
   useEffect(() => {
     const fetchAdDetail = async () => {
       try {
@@ -86,7 +90,11 @@ const DetailElon = () => {
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
               <h2 className="text-logoKok text-2xl font-semibold mb-[10px] max-md:mb-1 max-md:text-[16px]">
-                {adDetail.price} $
+                <CurrencyComponent
+                  amount={adDetail.price}
+                  currency={currencyNow == "UZS" ? "USD" : "UZS"}
+                />
+                {/* {adDetail.price} */}
               </h2>
               <div className="flex items-center">
                 <p className="text-sm max-md:text-xs font-medium mr-5 text-kulrang">
@@ -136,11 +144,13 @@ const DetailElon = () => {
               E’lon muallifi
             </h2>
             <div className="flex items-center">
-              <img
-                src={adDetail.user.photo}
-                alt="img"
-                className="rounded-full max-md:h-[54px] max-md:w-[54px]"
-              />
+              {adDetail.user.photo && (
+                <img
+                  src={adDetail.user.photo}
+                  alt="img"
+                  className="rounded-full max-md:h-[54px] max-md:w-[54px] w-[75px] h-[75px]"
+                />
+              )}
               <p className="text-2xl ml-[30px] font-semibold text-qora max-md:text-[16px]">
                 {adDetail.user.full_name}
               </p>
@@ -174,10 +184,10 @@ const DetailElon = () => {
             <p className="text-qora text-lg font-medium mt-[10px] mb-5 max-md:text-sm">
               {adDetail.address}
             </p>
-            <MapComponent
+            {/* <MapComponent
               latitude={adDetail.latitude}
               longitude={adDetail.longitude}
-            />
+            /> */}
           </div>
         </div>
       </div>
@@ -185,13 +195,13 @@ const DetailElon = () => {
         <h2 className="text-main mb-[30px] font-semibold text-2xl">
           Muallifning boshqa e’lonlari
         </h2>
-        <ElonSlider userId={adDetail.user.id} />
+        <ElonSlider userId={adDetail.user.id} adId={adId} />
       </div>
       <div className="flex flex-col mb-[50px]">
         <h2 className="text-main mb-[30px] font-semibold text-2xl">
           O’xshash e‘lonlar
         </h2>
-        <ElonSlider />
+        <ElonSlider category={adDetail.category} adId={adId} />
       </div>
     </div>
   );

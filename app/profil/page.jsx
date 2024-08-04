@@ -5,9 +5,40 @@ import { usePathname } from "next/navigation";
 import logo from "@/assets/images/logo.svg";
 import Image from "next/image";
 import LanguageSelector from "@/components/SelectLanguage";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import api from "@/lib/api";
 const page = () => {
   const pathname = usePathname();
-  console.log(pathname);
+  const [userInfo, setUserInfo] = useState("");
+  const fetchMyInfo = async () => {
+    const authToken = Cookies.get("authToken");
+    if (!authToken) {
+      console.error("Foydalanuvchi tizimga kirilgan emas.");
+      return;
+    }
+
+    try {
+      const response = await api.get("/api/v1/user/profile", {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response.data, "user");
+      setUserInfo(response.data); // Ensure count is an object
+    } catch (error) {
+      console.error(
+        "Xato:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  useEffect(() => {
+    fetchMyInfo();
+  }, []);
+
   return (
     <>
       <div className="max-md:hidden">
@@ -26,7 +57,18 @@ const page = () => {
                 alt="img"
                 className="h-10 w-10 mr-[30px] "
               />
-              <h2 className="text-qora text-2xl font-medium">Xoshimjon</h2>
+
+              {userInfo.photo && (
+                <img
+                  src={userInfo.photo}
+                  alt="img"
+                  className="rounded-full max-md:h-[54px] max-md:w-[54px] w-[75px] h-[75px]"
+                />
+              )}
+
+              <h2 className="text-qora text-2xl font-medium">
+                {userInfo.full_name}
+              </h2>
             </div>
           </div>
           <ProfilMenu />

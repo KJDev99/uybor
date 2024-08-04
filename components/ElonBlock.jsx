@@ -3,7 +3,7 @@ import Image from "next/image";
 import SavedImg from "@/assets/images/saveelon.svg";
 import NoSavedImg from "@/assets/images/nosaveelon.svg";
 import { CiLocationOn } from "react-icons/ci";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import CurrencyComponent from "./CurrencyComponent";
@@ -22,7 +22,40 @@ const ElonBlock = ({
   const [saved, setSaved] = useState(save);
   let view = useSelector((state) => state.view);
   let currencyNow = useSelector((state) => state.currency);
- 
+
+  useEffect(() => {
+    const savedElons = JSON.parse(sessionStorage.getItem("savedElons")) || [];
+    const isSaved = savedElons.some((elon) => elon.id === id);
+    setSaved(isSaved);
+  }, [id]);
+
+  const handleSaveClick = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const newSavedStatus = !saved;
+    setSaved(newSavedStatus);
+
+    const savedElons = JSON.parse(sessionStorage.getItem("savedElons")) || [];
+    const updatedElons = newSavedStatus
+      ? [
+          ...savedElons,
+          {
+            id,
+            top,
+            image,
+            save: newSavedStatus,
+            turi,
+            name,
+            address,
+            data,
+            price,
+          },
+        ]
+      : savedElons.filter((elon) => elon.id !== id);
+
+    sessionStorage.setItem("savedElons", JSON.stringify(updatedElons));
+  };
+
   return (
     <>
       {view == "block" ? (
@@ -43,11 +76,7 @@ const ElonBlock = ({
                 src={saved ? SavedImg : NoSavedImg}
                 alt={image}
                 className="absolute top-4 right-4 h-[30px] w-[30px] cursor-pointer z-10"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  event.preventDefault();
-                  setSaved((prev) => !prev);
-                }}
+                onClick={handleSaveClick}
               />
               <div
                 className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full max-md:w-[48px] max-md:h-4 max-md:text-[10px] ${
@@ -71,7 +100,10 @@ const ElonBlock = ({
               <div className="flex justify-between mb-3 max-md:mb-2">
                 <p className="text-sm text-kulrang">{data}</p>
                 <p className="text-sm text-qora font-medium max-md:hidden">
-                  <CurrencyComponent  amount={price} currency={currencyNow == 'UZS' ? "USD" : "UZS"}/>
+                  <CurrencyComponent
+                    amount={price}
+                    currency={currencyNow == "UZS" ? "USD" : "UZS"}
+                  />
                 </p>
               </div>
             </div>
@@ -103,29 +135,24 @@ const ElonBlock = ({
                 src={saved ? SavedImg : NoSavedImg}
                 alt={image}
                 className="absolute top-3 right-3 h-[23px] w-[23px] cursor-pointer md:hidden"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  event.preventDefault();
-                  setSaved((prev) => !prev);
-                }}
+                onClick={handleSaveClick}
               />
             </div>
             <Image
               src={saved ? SavedImg : NoSavedImg}
               alt={image}
               className="absolute top-4 right-4 h-[30px] w-[30px] cursor-pointer max-md:hidden"
-              onClick={(event) => {
-                event.stopPropagation();
-                event.preventDefault();
-                setSaved((prev) => !prev);
-              }}
+              onClick={handleSaveClick}
             />
             <div className="py-5 px-5 max-md:p-[10px] flex flex-col flex-grow">
               <h3 className="line-clamp-2 text-qora text-xl font-semibold flex-grow max-md:text-sm max-md:mb-1">
                 {name}
               </h3>
               <p className="text-2xl text-qora font-semibold md:hidden max-md:text-sm max-md:font-bold max-md:mb-5">
-                {price}
+                <CurrencyComponent
+                  amount={price}
+                  currency={currencyNow == "UZS" ? "USD" : "UZS"}
+                />
               </p>
               <div className="flex mt-2 mb-4 max-md:mb-1">
                 <CiLocationOn className="text-lg" />
@@ -136,7 +163,10 @@ const ElonBlock = ({
               <div className="flex justify-between mb-3 items-center">
                 <p className="text-sm text-kulrang">{data}</p>
                 <p className="text-2xl text-qora font-semibold max-md:hidden ">
-                  {price}
+                  <CurrencyComponent
+                    amount={price}
+                    currency={currencyNow == "UZS" ? "USD" : "UZS"}
+                  />
                 </p>
               </div>
             </div>

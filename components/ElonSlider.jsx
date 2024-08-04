@@ -5,30 +5,35 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import api from "@/lib/api";
 import ElonBlock from "./ElonBlock";
-import MainImg from "@/assets/images/asosiyrasm.png";
 
-export default function ElonSlider({ userId }) {
+export default function ElonSlider({ userId, category, adId }) {
   const [ads, setAds] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
   const fetchAds = async () => {
     setLoading(true);
     try {
-      const response = await api.get(`/api/v1/ads/author/${userId}`);
-      const transformedAds = response.data.results.map((ad) => ({
-        image: ad.media,
-        top: ad.is_top,
-        save: true,
-        turi: ad.ad_type.toLowerCase(),
-        name: ad.title,
-        address: `${ad.region.name_uz} ${ad.district.name_uz}`,
-        data: new Date(ad.created).toLocaleDateString("en-GB"),
-        price: `${ad.price.toLocaleString()} ${ad.currency}`,
-        view: "block",
-        id: ad.id
-      }));
+      let response = "";
+      if (userId) response = await api.get(`/api/v1/ads/author/${userId}`);
+      if (category)
+        response = await api.get(`/api/v1/ads/list?category=${category}`);
+      const transformedAds = response.data.results
+        .filter((ad) => ad.id != adId) // Exclude ad with matching id
+        .map((ad) => ({
+          image: ad.media,
+          top: ad.is_top,
+          save: true,
+          turi: ad.ad_type.toLowerCase(),
+          name: ad.title,
+          address: `${ad.region.name_uz} ${ad.district.name_uz}`,
+          data: new Date(ad.created).toLocaleDateString("en-GB"),
+          price: ad.price,
+          view: "block",
+          id: ad.id,
+        }));
       setAds(transformedAds);
+      console.log(response.data.results);
+      console.log(adId);
     } catch (err) {
       setError(err.message);
     } finally {

@@ -43,7 +43,7 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
         id: ad.id,
       }));
       setAds(transformedAds);
-      setCount(transformedAds.length);
+      // setCount(transformedAds?.length);
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));
     } catch (err) {
       setError(err.message);
