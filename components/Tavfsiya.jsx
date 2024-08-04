@@ -10,11 +10,12 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
 
   const [ads, setAds] = useState([]);
   const [error, setError] = useState(null);
-  const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [nextPageUrl, setNextPageUrl] = useState(null);
+  const [previousPageUrl, setPreviousPageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const itemsPerPage = 20;
-
   const fetchAds = async (pageNumber) => {
     setLoading(true);
     try {
@@ -26,9 +27,13 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
         url += `&search=${encodeURIComponent(search)}`;
       }
       url += `&limit=${itemsPerPage}&offset=${
-        (pageNumber - 1) * itemsPerPage
+        (currentPage - 1) * itemsPerPage
       }&page=${pageNumber}&size=${itemsPerPage}`;
       const response = await api.get(url);
+      const { next, previous, count } = response.data;
+      setNextPageUrl(next);
+      setPreviousPageUrl(previous);
+      setTotalPages(Math.ceil(count / itemsPerPage));
       const transformedAds = response.data.results.map((ad) => ({
         image: ad.media,
         top: ad.is_top,
@@ -43,7 +48,6 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
         id: ad.id,
       }));
       setAds(transformedAds);
-      // setCount(transformedAds?.length);
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));
     } catch (err) {
       setError(err.message);
@@ -53,25 +57,25 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
   };
 
   useEffect(() => {
-    fetchAds(page);
-  }, [page, search]);
+    fetchAds(currentPage);
+  }, [currentPage, search]);
 
   const handleNextPage = () => {
-    if (page < totalPages) {
-      setPage(page + 1);
+    if (nextPageUrl) {
+      setCurrentPage(currentPage + 1);
       window.scrollTo(0, 0);
     }
   };
 
   const handlePreviousPage = () => {
-    if (page > 1) {
-      setPage(page - 1);
+    if (previousPageUrl) {
+      setCurrentPage(currentPage - 1);
       window.scrollTo(0, 0);
     }
   };
 
   const handlePageClick = (pageNumber) => {
-    setPage(pageNumber);
+    setCurrentPage(pageNumber);
     window.scrollTo(0, 0);
   };
 
@@ -79,75 +83,67 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
     if (totalPages <= 1) return null;
 
     const pageNumbers = [];
+    let startPage = 1;
+    let endPage = 4;
 
-    // Always show the first page
-    pageNumbers.push(1);
-
-    // Add ellipsis if there are pages between the first page and current page
-    if (page > 4) {
-      pageNumbers.push("...");
+    if (currentPage > 2) {
+      startPage = currentPage - 1;
+      endPage = currentPage + 2;
+      if (endPage > totalPages) {
+        endPage = totalPages;
+        startPage = endPage - 3;
+        if (startPage < 1) startPage = 1;
+      }
     }
 
-    // Add the pages around the current page
-    for (
-      let i = Math.max(2, page - 1);
-      i <= Math.min(totalPages - 1, page + 1);
-      i++
-    ) {
+    if (startPage > 1) {
+      pageNumbers.push(1);
+      if (startPage > 2) pageNumbers.push("...");
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(i);
     }
 
-    // Add ellipsis if there are pages between the current page and the last page
-    if (page < totalPages - 3) {
-      pageNumbers.push("...");
-    }
-
-    // Always show the last page
-    if (totalPages > 1) {
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) pageNumbers.push("...");
       pageNumbers.push(totalPages);
     }
-
-    // Remove duplicates and ensure correct ordering
-    const uniquePageNumbers = Array.from(new Set(pageNumbers));
 
     return (
       <div className="flex justify-center mt-[50px] mb-5">
         <button
           onClick={handlePreviousPage}
-          disabled={page === 1}
+          disabled={!previousPageUrl}
           className={`h-10 bg-white rounded-md w-10 mr-2 flex justify-center items-center ${
-            page === 1 && "bg-kulrangOch"
+            !previousPageUrl && "bg-kulrangOch"
           }`}
         >
           <FaChevronLeft />
         </button>
-        {uniquePageNumbers.map((pageNumber, index) =>
-          pageNumber === "..." ? (
-            <span
-              key={index}
-              className="w-10 h-10 rounded-md font-semibold mx-1 text-qora bg-white flex justify-center items-center"
-            >
-              ...
-            </span>
-          ) : (
-            <button
-              key={pageNumber}
-              onClick={() => handlePageClick(pageNumber)}
-              className={`w-10 h-10 rounded-md font-semibold mx-1 ${
-                page === pageNumber
-                  ? "bg-ochKok text-logoKok"
-                  : "text-qora bg-white"
-              }`}
-            >
-              {pageNumber}
-            </button>
-          )
-        )}
+        {pageNumbers.map((pageNumber, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              if (pageNumber !== "...") {
+                handlePageClick(pageNumber);
+              }
+            }}
+            className={`w-10 h-10 rounded-md font-semibold mx-1 ${
+              pageNumber === currentPage
+                ? "bg-ochKok text-logoKok"
+                : "text-qora bg-white"
+            }`}
+            disabled={pageNumber === "..."}
+          >
+            {pageNumber}
+          </button>
+        ))}
         <button
           onClick={handleNextPage}
-          disabled={page === totalPages}
+          disabled={!nextPageUrl}
           className={`h-10 bg-white rounded-md w-10 ml-2 flex justify-center items-center ${
-            page === totalPages && "bg-kulrangOch"
+            !nextPageUrl && "bg-kulrangOch"
           }`}
         >
           <FaChevronRight />
@@ -155,7 +151,6 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
       </div>
     );
   };
-
   return (
     <div className="flex flex-col container mb-[60px]">
       <div className="flex flex-col">
