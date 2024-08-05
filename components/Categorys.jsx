@@ -1,11 +1,11 @@
 // components/Categorys.js
 import React from "react";
 import Category from "./Category";
-import Kvartiralar from "@/assets/images/kvartiralar.webp";
-import Xovlilar from "@/assets/images/xovlilar.webp";
-import Ofislar from "@/assets/images/ofislar.webp";
-import Dokonlar from "@/assets/images/dokonlar.webp";
-import Mehmonxona from "@/assets/images/mehmonxona.webp";
+import Kvartiralar from "@/assets/images/kvartiralar.jpg";
+import Xovlilar from "@/assets/images/xovlilar.png";
+import Ofislar from "@/assets/images/ofislar.jpg";
+import Dokonlar from "@/assets/images/dokonlar.jpg";
+import Mehmonxona from "@/assets/images/mehmonxona.jpg";
 
 const categories = [
   { image: Kvartiralar, text: "Kvartiralar", category: "APARTMENT" },

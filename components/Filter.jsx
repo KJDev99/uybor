@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import CategorySelect from "./CategorySelect";
 import ManzilSelect from "./ManzilSelect";
 import XonaSelect from "./XonaSelect";
@@ -11,10 +12,39 @@ import Image from "next/image";
 const Filter = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [filterHidden, setFilterHidden] = useState(true);
-  
+  const [category, setCategory] = useState("");
+  const [region, setRegion] = useState("");
+  const [district, setDistrict] = useState("");
+  const [minRoom, setMinRoom] = useState("");
+  const [maxRoom, setMaxRoom] = useState("");
+  const [priceMin, setPriceMin] = useState("");
+  const [priceMax, setPriceMax] = useState("");
+
+  const router = useRouter();
+
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.id);
   };
+
+  const handleFilterClick = () => {
+    const queryParams = new URLSearchParams();
+
+    // Add filter parameters to query
+    if (selectedOption) queryParams.append("ad_type", selectedOption);
+    if (category) queryParams.append("category", category);
+    if (region) queryParams.append("region", region);
+    if (district) queryParams.append("district", district);
+    if (minRoom) queryParams.append("min_room", minRoom);
+    if (maxRoom) queryParams.append("max_room", maxRoom);
+    if (priceMin) queryParams.append("price_min", priceMin);
+    if (priceMax) queryParams.append("price_max", priceMax);
+
+    // Redirect to the search results page with query parameters
+    // router.push(`/search?${queryParams.toString()}`);
+
+    console.log(queryParams, "handleFilterClick");
+  };
+
   return (
     <>
       <div
@@ -63,15 +93,26 @@ const Filter = () => {
           </label>
         </form>
         <div className="flex max-md:flex-col">
-          <CategorySelect />
-          <ManzilSelect />
-          <XonaSelect />
-          <NarxSelect />
+          <CategorySelect setCategory={setCategory} />
+          <ManzilSelect setRegion={setRegion} setDistrict={setDistrict} />
+          <XonaSelect setMinRoom={setMinRoom} setMaxRoom={setMaxRoom} />
+          <NarxSelect setPriceMin={setPriceMin} setPriceMax={setPriceMax} />
           <div className="w-[136px] h-10 mt-12 ml-4 max-md:hidden">
-            <Button main image={FilterImg} text="Saralash" color="white" />
+            <Button
+              main
+              image={FilterImg}
+              text="Saralash"
+              color="white"
+              onClick={handleFilterClick}
+            />
           </div>
           <div className="w-full h-10 my-5 md:hidden">
-            <Button main text="Saralash" color="white" />
+            <Button
+              main
+              text="Saralash"
+              color="white"
+              onClick={handleFilterClick()}
+            />
           </div>
         </div>
       </div>

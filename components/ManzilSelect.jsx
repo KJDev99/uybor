@@ -1,77 +1,75 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
+import api from "@/lib/api";
 
 const ManzilSelect = () => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Hammasi");
   const [hoveredCategory, setHoveredCategory] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [districts, setDistricts] = useState({});
   const categoryRef = useRef(null);
 
-  const categories = [
-    "Hammasi",
-    "Andijon",
-    "Buxoro",
-    "Fargʻona",
-    "Jizzax",
-    "Namangan",
-    "Navoiy",
-    "Qashqadaryo",
-    "Qoraqalpogʻiston",
-    "Samarqand",
-    "Sirdaryo",
-    "Surxondaryo",
-    "Toshkent shahar",
-    "Toshkent viloyati",
-    "Xorazm",
-  ];
-
-  const districts = {
-    Andijon: ["Andijon", "Asaka", "Xo'jaobod"],
-    Buxoro: ["Buxoro", "Gʻijduvon", "Kogon"],
-    Fargʻona: ["Fargʻona", "Quva", "Rishton"],
-    Jizzax: ["Jizzax", "Forish", "Zafarobod"],
-    Namangan: ["Namangan", "Chortoq", "Uychi"],
-    Navoiy: ["Navoiy", "Konimex", "Karmana"],
-    Qashqadaryo: ["Qarshi", "Shahrisabz", "Kitob"],
-    Qoraqalpogʻiston: ["Nukus", "Mo'ynoq", "Xo'jayli"],
-    Samarqand: ["Samarqand", "Bulungʻur", "Jomboy"],
-    Sirdaryo: ["Guliston", "Sirdaryo", "Yangiyer"],
-    Surxondaryo: ["Termiz", "Denov", "Shahrisabz"],
-    "Toshkent shahar": ["Toshkent"],
-    "Toshkent viloyati": [
-      "Toshkent",
-      "Bektemir",
-      "Chirchiq",
-      "Olmaliq",
-      "Angren",
-      "Yangiobod",
-    ],
-    Xorazm: ["Urganch", "Xiva", "Shovot"],
-    Hammasi: [],
+  // Fetch categories from backend
+  const fetchCategories = async () => {
+    try {
+      const response = await api.get("/api/v1/region");
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
   };
 
+  // Fetch districts for a specific region from backend
+  const fetchDistricts = async (regionId) => {
+    try {
+      const response = await api.get(`/api/v1/district?region=${regionId}`);
+      setDistricts((prev) => ({ ...prev, [regionId]: response.data }));
+    } catch (error) {
+      console.error("Error fetching districts:", error);
+    }
+  };
+
+  // Handle category click to open districts dropdown
+  const handleCategoryClick = (category) => {
+    setHoveredCategory(category);
+  };
+
+  // Handle district click to set the selected category
+  const handleDistrictClick = (district) => {
+    setSelectedCategory(district.name_uz);
+    setIsCategoryOpen(false);
+  };
+
+  // Toggle the category dropdown
   const toggleCategory = () => {
     setIsCategoryOpen(!isCategoryOpen);
   };
 
+  // Close the category dropdown when clicking outside
   const handleClickOutside = (event) => {
     if (categoryRef.current && !categoryRef.current.contains(event.target)) {
       setIsCategoryOpen(false);
     }
   };
 
-  const handleDistrictClick = (district) => {
-    setSelectedCategory(district);
-    setIsCategoryOpen(false);
-  };
-
   useEffect(() => {
+    fetchCategories();
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (hoveredCategory) {
+      const categoryId = hoveredCategory.id;
+      if (!districts[categoryId]) {
+        fetchDistricts(categoryId);
+      }
+    }
+  }, [hoveredCategory]);
 
   const displaySelectedCategory = () => {
     return selectedCategory ? selectedCategory : "Hammasi";
@@ -106,13 +104,13 @@ const ManzilSelect = () => {
         </div>
         {isCategoryOpen && (
           <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-[216px] max-md:w-[60%] top-[90px] z-[11]">
-            {categories.map((category, index) => (
+            {categories.map((category) => (
               <div
-                key={index}
+                key={category.id}
                 className="relative"
                 onMouseEnter={() => setHoveredCategory(category)}
                 onMouseLeave={() => setHoveredCategory(null)}
-                onClick={() => setHoveredCategory(category)}
+                onClick={() => handleCategoryClick(category)}
               >
                 <p
                   className={`w-full px-4 py-2 rounded-md flex items-center justify-between cursor-pointer ${
@@ -121,22 +119,26 @@ const ManzilSelect = () => {
                       : "text-kulrang"
                   }`}
                 >
-                  {category}
-                  {category !== "Hammasi" && (
+                  {category.name_uz}
+                  {category.name_uz !== "Hammasi" && (
                     <FaChevronLeft
-                      className={`text-kulrang transition-transform z-10 rotate-180`}
+                      className={`text-kulrang transition-transform z-10 ${
+                        hoveredCategory === category
+                          ? "rotate-[270deg]"
+                          : "rotate-180"
+                      }`}
                     />
                   )}
                 </p>
-                {(hoveredCategory === category) && districts[category] && (
+                {hoveredCategory === category && districts[category.id] && (
                   <div className="absolute left-full top-0 mt-[-10px] bg-white w-[216px] max-md:w-[80%] shadow-lg p-[10px] rounded-[10px]">
-                    {districts[category].map((district, idx) => (
+                    {districts[category.id].map((district) => (
                       <div
-                        key={idx}
+                        key={district.id}
                         className="cursor-pointer text-kulrang hover:bg-ochKok hover:text-qora p-2 rounded-md"
                         onClick={() => handleDistrictClick(district)}
                       >
-                        {district}
+                        {district.name_uz}
                       </div>
                     ))}
                   </div>

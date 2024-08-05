@@ -8,7 +8,6 @@ import SeeBlock from "@/assets/images/seeblock.svg";
 import SeeLine from "@/assets/images/seeline.svg";
 import SeeBlockAct from "@/assets/images/seeblockact.svg";
 import SeeLineAct from "@/assets/images/seelineact.svg";
-import MainImg from "@/assets/images/asosiyrasm.png";
 import ElonBlock from "./ElonBlock";
 import api from "@/lib/api";
 

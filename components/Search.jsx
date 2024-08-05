@@ -9,25 +9,30 @@ const Search = ({ setSearch, search1 }) => {
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
   const pathname = usePathname();
-  const handleInputChange = (e) => {
-    setSearchValue(e.target.value);
-    console.log(pathname);
-  };
+
+  // Update searchValue when pathname changes
   useEffect(() => {
     setSearchValue(search1);
-  }, [pathname]);
+  }, [pathname, search1]);
 
+  // Handle input change
+  const handleInputChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  // Clear the input field
   const clearInput = () => {
     setSearchValue("");
     setSearch(""); // Clear search value in parent component when input is cleared
   };
 
+  // Handle search click
   const handleSearchClick = () => {
-    if (searchValue && pathname !== "/search") {
-      // Redirect to /search page with the search query parameter
-      router.push(`/search?search=${encodeURIComponent(searchValue)}`);
-      setSearch(searchValue);
-    } else {
+    if (searchValue) {
+      if (pathname !== "/search") {
+        // Redirect to /search page with the search query parameter
+        router.push(`/search?search=${encodeURIComponent(searchValue)}`);
+      }
       setSearch(searchValue);
     }
   };
@@ -47,8 +52,12 @@ const Search = ({ setSearch, search1 }) => {
           onClick={clearInput}
         />
       )}
-
-      <div className="w-[136px] h-10 max-md:hidden" onClick={handleSearchClick}>
+      <div
+        className={`w-[136px] h-10 max-md:hidden cursor-pointer ${
+          searchValue ? "" : "opacity-100 pointer-events-none"
+        }`}
+        onClick={handleSearchClick}
+      >
         <Button main image={SearchImg} text="Qidirish" color="white" />
       </div>
     </div>

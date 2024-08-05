@@ -20,7 +20,7 @@ const SearchPage = () => {
   const [maxRoom, setMaxRoom] = useState("");
   const [priceMin, setPriceMin] = useState("");
   const [priceMax, setPriceMax] = useState("");
-  const search1 = searchParams.get("search")
+  const search1 = searchParams.get("search");
   console.log(search1);
   console.log(category);
   return (
@@ -29,6 +29,7 @@ const SearchPage = () => {
         <div className="flex md:flex-col md:bg-[#ffffffd8] rounded-2xl p-5 max-md:p-0">
           <Search setSearch={setSearch} search1={search1} />
           <Filter
+            setAdType={setAdType}
             setRegion={setRegion}
             setDistrict={setDistrict}
             setMinRoom={setMinRoom}
@@ -39,7 +40,7 @@ const SearchPage = () => {
         </div>
       </div>
       <TopElon category={category} search={search || search1} />
-      <Tavfsiya category={category} search={search || search1}/>
+      <Tavfsiya category={category} search={search || search1} />
     </>
   );
 };
