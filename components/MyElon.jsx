@@ -8,12 +8,14 @@ import Link from "next/link";
 import { FaAngleLeft } from "react-icons/fa6";
 import Cookies from "js-cookie";
 import api from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 const itemsPerPage = 20;
 const MyElon = () => {
   const [selectedDuration, setSelectedDuration] = useState("aktiv");
   const [myElons, setMyElons] = useState([]);
   const [myElonsCount, setMyElonsCount] = useState({}); // Initialize as an empty object
+  const router = useRouter();
   // Fetch my ads and count
   const statusMapping = {
     aktiv: "ACTIVE",
@@ -50,7 +52,7 @@ const MyElon = () => {
     const authToken = Cookies.get("authToken");
     try {
       await api.put(
-        `/api/v1/root/ads/${adId}/detail`,
+        `/api/v1/ads/${adId}/update/status`,
         {
           id: adId,
           status: "SOLD",
@@ -61,14 +63,14 @@ const MyElon = () => {
           },
         }
       );
-      // Refetch data or update state as needed
-      const response = await api.get(`/api/v1/root/ads/${adId}/detail`, {
+      const response = await api.get(`/api/v1/ads/my-ads?status=ACTIVE`, {
         headers: {
           Authorization: `Bearer ${authToken}`,
         },
       });
       router.push("/profil");
-      myElons(response.data);
+      setMyElons(response.data);
+      fetchMyAdsCount();
     } catch (err) {
       console.log(err);
     }

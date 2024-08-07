@@ -40,7 +40,11 @@ const MyElonItem = ({
     setIsOpenFinish(false);
     document.body.style.overflow = "auto";
   };
-
+  const handleConfirm = () => {
+    console.log("asd");
+    handleConfirmAction(id);
+    closeModal();
+  };
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getUTCDate().toString().padStart(2, "0");
@@ -154,7 +158,7 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
       )}
       {isOpenFinish && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-10"
           onClick={closeModal}
         >
           <div
@@ -175,7 +179,7 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
             </p>
             <div className="flex justify-center">
               <button
-                onClick={() => handleConfirmAction(id)}
+                onClick={handleConfirm}
                 className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5"
               >
                 Ha
@@ -214,7 +218,6 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
             Yakunlash
           </button>
         )}
-
         {isOpenTop && (
           <div
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm max-md:px-5"
