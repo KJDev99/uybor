@@ -29,10 +29,8 @@ const Search = ({ setSearch, search1 }) => {
   // Handle search click
   const handleSearchClick = () => {
     if (searchValue) {
-      if (pathname !== "/search") {
-        // Redirect to /search page with the search query parameter
-        router.push(`/search?search=${encodeURIComponent(searchValue)}`);
-      }
+      // Redirect to /search page with the search query parameter
+      router.push(`?search=${encodeURIComponent(searchValue)}`);
       setSearch(searchValue);
     }
   };

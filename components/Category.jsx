@@ -12,7 +12,7 @@ const Category = ({ image, text, category }) => {
       // Perform API request based on category
       await api.get(`/api/v1/ads/list?category=${category}`);
       // Redirect to search page
-      router.push(`/search?category=${category}`);
+      router.push(`/?category=${encodeURIComponent(category)}`);
     } catch (error) {
       console.error("Failed to fetch ads:", error);
     }

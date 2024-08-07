@@ -34,7 +34,6 @@ const KategoriyaTanlash = ({ categories, heading, setFormData, formData, reqName
     else if(category== "Bor") setFormData({ ...formData, [reqName]: true});
     else if(category== "Yo'q") setFormData({ ...formData, [reqName]: false });
     else setFormData({ ...formData, [reqName]: category})
-    console.log(formData, "formData");
   };
 
   useEffect(() => {

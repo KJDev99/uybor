@@ -9,12 +9,44 @@ import SeeLineAct from "@/assets/images/seelineact.svg";
 import ElonBlock from "./ElonBlock";
 import ElonBlockSkeleton from "./ElonBlockSkeleton"; // Importing the skeleton component
 import api from "@/lib/api";
+import { useSearchParams } from "next/navigation";
 
-const TopElon = ({ category, search, setCount, count }) => {
+const TopElon = ({ setCount, count }) => {
   const view = useSelector((state) => state.view);
   const currencyNow = useSelector((state) => state.currency);
   const dispatch = useDispatch();
 
+  const searchParams = useSearchParams();
+  const [adType, setAdType] = useState("");
+  const [category, setCategory] = useState("");
+  const [district, setDistrict] = useState("");
+  const [minRoom, setMinRoom] = useState("");
+  const [maxRoom, setMaxRoom] = useState("");
+  const [priceMin, setPriceMin] = useState("");
+  const [priceMax, setPriceMax] = useState("");
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    // Extract values from query parameters
+    const adTypeParam = searchParams.get("ad_type") || ""; // Default to empty string if null
+    const categoryParam = searchParams.get("category") || ""; // Default to empty string if null
+    const districtParam = searchParams.get("district") || ""; // Default to empty string if null
+    const minRoomParam = searchParams.get("min_room") || ""; // Default to empty string if null
+    const maxRoomParam = searchParams.get("max_room") || ""; // Default to empty string if null
+    const priceMinParam = searchParams.get("price_min") || ""; // Default to empty string if null
+    const priceMaxParam = searchParams.get("price_max") || ""; // Default to empty string if null
+    const searchParam = searchParams.get("search") || ""; // Default to empty string if null
+
+    // Update state with the extracted values
+    setAdType(adTypeParam);
+    setCategory(categoryParam);
+    setDistrict(districtParam);
+    setMinRoom(minRoomParam);
+    setMaxRoom(maxRoomParam);
+    setPriceMin(priceMinParam);
+    setPriceMax(priceMaxParam);
+    setSearch(searchParam);
+  }, [searchParams]);
   const handleViewChange = (newView) => {
     dispatch(setView(newView));
   };
@@ -32,10 +64,42 @@ const TopElon = ({ category, search, setCount, count }) => {
       try {
         let url = "/api/v1/ads/list?is_top=true";
         if (category) {
-          url += `&category=${encodeURIComponent(category)}`;
+          if (url !== "http://localhost:3000/?") url += "&";
+          url += `category=${encodeURIComponent(category)}`;
         }
         if (search) {
-          url += `&search=${encodeURIComponent(search)}`;
+          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          url += `search=${encodeURIComponent(search)}`;
+        }
+
+        if (adType) {
+          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          url += `ad_type=${encodeURIComponent(adType)}`;
+        }
+
+        if (district) {
+          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          url += `district=${encodeURIComponent(district)}`;
+        }
+
+        if (minRoom) {
+          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          url += `min_room=${encodeURIComponent(minRoom)}`;
+        }
+
+        if (maxRoom) {
+          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          url += `max_room=${encodeURIComponent(maxRoom)}`;
+        }
+
+        if (priceMin) {
+          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          url += `price_min=${encodeURIComponent(priceMin)}`;
+        }
+
+        if (priceMax) {
+          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          url += `price_max=${encodeURIComponent(priceMax)}`;
         }
         const response = await api.get(url);
         const transformedAds = response.data.results.map((ad) => ({
@@ -61,7 +125,7 @@ const TopElon = ({ category, search, setCount, count }) => {
     };
 
     fetchAds();
-  }, [search, category]);
+  }, [search, category, adType, minRoom, maxRoom, maxRoom, priceMin, priceMax]);
 
   return (
     <div className="flex flex-col container">
@@ -107,9 +171,11 @@ const TopElon = ({ category, search, setCount, count }) => {
         </div>
       </div>
       <div className="flex flex-col">
-        <h2 className="text-main mb-[30px] max-md:mb-[10px] font-semibold text-2xl max-md:text-lg">
-          Top e’lonlar
-        </h2>
+        {ads.length > 0 && (
+          <h2 className="text-main mb-[30px] max-md:mb-[10px] font-semibold text-2xl max-md:text-lg">
+            Top e’lonlar
+          </h2>
+        )}
         <div
           className={`flex flex-wrap ${
             view === "block"

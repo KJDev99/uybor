@@ -34,7 +34,6 @@ const SarlavhaKiritish = ({
       setFormData({ ...formData, [reqName]: value });
     }
   };
-  // console.log(userInfo);
   return (
     <div className="flex flex-col relative mr-[10px]">
       <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm max-md:mt-2">

@@ -5,8 +5,10 @@ import ElonBlock from "./ElonBlock";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import api from "@/lib/api";
 import ElonBlockSkeleton from "./ElonBlockSkeleton";
+import { useSearchParams } from "next/navigation";
+import EmptyAds from "./EmptyAds";
 
-const Tavfsiya = ({ category, search, setCount, count }) => {
+const Tavfsiya = ({ setCount, count }) => {
   const view = useSelector((state) => state.view);
 
   const [ads, setAds] = useState([]);
@@ -17,15 +19,80 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
   const [previousPageUrl, setPreviousPageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const itemsPerPage = 20;
+
+  const searchParams = useSearchParams();
+  const [adType, setAdType] = useState("");
+  const [category, setCategory] = useState("");
+  const [district, setDistrict] = useState("");
+  const [minRoom, setMinRoom] = useState("");
+  const [maxRoom, setMaxRoom] = useState("");
+  const [priceMin, setPriceMin] = useState("");
+  const [priceMax, setPriceMax] = useState("");
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    // Extract values from query parameters
+    const adTypeParam = searchParams.get("ad_type") || ""; // Default to empty string if null
+    const categoryParam = searchParams.get("category") || ""; // Default to empty string if null
+    const districtParam = searchParams.get("district") || ""; // Default to empty string if null
+    const minRoomParam = searchParams.get("min_room") || ""; // Default to empty string if null
+    const maxRoomParam = searchParams.get("max_room") || ""; // Default to empty string if null
+    const priceMinParam = searchParams.get("price_min") || ""; // Default to empty string if null
+    const priceMaxParam = searchParams.get("price_max") || ""; // Default to empty string if null
+    const searchParam = searchParams.get("search") || ""; // Default to empty string if null
+
+    // Update state with the extracted values
+    setAdType(adTypeParam);
+    setCategory(categoryParam);
+    setDistrict(districtParam);
+    setMinRoom(minRoomParam);
+    setMaxRoom(maxRoomParam);
+    setPriceMin(priceMinParam);
+    setPriceMax(priceMaxParam);
+    setSearch(searchParam);
+  }, [searchParams]);
+
   const fetchAds = async (pageNumber) => {
     setLoading(true);
     try {
       let url = "/api/v1/ads/list?is_top=false";
       if (category) {
-        url += `&category=${encodeURIComponent(category)}`;
+        if (url !== "http://localhost:3000/?") url += "&";
+        url += `category=${encodeURIComponent(category)}`;
       }
       if (search) {
-        url += `&search=${encodeURIComponent(search)}`;
+        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        url += `search=${encodeURIComponent(search)}`;
+      }
+
+      if (adType) {
+        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        url += `ad_type=${encodeURIComponent(adType)}`;
+      }
+
+      if (district) {
+        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        url += `district=${encodeURIComponent(district)}`;
+      }
+
+      if (minRoom) {
+        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        url += `min_room=${encodeURIComponent(minRoom)}`;
+      }
+
+      if (maxRoom) {
+        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        url += `max_room=${encodeURIComponent(maxRoom)}`;
+      }
+
+      if (priceMin) {
+        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        url += `price_min=${encodeURIComponent(priceMin)}`;
+      }
+
+      if (priceMax) {
+        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        url += `price_max=${encodeURIComponent(priceMax)}`;
       }
       url += `&limit=${itemsPerPage}&offset=${
         (currentPage - 1) * itemsPerPage
@@ -60,7 +127,7 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
 
   useEffect(() => {
     fetchAds(currentPage);
-  }, [currentPage, search]);
+  }, [search, category, adType, minRoom, maxRoom, maxRoom, priceMin, priceMax]);
 
   const handleNextPage = () => {
     if (nextPageUrl) {
@@ -166,11 +233,17 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
               : "grid grid-cols-1 gap-5"
           }`}
         >
-          {loading
-            ? Array.from({ length: 8 }).map((_, index) => (
-                <ElonBlockSkeleton key={index} view={view} />
-              ))
-            : ads.map((elon, index) => <ElonBlock key={index} {...elon} />)}
+          {loading ? (
+            Array.from({ length: 8 }).map((_, index) => (
+              <ElonBlockSkeleton key={index} view={view} />
+            ))
+          ) : ads.length > 0 ? (
+            ads.map((elon, index) => <ElonBlock key={index} {...elon} />)
+          ) : (
+            <div className="w-full">
+              <EmptyAds />
+            </div>
+          )}
         </div>
         {renderPagination()}
       </div>

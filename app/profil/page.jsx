@@ -27,7 +27,6 @@ const page = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data, "user");
       setUserInfo(response.data); // Ensure count is an object
     } catch (error) {
       console.error(

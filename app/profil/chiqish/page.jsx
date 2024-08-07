@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 
 const Page = () => {
   const router = useRouter();
-  console.log(router);
   const handleLogout = () => {
     // Clear cookies
     Cookies.remove("authToken");

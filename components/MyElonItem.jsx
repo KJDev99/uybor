@@ -25,7 +25,6 @@ const MyElonItem = ({
 }) => {
   const [isOpenTop, setIsOpenTop] = useState(false);
   const [isOpenFinish, setIsOpenFinish] = useState(false);
-  console.log(status);
   const openModalTop = () => {
     setIsOpenTop(true);
     document.body.style.overflow = "hidden";
@@ -41,7 +40,6 @@ const MyElonItem = ({
     document.body.style.overflow = "auto";
   };
   const handleConfirm = () => {
-    console.log("asd");
     handleConfirmAction(id);
     closeModal();
   };

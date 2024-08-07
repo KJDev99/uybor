@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
-const CategorySelect = ({setSeachQuery}) => {
+const CategorySelect = ({ setCategory }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const categoryRef = useRef(null);
@@ -20,11 +20,11 @@ const CategorySelect = ({setSeachQuery}) => {
   const handleCheckboxChange = (event) => {
     const category = event.target.id;
     if (selectedCategories.includes(category)) {
-      setSelectedCategories(
-        selectedCategories.filter((item) => item !== category)
-      );
+      setSelectedCategories();
+      setCategory(selectedCategories.filter((item) => item !== category));
     } else {
       setSelectedCategories([...selectedCategories, category]);
+      setCategory(selectedCategories.filter((item) => item !== category));
     }
   };
 

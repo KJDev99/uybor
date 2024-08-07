@@ -38,7 +38,6 @@ const MyElon = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
       setMyElons(response.data); // Update state with the fetched ads
     } catch (error) {
       console.error(

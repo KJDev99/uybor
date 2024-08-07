@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const XonaSelect = () => {
+const XonaSelect = ({ setMinRoom, setMaxRoom }) => {
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
 
+  useEffect(() => {
+    // Update the min and max values whenever the inputs change
+    setMinRoom(fromValue);
+    setMaxRoom(toValue);
+  }, [fromValue, toValue, setMinRoom, setMaxRoom]);
+
   const handleFromChange = (event) => {
     const inputValue = event.target.value;
-    if (!isNaN(inputValue)) { // Raqamni tekshirish
+    if (!isNaN(inputValue)) {
+      // Raqamni tekshirish
       setFromValue(inputValue);
     }
   };
 
   const handleToChange = (event) => {
     const inputValue = event.target.value;
-    if (!isNaN(inputValue)) { // Raqamni tekshirish
+    if (!isNaN(inputValue)) {
+      // Raqamni tekshirish
       setToValue(inputValue);
     }
   };

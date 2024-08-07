@@ -49,7 +49,6 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
     } else {
       setPasswordError(false);
     }
-    console.log(checkboxError, "checkboxError");
 
     if (valid) {
       setError(null);

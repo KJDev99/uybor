@@ -14,7 +14,6 @@ const ProfilMenu = () => {
   const handleDurationClick = (duration) => {
     setSelectedDuration(duration);
   };
-  console.log(pathname);
 
   return (
     <div

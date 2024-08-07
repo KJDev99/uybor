@@ -44,7 +44,6 @@ const page = () => {
   if (formData.media && formData.media.length > 0) {
     formData.media.forEach((fileObj) => {
       data.append("media", fileObj.file); // Append each file under the key 'media'
-      console.log(fileObj.file, "file"); // Debugging line to show file being appended
     });
   }
 
@@ -71,7 +70,6 @@ const page = () => {
       console.error("User is not authenticated");
       return;
     }
-    console.log(data, "data");
 
     try {
       // API so'rovini yuborish
@@ -81,7 +79,6 @@ const page = () => {
           Authorization: `Bearer ${token}`, // Tokenni Authorization headerida yuborish
         },
       });
-      console.log("Ad created successfully:", response.data);
       router.push("/");
       // Formani tozalash yoki foydalanuvchiga tasdiq xabari ko'rsatish
     } catch (error) {

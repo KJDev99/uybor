@@ -30,8 +30,19 @@ const Filter = () => {
     const queryParams = new URLSearchParams();
 
     // Add filter parameters to query
-    if (selectedOption) queryParams.append("ad_type", selectedOption);
-    if (category) queryParams.append("category", category);
+    if (selectedOption)
+      queryParams.append(
+        "ad_type",
+        selectedOption == "sotish" ? "SELL" : "RENT"
+      );
+    if (category) {
+      if (category == "Kvartiralar") queryParams.append("category", "APARTMENT");
+      if (category == "Xovlilar") queryParams.append("category", "HOUSE");
+      if (category == "Ofislar") queryParams.append("category", "OFFICE");
+      if (category == "Do'konlar") queryParams.append("category", "SHOP");
+      if (category == "Mehmonxona va dachalar")
+        queryParams.append("category", "HOTEL");
+    }
     if (region) queryParams.append("region", region);
     if (district) queryParams.append("district", district);
     if (minRoom) queryParams.append("min_room", minRoom);
@@ -40,9 +51,7 @@ const Filter = () => {
     if (priceMax) queryParams.append("price_max", priceMax);
 
     // Redirect to the search results page with query parameters
-    // router.push(`/search?${queryParams.toString()}`);
-
-    console.log(queryParams, "handleFilterClick");
+    router.push(`/?${queryParams.toString()}`);
   };
 
   return (
@@ -97,22 +106,17 @@ const Filter = () => {
           <ManzilSelect setRegion={setRegion} setDistrict={setDistrict} />
           <XonaSelect setMinRoom={setMinRoom} setMaxRoom={setMaxRoom} />
           <NarxSelect setPriceMin={setPriceMin} setPriceMax={setPriceMax} />
-          <div className="w-[136px] h-10 mt-12 ml-4 max-md:hidden">
-            <Button
-              main
-              image={FilterImg}
-              text="Saralash"
-              color="white"
-              onClick={handleFilterClick}
-            />
+          <div
+            className="w-[136px] h-10 mt-12 ml-4 max-md:hidden"
+            onClick={handleFilterClick}
+          >
+            <Button main image={FilterImg} text="Saralash" color="white" />
           </div>
-          <div className="w-full h-10 my-5 md:hidden">
-            <Button
-              main
-              text="Saralash"
-              color="white"
-              onClick={handleFilterClick()}
-            />
+          <div
+            className="w-full h-10 my-5 md:hidden"
+            onClick={handleFilterClick}
+          >
+            <Button main text="Saralash" color="white" />
           </div>
         </div>
       </div>

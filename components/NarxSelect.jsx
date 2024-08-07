@@ -1,23 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const NarxSelect = () => {
+const NarxSelect = ({ setPriceMin, setPriceMax }) => {
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
 
+  useEffect(() => {
+    // Update the min and max values whenever the inputs change
+    setPriceMin(fromValue);
+    setPriceMax(toValue);
+  }, [fromValue, toValue, setPriceMin, setPriceMax]);
+
   const handleFromChange = (event) => {
     const inputValue = event.target.value;
-    if (!isNaN(inputValue)) { // Raqamni tekshirish
+    if (!isNaN(inputValue)) {
+      // Check if the value is a number
       setFromValue(inputValue);
     }
   };
 
   const handleToChange = (event) => {
     const inputValue = event.target.value;
-    if (!isNaN(inputValue)) { // Raqamni tekshirish
+    if (!isNaN(inputValue)) {
+      // Check if the value is a number
       setToValue(inputValue);
     }
   };
-
 
   return (
     <div className="flex flex-col relative mr-[10px]">

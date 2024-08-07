@@ -12,6 +12,7 @@ const Page = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -37,6 +38,34 @@ const Page = () => {
 
     fetchUserProfile();
   }, []);
+  // useEffect(() => {
+  //   const fetchUserProfile = async () => {
+  //     const authToken = Cookies.get("authToken");
+  //     try {
+  //       const response = await api.get("/api/v1/user/status/payment", {
+  //         headers: {
+  //           Authorization: `Bearer ${authToken}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       });
+  //       setStatus(response.data);
+  //       console.log(response.data);
+  //     } catch (err) {
+  //       setError(err.response?.data?.message || "Xatolik yuz berdi.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchUserProfile(); // Initial fetch
+
+  //   const intervalId = setInterval(() => {
+  //     fetchUserProfile(); // Fetch every 3 seconds
+  //   }, 3000); // 3000 milliseconds = 3 seconds
+
+  //   // Clean up interval on component unmount
+  //   return () => clearInterval(intervalId);
+  // }, []);
   if (loading) return <Loader type="ball-grid-pulse" />;
 
   const handleAmountChange = (e) => {
@@ -59,7 +88,7 @@ const Page = () => {
       const response = await api.post(
         "/api/v1/user/fill/account",
         {
-          redirect_url: "https://topuy.uz",
+          redirect_url: "https://topuy.uz/profil/tolovlar",
           amount: parseFloat(amount),
         },
         {

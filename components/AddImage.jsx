@@ -16,7 +16,6 @@ const AddImage = ({ textImage, size, formData, setFormData }) => {
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
-    console.log(event.target.files[0]);
     if (files && files.length > 0) {
       const newImages = Array.from(files).map((file) => ({
         file: file, // Binary file data

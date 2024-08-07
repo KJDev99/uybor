@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 import api from "@/lib/api";
 
-const ManzilSelect = () => {
+const ManzilSelect = ({setRegion, setDistrict}) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Hammasi");
   const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -16,6 +16,7 @@ const ManzilSelect = () => {
     try {
       const response = await api.get("/api/v1/region");
       setCategories(response.data);
+
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -38,6 +39,7 @@ const ManzilSelect = () => {
 
   // Handle district click to set the selected category
   const handleDistrictClick = (district) => {
+    setDistrict(district.id);
     setSelectedCategory(district.name_uz);
     setIsCategoryOpen(false);
   };
