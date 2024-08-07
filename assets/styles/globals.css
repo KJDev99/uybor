@@ -137,6 +137,7 @@ body {
   -ms-overflow-style: none; /* For Internet Explorer and Edge */
   scrollbar-width: none; /* For Firefox */
 }
+/* Parent loader container */
 .parent_loader {
   position: fixed;
   top: 0;
@@ -149,7 +150,8 @@ body {
   align-items: center;
   z-index: 10000;
 }
-/* Loader.css */
+
+/* Loader styling */
 .loader {
   width: max-content;
   height: max-content;
@@ -167,6 +169,7 @@ body {
   height: 400px;
 }
 
+/* Keyframes for animations */
 @keyframes ball-grid-beat {
   0%,
   100% {
@@ -191,6 +194,7 @@ body {
   }
 }
 
+/* Ball grid pulse styling */
 .ball-grid-pulse {
   width: calc(15px * 3 + 2px * 6); /* $ball-size * 3 + $margin * 6 */
   display: flex;
@@ -213,17 +217,51 @@ body {
 
 /* Generating the specific styles for each child */
 .ball-grid-pulse > div:nth-child(1) {
-  animation-delay: 0.3s; /* Random value example */
-  animation-duration: 1s; /* Random value example */
+  animation-delay: 0.3s;
+  animation-duration: 1s;
 }
 
 .ball-grid-pulse > div:nth-child(2) {
-  animation-delay: 0.2s; /* Random value example */
-  animation-duration: 0.9s; /* Random value example */
+  animation-delay: 0.2s;
+  animation-duration: 0.9s;
 }
 
-/* Add similar styles for other child divs with random delays and durations */
+.ball-grid-pulse > div:nth-child(3) {
+  animation-delay: 0.1s;
+  animation-duration: 1.1s;
+}
 
+.ball-grid-pulse > div:nth-child(4) {
+  animation-delay: 0.4s;
+  animation-duration: 0.8s;
+}
+
+.ball-grid-pulse > div:nth-child(5) {
+  animation-delay: 0.5s;
+  animation-duration: 1.2s;
+}
+
+.ball-grid-pulse > div:nth-child(6) {
+  animation-delay: 0.6s;
+  animation-duration: 0.7s;
+}
+
+.ball-grid-pulse > div:nth-child(7) {
+  animation-delay: 0.7s;
+  animation-duration: 1s;
+}
+
+.ball-grid-pulse > div:nth-child(8) {
+  animation-delay: 0.8s;
+  animation-duration: 0.9s;
+}
+
+.ball-grid-pulse > div:nth-child(9) {
+  animation-delay: 0.9s;
+  animation-duration: 1.1s;
+}
+
+/* Ball grid beat styling */
 .ball-grid-beat div {
   width: 1rem;
   height: 1rem;
