@@ -10,6 +10,7 @@ import SeeBlockAct from "@/assets/images/seeblockact.svg";
 import SeeLineAct from "@/assets/images/seelineact.svg";
 import SavedImg from "@/assets/images/saveelon.svg";
 import ElonBlock from "@/components/ElonBlock";
+import EmptyAds from "@/components/EmptyAds";
 
 const Tanlanganlar = () => {
   const [savedElons, setSavedElons] = useState([]);
@@ -102,7 +103,7 @@ const Tanlanganlar = () => {
           </div>
         </>
       ) : (
-        "Elon yoq"
+        <EmptyAds text="Hozircha tanlanganlar yo’q" />
       )}
     </div>
   );

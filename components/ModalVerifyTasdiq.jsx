@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import api from "@/lib/api";
-import Cookies from "js-cookie";
 
-const ModalTastiq = ({ setStep, phone, closeModal }) => {
+const ModalVerifyTasdiq = ({ setStep, closeModal }) => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,18 +16,30 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
     setLoading(true);
     setError("");
 
+    const phone = sessionStorage.getItem("phoneUser");
+
+    // Debug: print phone and code values
+    console.log("Phone:", phone);
+    console.log("Code:", code);
+
     try {
       const response = await api.post("/api/v1/user/verify", {
-        phone,
+        phone: phone,
         code: parseInt(code, 10),
+        is_forgot_password: true,
       });
 
-      // Success handlin
-      Cookies.set("authToken", response.data.access);
-      localStorage.setItem("user", JSON.stringify(response.data));
-      closeModal();
-      window.location.reload();
+      // Debug: print response to debug
+      console.log("Verification Response:", response.data);
+
+      // Check the success condition based on response
+      if (response.data.success) {
+        setStep(7); // Proceed if verification is successful
+      } else {
+        setError("Kod noto‘g‘ri yoki serverda muammo bor.");
+      }
     } catch (err) {
+      console.error("Verification Error:", err);
       setError("Kod noto‘g‘ri yoki serverda muammo bor.");
     } finally {
       setLoading(false);
@@ -38,7 +49,7 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
   return (
     <div className="flex flex-col w-full">
       <button
-        onClick={() => setStep(3)}
+        onClick={() => setStep(2)}
         className="absolute top-5 left-5 text-qora"
       >
         <AiOutlineLeft size={24} />
@@ -52,7 +63,7 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
       </p>
       <input
         type="text"
-        placeholder="kod"
+        placeholder="Kod"
         value={code}
         onChange={(e) => setCode(e.target.value)}
         className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora"
@@ -60,7 +71,13 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
       {error && <p className="text-red-500 mt-2">{error}</p>}
       <p className="mt-5 text-kulrang text-sm font-semibold">
         Agar kod kelmagan bo'lsa
-        <span className="text-main cursor-pointer"> qayta yuborish</span>{" "}
+        <span
+          className="text-main cursor-pointer"
+          onClick={() => console.log("Qayta yuborish clicked")}
+        >
+          {" "}
+          qayta yuborish
+        </span>{" "}
         bosing.
       </p>
       <button
@@ -74,4 +91,4 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
   );
 };
 
-export default ModalTastiq;
+export default ModalVerifyTasdiq;

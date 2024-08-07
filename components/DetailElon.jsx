@@ -16,6 +16,9 @@ import { format, parseISO } from "date-fns";
 import MapComponent from "./MapContainer";
 import { useSelector } from "react-redux";
 import CurrencyComponent from "./CurrencyComponent";
+import DeletedAds from "./DeletedAds";
+
+import Loader from "./Loader";
 
 const formatDate = (dateString) => {
   const date = parseISO(dateString);
@@ -23,22 +26,20 @@ const formatDate = (dateString) => {
 };
 
 const DetailElon = () => {
-  const [saved, setSaved] = useState(false);
-
   const [adDetail, setAdDetail] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [saved, setSaved] = useState(false);
+
   const pathname = usePathname();
   const adId = pathname.split("/").pop();
-
-  let currencyNow = useSelector((state) => state.currency);
+  const currencyNow = useSelector((state) => state.currency);
 
   useEffect(() => {
     const fetchAdDetail = async () => {
       try {
         const response = await api.get(`api/v1/ads/${adId}/detail`);
         setAdDetail(response.data);
-        console.log(response.data);
       } catch (err) {
         setError(err);
       } finally {
@@ -47,10 +48,39 @@ const DetailElon = () => {
     };
 
     fetchAdDetail();
-  }, []);
+  }, [adId]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  useEffect(() => {
+    if (adDetail) {
+      const savedElons = JSON.parse(sessionStorage.getItem("savedElons")) || [];
+      const isSaved = savedElons.some((elon) => elon.id === adDetail?.id);
+      setSaved(isSaved);
+    }
+  }, [adDetail]);
+
+  const handleSaveClick = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+
+    const newSavedStatus = !saved;
+    setSaved(newSavedStatus);
+
+    const savedElons = JSON.parse(sessionStorage.getItem("savedElons")) || [];
+    const updatedElons = newSavedStatus
+      ? [
+          ...savedElons,
+          {
+            ...adDetail,
+            save: newSavedStatus,
+          },
+        ]
+      : savedElons.filter((elon) => elon.id !== adDetail.id);
+
+    sessionStorage.setItem("savedElons", JSON.stringify(updatedElons));
+  };
+
+  if (loading) return <Loader type="ball-grid-pulse" />;
+  if (error) return <DeletedAds text="Bu e’lon endi mavjud emas" />;
 
   const infos = [
     { text1: "Turarjoy turi:", text2: adDetail.accommodation_type },
@@ -80,11 +110,7 @@ const DetailElon = () => {
               src={saved ? SavedImg : NoSavedImg}
               alt="elon image"
               className="h-[30px] w-[30px] cursor-pointer "
-              onClick={(event) => {
-                event.stopPropagation();
-                event.preventDefault();
-                setSaved((prev) => !prev);
-              }}
+              onClick={handleSaveClick}
             />
           </div>
           <div className="flex items-center justify-between">

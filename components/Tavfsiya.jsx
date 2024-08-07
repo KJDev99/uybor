@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import ElonBlock from "./ElonBlock";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import api from "@/lib/api";
+import ElonBlockSkeleton from "./ElonBlockSkeleton";
 
 const Tavfsiya = ({ category, search, setCount, count }) => {
   const view = useSelector((state) => state.view);
@@ -49,6 +50,7 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
       }));
       setAds(transformedAds);
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));
+      // setCount(transformedAds.length);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -164,13 +166,11 @@ const Tavfsiya = ({ category, search, setCount, count }) => {
               : "grid grid-cols-1 gap-5"
           }`}
         >
-          {loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p>Error: {error}</p>
-          ) : (
-            ads.map((elon, index) => <ElonBlock key={index} {...elon} />)
-          )}
+          {loading
+            ? Array.from({ length: 8 }).map((_, index) => (
+                <ElonBlockSkeleton key={index} view={view} />
+              ))
+            : ads.map((elon, index) => <ElonBlock key={index} {...elon} />)}
         </div>
         {renderPagination()}
       </div>

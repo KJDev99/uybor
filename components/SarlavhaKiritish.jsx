@@ -12,15 +12,15 @@ const SarlavhaKiritish = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
-  const userInfo = JSON.parse(localStorage.getItem("user"))
+  const userInfo = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
     if (reqName === "user" && userInfo) {
       setInputValue(userInfo.full_name || "");
-      setFormData({ ...formData, 'user': userInfo.id });
+      setFormData({ ...formData, user: userInfo.id });
     } else if (reqName === "phone" && userInfo) {
       setInputValue(userInfo.phone || "");
-      setFormData({ ...formData, 'phone': userInfo.phone });
+      setFormData({ ...formData, phone: userInfo.phone });
     }
   }, []);
 

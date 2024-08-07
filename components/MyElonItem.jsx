@@ -20,6 +20,8 @@ const MyElonItem = ({
   edit,
   finish,
   status,
+  id,
+  handleConfirmAction,
 }) => {
   const [isOpenTop, setIsOpenTop] = useState(false);
   const [isOpenFinish, setIsOpenFinish] = useState(false);
@@ -49,7 +51,7 @@ const MyElonItem = ({
 
   return (
     <>
-      <div className="flex bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg relative">
+      <div className="flex bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg relative z-0">
         <div className="relative max-md:w-[130px] max-md:flex-shrink-0">
           {top && (
             <div className="absolute left-0 top-0 bg-sariq rounded-tl-[20px] rounded-tr-[0px] rounded-br-[15px] rounded-bl-[0px] color-white flex item items-center justify-center font-medium text-white h-[30px] w-[78px] max-md:w-[45px] max-md:h-[22px] max-md:rounded-tl-[5px] max-md:rounded-tr-[0px] max-md:rounded-br-[5px] max-md:rounded-bl-[0px] max-md:text-xs">
@@ -63,11 +65,11 @@ const MyElonItem = ({
           />
 
           <div
-            className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full  max-md:w-[48px] max-md:h-4 max-md:text-[10px] ${
-              turi == "ijara" ? "bg-ijara" : "bg-ochYashil"
+            className={`absolute h-5 w-20 flex items-center justify-center text-white text-xs capitalize bottom-2 right-2 rounded-full max-md:w-[48px] max-md:h-4 max-md:text-[10px] ${
+              turi == "RENT" ? "bg-ijara" : "bg-ochYashil"
             }`}
           >
-            {turi}
+            {turi == "RENT" ? "Ijara" : "Sotiladi"}
           </div>
         </div>
         <div className="py-5 px-5 max-md:p-[10px] flex flex-col flex-grow">
@@ -116,68 +118,75 @@ const MyElonItem = ({
                 Yakunlash
               </button>
             )}
-
-            {isOpenTop && (
-              <div
-                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
-                onClick={closeModal}
-              >
-                <div
-                  className="relative bg-[#F8FCFF] p-10 rounded-md shadow-md w-[860px] flex flex-col items-center"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <button
-                    onClick={closeModal}
-                    className="absolute top-5 right-5 text-qora"
-                  >
-                    <AiOutlineClose size={24} />
-                  </button>
-                  <TopgaChiqarish
-                    title="E’loningizni Topga chiqarmoqchimisiz?"
-                    text="E’loningizni sotish imkoniyatlarini oshiring va ko’proq xaridorlarni jalb qiling.
-Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningizni Topga ko’taring."
-                  />
-                  <button className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto">
-                    Topga ko’tarish
-                  </button>
-                </div>
-              </div>
-            )}
-            {isOpenFinish && (
-              <div
-                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
-                onClick={closeModal}
-              >
-                <div
-                  className="relative bg-[#F8FCFF] p-10 rounded-md shadow-md w-[860px]"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <button
-                    onClick={closeModal}
-                    className="absolute top-5 right-5 text-qora"
-                  >
-                    <AiOutlineClose size={24} />
-                  </button>
-                  <h2 className="text-3xl font-semibold mb-5 text-qora">
-                    E’lonni yakunlash
-                  </h2>
-                  <p className="text-qora mb-[50px]">
-                    E’lonni yakunlashni tasdiqlaysizmi?
-                  </p>
-                  <div className="flex justify-center">
-                    <button className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5">
-                      Ha
-                    </button>
-                    <button className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5">
-                      Yoq
-                    </button>
-                  </div>
-                </div>
-              </div>
+            {status == "bekor" && (
+              <button className="text cursor-not-allowed text-white px-4 py-1 rounded-md font-medium bg-[#FF0000] outline-none border-none flex justify-center items-center">
+                Rad etilgan
+              </button>
             )}
           </div>
         </div>
       </div>
+      {isOpenTop && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-10"
+          onClick={closeModal}
+        >
+          <div
+            className="relative bg-[#F8FCFF] p-10 rounded-md shadow-md w-[860px] flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeModal}
+              className="absolute top-5 right-5 text-qora"
+            >
+              <AiOutlineClose size={24} />
+            </button>
+            <TopgaChiqarish
+              title="E’loningizni Topga chiqarmoqchimisiz?"
+              text="E’loningizni sotish imkoniyatlarini oshiring va ko’proq xaridorlarni jalb qiling.
+Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningizni Topga ko’taring."
+            />
+            <button className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto">
+              Topga ko’tarish
+            </button>
+          </div>
+        </div>
+      )}
+      {isOpenFinish && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm"
+          onClick={closeModal}
+        >
+          <div
+            className="relative bg-[#F8FCFF] p-10 rounded-md shadow-md w-[860px]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeModal}
+              className="absolute top-5 right-5 text-qora"
+            >
+              <AiOutlineClose size={24} />
+            </button>
+            <h2 className="text-3xl font-semibold mb-5 text-qora">
+              E’lonni yakunlash
+            </h2>
+            <p className="text-qora mb-[50px]">
+              E’lonni yakunlashni tasdiqlaysizmi?
+            </p>
+            <div className="flex justify-center">
+              <button
+                onClick={() => handleConfirmAction(id)}
+                className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5"
+              >
+                Ha
+              </button>
+              <button className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5">
+                Yoq
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="flex justify-end gap-[15px] border-b border-kulrang pb-[15px] md:hidden">
         {!top && (
           <button

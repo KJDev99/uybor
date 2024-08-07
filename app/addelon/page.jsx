@@ -285,10 +285,10 @@ const page = () => {
             reqName="extra_phone"
           />
         </div>
-        <div className="w-3/4  max-md:w-full">
+        {/* <div className="w-3/4  max-md:w-full">
           <TopgaChiqarish />
-        </div>
-        <div className="w-full flex justify-center mb-10">
+        </div> */}
+        <div className="w-full flex justify-center my-10">
           <div className="w-1/2 h-[50px]" onClick={handleSubmit}>
             <Button main text="E’lonni joylash" color="white" />
           </div>

@@ -39,6 +39,25 @@ const Navbar = () => {
 
     checkAuthStatus();
   }, []);
+
+  const [savedElons, setSavedElons] = useState([]);
+
+  useEffect(() => {
+    const checkSavedElons = () => {
+      const savedElons = JSON.parse(sessionStorage.getItem("savedElons")) || [];
+      setSavedElons(savedElons);
+    };
+
+    // Initial load
+    checkSavedElons();
+
+    // Set up interval to poll for changes
+    const intervalId = setInterval(checkSavedElons, 100); // every second
+
+    // Clean up interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="bg-[#EDF7FF] max-md:mx-5 ">
       <div className="container h-20 flex justify-between border-b-[0.5px] border-logoKok max-md:hidden">
@@ -48,7 +67,12 @@ const Navbar = () => {
         <div className="flex items-center">
           <LanguageSelector />
           <Link href="/tanlanganlar">
-            <div className="ml-8">
+            <div className="ml-8 relative">
+              {savedElons.length > 0 ? (
+                <span className="absolute text-xs rounded-full text-white bg-logoKok w-6 h-6 flex items-center justify-center left-[-20px] top-[-10px]">
+                  {savedElons.length}
+                </span>
+              ) : null}
               <Button color="qora" image={Savedmsg} text="Tanlanganlar" />
             </div>
           </Link>

@@ -79,7 +79,6 @@ const AddManzil = ({ formData, setFormData }) => {
     setIsDistrictOpen(false);
 
     for (let i = 0; i < districts[selectedCategory].length; i++) {
-      
       if (districts[selectedCategory][i].name_uz == district) {
         setFormData((prevData) => ({
           ...prevData,
@@ -228,7 +227,7 @@ const AddManzil = ({ formData, setFormData }) => {
       </div>
       <input
         type="text"
-        value={formData.adress}
+        value={formData?.adress}
         onChange={handleAddressChange}
         className="mb-5 mt-[10px] outline-none pr-4 overflow-hidden text-qora font-medium flex p-[10px] h-10 w-full rounded-[10px] justify-between items-center cursor-pointer border border-yozish"
       />

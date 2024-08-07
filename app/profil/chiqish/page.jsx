@@ -15,11 +15,11 @@ const Page = () => {
     // Clear local storage
     localStorage.clear();
 
-    // router.replace('/');
+    // router.replace("/");
     // Or use router.push('/') if you want to add this action to the browser history
     setTimeout(() => {
       window.location.reload();
-    }, 10);
+    }, 100);
   };
 
   return (

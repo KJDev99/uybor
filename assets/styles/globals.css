@@ -128,7 +128,6 @@ body {
   }
 }
 
-
 .category_scroll::-webkit-scrollbar {
   width: 0;
   background: transparent; /* For WebKit browsers */
@@ -138,10 +137,25 @@ body {
   -ms-overflow-style: none; /* For Internet Explorer and Edge */
   scrollbar-width: none; /* For Firefox */
 }
-
-/* Replace $primary-color with the actual color value you want to use */
-.primary-color {
-  color: #fff; /* Replace with the actual value of $my-brand-color */
+.parent_loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+/* Loader.css */
+.loader {
+  width: max-content;
+  height: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .loader-hidden {
@@ -149,18 +163,66 @@ body {
 }
 
 .loader-active {
-  display: block;
+  display: flex; /* Loader ko'rsatish uchun */
+  height: 400px;
 }
 
-
 @keyframes ball-grid-beat {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 1;
   }
   50% {
     opacity: 0.5;
   }
 }
+
+@keyframes ball-grid-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.5);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.ball-grid-pulse {
+  width: calc(15px * 3 + 2px * 6); /* $ball-size * 3 + $margin * 6 */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Adjust to center items */
+}
+
+.ball-grid-pulse > div {
+  background-color: #015ea8; /* $primary-color */
+  width: 15px; /* $ball-size */
+  height: 15px; /* $ball-size */
+  border-radius: 100%;
+  margin: 2px; /* $margin */
+  animation-name: ball-grid-pulse;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-delay: 0; /* This will be overridden by specific animation delays */
+  animation-duration: 0.6s; /* This will be overridden by specific animation durations */
+}
+
+/* Generating the specific styles for each child */
+.ball-grid-pulse > div:nth-child(1) {
+  animation-delay: 0.3s; /* Random value example */
+  animation-duration: 1s; /* Random value example */
+}
+
+.ball-grid-pulse > div:nth-child(2) {
+  animation-delay: 0.2s; /* Random value example */
+  animation-duration: 0.9s; /* Random value example */
+}
+
+/* Add similar styles for other child divs with random delays and durations */
 
 .ball-grid-beat div {
   width: 1rem;

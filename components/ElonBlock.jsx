@@ -90,7 +90,12 @@ const ElonBlock = ({
               <h3 className="line-clamp-2 text-qora text-lg font-medium max-md:text-sm max-md:line-clamp-1">
                 {name}
               </h3>
-              <p className="text-sm text-qora font-medium md:hidden">{price}</p>
+              <p className="text-sm text-qora font-medium md:hidden">
+                <CurrencyComponent
+                  amount={price}
+                  currency={currencyNow == "UZS" ? "USD" : "UZS"}
+                />
+              </p>
               <div className="flex mt-2 mb-1">
                 <CiLocationOn className="text-lg" />
                 <p className="text-sm text-kulrang ml-2 max-md:text-xs line-clamp-1">

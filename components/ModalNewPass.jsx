@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { AiOutlineLeft } from 'react-icons/ai';
-import InputMask from 'react-input-mask';
+import api from "@/lib/api";
+import React, { useState } from "react";
+import { AiOutlineLeft } from "react-icons/ai";
+import InputMask from "react-input-mask";
 
 const ModalNewPass = ({ setStep }) => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(null);
 
   const validatePhone = () => {
-    // Format: +998-__-___-__-__
     const phonePattern = /^\+998\d{2}-\d{3}-\d{2}-\d{2}$/;
     if (!phonePattern.test(phone)) {
       setError("Telefon raqam to'liq va to'g'ri formatda kiritilishi kerak.");
@@ -17,9 +17,22 @@ const ModalNewPass = ({ setStep }) => {
     return true;
   };
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     if (validatePhone()) {
-      setStep(5);
+      try {
+        // Remove dashes for the payload
+        const formattedPhone = phone;
+
+        // Send POST request
+        await api.post("/api/v1/user/forgot/password", {
+          phone: formattedPhone,
+        });
+        sessionStorage.setItem("phoneUser", formattedPhone);
+        setStep(5);
+      } catch (err) {
+        console.error(err); // Error logging
+        setError("Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.");
+      }
     }
   };
 
@@ -50,11 +63,7 @@ const ModalNewPass = ({ setStep }) => {
         }}
       >
         {(inputProps) => (
-          <input
-            type="tel"
-            placeholder="Telefon raqam"
-            {...inputProps}
-          />
+          <input type="tel" placeholder="Telefon raqam" {...inputProps} />
         )}
       </InputMask>
       {error && <p className="text-red-500 text-xs italic mt-2">{error}</p>}

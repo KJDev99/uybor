@@ -24,7 +24,7 @@ const Category = ({ image, text, category }) => {
       onClick={handleClick}
     >
       <Image
-        className="w-full rounded-[10px] px-10 my-6 h-[146px] object-cover"
+        className="w-full rounded-[10px] px-10 my-6 h-[146px] object-cover max-md:px-0 max-md:h-[60px] max-md:my-1 max-md:object-contain"
         src={image}
         alt={text}
       />

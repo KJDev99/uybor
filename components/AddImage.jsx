@@ -9,7 +9,7 @@ const AddImage = ({ textImage, size, formData, setFormData }) => {
 
   useEffect(() => {
     // Initialize images state with images from formData if available
-    if (formData.media) {
+    if (formData?.media) {
       setImages(formData.media.map((img) => img.fileURL));
     }
   }, [formData]);
@@ -20,21 +20,17 @@ const AddImage = ({ textImage, size, formData, setFormData }) => {
     if (files && files.length > 0) {
       const newImages = Array.from(files).map((file) => ({
         file: file, // Binary file data
-        fileURL: URL.createObjectURL(file) 
+        fileURL: URL.createObjectURL(file),
       }));
 
-      setImages((prevImages) => [
-        ...prevImages,
-        ...newImages.map((img) => img.fileURL)
-      ].slice(0, 10));
+      setImages((prevImages) =>
+        [...prevImages, ...newImages.map((img) => img.fileURL)].slice(0, 10)
+      );
 
       // Update formData with new images
       setFormData((prevFormData) => ({
         ...prevFormData,
-        media: [
-          ...(prevFormData.media || []),
-          ...newImages
-        ]
+        media: [...(prevFormData.media || []), ...newImages],
       }));
     }
   };
@@ -48,7 +44,7 @@ const AddImage = ({ textImage, size, formData, setFormData }) => {
     // Update formData with updated images
     setFormData((prevFormData) => ({
       ...prevFormData,
-      media: updatedMedia
+      media: updatedMedia,
     }));
   };
 
@@ -56,7 +52,7 @@ const AddImage = ({ textImage, size, formData, setFormData }) => {
     const formData = new FormData();
     images.forEach((img, index) => {
       const file = formData.media[index].file;
-      formData.append('files', file);
+      formData.append("files", file);
     });
     return formData;
   };

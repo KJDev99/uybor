@@ -8,9 +8,11 @@ import LanguageSelector from "@/components/SelectLanguage";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import api from "@/lib/api";
+import Loader from "@/components/Loader";
 const page = () => {
   const pathname = usePathname();
   const [userInfo, setUserInfo] = useState("");
+  const [loading, setLoading] = useState(true);
   const fetchMyInfo = async () => {
     const authToken = Cookies.get("authToken");
     if (!authToken) {
@@ -32,13 +34,15 @@ const page = () => {
         "Xato:",
         error.response ? error.response.data : error.message
       );
+    } finally {
+      setLoading(false);
     }
   };
-
   useEffect(() => {
     fetchMyInfo();
   }, []);
 
+  if (loading) return <Loader type="ball-grid-pulse" />;
   return (
     <>
       <div className="max-md:hidden">

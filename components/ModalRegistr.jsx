@@ -50,8 +50,6 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
       setPasswordError(false);
     }
     console.log(checkboxError, "checkboxError");
-    console.log(passwordError, "passwordError");
-    console.log(valid, "valid");
 
     if (valid) {
       setError(null);
@@ -174,8 +172,15 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
           onChange={(e) => setIsChecked(e.target.checked)}
         />
         <p className="text-sm font-semibold text-kulrang  max-md:text-xs">
-          Men <Link onClick={closeModal} href="/foydalanishshartlari"  className="text-main cursor-pointer" >Foydalanish shartlari</Link>ni qabul
-          qilaman
+          Men{" "}
+          <Link
+            onClick={closeModal}
+            href="/foydalanishshartlari"
+            className="text-main cursor-pointer"
+          >
+            Foydalanish shartlari
+          </Link>
+          ni qabul qilaman
         </p>
       </label>
       {error && <p className="text-red-500 text-xs italic">{error}</p>}

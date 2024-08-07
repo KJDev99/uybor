@@ -10,6 +10,7 @@ import ModalRegistr from "./ModalRegistr";
 import ModalLogin from "./ModalLogin";
 import ModalTastiq from "./ModalTastiq";
 import ModalNewPass from "./ModalNewPass";
+import ModalVerifyTasdiq from "./ModalVerifyTasdiq";
 
 const LoginModal = ({ closeModal }) => {
   const [step, setStep] = useState(2);
@@ -27,14 +28,35 @@ const LoginModal = ({ closeModal }) => {
           <ModalLogin setStep={setStep} step={step} closeModal={closeModal} />
         );
       case 3:
-        return <ModalRegistr setStep={setStep} step={step}  setNumber={setNumber} closeModal={closeModal} />;
-      case 4:
         return (
-          <ModalNewPass setStep={setStep} step={step}/>
+          <ModalRegistr
+            setStep={setStep}
+            step={step}
+            setNumber={setNumber}
+            closeModal={closeModal}
+          />
         );
+      case 4:
+        return <ModalNewPass setStep={setStep} step={step} />;
       case 5:
-        return <ModalTastiq setStep={setStep} step={step} phone={number} closeModal={closeModal}/>;
+        return (
+          <ModalTastiq
+            setStep={setStep}
+            step={step}
+            phone={number}
+            closeModal={closeModal}
+          />
+        );
       case 6:
+        return (
+          <ModalVerifyTasdiq
+            setStep={setStep}
+            step={step}
+            phone={number}
+            closeModal={closeModal}
+          />
+        );
+      case 7:
         return (
           <div className="flex flex-col w-full">
             <button

@@ -35,9 +35,7 @@ const MobileNavBar = ({ isAuthenticated, openModalTop }) => {
 
   return (
     <div
-      className={`fixed md:hidden bg-white left-[50%] translate-x-[-50%] bottom-[10px] max-md:py-2 max-md:px-5 z-[999] rounded-[10px] flex shadow-lg transition-transform duration-300 ${
-        isVisible ? "transform translate-y-0" : "transform translate-y-full"
-      }`}
+      className={`fixed md:hidden bg-white left-[50%] translate-x-[-50%] bottom-[10px] max-md:py-2 max-md:px-5 z-[999] rounded-[10px] flex shadow-lg}`}
     >
       <Link
         href="/"

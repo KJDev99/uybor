@@ -1,46 +1,228 @@
-import SarlavhaKiritish from "@/components/SarlavhaKiritish";
+"use client";
+import React, { useEffect, useState } from "react";
+import api from "@/lib/api";
+import Cookies from "js-cookie";
 import Link from "next/link";
-import React from "react";
 import { FaAngleLeft } from "react-icons/fa6";
+import SarlavhaKiritishEdit from "@/components/SarlavhaKiritishEdit";
+import rasmYuklash from "@/assets/images/rasmyuklash.svg";
+import Image from "next/image";
+import Loader from "@/components/Loader";
 
-const page = () => {
+const ProfilePage = () => {
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+  const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [formValues, setFormValues] = useState({
+    fullName: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [formErrors, setFormErrors] = useState({
+    passwordError: false,
+  });
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const authToken = Cookies.get("authToken");
+      if (!authToken) {
+        console.error("Foydalanuvchi tizimga kirilgan emas.");
+        return;
+      }
+      try {
+        const response = await api.get("/api/v1/user/profile", {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        });
+        setUserData(response.data);
+        setFormValues((prev) => ({
+          ...prev,
+          fullName: response.data.full_name,
+        }));
+        if (response.data.photo) {
+          setImage(response.data.photo);
+        }
+      } catch (err) {
+        setError(err.response?.data?.message || "Xatolik yuz berdi.");
+        console.error("Fetch Error:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
+  if (loading) return <Loader type="ball-grid-pulse" />;
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+    if (
+      formValues.newPassword &&
+      formValues.newPassword !== formValues.confirmPassword
+    ) {
+      setFormErrors((prev) => ({ ...prev, passwordError: true }));
+      isValid = false;
+    } else {
+      setFormErrors((prev) => ({ ...prev, passwordError: false }));
+    }
+    return isValid;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      const authToken = Cookies.get("authToken");
+      if (!authToken) {
+        console.error("Foydalanuvchi tizimga kirilgan emas.");
+        return;
+      }
+
+      try {
+        const formData = new FormData();
+        formData.append("full_name", formValues.fullName || "");
+        if (image) formData.append("photo", dataURItoBlob(image));
+        if (formValues.newPassword)
+          formData.append("password", formValues.newPassword);
+        if (formValues.confirmPassword)
+          formData.append("confirm_password", formValues.confirmPassword);
+
+        await api.put("/api/v1/user/profile", formData, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+
+        setSuccess("Profil ma’lumotlari muvaffaqiyatli yangilandi!");
+        // Refresh the user data to reflect changes
+        await fetchUserProfile();
+      } catch (err) {
+        setError(err.response?.data?.message || "Xatolik yuz berdi.");
+        console.error("Submit Error:", err);
+      }
+    }
+  };
+
+  // Utility function to convert base64 to Blob
+  const dataURItoBlob = (dataURI) => {
+    try {
+      const byteString = atob(dataURI.split(",")[1]);
+      const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const uintArray = new Uint8Array(arrayBuffer);
+
+      for (let i = 0; i < byteString.length; i++) {
+        uintArray[i] = byteString.charCodeAt(i);
+      }
+
+      return new Blob([arrayBuffer], { type: mimeString });
+    } catch (e) {
+      console.error("Error converting dataURI to Blob:", e);
+      return null;
+    }
+  };
+
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
+  }
+
+  if (!userData) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div className="md:bg-white md:p-[30px] rounded-[10px] mb-[30px] flex justify-between max-md:flex-col">
       <Link
         href={"/profil"}
         className="md:hidden text-lg font-semibold flex items-center max-md:mb-5"
       >
-        {" "}
         <FaAngleLeft />
         Profil
       </Link>
       <h2 className="text-lg text-[#343434] font-semibold md:hidden">
         Sozlamalar
       </h2>
-      <div className="flex justify-between  w-full max-md:flex-col-reverse">
+      <div className="flex justify-between w-full max-md:flex-col-reverse">
         <div className="w-3/5 flex flex-col max-md:w-full">
           <h2 className="text-xl text-qora font-semibold max-md:hidden">
             Profil ma’lumotlari
           </h2>
-          <SarlavhaKiritish label="Ismingiz" type="text" />
-          <SarlavhaKiritish label="Telefon raqam" type="number" />
+          <SarlavhaKiritishEdit
+            label="Ismingiz"
+            type="text"
+            placeholder="Ism"
+            name="fullName"
+            value={formValues.fullName}
+            onChange={handleInputChange}
+          />
+          <SarlavhaKiritishEdit
+            label="Telefon raqam"
+            type="text"
+            placeholder="Telefon raqam"
+            value={userData.phone} // Displaying phone number, but it's not editable
+            disabled
+          />
           <h2 className="text-xl text-qora font-semibold mt-[30px]">
             Parolni yangilash
           </h2>
-          <SarlavhaKiritish label="Parolni kiriting" type="number" />
-          <SarlavhaKiritish label="Yangi parolni kiriting" type="number" />
-          <button className="h-[44px] w-full border-none bg-main outline-none text-white text-lg rounded-[10px] mt-[30px]">
+          <SarlavhaKiritishEdit
+            label="Yangi parol"
+            type="password"
+            placeholder="Yangi parol"
+            name="newPassword"
+            value={formValues.newPassword}
+            onChange={handleInputChange}
+          />
+          <SarlavhaKiritishEdit
+            label="Yangi parolni tasdiqlang"
+            type="password"
+            placeholder="Yangi parolni tasdiqlang"
+            name="confirmPassword"
+            value={formValues.confirmPassword}
+            onChange={handleInputChange}
+            message={formErrors.passwordError ? "Parollar mos kelmayapti." : ""}
+          />
+          <button
+            className="h-[44px] w-full border-none bg-main outline-none text-white text-lg rounded-[10px] mt-[30px]"
+            onClick={handleSubmit}
+          >
             Saqlash
           </button>
         </div>
         <div className="w-2/5 flex flex-col items-center max-md:w-full">
-          <div className="relative w-[223px] h-[223px] max-md:h-[102px] max-md:w-[102px] rounded-full mt-10 overflow-hidden ">
+          <div className="relative w-[223px] h-[223px] max-md:h-[102px] max-md:w-[102px] rounded-full mt-10 overflow-hidden">
             <img
               className="w-full h-full object-cover"
-              src="/images/person.png"
+              src={image || rasmYuklash}
               alt="user"
             />
-            <div className="absolute bottom-0 left-0 h-[58px] max-md:h-[30px] max-md:text-[10px] w-full bg-[#ffffffcd] text-lg text-logoKok flex items-center justify-center ">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="absolute inset-0 opacity-0 cursor-pointer"
+            />
+            <div className="absolute bottom-0 left-0 h-[58px] max-md:h-[30px] max-md:text-[10px] w-full bg-[#ffffffcd] text-lg text-logoKok flex items-center justify-center">
               O’zgartirish
             </div>
           </div>
@@ -50,4 +232,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ProfilePage;

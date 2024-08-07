@@ -8,7 +8,7 @@ const Hero = () => {
       style={{ backgroundImage: "url('./images/mainbg.webp')" }}
     >
       <div className="container pt-[50px] max-md:pt-[30px]">
-        <div className="flex md:flex-col md:bg-[#ffffffd8] rounded-2xl p-5 max-md:p-0">
+        <div className="flex md:flex-col md:bg-[#ffffffd8] rounded-2xl p-5 max-md:p-0 max-md:items-center">
           <Search />
           <Filter />
         </div>

@@ -46,6 +46,34 @@ const MyElon = () => {
     }
   };
 
+  const handleConfirmAction = async (adId) => {
+    const authToken = Cookies.get("authToken");
+    try {
+      await api.put(
+        `/api/v1/root/ads/${adId}/detail`,
+        {
+          id: adId,
+          status: "SOLD",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+        }
+      );
+      // Refetch data or update state as needed
+      const response = await api.get(`/api/v1/root/ads/${adId}/detail`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+      router.push("/profil");
+      myElons(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const fetchMyAdsCount = async () => {
     const authToken = Cookies.get("authToken");
     if (!authToken) {
@@ -60,7 +88,6 @@ const MyElon = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log(response.data);
       setMyElonsCount(response.data); // Ensure count is an object
     } catch (error) {
       console.error(
@@ -75,8 +102,6 @@ const MyElon = () => {
     fetchMyAds(status);
     fetchMyAdsCount();
   }, [selectedDuration]);
-
- 
 
   const handleDurationClick = (duration) => {
     setSelectedDuration(duration);
@@ -112,7 +137,9 @@ const MyElon = () => {
           }`}
           onClick={() => handleDurationClick("tasdiq")}
         >
-          <p className="text-lg">Tasdiqlanishi Kutilayotgan: {myElonsCount.waiting || 0}</p>
+          <p className="text-lg">
+            Tasdiqlanishi Kutilayotgan: {myElonsCount.waiting || 0}
+          </p>
         </div>
         <div
           className={`flex rounded-[10px] px-4 py-2 max-md:px-2 max-md:py-1 max-md:text-lg max-md:flex-shrink-0 cursor-pointer border text-xl font-semibold ${
@@ -138,10 +165,21 @@ const MyElon = () => {
       <div className="grid grid-cols-1 gap-5">
         {myElons?.results?.length ? (
           myElons.results.map((elon, index) => (
-            <MyElonItem key={index} image={elon.media} name={elon.title} price={elon.price} data={elon.created} status={selectedDuration} />
+            <MyElonItem
+              key={index}
+              image={elon.media}
+              name={elon.title}
+              price={elon.price}
+              data={elon.created}
+              status={selectedDuration}
+              turi={elon.ad_type}
+              address={elon.address}
+              id={elon.id}
+              handleConfirmAction={handleConfirmAction}
+            />
           ))
         ) : (
-          <NoItems /> // Display NoItems component if no ads are available
+          <NoItems text="Hozircha tanlanganlar yo’q" /> // Display NoItems component if no ads are available
         )}
       </div>
     </div>

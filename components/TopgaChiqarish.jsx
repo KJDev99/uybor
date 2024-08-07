@@ -20,7 +20,9 @@ const TopgaChiqarish = ({ text, title }) => {
           <h2 className="text-qora text-3xl font-semibold ml-[25px] mb-5 max-md:text-2xl max-md:ml-0">
             {title}
           </h2>
-          <p className="text text-qora mb-[30px] ml-[25px] max-md:text-sm max-md:ml-0">{text}</p>
+          <p className="text text-qora mb-[30px] ml-[25px] max-md:text-sm max-md:ml-0">
+            {text}
+          </p>
         </>
       ) : (
         <>
@@ -86,7 +88,7 @@ const TopgaChiqarish = ({ text, title }) => {
           >
             3 kun
           </h2>
-          <h3 className={`text-2xl mb-[10px] font-semibold `}>10 000 so’m</h3>
+          <h3 className={`text-2xl mb-[10px] font-semibold `}>2 000 so’m</h3>
           <p className="text-sm text-kulrang">
             E’loningiz 3 kun davomida Topda turadi. Saytga tashrif buyuruvchilar
             sizning e’loningizni birinchilardan bo’lib ko’radi.
@@ -105,12 +107,12 @@ const TopgaChiqarish = ({ text, title }) => {
               selectedDuration === "10 kun" ? "text-logoKok" : "text-kulrang"
             }`}
           >
-            10 kun
+            7 kun
           </h2>
-          <h3 className={`text-2xl mb-[10px] font-semibold`}>80 000 so’m</h3>
+          <h3 className={`text-2xl mb-[10px] font-semibold`}>9 000 so’m</h3>
           <p className="text-sm text-kulrang">
-            E’loningiz 10 kun davomida Topda turadi. Saytga tashrif
-            buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
+            E’loningiz 7 kun davomida Topda turadi. Saytga tashrif buyuruvchilar
+            sizning e’loningizni birinchilardan bo’lib ko’radi.
           </p>
         </div>
         <div
@@ -128,7 +130,7 @@ const TopgaChiqarish = ({ text, title }) => {
           >
             30 kun
           </h2>
-          <h3 className={`text-2xl mb-[10px] font-semibold `}>200 000 so’m</h3>
+          <h3 className={`text-2xl mb-[10px] font-semibold `}>35 000 so’m</h3>
           <p className="text-sm text-kulrang">
             E’loningiz 30 kun davomida Topda turadi. Saytga tashrif
             buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
@@ -188,16 +190,16 @@ const TopgaChiqarish = ({ text, title }) => {
       <div className="md:hidden">
         {selectedDuration === "3 kun" && (
           <div className="flex flex-col w-full px-5">
-            <h3 className={`text-lg mb-[5px] font-semibold `}>10 000 so’m</h3>
+            <h3 className={`text-lg mb-[5px] font-semibold `}>2 000 so’m</h3>
             <p className="text-sm text-kulrang mb-[30px]">
               E’loningiz 3 kun davomida Topda turadi. Saytga tashrif
               buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
             </p>
           </div>
         )}
-        {selectedDuration === "10 kun" && (
+        {selectedDuration === "7 kun" && (
           <div className="flex flex-col w-full px-5">
-            <h3 className={`text-lg mb-[5px] font-semibold`}>80 000 so’m</h3>
+            <h3 className={`text-lg mb-[5px] font-semibold`}>9 000 so’m</h3>
             <p className="text-sm text-kulrang mb-[30px]">
               E’loningiz 10 kun davomida Topda turadi. Saytga tashrif
               buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
@@ -206,7 +208,7 @@ const TopgaChiqarish = ({ text, title }) => {
         )}
         {selectedDuration === "30 kun" && (
           <div className="flex flex-col w-full px-5">
-            <h3 className={`text-lg mb-[5px] font-semibold `}>200 000 so’m</h3>
+            <h3 className={`text-lg mb-[5px] font-semibold `}>45 000 so’m</h3>
             <p className="text-sm text-kulrang mb-[30px]">
               E’loningiz 30 kun davomida Topda turadi. Saytga tashrif
               buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
