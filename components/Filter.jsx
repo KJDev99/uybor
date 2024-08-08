@@ -12,7 +12,7 @@ import Image from "next/image";
 const Filter = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [filterHidden, setFilterHidden] = useState(true);
-  const [category, setCategory] = useState("");
+  const [categories, setCategory] = useState("");
   const [region, setRegion] = useState("");
   const [district, setDistrict] = useState("");
   const [minRoom, setMinRoom] = useState("");
@@ -30,19 +30,32 @@ const Filter = () => {
     const queryParams = new URLSearchParams();
 
     // Add filter parameters to query
+    const categoryMap = {
+      "Kvartiralar": "APARTMENT",
+      "Xovlilar": "HOUSE",
+      "Do'konlar": "SHOP",
+      "Ofislar": "OFFICE",
+      "Mehmonxona va dachalar": "HOTEL"
+    };
+  
+    // Handle categories
+    if (Array.isArray(categories)) {
+      categories.forEach(category => {
+        if (categoryMap[category]) {
+          queryParams.append("category", categoryMap[category]);
+        }
+      });
+    } else {
+      // Single category case
+      if (categoryMap[categories]) {
+        queryParams.append("category", categoryMap[categories]);
+      }
+    }
     if (selectedOption)
       queryParams.append(
         "ad_type",
         selectedOption == "sotish" ? "SELL" : "RENT"
       );
-    if (category) {
-      if (category == "Kvartiralar") queryParams.append("category", "APARTMENT");
-      if (category == "Xovlilar") queryParams.append("category", "HOUSE");
-      if (category == "Ofislar") queryParams.append("category", "OFFICE");
-      if (category == "Do'konlar") queryParams.append("category", "SHOP");
-      if (category == "Mehmonxona va dachalar")
-        queryParams.append("category", "HOTEL");
-    }
     if (region) queryParams.append("region", region);
     if (district) queryParams.append("district", district);
     if (minRoom) queryParams.append("min_room", minRoom);

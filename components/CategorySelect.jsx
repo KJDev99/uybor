@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
@@ -19,12 +18,16 @@ const CategorySelect = ({ setCategory }) => {
 
   const handleCheckboxChange = (event) => {
     const category = event.target.id;
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories();
-      setCategory(selectedCategories.filter((item) => item !== category));
+    const isChecked = event.target.checked;
+
+    if (isChecked) {
+      const updatedCategories = [...selectedCategories, category];
+      setSelectedCategories(updatedCategories);
+      setCategory(updatedCategories);
     } else {
-      setSelectedCategories([...selectedCategories, category]);
-      setCategory(selectedCategories.filter((item) => item !== category));
+      const updatedCategories = selectedCategories.filter((item) => item !== category);
+      setSelectedCategories(updatedCategories);
+      setCategory(updatedCategories);
     }
   };
 
@@ -36,13 +39,12 @@ const CategorySelect = ({ setCategory }) => {
   }, []);
 
   const displaySelectedCategories = () => {
-    // setSearchQuery(prevQuery => ({ ...prevQuery, category: selectedCategories.join(", ")}));`
     if (selectedCategories.length === 0) {
       return "Hammasi";
-    } else if (selectedCategories.length <= 1) {
-      return selectedCategories.join(", ");
+    } else if (selectedCategories.length === 1) {
+      return selectedCategories[0];
     } else {
-      return selectedCategories.slice(0, 1).join(", ") + ", ...";
+      return `${selectedCategories[0]}, ...`;
     }
   };
 
@@ -51,7 +53,7 @@ const CategorySelect = ({ setCategory }) => {
       <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">Kategoriya</h2>
       <div className="flex flex-col" ref={categoryRef}>
         <div
-          className={`flex p-[10px] h-10 w-[200px] max-md:w-full rounded-[10px] justify-between items-center  cursor-pointer ${
+          className={`flex p-[10px] h-10 w-[200px] max-md:w-full rounded-[10px] justify-between items-center cursor-pointer ${
             selectedCategories.length !== 0
               ? "bg-ochKok"
               : "border border-kulrang"
@@ -59,10 +61,10 @@ const CategorySelect = ({ setCategory }) => {
           onClick={toggleCategory}
         >
           <p
-            className={`text-nowrap w-[150px] pr-4  overflow-hidden ${
+            className={`text-nowrap w-[150px] pr-4 overflow-hidden ${
               selectedCategories.length !== 0
-                ? "text-qora font-medium "
-                : "text-kulrang "
+                ? "text-qora font-medium"
+                : "text-kulrang"
             }`}
           >
             {displaySelectedCategories()}

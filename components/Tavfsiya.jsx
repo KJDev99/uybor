@@ -118,6 +118,7 @@ const Tavfsiya = ({ setCount }) => {
       setAds(transformedAds);
       setCount(response.data.count)
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));
+      console.log(transformedAds);
     } catch (err) {
       setError(err.message);
     } finally {

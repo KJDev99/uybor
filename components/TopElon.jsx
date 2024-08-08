@@ -25,6 +25,7 @@ const TopElon = ({ count }) => {
   const [priceMin, setPriceMin] = useState("");
   const [priceMax, setPriceMax] = useState("");
   const [search, setSearch] = useState("");
+  const [countTop, setCountTop] = useState("");
 
   useEffect(() => {
     // Extract values from query parameters
@@ -63,44 +64,43 @@ const TopElon = ({ count }) => {
     const fetchAds = async () => {
       try {
         let url = "/api/v1/ads/list?is_top=true";
-        if (category) {
-          if (url !== "http://localhost:3000/?") url += "&";
-          url += `category=${encodeURIComponent(category)}`;
-        }
-        if (search) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-          url += `search=${encodeURIComponent(search)}`;
-        }
 
-        if (adType) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-          url += `ad_type=${encodeURIComponent(adType)}`;
-        }
+        // Helper function to add parameters to the URL
+        const addParam = (key, value) => {
+          if (value) {
+            if (url.includes("?")) {
+              // If URL already has parameters, add `&`
+              url += `&${key}=${encodeURIComponent(value)}`;
+            } else {
+              // If URL has no parameters yet, add `?`
+              url += `?${key}=${encodeURIComponent(value)}`;
+            }
+          }
+        };
 
-        if (district) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-          url += `district=${encodeURIComponent(district)}`;
-        }
+        // Handle category as an array if needed
+        const appendCategories = (categories) => {
+          if (Array.isArray(categories)) {
+            categories.forEach((category) => {
+              addParam("category", category);
+            });
+          } else {
+            addParam("category", categories);
+          }
+        };
+        console.log(categories, 'category');
 
-        if (minRoom) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-          url += `min_room=${encodeURIComponent(minRoom)}`;
-        }
+        // Call helper function for each parameter
+        appendCategories(category); // 'category' could be a single value or an array
+        addParam("search", search);
+        addParam("ad_type", adType);
+        addParam("district", district);
+        addParam("min_room", minRoom);
+        addParam("max_room", maxRoom);
+        addParam("price_min", priceMin);
+        addParam("price_max", priceMax);
 
-        if (maxRoom) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-          url += `max_room=${encodeURIComponent(maxRoom)}`;
-        }
-
-        if (priceMin) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-          url += `price_min=${encodeURIComponent(priceMin)}`;
-        }
-
-        if (priceMax) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-          url += `price_max=${encodeURIComponent(priceMax)}`;
-        }
+        // Make the API request
         const response = await api.get(url);
         const transformedAds = response.data.results.map((ad) => ({
           image: ad.media,
@@ -116,7 +116,11 @@ const TopElon = ({ count }) => {
           id: ad.id,
           currencyNow: currencyNow,
         }));
+        setCountTop(response.data.count);
         setAds(transformedAds);
+        console.log(transformedAds, "top transformedAds");
+        console.log(url, "top transformedAds");
+
         setLoading(false); // Set loading to false after data is fetched
       } catch (err) {
         setError(err.message);
@@ -131,7 +135,7 @@ const TopElon = ({ count }) => {
     <div className="flex flex-col container">
       <div className="flex justify-between mt-[50px] md:mb-[30px] max-md:flex-col-reverse">
         <h2 className="text-2xl text-qora font-semibold max-md:text-lg max-md:mt-5 max-md:mb-2">
-          {ads?.length + count } ta e’lon mavjud
+          {countTop + count} ta e’lon mavjud
         </h2>
         <div className="flex max-md:justify-between">
           <div className="flex items-center ">
