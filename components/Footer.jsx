@@ -34,14 +34,14 @@ const Footer = () => {
               +998 97 466 77 88
             </a>
             <a
-              href="mailto:opuyofficial@gmail.com"
+              href="mailto:topuyofficial@gmail.com"
               className="text-kulrangOch text-sm mb-3"
             >
-              opuyofficial@gmail.com
+              topuyofficial@gmail.com
             </a>
             <a href="tel:" className="text-kulrangOch text-sm mb-3"></a>
             <p className="text-kulrangOch text-sm mb-3">
-              Navoiy shahar, Navoiy tumani
+              Navoiy viloyat Qiziltepa tuman
             </p>
           </div>
           <div className="flex flex-col max-md:col-span-3">
