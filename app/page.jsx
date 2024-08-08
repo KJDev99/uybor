@@ -15,9 +15,9 @@ const page = () => {
     <>
       <Hero />
       {searchParams == "" && <Categorys />}
-      <TopElon setCount={setCount} count={count} />
+      <TopElon count={count} />
       {searchParams == "" && <InnerBg />}
-      <Tavfsiya setCount={setCount} count={count} />
+      <Tavfsiya setCount={setCount} />
     </>
   );
 };

@@ -8,7 +8,7 @@ import ElonBlockSkeleton from "./ElonBlockSkeleton";
 import { useSearchParams } from "next/navigation";
 import EmptyAds from "./EmptyAds";
 
-const Tavfsiya = ({ setCount, count }) => {
+const Tavfsiya = ({ setCount }) => {
   const view = useSelector((state) => state.view);
 
   const [ads, setAds] = useState([]);
@@ -116,8 +116,8 @@ const Tavfsiya = ({ setCount, count }) => {
         id: ad.id,
       }));
       setAds(transformedAds);
+      setCount(response.data.count)
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));
-      // setCount(transformedAds.length);
     } catch (err) {
       setError(err.message);
     } finally {

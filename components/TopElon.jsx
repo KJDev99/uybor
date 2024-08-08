@@ -11,7 +11,7 @@ import ElonBlockSkeleton from "./ElonBlockSkeleton"; // Importing the skeleton c
 import api from "@/lib/api";
 import { useSearchParams } from "next/navigation";
 
-const TopElon = ({ setCount, count }) => {
+const TopElon = ({ count }) => {
   const view = useSelector((state) => state.view);
   const currencyNow = useSelector((state) => state.currency);
   const dispatch = useDispatch();
@@ -131,7 +131,7 @@ const TopElon = ({ setCount, count }) => {
     <div className="flex flex-col container">
       <div className="flex justify-between mt-[50px] md:mb-[30px] max-md:flex-col-reverse">
         <h2 className="text-2xl text-qora font-semibold max-md:text-lg max-md:mt-5 max-md:mb-2">
-          {count} ta e’lon mavjud
+          {ads?.length + count } ta e’lon mavjud
         </h2>
         <div className="flex max-md:justify-between">
           <div className="flex items-center ">

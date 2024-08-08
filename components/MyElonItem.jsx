@@ -8,7 +8,9 @@ import Link from "next/link";
 import { AiOutlineClose } from "react-icons/ai";
 import { useState } from "react";
 import TopgaChiqarish from "./TopgaChiqarish";
-
+import api from "@/lib/api";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 const MyElonItem = ({
   top,
   image,
@@ -25,6 +27,8 @@ const MyElonItem = ({
 }) => {
   const [isOpenTop, setIsOpenTop] = useState(false);
   const [isOpenFinish, setIsOpenFinish] = useState(false);
+  const [topDay, setTopDay] = useState("");
+  const router = useRouter();
   const openModalTop = () => {
     setIsOpenTop(true);
     document.body.style.overflow = "hidden";
@@ -50,7 +54,32 @@ const MyElonItem = ({
     const year = date.getUTCFullYear();
     return `${day}.${month}.${year}`;
   };
+  const handleButtonClick = async () => {
+    const authToken = Cookies.get("authToken");
+    if (!authToken) {
+      console.error("Foydalanuvchi tizimga kirilgan emas.");
+      return;
+    }
 
+    try {
+      const response = await api.post(
+        `/api/v1/ads/${id}/raise/top`,
+        { day: +topDay },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("Response from backend:", response.data);
+       window.location.reload();
+      setIsOpenTop(false);
+    } catch (error) {
+      console.error("Error making request:", error);
+      router.push('/profil/tolovlar')
+    }
+  };
   return (
     <>
       <div className="flex bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg relative z-0">
@@ -144,11 +173,15 @@ const MyElonItem = ({
               <AiOutlineClose size={24} />
             </button>
             <TopgaChiqarish
+              setTopDay={setTopDay}
               title="E’loningizni Topga chiqarmoqchimisiz?"
               text="E’loningizni sotish imkoniyatlarini oshiring va ko’proq xaridorlarni jalb qiling.
 Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningizni Topga ko’taring."
             />
-            <button className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto">
+            <button
+              className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto"
+              onClick={handleButtonClick}
+            >
               Topga ko’tarish
             </button>
           </div>

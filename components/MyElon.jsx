@@ -39,6 +39,7 @@ const MyElon = () => {
         },
       });
       setMyElons(response.data); // Update state with the fetched ads
+      console.log(response.data);
     } catch (error) {
       console.error(
         "Xato:",
@@ -176,6 +177,7 @@ const MyElon = () => {
               turi={elon.ad_type}
               address={elon.address}
               id={elon.id}
+              top={elon.is_top}
               handleConfirmAction={handleConfirmAction}
             />
           ))
