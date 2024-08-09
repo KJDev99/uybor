@@ -31,16 +31,16 @@ const Filter = () => {
 
     // Add filter parameters to query
     const categoryMap = {
-      "Kvartiralar": "APARTMENT",
-      "Xovlilar": "HOUSE",
+      Kvartiralar: "APARTMENT",
+      Xovlilar: "HOUSE",
       "Do'konlar": "SHOP",
-      "Ofislar": "OFFICE",
-      "Mehmonxona va dachalar": "HOTEL"
+      Ofislar: "OFFICE",
+      "Mehmonxona va dachalar": "HOTEL",
     };
-  
+
     // Handle categories
     if (Array.isArray(categories)) {
-      categories.forEach(category => {
+      categories.forEach((category) => {
         if (categoryMap[category]) {
           queryParams.append("category", categoryMap[category]);
         }

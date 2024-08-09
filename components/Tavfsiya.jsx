@@ -80,12 +80,12 @@ const Tavfsiya = ({ setCount }) => {
 
       if (minRoom) {
         if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-        url += `min_room=${encodeURIComponent(minRoom)}`;
+        url += `room_min=${encodeURIComponent(minRoom)}`;
       }
 
       if (maxRoom) {
         if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-        url += `max_room=${encodeURIComponent(maxRoom)}`;
+        url += `room_max=${encodeURIComponent(maxRoom)}`;
       }
 
       if (priceMin) {
@@ -228,7 +228,7 @@ const Tavfsiya = ({ setCount }) => {
     );
   };
   return (
-    <div className="flex flex-col container mb-[60px]">
+    <div className="flex flex-col container mb-[60px] mt-5">
       <div className="flex flex-col">
         <h2 className="text-main mb-[30px] font-semibold text-2xl max-md:text-sm max-md:mb-[10px]">
           Tavsiya etamiz
@@ -240,19 +240,11 @@ const Tavfsiya = ({ setCount }) => {
               : "grid grid-cols-1 gap-5"
           }`}
         >
-          {loading ? (
-            Array.from({ length: 8 }).map((_, index) => (
-              <ElonBlockSkeleton key={index} view={view} />
-            ))
-          ) : ads.length > 0 ? (
-            ads.map((elon, index) => <ElonBlock key={index} {...elon} />)
-          ) : (
-            <Msg
-              status="warning"
-              text="Hozircha ushbu qidiruv bo’yicha e’lon topilmadi!"
-              seeMsg
-            />
-          )}
+          {loading
+            ? Array.from({ length: 8 }).map((_, index) => (
+                <ElonBlockSkeleton key={index} view={view} />
+              ))
+            : ads.map((elon, index) => <ElonBlock key={index} {...elon} />)}
         </div>
         {renderPagination()}
       </div>

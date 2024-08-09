@@ -85,12 +85,12 @@ const TopElon = ({ count }) => {
 
         if (minRoom) {
           if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-          url += `min_room=${encodeURIComponent(minRoom)}`;
+          url += `room_min=${encodeURIComponent(minRoom)}`;
         }
 
         if (maxRoom) {
           if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
-          url += `max_room=${encodeURIComponent(maxRoom)}`;
+          url += `room_max=${encodeURIComponent(maxRoom)}`;
         }
 
         if (priceMin) {

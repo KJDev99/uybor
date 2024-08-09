@@ -10,7 +10,9 @@ const Hero = () => {
 
   return (
     <div
-      className="main_bg h-[calc(550px-80px)] max-md:h-[295px] bg-no-repeat bg-cover bg-center"
+      className={`main_bg h-[calc(550px-80px)] max-md:h-[295px] bg-no-repeat bg-cover bg-center ${
+        isSearchParamsEmpty ? "h-[calc(550px-80px)]" : "h-max"
+      }`}
       style={{
         backgroundImage: isSearchParamsEmpty
           ? "url('./images/mainbg.webp')"

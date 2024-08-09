@@ -23,8 +23,8 @@ const UserElon = () => {
     dispatch(setView(newView));
   };
 
-  const pathname = usePathname()
-  const modifiedPathname = pathname.replace('/ads/', '');
+  const pathname = usePathname();
+  const modifiedPathname = pathname.replace("/ads/", "");
   const [ads, setAds] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -43,9 +43,10 @@ const UserElon = () => {
         data: new Date(ad.created).toLocaleDateString("en-GB"),
         price: `${ad.price.toLocaleString()} ${ad.currency}`,
         view: "block",
-        id: ad.id
+        id: ad.id,
       }));
       setAds(transformedAds);
+      console.log(transformedAds, "testtstts");
     } catch (err) {
       setError(err.message);
     } finally {
@@ -59,12 +60,13 @@ const UserElon = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
- 
 
   return (
     <div className="flex flex-col container">
       <div className="flex max-md:flex-col justify-between mt-[50px] mb-[30px]  max-md:mt-[10px]">
-        <h2 className="text-2xl text-qora font-semibold max-md:text-[16px]">Muallifning barcha e’lonlari:</h2>
+        <h2 className="text-2xl text-qora font-semibold max-md:text-[16px]">
+          Muallifning barcha e’lonlari:
+        </h2>
         <div className="flex">
           <div className="flex items-center">
             <p className="text-qora font-medium">Ko'rinishi:</p>
@@ -104,16 +106,18 @@ const UserElon = () => {
       </div>
       <div
         className={`flex flex-wrap mb-[30px] ${
-          view == "block" ? "grid grid-cols-4 gap-7 max-md:gap-[15px] max-md:grid-cols-2" : "grid grid-cols-1 gap-5"
+          view == "block"
+            ? "grid grid-cols-4 gap-7 max-md:gap-[15px] max-md:grid-cols-2"
+            : "grid grid-cols-1 gap-5"
         }`}
       >
-         {loading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <p>Error: {error}</p>
-          ) : (
-            ads.map((elon, index) => <ElonBlock key={index} {...elon} />)
-          )}
+        {loading ? (
+          <p>Loading...</p>
+        ) : error ? (
+          <p>Error: {error}</p>
+        ) : (
+          ads.map((elon, index) => <ElonBlock key={index} {...elon} />)
+        )}
       </div>
     </div>
   );
