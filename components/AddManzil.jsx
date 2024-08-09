@@ -119,7 +119,7 @@ const AddManzil = ({ formData, setFormData }) => {
           <p
             className={`text-nowrap w-1/2 pr-4 overflow-hidden text-qora font-medium`}
           >
-            {categories[selectedCategory - 1]?.name_uz}
+            {categories[selectedCategory - 3]?.name_uz}
           </p>
           <FaChevronLeft
             className={`text-qora transition-transform z-10 ${
