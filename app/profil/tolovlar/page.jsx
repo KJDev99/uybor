@@ -88,7 +88,7 @@ const Page = () => {
       const response = await api.post(
         "/api/v1/user/fill/account",
         {
-          redirect_url: "http://localhost:3000/profil/tolovlar",
+          redirect_url: "http://topuy.uz/profil/tolovlar",
           amount: parseFloat(amount),
         },
         {

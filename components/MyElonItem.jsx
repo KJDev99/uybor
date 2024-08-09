@@ -59,7 +59,6 @@ const MyElonItem = ({
   const handleButtonClick = async () => {
     const authToken = Cookies.get("authToken");
     if (!authToken) {
-      console.error("Foydalanuvchi tizimga kirilgan emas.");
       return;
     }
 
@@ -74,11 +73,9 @@ const MyElonItem = ({
           },
         }
       );
-      console.log("Response from backend:", response.data);
       window.location.reload();
       setIsOpenTop(false);
     } catch (error) {
-      console.error("Error making request:", error);
       setSeeMsg("1");
       console.log(seeMsg);
       setTimeout(() => {
