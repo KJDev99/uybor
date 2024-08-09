@@ -9,7 +9,6 @@ import "leaflet/dist/leaflet.css";
 import { useSearchParams } from "next/navigation";
 const page = () => {
   const searchParams = useSearchParams();
-  console.log(searchParams);
   const [count, setCount] = useState();
   return (
     <>

@@ -38,12 +38,12 @@ const CurrencyComponent = ({ amount, currency }) => {
 
       if (currency === "USD") {
         setConvertedAmount(
-          numericAmount.toLocaleString("uz-UZ", { maximumFractionDigits: 1 })
+          numericAmount.toLocaleString("uz-UZ", { maximumFractionDigits: 0 })
         );
       } else if (currency === "UZS") {
         const converted = numericAmount / rate;
         setConvertedAmount(
-          converted.toLocaleString("en-US", { maximumFractionDigits: 1 })
+          converted.toLocaleString("en-US", { maximumFractionDigits: 0 })
         );
       }
     }
@@ -52,7 +52,8 @@ const CurrencyComponent = ({ amount, currency }) => {
   return (
     <div>
       <p>
-        {convertedAmount} {currency === "USD" ? "sum" : "$"}
+        {currency === "USD" ? convertedAmount : convertedAmount}{" "}
+        {currency === "USD" ? "sum" : "$"}
       </p>
     </div>
   );

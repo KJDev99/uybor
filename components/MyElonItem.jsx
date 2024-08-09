@@ -11,6 +11,7 @@ import TopgaChiqarish from "./TopgaChiqarish";
 import api from "@/lib/api";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Msg from "./Msg";
 const MyElonItem = ({
   top,
   image,
@@ -29,6 +30,7 @@ const MyElonItem = ({
   const [isOpenFinish, setIsOpenFinish] = useState(false);
   const [topDay, setTopDay] = useState("");
   const router = useRouter();
+  const [seeMsg, setSeeMsg] = useState("0");
   const openModalTop = () => {
     setIsOpenTop(true);
     document.body.style.overflow = "hidden";
@@ -73,15 +75,27 @@ const MyElonItem = ({
         }
       );
       console.log("Response from backend:", response.data);
-       window.location.reload();
+      window.location.reload();
       setIsOpenTop(false);
     } catch (error) {
       console.error("Error making request:", error);
-      router.push('/profil/tolovlar')
+      setSeeMsg("1");
+      console.log(seeMsg);
+      setTimeout(() => {
+        setSeeMsg("0");
+        router.push("/profil/tolovlar");
+      }, 2000);
     }
   };
   return (
     <>
+      <Msg
+        text={
+          "E'loningizni topga chiqarish uchun iltmos avval hisobingizni to'ldiring!"
+        }
+        status="warning"
+        seeMsg={seeMsg}
+      />
       <div className="flex bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg relative z-0">
         <div className="relative max-md:w-[130px] max-md:flex-shrink-0">
           {top && (
