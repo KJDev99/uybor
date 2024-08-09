@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Navbar from "@/components/Navbar";
 import "@/assets/styles/globals.css";
 import Footer from "@/components/Footer";
@@ -14,7 +13,7 @@ export const metadata = {
 const MainLayout = ({ children }) => {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords} />
@@ -52,7 +51,7 @@ const MainLayout = ({ children }) => {
           </div>
         </noscript>
         {/* /Yandex.Metrika counter */}
-      </Head>
+      </head>
       <body className="bg-background">
         <ClientProvider>
           <Navbar />
