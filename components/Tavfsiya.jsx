@@ -36,7 +36,7 @@ const Tavfsiya = ({ setCount }) => {
   useEffect(() => {
     // Extract values from query parameters
     const adTypeParam = searchParams.get("ad_type") || ""; // Default to empty string if null
-    const categoryParam = searchParams.get("category") || ""; // Default to empty string if null
+    const categoryParam = searchParams.getAll("category") || ""; // Default to empty string if null
     const districtParam = searchParams.get("district") || ""; // Default to empty string if null
     const minRoomParam = searchParams.get("min_room") || ""; // Default to empty string if null
     const maxRoomParam = searchParams.get("max_room") || ""; // Default to empty string if null
@@ -59,42 +59,46 @@ const Tavfsiya = ({ setCount }) => {
     setLoading(true);
     try {
       let url = "/api/v1/ads/list?is_top=false";
-      if (category) {
-        if (url !== "http://localhost:3000/?") url += "&";
-        url += `category=${encodeURIComponent(category)}`;
-      }
+      category.forEach((categor, index) => {
+        if (url !== "/api/v1/ads/list?is_top=false?") url += "&";
+        if (index > 0) {
+          url += "&";
+        }
+        url += `category=${encodeURIComponent(categor)}`;
+      });
       if (search) {
-        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        if (url !== "/api/v1/ads/list?is_top=false?") url += "&"; // Add '&' if url already has parameters
         url += `search=${encodeURIComponent(search)}`;
       }
 
       if (adType) {
-        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        if (url !== "/api/v1/ads/list?is_top=false?") url += "&"; // Add '&' if url already has parameters
         url += `ad_type=${encodeURIComponent(adType)}`;
       }
 
       if (district) {
-        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        if (url !== "/api/v1/ads/list?is_top=false?") url += "&"; // Add '&' if url already has parameters
         url += `district=${encodeURIComponent(district)}`;
+        console.log(url);
       }
 
       if (minRoom) {
-        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        if (url !== "/api/v1/ads/list?is_top=false?") url += "&"; // Add '&' if url already has parameters
         url += `room_min=${encodeURIComponent(minRoom)}`;
       }
 
       if (maxRoom) {
-        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        if (url !== "/api/v1/ads/list?is_top=false?") url += "&"; // Add '&' if url already has parameters
         url += `room_max=${encodeURIComponent(maxRoom)}`;
       }
 
       if (priceMin) {
-        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        if (url !== "/api/v1/ads/list?is_top=false?") url += "&"; // Add '&' if url already has parameters
         url += `price_min=${encodeURIComponent(priceMin)}`;
       }
 
       if (priceMax) {
-        if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+        if (url !== "/api/v1/ads/list?is_top=false?") url += "&"; // Add '&' if url already has parameters
         url += `price_max=${encodeURIComponent(priceMax)}`;
       }
       url += `&limit=${itemsPerPage}&offset=${
@@ -134,7 +138,17 @@ const Tavfsiya = ({ setCount }) => {
 
   useEffect(() => {
     fetchAds(currentPage);
-  }, [search, category, adType, minRoom, maxRoom, maxRoom, priceMin, priceMax]);
+  }, [
+    search,
+    category,
+    adType,
+    district,
+    minRoom,
+    maxRoom,
+    maxRoom,
+    priceMin,
+    priceMax,
+  ]);
 
   const handleNextPage = () => {
     if (nextPageUrl) {

@@ -30,7 +30,7 @@ const TopElon = ({ count }) => {
   useEffect(() => {
     // Extract values from query parameters
     const adTypeParam = searchParams.get("ad_type") || ""; // Default to empty string if null
-    const categoryParam = searchParams.get("category") || ""; // Default to empty string if null
+    const categoryParam = searchParams.getAll("category") || ""; // Default to empty string if null
     const districtParam = searchParams.get("district") || ""; // Default to empty string if null
     const minRoomParam = searchParams.get("min_room") || ""; // Default to empty string if null
     const maxRoomParam = searchParams.get("max_room") || ""; // Default to empty string if null
@@ -64,42 +64,45 @@ const TopElon = ({ count }) => {
     const fetchAds = async () => {
       try {
         let url = "/api/v1/ads/list?is_top=true";
-        if (category) {
-          if (url !== "http://localhost:3000/?") url += "&";
-          url += `category=${encodeURIComponent(category)}`;
-        }
+        category.forEach((categor, index) => {
+          if (url !== "/api/v1/ads/list?is_top=true?") url += "&";
+          if (index > 0) {
+            url += "&";
+          }
+          url += `category=${encodeURIComponent(categor)}`;
+        });
         if (search) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          if (url !== "/api/v1/ads/list?is_top=true?") url += "&"; // Add '&' if url already has parameters
           url += `search=${encodeURIComponent(search)}`;
         }
 
         if (adType) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          if (url !== "/api/v1/ads/list?is_top=true?") url += "&"; // Add '&' if url already has parameters
           url += `ad_type=${encodeURIComponent(adType)}`;
         }
 
         if (district) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          if (url !== "/api/v1/ads/list?is_top=true?") url += "&"; // Add '&' if url already has parameters
           url += `district=${encodeURIComponent(district)}`;
         }
 
         if (minRoom) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          if (url !== "/api/v1/ads/list?is_top=true?") url += "&"; // Add '&' if url already has parameters
           url += `room_min=${encodeURIComponent(minRoom)}`;
         }
 
         if (maxRoom) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          if (url !== "/api/v1/ads/list?is_top=true?") url += "&"; // Add '&' if url already has parameters
           url += `room_max=${encodeURIComponent(maxRoom)}`;
         }
 
         if (priceMin) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          if (url !== "/api/v1/ads/list?is_top=true?") url += "&"; // Add '&' if url already has parameters
           url += `price_min=${encodeURIComponent(priceMin)}`;
         }
 
         if (priceMax) {
-          if (url !== "http://localhost:3000/?") url += "&"; // Add '&' if url already has parameters
+          if (url !== "/api/v1/ads/list?is_top=true?") url += "&"; // Add '&' if url already has parameters
           url += `price_max=${encodeURIComponent(priceMax)}`;
         }
 
@@ -132,7 +135,17 @@ const TopElon = ({ count }) => {
     };
 
     fetchAds();
-  }, [search, category, adType, minRoom, maxRoom, maxRoom, priceMin, priceMax]);
+  }, [
+    search,
+    category,
+    district,
+    adType,
+    minRoom,
+    maxRoom,
+    maxRoom,
+    priceMin,
+    priceMax,
+  ]);
 
   return (
     <div className="flex flex-col container">
@@ -140,7 +153,9 @@ const TopElon = ({ count }) => {
         <h2 className="text-2xl text-qora font-semibold max-md:text-lg max-md:mt-5 max-md:mb-2">
           {countTop + count == "undefined"
             ? ""
-            : `${countTop + count} ta e’lon mavjud`}
+            : `${countTop + count} ${
+                category.length == 1 ? category : ""
+              } ta e’lon mavjud`}
         </h2>
         <div className="flex max-md:justify-between">
           <div className="flex items-center ">
