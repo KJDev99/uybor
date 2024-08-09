@@ -76,6 +76,9 @@ const Navbar = () => {
               <Button color="qora" image={Savedmsg} text="Tanlanganlar" />
             </div>
           </Link>
+          <Link href="/text">
+            <div className="ml-8 relative">Test</div>
+          </Link>
           {isAuthenticated ? (
             <Link href="/profil">
               <div className="ml-8">

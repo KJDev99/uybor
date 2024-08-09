@@ -7,6 +7,7 @@ import api from "@/lib/api";
 import ElonBlockSkeleton from "./ElonBlockSkeleton";
 import { useSearchParams } from "next/navigation";
 import EmptyAds from "./EmptyAds";
+import Msg from "./Msg";
 
 const Tavfsiya = ({ setCount }) => {
   const view = useSelector((state) => state.view);
@@ -29,6 +30,8 @@ const Tavfsiya = ({ setCount }) => {
   const [priceMin, setPriceMin] = useState("");
   const [priceMax, setPriceMax] = useState("");
   const [search, setSearch] = useState("");
+
+  const [seeMsg, setseeMsg] = useState("");
 
   useEffect(() => {
     // Extract values from query parameters
@@ -116,13 +119,16 @@ const Tavfsiya = ({ setCount }) => {
         id: ad.id,
       }));
       setAds(transformedAds);
-      setCount(response.data.count)
+      setCount(response.data.count);
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));
+
       console.log(transformedAds);
     } catch (err) {
       setError(err.message);
+      // setseeMsg("1");
     } finally {
       setLoading(false);
+      // setseeMsg("0");
     }
   };
 
@@ -241,9 +247,11 @@ const Tavfsiya = ({ setCount }) => {
           ) : ads.length > 0 ? (
             ads.map((elon, index) => <ElonBlock key={index} {...elon} />)
           ) : (
-            <div className="w-full">
-              <EmptyAds />
-            </div>
+            <Msg
+              status="warning"
+              text="Hozircha ushbu qidiruv bo’yicha e’lon topilmadi!"
+              seeMsg
+            />
           )}
         </div>
         {renderPagination()}
