@@ -20,27 +20,36 @@ const page = () => {
   });
   const router = useRouter();
   const data = new FormData();
-  data.append("ad_type", formData.ad_type);
-  data.append("phone", formData.phone);
-  data.append("title", formData.title);
-  data.append("category", formData.category);
-  data.append("price", formData.price);
-  data.append("currency", formData.currency);
-  data.append("region", formData.region);
-  data.append("district", formData.district);
-  data.append("adress", formData.adress);
-  data.append("room", formData.room);
-  data.append("accommodation_type", formData.accommodation_type);
-  data.append("construction_type", formData.construction_type);
-  data.append("house_built_year", formData.house_built_year);
-  data.append("have_furniture", formData.have_furniture);
-  data.append("living_area", formData.living_area);
-  data.append("total_area", formData.total_area);
-  data.append("floor", formData.floor);
-  data.append("total_floor", formData.total_floor);
-  data.append("have_broker_fee", formData.have_broker_fee);
-  data.append("description", formData.description);
-  data.append("extra_phone", formData.extra_phone);
+  const fields = [
+    "ad_type",
+    "phone",
+    "title",
+    "category",
+    "price",
+    "currency",
+    "region",
+    "district",
+    "adress",
+    "room",
+    "accommodation_type",
+    "construction_type",
+    "house_built_year",
+    "have_furniture",
+    "living_area",
+    "total_area",
+    "floor",
+    "total_floor",
+    "have_broker_fee",
+    "description",
+    "extra_phone",
+  ];
+
+  // Iterate through the fields and append only if they have a value
+  fields.forEach((field) => {
+    if (formData[field]) {
+      data.append(field, formData[field]);
+    }
+  });
   if (formData.media && formData.media.length > 0) {
     formData.media.forEach((fileObj) => {
       data.append("media", fileObj.file); // Append each file under the key 'media'

@@ -3,7 +3,7 @@ import api from "@/lib/api";
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 
-const AddManzil = ({ formData, setFormData }) => {
+const AddManzil = ({ formData, setFormData, value }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isDistrictOpen, setIsDistrictOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 
-const AddNarx = ({ formData, setFormData }) => {
+const AddNarx = ({ formData, setFormData, value }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -14,7 +14,7 @@ const AddNarx = ({ formData, setFormData }) => {
   const handleFromChange = (event) => {
     const inputValue = event.target.value;
     if (!isNaN(inputValue)) {
-      setFormData({...formData, "price":inputValue});
+      setFormData({ ...formData, price: inputValue });
       setFromValue(inputValue);
     }
   };
@@ -30,17 +30,22 @@ const AddNarx = ({ formData, setFormData }) => {
       setIsCategoryOpen(false);
     }
   };
-  
+
   const handleRadioChange = (event) => {
     const category = event.target.value;
     setSelectedCategory(category);
     setIsCategoryOpen(false);
     // setFormData({...formData, "currency":category});
-    if(category== "So'm") setFormData({ ...formData, "currency": 'UZS' });
-    else if(category== "Usd") setFormData({ ...formData, "currency": 'USD' });
+    if (category == "So'm") setFormData({ ...formData, currency: "UZS" });
+    else if (category == "Usd") setFormData({ ...formData, currency: "USD" });
   };
 
   useEffect(() => {
+    console.log(value, "value22");
+    if (value) {
+      setFromValue(value.price);
+      setSelectedCategory(value.currency);
+    }
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);

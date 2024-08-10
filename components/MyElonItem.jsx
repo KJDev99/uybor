@@ -144,7 +144,7 @@ const MyElonItem = ({
               </button>
             )}
             {(status == "aktiv" || status == "tasdiq") && (
-              <Link href={"/profil/editelon"}>
+              <Link href={`/editads/${id}`}>
                 <button className="text text-qora px-4 py-1 rounded-md font-medium bg-[#E7F4FF] outline-none border-none flex justify-center items-center">
                   <Image src={EditImg} alt="edit" className="mr-2" />
                   Tahrirlash

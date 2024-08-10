@@ -28,7 +28,7 @@ const ModalNewPass = ({ setStep }) => {
           phone: formattedPhone,
         });
         sessionStorage.setItem("phoneUser", formattedPhone);
-        setStep(5);
+        setStep(6);
       } catch (err) {
         console.error(err); // Error logging
         setError("Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.");

@@ -87,7 +87,7 @@ const ElonBlock = ({
               </div>
             </div>
             <div className="py-2 px-4 max-md:px-2 flex flex-col">
-              <h3 className="line-clamp-2 text-qora text-lg font-medium max-md:text-sm max-md:line-clamp-1">
+              <h3 className="line-clamp-2 text-qora text-lg font-medium max-md:text-sm max-md:line-clamp-1 h-[56px]">
                 {name}
               </h3>
               <p className="text-sm text-qora font-medium md:hidden">

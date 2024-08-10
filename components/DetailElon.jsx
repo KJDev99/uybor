@@ -39,7 +39,11 @@ const DetailElon = () => {
     const fetchAdDetail = async () => {
       try {
         const response = await api.get(`api/v1/ads/${adId}/detail`);
-        setAdDetail(response.data);
+        if (response.data.status == "ACTIVE") {
+          setAdDetail(response.data);
+        } else {
+          setError(true);
+        }
       } catch (err) {
         setError(err);
       } finally {

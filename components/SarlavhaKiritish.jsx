@@ -9,6 +9,7 @@ const SarlavhaKiritish = ({
   setFormData,
   formData,
   reqName,
+  value,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
@@ -22,6 +23,11 @@ const SarlavhaKiritish = ({
       setInputValue(userInfo.phone || "");
       setFormData({ ...formData, phone: userInfo.phone });
     }
+
+    if (value) {
+      setInputValue(value);
+    }
+    console.log(value, "value sar");
   }, []);
 
   const handleChange = (event) => {
@@ -42,7 +48,7 @@ const SarlavhaKiritish = ({
       <div className="flex flex-col">
         <input
           type="text" // Always use text input type for custom validation
-          disabled={reqName == "user" || reqName == "phone"} // Disable input field for admin users
+          disabled={reqName == "user"} // Disable input field for admin users
           value={inputValue}
           onChange={handleChange}
           placeholder={placeholder}

@@ -2,12 +2,9 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ElonBlock from "./ElonBlock";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import api from "@/lib/api";
 import ElonBlockSkeleton from "./ElonBlockSkeleton";
 import { useSearchParams } from "next/navigation";
-import EmptyAds from "./EmptyAds";
-import Msg from "./Msg";
 
 const Tavfsiya = ({ setCount }) => {
   const view = useSelector((state) => state.view);
@@ -17,10 +14,9 @@ const Tavfsiya = ({ setCount }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [nextPageUrl, setNextPageUrl] = useState(null);
-  const [previousPageUrl, setPreviousPageUrl] = useState(null);
   const [loading, setLoading] = useState(false);
   const itemsPerPage = 20;
-
+  const [prevPage, setPrevPage] = useState(1);
   const searchParams = useSearchParams();
   const [adType, setAdType] = useState("");
   const [category, setCategory] = useState("");
@@ -30,8 +26,6 @@ const Tavfsiya = ({ setCount }) => {
   const [priceMin, setPriceMin] = useState("");
   const [priceMax, setPriceMax] = useState("");
   const [search, setSearch] = useState("");
-
-  const [seeMsg, setseeMsg] = useState("");
 
   useEffect(() => {
     // Extract values from query parameters
@@ -55,7 +49,7 @@ const Tavfsiya = ({ setCount }) => {
     setSearch(searchParam);
   }, [searchParams]);
 
-  const fetchAds = async (pageNumber) => {
+  const fetchAds = async () => {
     setLoading(true);
     try {
       let url = "/api/v1/ads/list?is_top=false";
@@ -103,11 +97,10 @@ const Tavfsiya = ({ setCount }) => {
       }
       url += `&limit=${itemsPerPage}&offset=${
         (currentPage - 1) * itemsPerPage
-      }&page=${pageNumber}&size=${itemsPerPage}`;
+      }`;
       const response = await api.get(url);
-      const { next, previous, count } = response.data;
+      const { next, count } = response.data;
       setNextPageUrl(next);
-      setPreviousPageUrl(previous);
       setTotalPages(Math.ceil(count / itemsPerPage));
       const transformedAds = response.data.results.map((ad) => ({
         image: ad.media,
@@ -122,17 +115,18 @@ const Tavfsiya = ({ setCount }) => {
         view: view,
         id: ad.id,
       }));
-      setAds(transformedAds);
+      if (currentPage === prevPage) {
+        setAds(transformedAds);
+      } else {
+        setAds((prevAds) => [...prevAds, ...transformedAds]);
+      }
+      setPrevPage(currentPage);
       setCount(response.data.count);
       setTotalPages(Math.ceil(response.data.count / itemsPerPage));
-
-      console.log(transformedAds);
     } catch (err) {
       setError(err.message);
-      // setseeMsg("1");
     } finally {
       setLoading(false);
-      // setseeMsg("0");
     }
   };
 
@@ -148,95 +142,27 @@ const Tavfsiya = ({ setCount }) => {
     maxRoom,
     priceMin,
     priceMax,
+    currentPage,
   ]);
 
   const handleNextPage = () => {
     if (nextPageUrl) {
       setCurrentPage(currentPage + 1);
-      window.scrollTo(0, 0);
     }
-  };
-
-  const handlePreviousPage = () => {
-    if (previousPageUrl) {
-      setCurrentPage(currentPage - 1);
-      window.scrollTo(0, 0);
-    }
-  };
-
-  const handlePageClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    window.scrollTo(0, 0);
   };
 
   const renderPagination = () => {
     if (totalPages <= 1) return null;
-
-    const pageNumbers = [];
-    let startPage = 1;
-    let endPage = 4;
-
-    if (currentPage > 2) {
-      startPage = currentPage - 1;
-      endPage = currentPage + 2;
-      if (endPage > totalPages) {
-        endPage = totalPages;
-        startPage = endPage - 3;
-        if (startPage < 1) startPage = 1;
-      }
-    }
-
-    if (startPage > 1) {
-      pageNumbers.push(1);
-      if (startPage > 2) pageNumbers.push("...");
-    }
-
-    for (let i = startPage; i <= endPage; i++) {
-      pageNumbers.push(i);
-    }
-
-    if (endPage < totalPages) {
-      if (endPage < totalPages - 1) pageNumbers.push("...");
-      pageNumbers.push(totalPages);
-    }
-
     return (
-      <div className="flex justify-center mt-[50px] mb-5">
-        <button
-          onClick={handlePreviousPage}
-          disabled={!previousPageUrl}
-          className={`h-10 bg-white rounded-md w-10 mr-2 flex justify-center items-center ${
-            !previousPageUrl && "bg-kulrangOch"
-          }`}
-        >
-          <FaChevronLeft />
-        </button>
-        {pageNumbers.map((pageNumber, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              if (pageNumber !== "...") {
-                handlePageClick(pageNumber);
-              }
-            }}
-            className={`w-10 h-10 rounded-md font-semibold mx-1 ${
-              pageNumber === currentPage
-                ? "bg-ochKok text-logoKok"
-                : "text-qora bg-white"
-            }`}
-            disabled={pageNumber === "..."}
-          >
-            {pageNumber}
-          </button>
-        ))}
+      <div className="flex justify-center ">
         <button
           onClick={handleNextPage}
           disabled={!nextPageUrl}
-          className={`h-10 bg-white rounded-md w-10 ml-2 flex justify-center items-center ${
-            !nextPageUrl && "bg-kulrangOch"
+          className={`mt-[50px] mb-5 bg-transparent rounded-md w-[210px] h-[30px] flex justify-center items-center border border-[#015EA8] text-[#015EA8] cursor-pointer ${
+            !nextPageUrl && "hidden h-0"
           }`}
         >
-          <FaChevronRight />
+          Yana ko’rsatish
         </button>
       </div>
     );

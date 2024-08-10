@@ -4,7 +4,7 @@ import rasmYuklash from "@/assets/images/rasmyuklash.svg";
 import Camera from "@/assets/images/camera.svg";
 import { FaTimes } from "react-icons/fa";
 
-const AddImage = ({ textImage, size, formData, setFormData }) => {
+const AddImage = ({ textImage, size, formData, setFormData, value }) => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,11 @@ const AddImage = ({ textImage, size, formData, setFormData }) => {
       setImages(formData.media.map((img) => img.fileURL));
     }
   }, [formData]);
-
+  useEffect(() => {
+    if (value) {
+      setImages(Object.values(value).map((img) => img.file));
+    }
+  }, [value]);
   const handleImageUpload = (event) => {
     const files = event.target.files;
     if (files && files.length > 0) {

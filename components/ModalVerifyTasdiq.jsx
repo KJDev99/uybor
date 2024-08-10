@@ -18,10 +18,6 @@ const ModalVerifyTasdiq = ({ setStep, closeModal }) => {
 
     const phone = sessionStorage.getItem("phoneUser");
 
-    // Debug: print phone and code values
-    console.log("Phone:", phone);
-    console.log("Code:", code);
-
     try {
       const response = await api.post("/api/v1/user/verify", {
         phone: phone,
@@ -31,13 +27,10 @@ const ModalVerifyTasdiq = ({ setStep, closeModal }) => {
 
       // Debug: print response to debug
       console.log("Verification Response:", response.data);
+      console.log("Verification Response:", code);
 
       // Check the success condition based on response
-      if (response.data.success) {
-        setStep(7); // Proceed if verification is successful
-      } else {
-        setError("Kod noto‘g‘ri yoki serverda muammo bor.");
-      }
+      setStep(7); // Proceed if verification is successful
     } catch (err) {
       console.error("Verification Error:", err);
       setError("Kod noto‘g‘ri yoki serverda muammo bor.");

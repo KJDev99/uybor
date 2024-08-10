@@ -36,7 +36,14 @@ const Tanlanganlar = () => {
   const handleCurrencyChange = (newCurrency) => {
     dispatch(setCurrency(newCurrency));
   };
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-indexed
+    const year = date.getFullYear();
 
+    return `${day}/${month}/${year}`;
+  }
   return (
     <div className="flex flex-col container mb-10">
       {savedElons.length > 0 ? (
@@ -91,7 +98,19 @@ const Tanlanganlar = () => {
           >
             {savedElons.map((elon) => (
               <div key={elon.id} className="relative">
-                <ElonBlock {...elon} />
+                <ElonBlock
+                  address={
+                    elon.address ||
+                    elon.region.name_uz + " " + elon.district.name_uz
+                  }
+                  name={elon.name || elon.title}
+                  image={elon.image || elon.media[0].file}
+                  price={elon.price || elon.price}
+                  top={elon.top || elon.is_top}
+                  turi={elon.turi || elon.ad_type}
+                  data={elon.data || formatDate(elon.created)}
+                  id={elon.id}
+                />
                 <Image
                   src={SavedImg}
                   alt="no save"

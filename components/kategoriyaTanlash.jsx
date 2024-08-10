@@ -2,7 +2,14 @@
 import { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 
-const KategoriyaTanlash = ({ categories, heading, setFormData, formData, reqName }) => {
+const KategoriyaTanlash = ({
+  categories,
+  heading,
+  setFormData,
+  formData,
+  reqName,
+  value,
+}) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -20,24 +27,49 @@ const KategoriyaTanlash = ({ categories, heading, setFormData, formData, reqName
 
   const handleCategoryChange = (event) => {
     const category = event.target.id;
+
     setSelectedCategory(category);
     setIsCategoryOpen(false);
-    if(category== "Kvartiralar") setFormData({ ...formData, [reqName]: 'APARTMENT' });
-    else if(category== "Xovlilar") setFormData({ ...formData, [reqName]: 'HOUSE' });
-    else if(category== "Ofislar") setFormData({ ...formData, [reqName]: 'OFFICE' });
-    else if(category== "Do'konlar") setFormData({ ...formData, [reqName]: 'SHOP' });
-    else if(category== "Mehmonxona va dachalar") setFormData({ ...formData, [reqName]: 'HOTEL' });
-    else if(category== "birlamchi") setFormData({ ...formData, [reqName]: 'NEW' });
-    else if(category== "Ikkilamchi") setFormData({ ...formData, [reqName]: 'OLD' });
-    else if(category== "G'isht") setFormData({ ...formData, [reqName]: 'BRICK' });
-    else if(category== "Panel") setFormData({ ...formData, [reqName]: 'PANEL' });
-    else if(category== "Bor") setFormData({ ...formData, [reqName]: true});
-    else if(category== "Yo'q") setFormData({ ...formData, [reqName]: false });
-    else setFormData({ ...formData, [reqName]: category})
+    if (category == "Kvartiralar")
+      setFormData({ ...formData, [reqName]: "APARTMENT" });
+    else if (category == "Xovlilar")
+      setFormData({ ...formData, [reqName]: "HOUSE" });
+    else if (category == "Ofislar")
+      setFormData({ ...formData, [reqName]: "OFFICE" });
+    else if (category == "Do'konlar")
+      setFormData({ ...formData, [reqName]: "SHOP" });
+    else if (category == "Mehmonxona va dachalar")
+      setFormData({ ...formData, [reqName]: "HOTEL" });
+    else if (category == "birlamchi")
+      setFormData({ ...formData, [reqName]: "NEW" });
+    else if (category == "Ikkilamchi")
+      setFormData({ ...formData, [reqName]: "OLD" });
+    else if (category == "G'isht")
+      setFormData({ ...formData, [reqName]: "BRICK" });
+    else if (category == "Panel")
+      setFormData({ ...formData, [reqName]: "PANEL" });
+    else if (category == "Bor") setFormData({ ...formData, [reqName]: true });
+    else if (category == "Yo'q") setFormData({ ...formData, [reqName]: false });
+    else setFormData({ ...formData, [reqName]: category });
   };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
+    console.log(value);
+    if (value) {
+      if (value == "APARTMENT") setSelectedCategory("Kvartiralar");
+      else if (value == "HOUSE") setSelectedCategory("Xovlilar");
+      else if (value == "OFFICE") setSelectedCategory("Ofislar");
+      else if (value == "SHOP") setSelectedCategory("Do'konlar");
+      else if (value == "HOTEL") setSelectedCategory("Mehmonxona va dachalar");
+      else if (value == "NEW") setSelectedCategory("birlamchi");
+      else if (value == "OLD") setSelectedCategory("Ikkilamchi");
+      else if (value == "BRICK") setSelectedCategory("G'isht");
+      else if (value == "PANEL") setSelectedCategory("Panel");
+      else if (value === true) setSelectedCategory("Bor");
+      else if (value === false) setSelectedCategory("Yo'q");
+      else setSelectedCategory(value); // Default case
+    }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
