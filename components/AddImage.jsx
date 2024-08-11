@@ -103,7 +103,7 @@ const AddImage = ({ textImage, size, formData, setFormData, value }) => {
                 <img
                   src={images[index]}
                   alt={`Rasm`}
-                  className="rounded-[10px] object-cover"
+                  className="rounded-[10px] object-cover h-full w-full"
                 />
                 <button
                   className="absolute top-2 right-2 text-red-500 bg-white rounded-full p-1"

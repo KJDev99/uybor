@@ -49,6 +49,7 @@ const EditAdPage = () => {
         const response = await api.get(`/api/v1/ads/${adId}/detail`);
         setGetData(response.data);
         // Handle media if necessary
+        setSelectedOption(response.data.ad_type);
       } catch (error) {
         console.error("Error fetching ad data:", error);
       }
@@ -138,6 +139,43 @@ const EditAdPage = () => {
       {getData && (
         <div className="px-5">
           <div className="border w-full border-kulrang"></div>
+          <div className="flex my-3">
+            <label htmlFor="SELL" className="flex items-center mr-4 ">
+              <input
+                type="radio"
+                id="SELL"
+                name="ad_type"
+                onChange={handleOptionChange}
+                checked={selectedOption === "SELL"}
+              />
+              <span
+                className={`ml-2 text-lg font-medium max-md:text-sm ${
+                  selectedOption === "SELL" ? "text-logoKok" : "text-kulrang"
+                }`}
+              >
+                Sotish uchun
+              </span>
+            </label>
+            <label
+              htmlFor="RENT"
+              className="flex items-center ml-[50px] max-md:ml-5"
+            >
+              <input
+                type="radio"
+                id="RENT"
+                name="ad_type"
+                onChange={handleOptionChange}
+                checked={selectedOption === "RENT"}
+              />
+              <span
+                className={`ml-2 text-lg font-medium max-md:text-sm ${
+                  selectedOption === "RENT" ? "text-logoKok" : "text-kulrang"
+                }`}
+              >
+                Ijaraga berish uchun
+              </span>
+            </label>
+          </div>
           <div className="w-full">
             <KategoriyaTanlash
               categories={[

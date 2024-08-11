@@ -2,6 +2,7 @@
 import api from "@/lib/api";
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa";
+import AddressComponent from "./AddresComponent";
 
 const AddManzil = ({ formData, setFormData, value }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
@@ -225,17 +226,18 @@ const AddManzil = ({ formData, setFormData, value }) => {
           </div>
         )}
       </div>
-      <input
+      {/* <input
         type="text"
-        value={formData?.adress}
+        value={formData.address}
         onChange={handleAddressChange}
         className="mb-5 mt-[10px] outline-none pr-4 overflow-hidden text-qora font-medium flex p-[10px] h-10 w-full rounded-[10px] justify-between items-center cursor-pointer border border-yozish"
       />
       <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d24537.891990688517!2d64.43917506583864!3d39.756798174628564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f5005d07f3e5d61%3A0x23e40e8c2b477b21!2sTURON%20PLAZA!5e0!3m2!1sru!2s!4v1721148984897!5m2!1sru!2s"
+        src={`https://yandex.ru/map-widget/v1/?ll=${selectedLocation.lng},${selectedLocation.lat}&z=12`}
         loading="lazy"
         className="mb-5 rounded-[10px] border-none outline-none h-[380px] w-full max-md:h-[335px]"
-      ></iframe>
+      ></iframe> */}
+      <AddressComponent />
     </div>
   );
 };

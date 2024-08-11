@@ -8,6 +8,7 @@ const Button = ({
   text,
   width,
   height,
+  mr,
 }) => {
   return (
     <div
@@ -23,7 +24,7 @@ const Button = ({
           alt="Logo"
           width={width ? width : ""}
           height={height ? height : ""}
-          className="mr-2"
+          className={`mr-2 ${mr && "mr-0"}`}
         />
       )}
       {text && <span>{text}</span>}

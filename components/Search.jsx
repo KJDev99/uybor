@@ -31,7 +31,7 @@ const Search = ({ setSearch, search1 }) => {
     if (searchValue) {
       // Redirect to /search page with the search query parameter
       router.push(`?search=${encodeURIComponent(searchValue)}`);
-      setSearch(searchValue);
+      // setSearch(searchValue);
     }
   };
 
@@ -46,7 +46,7 @@ const Search = ({ setSearch, search1 }) => {
       />
       {searchValue && (
         <IoMdClose
-          className="absolute right-[180px] top-[20px] max-md:top-[10px] max-md:right-7 text-xl text-qora cursor-pointer"
+          className="absolute right-[180px] top-[20px] max-md:top-[10px] max-md:right-7 text-xl text-qora cursor-pointer max-md:hidden"
           onClick={clearInput}
         />
       )}
@@ -57,6 +57,14 @@ const Search = ({ setSearch, search1 }) => {
         onClick={handleSearchClick}
       >
         <Button main image={SearchImg} text="Qidirish" color="white" />
+      </div>
+      <div
+        className={`w-10 flex justify-center items-center h-10 md:hidden cursor-pointer absolute right-5 ${
+          searchValue ? "" : "opacity-100 pointer-events-none"
+        }`}
+        onClick={handleSearchClick}
+      >
+        <Button main image={SearchImg} color="white" mr={true} />
       </div>
     </div>
   );

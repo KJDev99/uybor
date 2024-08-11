@@ -18,9 +18,11 @@ const ElonBlock = ({
   data,
   price,
   id,
+  see,
 }) => {
   const [saved, setSaved] = useState(save);
   let view = useSelector((state) => state.view);
+
   let currencyNow = useSelector((state) => state.currency);
 
   useEffect(() => {
@@ -58,7 +60,7 @@ const ElonBlock = ({
 
   return (
     <>
-      {view == "block" ? (
+      {view == "block" || see ? (
         <Link href={`/${id}`}>
           <div className="flex flex-col bg-white rounded-[20px] max-md:rounded-[5px] overflow-hidden shadow-lg">
             <div className="relative">

@@ -23,6 +23,8 @@ const MyElonItem = ({
   edit,
   finish,
   status,
+  district,
+  region,
   id,
   handleConfirmAction,
 }) => {
@@ -124,7 +126,7 @@ const MyElonItem = ({
           <div className="flex mt-2 mb-4 max-md:mb-1">
             <CiLocationOn className="text-lg" />
             <p className="text-sm text-kulrang ml-2 max-md:text-xs">
-              {address}
+              {region} {district}
             </p>
           </div>
           <div className="flex justify-between mb-3 items-center">
@@ -226,7 +228,10 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
               >
                 Ha
               </button>
-              <button className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5">
+              <button
+                onClick={closeModal}
+                className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5"
+              >
                 Yoq
               </button>
             </div>
@@ -234,7 +239,7 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
         </div>
       )}
       <div className="flex justify-end gap-[15px] border-b border-kulrang pb-[15px] md:hidden">
-        {!top && (
+        {!top && status == "aktiv" && (
           <button
             onClick={openModalTop}
             className="text text-qora px-4 py-1 rounded-md max-md:rounded-[5px] font-medium bg-[#FFE8BC] outline-none border-none flex justify-center items-center max-md:text-xs max-md:px-1 max-md:h-[30px] "
@@ -243,15 +248,15 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
             Topga chiqarish
           </button>
         )}
-        {edit && (
-          <Link href={"/profil/editelon"}>
+        {(status == "aktiv" || status == "tasdiq") && (
+          <Link href={`/editads/${id}`}>
             <button className="text text-qora px-4 py-1 rounded-md max-md:rounded-[5px] font-medium bg-[#E7F4FF] outline-none border-none flex justify-center items-center max-md:text-xs max-md:px-1 max-md:h-[30px] ">
               <Image src={EditImg} alt="edit" className="mr-[6px]" />
               Tahrirlash
             </button>
           </Link>
         )}
-        {finish && (
+        {status == "aktiv" && (
           <button
             onClick={openModalFinish}
             className="text text-qora px-4 py-1 rounded-md max-md:rounded-[5px] font-medium bg-[#CFFFDD] outline-none border-none flex justify-center items-center max-md:text-xs max-md:px-1 max-md:h-[30px]  "
@@ -308,10 +313,16 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
                 E’lonni yakunlashni tasdiqlaysizmi?
               </p>
               <div className="flex justify-center">
-                <button className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5">
+                <button
+                  onClick={handleConfirm}
+                  className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5"
+                >
                   Ha
                 </button>
-                <button className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5">
+                <button
+                  onClick={closeModal}
+                  className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5"
+                >
                   Yoq
                 </button>
               </div>

@@ -29,6 +29,8 @@ const Filter = () => {
   const handleFilterClick = () => {
     const queryParams = new URLSearchParams();
 
+    setFilterHidden(true);
+
     // Add filter parameters to query
     const categoryMap = {
       Kvartiralar: "APARTMENT",

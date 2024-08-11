@@ -14,7 +14,7 @@ const Page = () => {
     // Clear local storage
     localStorage.clear();
 
-    // router.replace("/");
+    router.replace("/");
     // Or use router.push('/') if you want to add this action to the browser history
     setTimeout(() => {
       window.location.reload();
@@ -41,18 +41,18 @@ const Page = () => {
         <div className="flex mb-20">
           <button
             className="h-[44px] w-[173px] max-md:w-[140px] border border-kulrang text-kulrang text-lg rounded-[10px] mx-5 hover:border-logoKok hover:bg-logoKok hover:text-white transition-all"
-            onClick={() => router.replace("/profil/chiqish")}
+            onClick={() => router.replace("/")}
           >
             Yo'q
           </button>
-          <Link href="/">
-            <button
-              className="h-[44px] w-[173px] max-md:w-[140px] border border-kulrang text-kulrang text-lg rounded-[10px] mx-5 hover:border-logoKok hover:bg-logoKok hover:text-white transition-all"
-              onClick={handleLogout}
-            >
-              Ha
-            </button>
-          </Link>
+          {/* <Link href="/"> */}
+          <button
+            className="h-[44px] w-[173px] max-md:w-[140px] border border-kulrang text-kulrang text-lg rounded-[10px] mx-5 hover:border-logoKok hover:bg-logoKok hover:text-white transition-all"
+            onClick={handleLogout}
+          >
+            Ha
+          </button>
+          {/* </Link> */}
         </div>
       </div>
     </div>

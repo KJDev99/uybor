@@ -6,7 +6,7 @@ import { Navigation } from "swiper/modules";
 import api from "@/lib/api";
 import ElonBlock from "./ElonBlock";
 
-export default function ElonSlider({ userId, category, adId }) {
+export default function ElonSlider({ userId, category, adId, see }) {
   const [ads, setAds] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -70,7 +70,7 @@ export default function ElonSlider({ userId, category, adId }) {
     >
       {ads.map((ad) => (
         <SwiperSlide key={ad.id} className="flex w-auto">
-          <ElonBlock {...ad} />
+          <ElonBlock {...ad} see="block" />
         </SwiperSlide>
       ))}
     </Swiper>

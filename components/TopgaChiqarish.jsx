@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const TopgaChiqarish = ({ text, title, setTopDay }) => {
   const [selectedOption, setSelectedOption] = useState("top");
-  const [selectedDuration, setSelectedDuration] = useState("10");
+  const [selectedDuration, setSelectedDuration] = useState("7");
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.id);
@@ -96,18 +96,18 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
         </div>
         <div
           className={`rounded-[10px] p-5 border cursor-pointer ${
-            selectedDuration === "10"
+            selectedDuration === "7"
               ? "border-logoKok bg-ochKok"
               : "bg-white border-kulrangOch"
           }`}
-          onClick={() => handleDurationClick("10")}
+          onClick={() => handleDurationClick("7")}
         >
           <h2
             className={`font-bold mb-[10px] text-center text-[32px]  ${
-              selectedDuration === "10" ? "text-logoKok" : "text-kulrang"
+              selectedDuration === "7" ? "text-logoKok" : "text-kulrang"
             }`}
           >
-            10 kun
+            7 kun
           </h2>
           <h3 className={`text-2xl mb-[10px] font-semibold`}>9 000 so’m</h3>
           <p className="text-sm text-kulrang">
@@ -156,18 +156,18 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
         </div>
         <div
           className={`rounded-[10px] w-[92px] h-[34px] border cursor-pointer flex items-center justify-center ${
-            selectedDuration === "10"
+            selectedDuration === "7"
               ? "border-logoKok bg-[#015EA8]"
               : "bg-white border-kulrangOch"
           }`}
-          onClick={() => handleDurationClick("10")}
+          onClick={() => handleDurationClick("7")}
         >
           <h2
             className={`font-bold text-center text-[18px]  ${
-              selectedDuration === "10" ? "text-white" : "text-kulrang"
+              selectedDuration === "7" ? "text-white" : "text-kulrang"
             }`}
           >
-            10 kun
+            7 kun
           </h2>
         </div>
         <div
@@ -201,7 +201,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
           <div className="flex flex-col w-full px-5">
             <h3 className={`text-lg mb-[5px] font-semibold`}>9 000 so’m</h3>
             <p className="text-sm text-kulrang mb-[30px]">
-              E’loningiz 10 kun davomida Topda turadi. Saytga tashrif
+              E’loningiz 7 kun davomida Topda turadi. Saytga tashrif
               buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
             </p>
           </div>

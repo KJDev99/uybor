@@ -19,41 +19,41 @@ const ProfilePage = () => {
     fullName: "",
     newPassword: "",
     confirmPassword: "",
+    photos: "",
   });
   const [formErrors, setFormErrors] = useState({
     passwordError: false,
   });
 
+  const fetchUserProfile = async () => {
+    const authToken = Cookies.get("authToken");
+    if (!authToken) {
+      console.error("Foydalanuvchi tizimga kirilgan emas.");
+      return;
+    }
+    try {
+      const response = await api.get("/api/v1/user/profile", {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      setUserData(response.data);
+      setFormValues((prev) => ({
+        ...prev,
+        fullName: response.data.full_name,
+      }));
+      if (response.data.photo) {
+        setImage(response.data.photo);
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Xatolik yuz berdi.");
+      console.error("Fetch Error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      const authToken = Cookies.get("authToken");
-      if (!authToken) {
-        console.error("Foydalanuvchi tizimga kirilgan emas.");
-        return;
-      }
-      try {
-        const response = await api.get("/api/v1/user/profile", {
-          headers: {
-            Authorization: `Bearer ${authToken}`,
-            "Content-Type": "application/json",
-          },
-        });
-        setUserData(response.data);
-        setFormValues((prev) => ({
-          ...prev,
-          fullName: response.data.full_name,
-        }));
-        if (response.data.photo) {
-          setImage(response.data.photo);
-        }
-      } catch (err) {
-        setError(err.response?.data?.message || "Xatolik yuz berdi.");
-        console.error("Fetch Error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchUserProfile();
   }, []);
   if (loading) return <Loader type="ball-grid-pulse" />;
@@ -100,7 +100,10 @@ const ProfilePage = () => {
       try {
         const formData = new FormData();
         formData.append("full_name", formValues.fullName || "");
-        if (image) formData.append("photo", dataURItoBlob(image));
+        // if (image) {
+        //   console.log(image);
+        //   formData.append("photo", image);
+        // }
         if (formValues.newPassword)
           formData.append("password", formValues.newPassword);
         if (formValues.confirmPassword)
@@ -115,7 +118,7 @@ const ProfilePage = () => {
 
         setSuccess("Profil ma’lumotlari muvaffaqiyatli yangilandi!");
         // Refresh the user data to reflect changes
-        await fetchUserProfile();
+        window.location.reload();
       } catch (err) {
         setError(err.response?.data?.message || "Xatolik yuz berdi.");
         console.error("Submit Error:", err);

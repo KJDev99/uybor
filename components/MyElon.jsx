@@ -175,7 +175,8 @@ const MyElon = () => {
               data={elon.created}
               status={selectedDuration}
               turi={elon.ad_type}
-              address={elon.address}
+              region={elon.region?.name_uz}
+              district={elon.district?.name_uz}
               id={elon.id}
               top={elon.is_top}
               handleConfirmAction={handleConfirmAction}

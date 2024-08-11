@@ -10,6 +10,7 @@ import Button from "@/components/Button";
 import Cookies from "js-cookie";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { AiOutlineClose } from "react-icons/ai";
 
 const getToken = () => Cookies.get("authToken");
 const page = () => {
@@ -18,6 +19,11 @@ const page = () => {
   const [formData, setFormData] = useState({
     ad_type: "",
   });
+
+  const [topDay, setTopDay] = useState("");
+  const [seeTop, SetSeeTop] = useState(false);
+  const [seeMsg, setSeeMsg] = useState("0");
+
   const router = useRouter();
   const data = new FormData();
   const fields = [
@@ -88,11 +94,45 @@ const page = () => {
           Authorization: `Bearer ${token}`, // Tokenni Authorization headerida yuborish
         },
       });
-      router.push("/");
+      // router.push("/");
+      SetSeeTop(true);
       // Formani tozalash yoki foydalanuvchiga tasdiq xabari ko'rsatish
     } catch (error) {
       console.error("Error creating ad:", error);
     }
+  };
+
+  const handleButtonClick = async () => {
+    const authToken = Cookies.get("authToken");
+    if (!authToken) {
+      return;
+    }
+
+    try {
+      const response = await api.post(
+        `/api/v1/ads/${id}/raise/top`,
+        { day: +topDay },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      window.location.reload();
+      setIsOpenTop(false);
+    } catch (error) {
+      setSeeMsg("1");
+      console.log(seeMsg);
+      setTimeout(() => {
+        setSeeMsg("0");
+        router.push("/profil/tolovlar");
+      }, 2000);
+    }
+  };
+  const closeModal = (e) => {
+    e.preventDefault();
+    router.push("/");
   };
   return (
     <div className="container">
@@ -291,6 +331,33 @@ const page = () => {
             reqName="extra_phone"
           />
         </div>
+        {seeTop && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-10">
+            <div
+              className="relative bg-[#F8FCFF] p-10 rounded-md shadow-md w-[860px] flex flex-col items-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={closeModal}
+                className="absolute top-5 right-5 text-qora"
+              >
+                <AiOutlineClose size={24} />
+              </button>
+              <TopgaChiqarish
+                setTopDay={setTopDay}
+                title="E’loningizni Topga chiqarmoqchimisiz?"
+                text="E’loningizni sotish imkoniyatlarini oshiring va ko’proq xaridorlarni jalb qiling.
+    Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningizni Topga ko’taring."
+              />
+              <button
+                className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto"
+                onClick={handleButtonClick}
+              >
+                Topga ko’tarish
+              </button>
+            </div>
+          </div>
+        )}
         {/* <div className="w-3/4  max-md:w-full">
           <TopgaChiqarish />
         </div> */}

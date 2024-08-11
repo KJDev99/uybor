@@ -9,8 +9,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const ProfilMenu = () => {
-  const [selectedDuration, setSelectedDuration] = useState("meningelonlarim");
   const pathname = usePathname();
+  const [selectedDuration, setSelectedDuration] = useState(pathname);
+  console.log(pathname, "pathname");
   const handleDurationClick = (duration) => {
     setSelectedDuration(duration);
   };
@@ -25,11 +26,11 @@ const ProfilMenu = () => {
         <Link className="max-md:hidden" href={"/profil"}>
           <div
             className={`flex rounded-[10px] px-5 py-3 cursor-pointer text-xl font-semibold ${
-              selectedDuration === "meningelonlarim"
+              selectedDuration === "/profil"
                 ? " bg-ochKok text-logoKok"
                 : "bg-transparent text-qora"
             }`}
-            onClick={() => handleDurationClick("meningelonlarim")}
+            onClick={() => handleDurationClick("/profil")}
           >
             <Image src={MeningElonlarim} alt="MeningElonlarim" />
             <p className="ml-4">Mening e’lonlarim</p>
@@ -38,11 +39,11 @@ const ProfilMenu = () => {
         <Link className="md:hidden" href={"/profil/myelon"}>
           <div
             className={`flex rounded-[10px] px-5 py-3 cursor-pointer text-xl font-semibold ${
-              selectedDuration === "meningelonlarim"
+              selectedDuration === "/profil/myelon"
                 ? " bg-ochKok text-logoKok"
                 : "bg-transparent text-qora"
             }`}
-            onClick={() => handleDurationClick("meningelonlarim")}
+            onClick={() => handleDurationClick("/profil/myelon")}
           >
             <Image src={MeningElonlarim} alt="MeningElonlarim" />
             <p className="ml-4">Mening e’lonlarim</p>
@@ -51,11 +52,11 @@ const ProfilMenu = () => {
         <Link href={"/profil/tolovlar"}>
           <div
             className={`flex rounded-[10px] px-5 py-3 cursor-pointer text-xl font-semibold ${
-              selectedDuration === "tolovlar"
+              selectedDuration === "/profil/tolovlar"
                 ? " bg-ochKok text-logoKok"
                 : "bg-transparent text-qora"
             }`}
-            onClick={() => handleDurationClick("tolovlar")}
+            onClick={() => handleDurationClick("/profil/tolovlar")}
           >
             <Image src={Tolovlar} alt="tolovlar" />
             <p className="ml-4">To’lovlar</p>
@@ -64,11 +65,11 @@ const ProfilMenu = () => {
         <Link href={"/profil/sozlamalar"}>
           <div
             className={`flex rounded-[10px] px-5 py-3 cursor-pointer text-xl font-semibold ${
-              selectedDuration === "sozlamalar"
+              selectedDuration === "/profil/sozlamalar"
                 ? " bg-ochKok text-logoKok"
                 : "bg-transparent text-qora"
             }`}
-            onClick={() => handleDurationClick("sozlamalar")}
+            onClick={() => handleDurationClick("/profil/sozlamalar")}
           >
             <Image src={Sozlamalar} alt="sozlamalar" />
             <p className="ml-4">Sozlamalar</p>
@@ -77,11 +78,11 @@ const ProfilMenu = () => {
         <Link href={"/profil/chiqish"}>
           <div
             className={`flex rounded-[10px] px-5 py-3 cursor-pointer text-xl font-semibold ${
-              selectedDuration === "profilchiqish"
+              selectedDuration === "/profil/chiqish"
                 ? " bg-ochKok text-logoKok"
                 : "bg-transparent text-qora"
             }`}
-            onClick={() => handleDurationClick("profilchiqish")}
+            onClick={() => handleDurationClick("/profil/chiqish")}
           >
             <Image src={Profilchiqish} alt="profilchiqish" />
             <p className="ml-4">Profildan chiqish</p>

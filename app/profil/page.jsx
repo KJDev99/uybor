@@ -55,17 +55,11 @@ const page = () => {
           </div>
           <div className="w-full h-[60px] rounded-[10px] flex  md:hidden ml-[20px]">
             <div className="flex items-center ">
-              <img
-                src="/images/person.png"
-                alt="img"
-                className="h-10 w-10 mr-[30px] "
-              />
-
               {userInfo.photo && (
                 <img
                   src={userInfo.photo}
                   alt="img"
-                  className="rounded-full max-md:h-[54px] max-md:w-[54px] w-[75px] h-[75px]"
+                  className="rounded-full max-md:h-[54px] max-md:w-[54px] w-[75px] h-[75px] mr-4"
                 />
               )}
 
