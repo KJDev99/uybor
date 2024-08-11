@@ -5,8 +5,7 @@ import Cookies from "js-cookie";
 import Link from "next/link";
 import { FaAngleLeft } from "react-icons/fa6";
 import SarlavhaKiritishEdit from "@/components/SarlavhaKiritishEdit";
-import rasmYuklash from "@/assets/images/rasmyuklash.svg";
-import Image from "next/image";
+import rasmYuklash from "@/assets/images/rasmyuklash.png";
 import Loader from "@/components/Loader";
 
 const ProfilePage = () => {
@@ -14,6 +13,7 @@ const ProfilePage = () => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
   const [image, setImage] = useState(null);
+  const [image1, setImage1] = useState(null);
   const [loading, setLoading] = useState(true);
   const [formValues, setFormValues] = useState({
     fullName: "",
@@ -63,6 +63,7 @@ const ProfilePage = () => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
+        setImage1(file);
         setImage(reader.result);
       };
       reader.readAsDataURL(file);
@@ -100,10 +101,10 @@ const ProfilePage = () => {
       try {
         const formData = new FormData();
         formData.append("full_name", formValues.fullName || "");
-        // if (image) {
-        //   console.log(image);
-        //   formData.append("photo", image);
-        // }
+        if (image) {
+          console.log(image);
+          formData.append("photo", image1);
+        }
         if (formValues.newPassword)
           formData.append("password", formValues.newPassword);
         if (formValues.confirmPassword)
@@ -123,25 +124,6 @@ const ProfilePage = () => {
         setError(err.response?.data?.message || "Xatolik yuz berdi.");
         console.error("Submit Error:", err);
       }
-    }
-  };
-
-  // Utility function to convert base64 to Blob
-  const dataURItoBlob = (dataURI) => {
-    try {
-      const byteString = atob(dataURI.split(",")[1]);
-      const mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
-      const arrayBuffer = new ArrayBuffer(byteString.length);
-      const uintArray = new Uint8Array(arrayBuffer);
-
-      for (let i = 0; i < byteString.length; i++) {
-        uintArray[i] = byteString.charCodeAt(i);
-      }
-
-      return new Blob([arrayBuffer], { type: mimeString });
-    } catch (e) {
-      console.error("Error converting dataURI to Blob:", e);
-      return null;
     }
   };
 
@@ -225,7 +207,7 @@ const ProfilePage = () => {
               onChange={handleImageChange}
               className="absolute inset-0 opacity-0 cursor-pointer"
             />
-            <div className="absolute bottom-0 left-0 h-[58px] max-md:h-[30px] max-md:text-[10px] w-full bg-[#ffffffcd] text-lg text-logoKok flex items-center justify-center">
+            <div className="cursor-pointer absolute bottom-0 left-0 h-[38px] max-md:h-[30px] max-md:text-[10px] w-full bg-[#ffffffcd] text-lg text-logoKok flex items-center justify-center">
               O’zgartirish
             </div>
           </div>

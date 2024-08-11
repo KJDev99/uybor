@@ -2,8 +2,7 @@
 import api from "@/lib/api";
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa";
-import AddressComponent from "./AddresComponent";
-
+import MapComponent from "./MapComponent";
 const AddManzil = ({ formData, setFormData, value }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isDistrictOpen, setIsDistrictOpen] = useState(false);
@@ -95,14 +94,6 @@ const AddManzil = ({ formData, setFormData, value }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const handleAddressChange = (event) => {
-    const { value } = event.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      adress: value,
-    }));
-  };
 
   return (
     <div className="flex flex-col relative mr-[10px]">
@@ -226,18 +217,8 @@ const AddManzil = ({ formData, setFormData, value }) => {
           </div>
         )}
       </div>
-      {/* <input
-        type="text"
-        value={formData.address}
-        onChange={handleAddressChange}
-        className="mb-5 mt-[10px] outline-none pr-4 overflow-hidden text-qora font-medium flex p-[10px] h-10 w-full rounded-[10px] justify-between items-center cursor-pointer border border-yozish"
-      />
-      <iframe
-        src={`https://yandex.ru/map-widget/v1/?ll=${selectedLocation.lng},${selectedLocation.lat}&z=12`}
-        loading="lazy"
-        className="mb-5 rounded-[10px] border-none outline-none h-[380px] w-full max-md:h-[335px]"
-      ></iframe> */}
-      <AddressComponent />
+
+      <MapComponent position={[40.0902, 65.3312]} />
     </div>
   );
 };

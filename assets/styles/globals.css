@@ -277,3 +277,11 @@ body {
   justify-content: space-around;
   align-items: center;
 }
+
+.ymaps-2-1-79-map {
+  display: none !important;
+}
+
+.ymaps-2-1-79-map:nth-child(1) {
+  display: block !important;
+}

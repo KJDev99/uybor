@@ -1,4 +1,3 @@
-"use client";
 import { useEffect, useState } from "react";
 
 const SarlavhaKiritish = ({
@@ -19,7 +18,8 @@ const SarlavhaKiritish = ({
     if (reqName === "user" && userInfo) {
       setInputValue(userInfo.full_name || "");
       setFormData({ ...formData, user: userInfo.id });
-    } else if (reqName === "phone" && userInfo) {
+    }
+    if (reqName === "phone" && userInfo) {
       setInputValue(userInfo.phone || "");
       setFormData({ ...formData, phone: userInfo.phone });
     }
@@ -27,7 +27,6 @@ const SarlavhaKiritish = ({
     if (value) {
       setInputValue(value);
     }
-    console.log(value, "value sar");
   }, []);
 
   const handleChange = (event) => {

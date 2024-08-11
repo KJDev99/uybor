@@ -318,7 +318,7 @@ const page = () => {
           />
           <SarlavhaKiritish
             label="Telefon raqam"
-            type="number"
+            type="text"
             formData={formData}
             setFormData={setFormData}
             reqName="phone"
