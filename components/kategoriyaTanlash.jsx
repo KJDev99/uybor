@@ -55,7 +55,6 @@ const KategoriyaTanlash = ({
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-    console.log(value);
     if (value) {
       if (value == "APARTMENT") setSelectedCategory("Kvartiralar");
       else if (value == "HOUSE") setSelectedCategory("Xovlilar");

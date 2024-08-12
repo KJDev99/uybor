@@ -7,15 +7,21 @@ import { FaTimes } from "react-icons/fa";
 const AddImage = ({ textImage, size, formData, setFormData, value }) => {
   const [images, setImages] = useState([]);
 
-  useEffect(() => {
-    // Initialize images state with images from formData if available
-    if (formData?.media) {
-      setImages(formData.media.map((img) => img.fileURL));
-    }
-  }, [formData]);
+  // useEffect(() => {
+  //   console.log(formData.media, "asd");
+  //   formData.media.map((img) => {
+  //     console.log(img.file, "img.fileURL");
+  //     setFormData((prev) => ({
+  //       ...prev,
+  //       media: {
+  //         fileURL: `blob:${img.file}`,
+  //       },
+  //     }));
+  //   });
+  // }, [value]);
   useEffect(() => {
     if (value) {
-      setImages(Object.values(value).map((img) => img.file));
+      setImages(value.map((img) => img.file));
     }
   }, [value]);
   const handleImageUpload = (event) => {
@@ -31,10 +37,12 @@ const AddImage = ({ textImage, size, formData, setFormData, value }) => {
       );
 
       // Update formData with new images
+
       setFormData((prevFormData) => ({
         ...prevFormData,
         media: [...(prevFormData.media || []), ...newImages],
       }));
+      console.log(formData.media, "prevFormData.media");
     }
   };
 

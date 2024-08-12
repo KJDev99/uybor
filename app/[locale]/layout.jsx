@@ -1,22 +1,19 @@
+// app/layout.js yoki app/layout.tsx
 import Navbar from "@/components/Navbar";
 import "@/assets/styles/globals.css";
 import Footer from "@/components/Footer";
 import ClientProvider from "@/components/ClientProvider";
 
-export const metadata = {
-  title: "TOPUY, Ko'chmas mulklarning katta bozori ",
-  description: "Ko'chmas mulklarning katta bozori ",
-  keywords:
-    "Ko'chmas mulklarning katta bozori, Uybor, topuy, uytopish, kvartiratopish, uysotish, uyolish",
-};
-
 const MainLayout = ({ children }) => {
   return (
-    <html lang="en">
+    <html>
       <head>
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-        <meta name="keywords" content={metadata.keywords} />
+        <title>TOPUY, Ko'chmas mulklarning katta bozori </title>
+        <meta name="description" content="Ko'chmas mulklarning katta bozori" />
+        <meta
+          name="keywords"
+          content="Ko'chmas mulklarning katta bozori, Uybor, topuy, uytopish, kvartiratopish, uysotish, uyolish"
+        />
         <meta
           name="google-site-verification"
           content="UkR4dh55Cj77k3gf1-90XU77TKTWqS6iGqR-z1wC7Tw"

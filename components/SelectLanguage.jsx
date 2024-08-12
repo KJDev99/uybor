@@ -41,7 +41,7 @@ const LanguageSelector = () => {
             className="mr-2 object-cover"
           />
           <p
-            className={`text-nowrap  pr-4 overflow-hidden ${
+            className={`text-nowrap pr-4 overflow-hidden ${
               selectedLanguage !== "Hammasi"
                 ? "text-qora font-medium"
                 : "text-kulrang"
@@ -69,13 +69,13 @@ const LanguageSelector = () => {
                   name="language"
                   value={language.code}
                   className="hidden"
-                  checked={selectedLanguage.name === language.name}
+                  checked={selectedLanguage.code === language.code}
                   onChange={handleLanguageChange}
                 />
                 <p
                   className={`w-full px-2 py-2 text-xs rounded-md flex items-center justify-between ${
-                    selectedLanguage.name === language.name
-                      ? "bg-logoKok text-white  font-medium"
+                    selectedLanguage.code === language.code
+                      ? "bg-logoKok text-white font-medium"
                       : "text-qora"
                   }`}
                 >

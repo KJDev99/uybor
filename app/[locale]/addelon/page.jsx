@@ -57,6 +57,7 @@ const page = () => {
     }
   });
   if (formData.media && formData.media.length > 0) {
+    console.log(formData.media, "formData.media");
     formData.media.forEach((fileObj) => {
       data.append("media", fileObj.file); // Append each file under the key 'media'
     });
@@ -132,7 +133,7 @@ const page = () => {
   };
   const closeModal = (e) => {
     e.preventDefault();
-    router.push("/");
+    router.push("/profil");
   };
   return (
     <div className="container">

@@ -37,6 +37,7 @@ const EditAdPage = () => {
     have_broker_fee: "",
     description: "",
     extra_phone: "",
+    media: [],
   });
   const [getData, setGetData] = useState();
   const [media, setMedia] = useState([]);
@@ -48,7 +49,9 @@ const EditAdPage = () => {
       try {
         const response = await api.get(`/api/v1/ads/${adId}/detail`);
         setGetData(response.data);
+        setFormData(response.data);
         // Handle media if necessary
+        console.log(response.data);
         setSelectedOption(response.data.ad_type);
       } catch (error) {
         console.error("Error fetching ad data:", error);
@@ -64,6 +67,7 @@ const EditAdPage = () => {
       ...prevData,
       ad_type: e.target.id,
     }));
+    console.log(formData, "formData");
   };
 
   const handleDescriptionChange = (event) => {
@@ -75,8 +79,9 @@ const EditAdPage = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(media, formData);
     e.preventDefault();
-
+    console.log(formData, "formData");
     const data = new FormData();
     data.append("ad_type", formData.ad_type);
     data.append("phone", formData.phone);
@@ -99,11 +104,10 @@ const EditAdPage = () => {
     data.append("have_broker_fee", formData.have_broker_fee);
     data.append("description", formData.description);
     data.append("extra_phone", formData.extra_phone);
-    if (media.length > 0) {
-      media.forEach((fileObj) => {
-        data.append("media", fileObj.file);
-      });
-    }
+    console.log(formData.media, "asdasdasd");
+    formData.media?.forEach((fileObj) => {
+      data.append("media", fileObj?.file);
+    });
     const token = getToken();
 
     if (!token) {
@@ -120,6 +124,7 @@ const EditAdPage = () => {
       });
       router.push("/profil/myelon");
     } catch (error) {
+      console.log(data, "data");
       console.error("Error updating ad:", error);
     }
   };
@@ -316,7 +321,7 @@ const EditAdPage = () => {
               Tavsif
             </h2>
             <textarea
-              value={getData.description}
+              value={formData.description}
               onChange={handleDescriptionChange}
               placeholder="O‘zingizni shu e’lonni ko‘rayotgan odam o’riniga qo’ying va tavsif yozing"
               className="w-full h-[177px] px-3 py-4 border-kulrangOch text-kulrang bg-yozish text-sm rounded-[10px] outline-none"

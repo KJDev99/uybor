@@ -11,7 +11,6 @@ import { usePathname } from "next/navigation";
 const ProfilMenu = () => {
   const pathname = usePathname();
   const [selectedDuration, setSelectedDuration] = useState(pathname);
-  console.log(pathname, "pathname");
   const handleDurationClick = (duration) => {
     setSelectedDuration(duration);
   };
@@ -22,7 +21,7 @@ const ProfilMenu = () => {
         selectedDuration === "meningelonlarim"
       }`}
     >
-      <div className="w-full gap-5 flex flex-col mb-10">
+      <div className="w-full gap-5 flex flex-col mb-10 md:min-h-[80vh]">
         <Link className="max-md:hidden" href={"/profil"}>
           <div
             className={`flex rounded-[10px] px-5 py-3 cursor-pointer text-xl font-semibold ${
@@ -47,6 +46,19 @@ const ProfilMenu = () => {
           >
             <Image src={MeningElonlarim} alt="MeningElonlarim" />
             <p className="ml-4">Mening e’lonlarim</p>
+          </div>
+        </Link>
+        <Link href={"/profil/hamkor"}>
+          <div
+            className={`flex rounded-[10px] px-5 py-3 cursor-pointer text-xl font-semibold ${
+              selectedDuration === "/profil/hamkor"
+                ? " bg-ochKok text-logoKok"
+                : "bg-transparent text-qora"
+            }`}
+            onClick={() => handleDurationClick("/profil/hamkor")}
+          >
+            <Image src={Tolovlar} alt="hamkor" />
+            <p className="ml-4">Hamkorlar</p>
           </div>
         </Link>
         <Link href={"/profil/tolovlar"}>

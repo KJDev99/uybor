@@ -103,7 +103,7 @@ const AddManzil = ({ formData, setFormData, value }) => {
       <p className="text-sm text-kulrang mb-2 ml-[20px] max-md:ml-0">
         Manzilni qo’lda yozing yoki xaritadan belgilang
       </p>
-      <div className="flex gap-5 max-md:flex-col" ref={categoryRef}>
+      <div className="flex gap-5 max-md:flex-col mb-5" ref={categoryRef}>
         <div
           className={`flex p-[10px] h-10 w-1/2 max-md:w-full rounded-[10px] justify-between items-center cursor-pointer bg-white border border-kulrangOch`}
           onClick={toggleCategory}
