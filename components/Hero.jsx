@@ -28,10 +28,12 @@ const Hero = () => {
         {isSearchParamsEmpty && (
           <div className="flex flex-col">
             <h1 className="mt-7 mb-3 font-semibold text-logoKok text-[42px] max-md:text-2xl max-md:mt-[30px] max-md:mb-[6px]">
-              {t("mainTitle")}
+              {/* {t("mainTitle")} */}
+              Istaganingizni oson toping
             </h1>
             <p className="text-logoKok font-semibold max-md:text-sm">
-              {t("subTitle")}
+              {/* {t("subTitle")} */}
+              Ko’chmas mulklarning katta bozori
             </p>
           </div>
         )}
