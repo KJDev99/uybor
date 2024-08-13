@@ -2,11 +2,26 @@ import React, { useState } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import api from "@/lib/api";
 import Cookies from "js-cookie";
+import { usePathname } from "next/navigation";
+import { useMemo } from "react";
+
+const useQueryParam = (param) => {
+  const pathname = usePathname();
+  const queryParams = useMemo(() => {
+    const url = new URL(pathname, "https://topuy.uz");
+    return new URLSearchParams(url.search);
+  }, [pathname]);
+
+  return queryParams.get(param);
+};
 
 const ModalTastiq = ({ setStep, phone, closeModal }) => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const referalValue = useQueryParam("referal");
+
+  console.log(referalValue);
 
   const handleVerify = async () => {
     if (!code) {
@@ -21,6 +36,7 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
       const response = await api.post("/api/v1/user/verify", {
         phone,
         code: parseInt(code, 10),
+        referral: referalValue ? referalValue : "",
       });
 
       // Success handlin

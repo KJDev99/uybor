@@ -105,7 +105,7 @@ const MyElonItem = ({
           <img
             src={image}
             alt={image}
-            className="w-[230px] h-[190px] object-cover"
+            className="w-[230px] h-[190px] object-cover max-md:h-[146px]"
           />
 
           <div

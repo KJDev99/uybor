@@ -48,13 +48,10 @@ const Navbar = () => {
       setSavedElons(savedElons);
     };
 
-    // Initial load
     checkSavedElons();
 
-    // Set up interval to poll for changes
-    const intervalId = setInterval(checkSavedElons, 100); // every second
+    const intervalId = setInterval(checkSavedElons, 100);
 
-    // Clean up interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
 

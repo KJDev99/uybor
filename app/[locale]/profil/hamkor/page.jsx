@@ -39,7 +39,7 @@ const page = () => {
           },
         });
         setUserData(response.data);
-        setText("https://topuy.uz/?" + response.data.code);
+        setText("https://topuy.uz/?referal=" + response.data.code);
       } catch (err) {
         setError(err.response?.data?.message || "Xatolik yuz berdi.");
       } finally {
