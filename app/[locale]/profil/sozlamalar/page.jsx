@@ -197,7 +197,7 @@ const ProfilePage = () => {
         <div className="w-2/5 flex flex-col items-center max-md:w-full">
           <div className="relative w-[223px] h-[223px] max-md:h-[102px] max-md:w-[102px] rounded-full mt-10 overflow-hidden">
             <img
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
               src={image || rasmYuklash}
               alt="user"
             />

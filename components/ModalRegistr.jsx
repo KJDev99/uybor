@@ -65,7 +65,9 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
         setStep(5);
         setNumber(phone);
       } catch (err) {
-        setError(err.response.data.message || "An error occurred");
+        setError(
+          err.response.data.message || "Parol 8 ta belgi bo'lishi kerak!"
+        );
       }
     }
   };
