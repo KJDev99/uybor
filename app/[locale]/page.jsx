@@ -10,7 +10,11 @@ import { useSearchParams } from "next/navigation";
 const page = () => {
   const searchParams = useSearchParams();
   const [count, setCount] = useState();
-  sessionStorage.setItem("referal", searchParams);
+  // console.log(String(searchParams).slice(0, String(searchParams).length - 1));
+  sessionStorage.setItem(
+    "referal",
+    String(searchParams).slice(0, String(searchParams).length - 1)
+  );
   return (
     <>
       <Hero />

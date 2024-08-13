@@ -19,7 +19,10 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  // const referalValue = useSearchParams();
+  const [referalValue, setReferalValue] = useState(
+    sessionStorage.getItem("referal")
+  );
+  console.log(referalValue);
 
   const handleVerify = async () => {
     if (!code) {

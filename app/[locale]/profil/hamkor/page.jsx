@@ -40,6 +40,8 @@ const page = () => {
           },
         });
         setUserData(response.data);
+        setCardNumber(response.data.card_number);
+        setFullName(response.data.card_name);
         setText("https://topuy.uz/?" + response.data.code);
       } catch (err) {
         setError(err.response?.data?.message || "Xatolik yuz berdi.");
@@ -115,9 +117,14 @@ const page = () => {
           Hamkorlik qilish quyidagi tartibda bo’ladi
         </h2>
         <p>
-          ishlangann keshbekni hisobingizga o'tkazish uchun ma'lumotlaringizni
-          to'ldiring va haftaning dushanba kuni sizga tayyorlangan kashbek
-          o'tkazilib beriladi
+          Sizning referal silkangiz bo’yicha ro’yxatdan o’tgan harbir
+          foydalanuvchi uchun 1000 so’mdan keshbek (bonus) haftaning dushanba
+          kuniga qadar bank karta raqamizga o’tkazib beriladi. Qo’shimcha
+          savollar bo’yicha telegramdagi{" "}
+          <a className="text-logoKok" href="https://t.me/topuy_official">
+            https://t.me/topuy_official
+          </a>
+          ning adminiga murojaat qilishingiz mumkin….
         </p>
       </div>
       <div className="py-7 px-[60px] bg-white border border-[#015EA8] rounded-xl mb-5">
@@ -159,12 +166,14 @@ const page = () => {
               placeholder="Karta Egasining ism familyasini  kiriting"
             />
           </div>
-          <button
-            onClick={handleSubmit}
-            className="mt-9 p-2 bg-blue-500 text-white rounded h-10 ml-4"
-          >
-            Yuborish
-          </button>
+          <div className="flex flex-col justify-end">
+            <button
+              onClick={handleSubmit}
+              className="px-3 bg-logoKok text-white rounded h-11 ml-4 mb-[2px]"
+            >
+              Saqlash
+            </button>
+          </div>
         </div>
       </div>
       <div className="py-7 px-[60px] bg-white border border-[#015EA8] rounded-xl mb-5">
