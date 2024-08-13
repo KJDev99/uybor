@@ -10,7 +10,8 @@ const page = () => {
   const [error, setError] = useState(null);
   const [tolovlar, setTolovlar] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [cardNumber, setCardNumber] = useState("");
+  const [fullName, setFullName] = useState("");
   const [text, setText] = useState("");
 
   const handleCopy = () => {
@@ -39,7 +40,7 @@ const page = () => {
           },
         });
         setUserData(response.data);
-        setText("https://topuy.uz/?referal=" + response.data.code);
+        setText("https://topuy.uz/?" + response.data.code);
       } catch (err) {
         setError(err.response?.data?.message || "Xatolik yuz berdi.");
       } finally {
@@ -47,6 +48,7 @@ const page = () => {
       }
     };
     fetchUserProfile();
+
     const fetchUserTolov = async () => {
       const authToken = Cookies.get("authToken");
       if (!authToken) {
@@ -68,6 +70,42 @@ const page = () => {
     };
     fetchUserTolov();
   }, []);
+
+  const fetchUserProfile2 = async () => {
+    const authToken = Cookies.get("authToken");
+    if (!authToken) {
+      console.error("Foydalanuvchi tizimga kirilgan emas.");
+      return;
+    }
+    try {
+      setLoading(true);
+      const response = await api.post(
+        "/api/v1/user/referral",
+        { card_number: cardNumber, card_name: fullName },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setUserData(response.data);
+      setText("https://topuy.uz/?" + response.data.code);
+    } catch (err) {
+      setError(err.response?.data?.message || "Xatolik yuz berdi.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = () => {
+    if (cardNumber && fullName) {
+      fetchUserProfile2();
+      // Qo'shimcha kod: ma'lumotlarni serverga yuboring yoki boshqa amallarni bajaring
+    } else {
+      alert("Iltimos, barcha maydonlarni to'ldiring.");
+    }
+  };
 
   if (loading) return <Loader type="ball-grid-pulse" />;
   return (
@@ -105,6 +143,8 @@ const page = () => {
             <p className="mb-[10px]">Karta raqam:</p>
             <input
               type="text"
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
               className="p-[10px] rounded-[10px] w-[360px] border border-[#015EA8]"
               placeholder="Karta raqamingizni kiriting"
             />
@@ -113,10 +153,18 @@ const page = () => {
             <p className="mb-[10px]">Ism familiya:</p>
             <input
               type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
               className="p-[10px] rounded-[10px] w-[360px] border border-[#015EA8]"
               placeholder="Karta Egasining ism familyasini  kiriting"
             />
           </div>
+          <button
+            onClick={handleSubmit}
+            className="mt-9 p-2 bg-blue-500 text-white rounded h-10 ml-4"
+          >
+            Yuborish
+          </button>
         </div>
       </div>
       <div className="py-7 px-[60px] bg-white border border-[#015EA8] rounded-xl mb-5">
