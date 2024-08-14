@@ -11,7 +11,7 @@ function MyMap({ formData, setFormData, value }) {
   const [mapInstance, setMapInstance] = useState(null);
   const [mapState, setMapState] = useState({
     center: [40.0902, 65.3312],
-    zoom: 8,
+    zoom: 12,
   });
 
   const apiKey = "dd3d8e42-b837-42e6-8f97-5dab7d542d03";

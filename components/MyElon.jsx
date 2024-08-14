@@ -39,7 +39,7 @@ const MyElon = () => {
         },
       });
       setMyElons(response.data); // Update state with the fetched ads
-      console.log(response.data);
+      response.data.results.reverse(); //);
     } catch (error) {
       console.error(
         "Xato:",

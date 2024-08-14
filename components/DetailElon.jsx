@@ -10,7 +10,7 @@ import AddInfos from "./AddInfos";
 import ElonSlider from "./ElonSlider";
 import Link from "next/link";
 import api from "@/lib/api";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 import { format, parseISO } from "date-fns";
 import { useSelector } from "react-redux";
@@ -19,6 +19,7 @@ import DeletedAds from "./DeletedAds";
 
 import Loader from "./Loader";
 import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
+import { FaEye } from "react-icons/fa";
 
 const formatDate = (dateString) => {
   const date = parseISO(dateString);
@@ -41,6 +42,7 @@ const DetailElon = () => {
         const response = await api.get(`api/v1/ads/${adId}/detail`);
         if (response.data.status == "ACTIVE") {
           setAdDetail(response.data);
+          console.log(response.data.latitude, "test");
         } else {
           setError(true);
         }
@@ -107,6 +109,16 @@ const DetailElon = () => {
     zoom: 12,
   };
 
+  const copyUrlToClipboard = () => {
+    // Get the current URL
+    const url = window.location.href;
+
+    // Copy the URL to the clipboard
+    navigator.clipboard.writeText(url).then(() => {
+      // alert("URL copied to clipboard!"); // Optional: notify the user
+    });
+  };
+
   return (
     <div className="container">
       <div className="grid grid-cols-3">
@@ -118,7 +130,7 @@ const DetailElon = () => {
             <Image
               src={saved ? SavedImg : NoSavedImg}
               alt="elon image"
-              className="h-[30px] w-[30px] cursor-pointer "
+              className="h-[30px] w-[30px] cursor-pointer max-md:mt-2 "
               onClick={handleSaveClick}
             />
           </div>
@@ -140,12 +152,24 @@ const DetailElon = () => {
                 </p>
               </div>
             </div>
-            <div className="h-[33px] w-[33px] bbg-white rounded-full flex items-center  justify-center">
-              <Image
-                src={ShareElonImg}
-                alt="elon image"
-                className="h-[25px] w-[25px] cursor-pointer "
-              />
+            <div className="flex flex-col items-end">
+              <div
+                className="h-[33px] w-[33px] bg-white rounded-full flex items-center  justify-center"
+                onClick={copyUrlToClipboard}
+              >
+                <Image
+                  src={ShareElonImg}
+                  alt="elon image"
+                  className="h-[25px] w-[25px] cursor-pointer "
+                />
+              </div>
+              <div className="flex items-center mt-4">
+                <FaEye className="text-[16px] text-kulrang" />
+                <p className="text-sm text-kulrang ml-2 max-md:text-xs line-clamp-1">
+                  {/* {see} */}
+                  1000
+                </p>
+              </div>
             </div>
           </div>
           <div className="mt-5">
@@ -219,11 +243,15 @@ const DetailElon = () => {
             <p className="text-qora text-lg font-medium mt-[10px] mb-5 max-md:text-sm">
               {adDetail.address}
             </p>
-            <YMaps>
-              <Map state={mapState} width="100%" height="200px">
-                <Placemark geometry={[adDetail.latitude, adDetail.longitude]} />
-              </Map>
-            </YMaps>
+            {adDetail.latitude && (
+              <YMaps>
+                <Map state={mapState} width="100%" height="200px">
+                  <Placemark
+                    geometry={[adDetail.latitude, adDetail.longitude]}
+                  />
+                </Map>
+              </YMaps>
+            )}
           </div>
         </div>
       </div>

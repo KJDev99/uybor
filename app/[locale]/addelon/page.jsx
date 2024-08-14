@@ -11,6 +11,8 @@ import Cookies from "js-cookie";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { AiOutlineClose } from "react-icons/ai";
+import Msg from "@/components/Msg";
+import Loader from "@/components/Loader";
 
 const getToken = () => Cookies.get("authToken");
 const page = () => {
@@ -23,6 +25,8 @@ const page = () => {
   const [topDay, setTopDay] = useState("");
   const [seeTop, SetSeeTop] = useState(false);
   const [seeMsg, setSeeMsg] = useState("0");
+
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
   const data = new FormData();
@@ -58,7 +62,6 @@ const page = () => {
     }
   });
   if (formData.media && formData.media.length > 0) {
-    console.log(formData.media, "formData.media");
     formData.media.forEach((fileObj) => {
       data.append("media", fileObj.file); // Append each file under the key 'media'
     });
@@ -78,6 +81,7 @@ const page = () => {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
 
     // Tokenni olish
@@ -98,9 +102,15 @@ const page = () => {
       });
       // router.push("/");
       SetSeeTop(true);
+      setSeeMsg("1");
+      setTimeout(() => {
+        setSeeMsg("0");
+      }, 3000);
       // Formani tozalash yoki foydalanuvchiga tasdiq xabari ko'rsatish
     } catch (error) {
       console.error("Error creating ad:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -136,6 +146,8 @@ const page = () => {
     e.preventDefault();
     router.push("/profil");
   };
+
+  if (loading) return <Loader type="ball-grid-pulse" />;
   return (
     <div className="container">
       <h1 className="mt-10 text-qora text-3xl font-semibold max-md:my-2 max-md:text-lg">
@@ -222,9 +234,9 @@ const page = () => {
           <h2 className="text-2xl font-medium ml-5 max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
             Qo’shimcha ma’lumotlar
           </h2>
-          <KategoriyaTanlash
-            categories={["1", "2", "3", "4", "5"]}
-            heading="Xonalar soni"
+          <SarlavhaKiritish
+            label="Xonalar soni"
+            type="number"
             formData={formData}
             setFormData={setFormData}
             reqName="room"
@@ -237,7 +249,7 @@ const page = () => {
             reqName="accommodation_type"
           />
           <KategoriyaTanlash
-            categories={["Panel", "G'isht"]}
+            categories={["Panelli", "G'isht", "Monolit", "Blokli"]}
             heading="Qurilish turi"
             formData={formData}
             setFormData={setFormData}
@@ -334,6 +346,13 @@ const page = () => {
             reqName="extra_phone"
           />
         </div>
+        {seeMsg && (
+          <Msg
+            status="success"
+            seeMsg={seeMsg}
+            text="E'lon Muvofaqqiyatli qo'shildi"
+          />
+        )}
         {seeTop && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-10">
             <div

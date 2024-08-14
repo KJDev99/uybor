@@ -194,7 +194,7 @@ const page = () => {
               Summa
             </div>
             <div className="w-1/4 flex justify-center items-center text-white text-sm font-medium bg-[#015EA8] h-[40px] max-md:text-xs text-center">
-              Referaldan kelganlar
+              Referallar
             </div>
             <div className="w-1/4 flex justify-center items-center text-white text-sm font-medium bg-[#015EA8] h-[40px] max-md:text-xs text-center">
               Chekni ko’rish

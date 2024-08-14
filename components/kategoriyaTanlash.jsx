@@ -46,8 +46,12 @@ const KategoriyaTanlash = ({
       setFormData({ ...formData, [reqName]: "OLD" });
     else if (category == "G'isht")
       setFormData({ ...formData, [reqName]: "BRICK" });
-    else if (category == "Panel")
+    else if (category == "Panelli")
       setFormData({ ...formData, [reqName]: "PANEL" });
+    else if (category == "Monolit")
+      setFormData({ ...formData, [reqName]: "MONOLITH" });
+    else if (category == "Blokli")
+      setFormData({ ...formData, [reqName]: "BLOCK" });
     else if (category == "Bor") setFormData({ ...formData, [reqName]: true });
     else if (category == "Yo'q") setFormData({ ...formData, [reqName]: false });
     else setFormData({ ...formData, [reqName]: category });

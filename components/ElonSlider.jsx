@@ -31,6 +31,7 @@ export default function ElonSlider({ userId, category, adId, see }) {
           view: "block",
           id: ad.id,
         }));
+      // console.log(transformedAds);
       setAds(transformedAds);
     } catch (err) {
       setError(err.message);

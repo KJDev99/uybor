@@ -88,7 +88,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
           >
             3 kun
           </h2>
-          <h3 className={`text-2xl mb-[10px] font-semibold `}>2 000 so’m</h3>
+          <h3 className={`text-2xl mb-[10px] font-semibold `}>10 000 so’m</h3>
           <p className="text-sm text-kulrang">
             E’loningiz 3 kun davomida Topda turadi. Saytga tashrif buyuruvchilar
             sizning e’loningizni birinchilardan bo’lib ko’radi.
@@ -109,7 +109,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
           >
             7 kun
           </h2>
-          <h3 className={`text-2xl mb-[10px] font-semibold`}>9 000 so’m</h3>
+          <h3 className={`text-2xl mb-[10px] font-semibold`}>18 000 so’m</h3>
           <p className="text-sm text-kulrang">
             E’loningiz 7 kun davomida Topda turadi. Saytga tashrif buyuruvchilar
             sizning e’loningizni birinchilardan bo’lib ko’radi.
@@ -130,7 +130,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
           >
             30 kun
           </h2>
-          <h3 className={`text-2xl mb-[10px] font-semibold `}>35 000 so’m</h3>
+          <h3 className={`text-2xl mb-[10px] font-semibold `}>75 000 so’m</h3>
           <p className="text-sm text-kulrang">
             E’loningiz 30 kun davomida Topda turadi. Saytga tashrif
             buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
@@ -190,7 +190,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
       <div className="md:hidden">
         {selectedDuration === "3" && (
           <div className="flex flex-col w-full px-5">
-            <h3 className={`text-lg mb-[5px] font-semibold `}>2 000 so’m</h3>
+            <h3 className={`text-lg mb-[5px] font-semibold `}>10 000 so’m</h3>
             <p className="text-sm text-kulrang mb-[30px]">
               E’loningiz 3 kun davomida Topda turadi. Saytga tashrif
               buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
@@ -199,7 +199,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
         )}
         {selectedDuration === "7" && (
           <div className="flex flex-col w-full px-5">
-            <h3 className={`text-lg mb-[5px] font-semibold`}>9 000 so’m</h3>
+            <h3 className={`text-lg mb-[5px] font-semibold`}>18 000 so’m</h3>
             <p className="text-sm text-kulrang mb-[30px]">
               E’loningiz 7 kun davomida Topda turadi. Saytga tashrif
               buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
@@ -208,7 +208,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
         )}
         {selectedDuration === "30" && (
           <div className="flex flex-col w-full px-5">
-            <h3 className={`text-lg mb-[5px] font-semibold `}>45 000 so’m</h3>
+            <h3 className={`text-lg mb-[5px] font-semibold `}>75 000 so’m</h3>
             <p className="text-sm text-kulrang mb-[30px]">
               E’loningiz 30 kun davomida Topda turadi. Saytga tashrif
               buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.

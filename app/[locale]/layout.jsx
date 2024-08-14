@@ -53,7 +53,7 @@ const MainLayout = ({ children }) => {
       <body className="bg-background">
         <ClientProvider>
           <Navbar />
-          <div>{children}</div>
+          <div className="min-h-[80vh] h-max">{children}</div>
           <Footer />
         </ClientProvider>
       </body>

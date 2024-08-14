@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import CurrencyComponent from "./CurrencyComponent";
+import { FaEye } from "react-icons/fa";
 
 const ElonBlock = ({
   top,
@@ -98,11 +99,20 @@ const ElonBlock = ({
                   currency={currencyNow == "UZS" ? "USD" : "UZS"}
                 />
               </p>
-              <div className="flex mt-2 mb-1">
-                <CiLocationOn className="text-lg" />
-                <p className="text-sm text-kulrang ml-2 max-md:text-xs line-clamp-1">
-                  {address}
-                </p>
+              <div className="flex mt-2 mb-1 justify-between">
+                <div className="flex items-center">
+                  <CiLocationOn className="text-lg" />
+                  <p className="text-sm text-kulrang ml-2 max-md:text-xs line-clamp-1">
+                    {address}
+                  </p>
+                </div>
+                <div className="flex items-center">
+                  <FaEye className="text-[16px] text-kulrang" />
+                  <p className="text-sm text-kulrang ml-2 max-md:text-xs line-clamp-1">
+                    {/* {see} */}
+                    1000
+                  </p>
+                </div>
               </div>
               <div className="flex justify-between mb-3 max-md:mb-2">
                 <p className="text-sm text-kulrang">{data}</p>
@@ -161,11 +171,21 @@ const ElonBlock = ({
                   currency={currencyNow == "UZS" ? "USD" : "UZS"}
                 />
               </p>
-              <div className="flex mt-2 mb-4 max-md:mb-1">
-                <CiLocationOn className="text-lg" />
-                <p className="text-sm text-kulrang ml-2 max-md:text-xs">
-                  {address}
-                </p>
+              <div className="flex mt-2 mb-4 max-md:mb-1 justify-between">
+                <div className="flex items-center">
+                  <CiLocationOn className="text-lg" />
+                  <p className="text-sm text-kulrang ml-2 max-md:text-xs">
+                    {address}
+                  </p>
+                </div>
+
+                <div className="flex items-center">
+                  <FaEye className="text-[16px] text-kulrang" />
+                  <p className="text-sm text-kulrang mx-2 max-md:text-xs line-clamp-1">
+                    {/* {see} */}
+                    10000
+                  </p>
+                </div>
               </div>
               <div className="flex justify-between mb-3 items-center">
                 <p className="text-sm text-kulrang">{data}</p>
