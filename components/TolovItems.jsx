@@ -39,13 +39,13 @@ const TolovItems = ({ bg, chek, created, users, amount }) => {
     <div
       className={`w-full h-[60px] flex items-center ${bg && "bg-background"}`}
     >
-      <p className="w-1/4 flex justify-center items-center text-[#747474] text-sm font-[300] bg-transparent h-[40px]">
+      <p className="w-1/4 flex justify-center items-center text-[#747474] text-sm font-[300] bg-transparent h-[40px] max-md:text-xs text-center">
         {amount}
       </p>
-      <p className="w-1/4 flex justify-center items-center text-[#747474] text-sm font-[300] bg-transparent h-[40px]">
+      <p className="w-1/4 flex justify-center items-center text-[#747474] text-sm font-[300] bg-transparent h-[40px] max-md:text-xs text-center">
         {users}
       </p>
-      <p className="w-1/4 flex justify-center items-center text-[#747474] text-sm font-[300] bg-transparent h-[40px]">
+      <p className="w-1/4 flex justify-center items-center text-[#747474] text-sm font-[300] bg-transparent h-[40px] max-md:text-xs text-center">
         {/* `chek` rasmni yuklab olish uchun tugma */}
         <button
           onClick={handleDownload}
@@ -56,7 +56,7 @@ const TolovItems = ({ bg, chek, created, users, amount }) => {
         </button>
       </p>
 
-      <p className="w-1/4 flex justify-center items-center text-[#747474] text-sm font-[300] bg-transparent h-[40px]">
+      <p className="w-1/4 flex justify-center items-center text-[#747474] text-sm font-[300] bg-transparent h-[40px] max-md:text-xs text-center">
         <span>{date}</span>
         <span className="text-[10px] ml-5">{time}</span>
       </p>
