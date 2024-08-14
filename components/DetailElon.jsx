@@ -13,12 +13,12 @@ import api from "@/lib/api";
 import { usePathname } from "next/navigation";
 
 import { format, parseISO } from "date-fns";
-import MapComponent from "./MapContainer";
 import { useSelector } from "react-redux";
 import CurrencyComponent from "./CurrencyComponent";
 import DeletedAds from "./DeletedAds";
 
 import Loader from "./Loader";
+import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
 
 const formatDate = (dateString) => {
   const date = parseISO(dateString);
@@ -101,6 +101,11 @@ const DetailElon = () => {
       text2: adDetail.have_broker_fee ? "Bor" : "Yo'q",
     },
   ];
+
+  const mapState = {
+    center: [adDetail.latitude, adDetail.longitude],
+    zoom: 12,
+  };
 
   return (
     <div className="container">
@@ -214,10 +219,11 @@ const DetailElon = () => {
             <p className="text-qora text-lg font-medium mt-[10px] mb-5 max-md:text-sm">
               {adDetail.address}
             </p>
-            {/* <MapComponent
-              latitude={adDetail.latitude}
-              longitude={adDetail.longitude}
-            /> */}
+            <YMaps>
+              <Map state={mapState} width="100%" height="200px">
+                <Placemark geometry={[adDetail.latitude, adDetail.longitude]} />
+              </Map>
+            </YMaps>
           </div>
         </div>
       </div>

@@ -218,7 +218,11 @@ const AddManzil = ({ formData, setFormData, value }) => {
         )}
       </div>
 
-      <MapComponent position={[40.0902, 65.3312]} />
+      <MapComponent
+        formData={formData}
+        setFormData={setFormData}
+        value={value}
+      />
     </div>
   );
 };

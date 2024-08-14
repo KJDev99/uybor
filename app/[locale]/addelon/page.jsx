@@ -35,7 +35,8 @@ const page = () => {
     "currency",
     "region",
     "district",
-    "adress",
+    "latitude",
+    "longitude",
     "room",
     "accommodation_type",
     "construction_type",
@@ -213,6 +214,7 @@ const page = () => {
         <div className="w-3/4 max-md:w-full">
           <AddManzil formData={formData} setFormData={setFormData} />
         </div>
+
         <div className="w-full">
           <AddImage formData={formData} setFormData={setFormData} />
         </div>
