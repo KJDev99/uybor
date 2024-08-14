@@ -19,10 +19,6 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const [referalValue, setReferalValue] = useState(
-    sessionStorage.getItem("referal")
-  );
-  console.log(referalValue);
 
   const handleVerify = async () => {
     if (!code) {
@@ -34,11 +30,18 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
     setError("");
 
     try {
-      const response = await api.post("/api/v1/user/verify", {
+      const referral = sessionStorage.getItem("referal");
+
+      const payload = {
         phone,
         code: parseInt(code, 10),
-        referral: sessionStorage.getItem("referal"),
-      });
+      };
+
+      if (referral) {
+        payload.referral = referral;
+      }
+
+      const response = await api.post("/api/v1/user/verify", payload);
 
       // Success handlin
       Cookies.set("authToken", response.data.access);
