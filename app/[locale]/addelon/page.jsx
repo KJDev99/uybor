@@ -25,6 +25,7 @@ const page = () => {
   const [topDay, setTopDay] = useState("");
   const [seeTop, SetSeeTop] = useState(false);
   const [seeMsg, setSeeMsg] = useState("0");
+  const [seeMsgW, setSeeMsgW] = useState("0");
 
   const [loading, setLoading] = useState(false);
 
@@ -134,10 +135,10 @@ const page = () => {
       window.location.reload();
       setIsOpenTop(false);
     } catch (error) {
-      setSeeMsg("1");
+      setSeeMsgW("1");
       console.log(seeMsg);
       setTimeout(() => {
-        setSeeMsg("0");
+        setSeeMsgW("0");
         router.push("/profil/tolovlar");
       }, 2000);
     }
@@ -346,40 +347,7 @@ const page = () => {
             reqName="extra_phone"
           />
         </div>
-        {seeMsg && (
-          <Msg
-            status="success"
-            seeMsg={seeMsg}
-            text="E'lon Muvofaqqiyatli qo'shildi"
-          />
-        )}
-        {seeTop && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-10">
-            <div
-              className="relative bg-[#F8FCFF] p-10 rounded-md shadow-md w-[860px] flex flex-col items-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                onClick={closeModal}
-                className="absolute top-5 right-5 text-qora"
-              >
-                <AiOutlineClose size={24} />
-              </button>
-              <TopgaChiqarish
-                setTopDay={setTopDay}
-                title="E’loningizni Topga chiqarmoqchimisiz?"
-                text="E’loningizni sotish imkoniyatlarini oshiring va ko’proq xaridorlarni jalb qiling.
-    Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningizni Topga ko’taring."
-              />
-              <button
-                className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto"
-                onClick={handleButtonClick}
-              >
-                Topga ko’tarish
-              </button>
-            </div>
-          </div>
-        )}
+
         {/* <div className="w-3/4  max-md:w-full">
           <TopgaChiqarish />
         </div> */}
@@ -389,6 +357,47 @@ const page = () => {
           </div>
         </div>
       </form>
+      {seeMsg && (
+        <Msg
+          status="success"
+          seeMsg={seeMsg}
+          text="E'lon Muvofaqqiyatli qo'shildi"
+        />
+      )}
+      {seeMsgW && (
+        <Msg
+          status="warning"
+          seeMsg={seeMsgW}
+          text="Iltimos Hisobinggizni To'ldiring"
+        />
+      )}
+      {seeTop && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-10">
+          <div
+            className="relative bg-[#F8FCFF] p-10 rounded-md shadow-md w-[860px] flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={closeModal}
+              className="absolute top-5 right-5 text-qora"
+            >
+              <AiOutlineClose size={24} />
+            </button>
+            <TopgaChiqarish
+              setTopDay={setTopDay}
+              title="E’loningizni Topga chiqarmoqchimisiz?"
+              text="E’loningizni sotish imkoniyatlarini oshiring va ko’proq xaridorlarni jalb qiling.
+    Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningizni Topga ko’taring."
+            />
+            <button
+              className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto"
+              onClick={handleButtonClick}
+            >
+              Topga ko’tarish
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
