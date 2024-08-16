@@ -29,6 +29,7 @@ const Page = () => {
           },
         });
         setUserData(response.data);
+        console.log(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Xatolik yuz berdi.");
       } finally {
@@ -122,29 +123,38 @@ const Page = () => {
       <h2 className="text-lg text-[#343434] font-semibold md:hidden">
         To'lovlar
       </h2>
-      <div className="flex flex-col p-[30px] max-md:p-5 h-[280px] bg-shadowcard !max-md:bg-transparent w-full max-md:h-[190px]">
-        <h3 className="text-logoKok mb-[27px] text-2xl font-semibold max-md:text-[16px] max-md:mb-[10px]">
+      <div
+        className="flex flex-col p-[30px] max-md:p-5 bg-no-repeat bg-contain bg-center !max-md:bg-transparent w-[450px] h-[250px] max-md:h-avto max-md:w-[355px] max-md:mx-auto"
+        style={{ backgroundImage: "url('/images/tolovcard.jpg')" }}
+      >
+        {/* <h3 className="text-logoKok mb-[27px] text-2xl font-semibold max-md:text-[16px] max-md:mb-[10px]">
           Topuy hamyon
-        </h3>
-        <h2 className="text-qora flex-grow text-[28px] font-semibold max-md:text-lg">
+        </h3> */}
+        <p className="text-3xl text-white font-bold max-md:text-2xl mt-[130px] max-md:mt-[90px]">
+          {userData?.account}
+          <span className="text-lg"> so‘m</span>
+        </p>
+        <h2 className="text-white text-[14px] max-md:text-sm mb-[-4px]">
           {userData?.full_name}
         </h2>
-        <p className="text-3xl text-qora font-bold max-md:text-2xl">
-          {userData?.account}
-          <span className="text-2xl"> so‘m</span>
+        <p className="text-white text-[14px] max-md:text-sm">
+          {userData?.phone}
         </p>
       </div>
-      <div className="flex flex-col p-[30px] max-md:px-5 max-md:py-0 md:h-[280px] bg-shadowcard !max-md:bg-transparent w-full">
-        <h3 className="text-qora mb-[27px] text-2xl font-semibold max-md:text-lg max-md:mb-[10px]">
+      <div
+        className="flex flex-col py-[30px] px-10 max-md:p-5 bg-no-repeat bg-contain bg-center !max-md:bg-transparent w-[370px] h-[250px] max-md:h-avto max-md:w-[335px] max-md:mx-auto"
+        style={{ backgroundImage: "url('/images/tolovcard2.jpg')" }}
+      >
+        <h3 className="text-white text-xl max-md:text-[14px] flex-grow">
           Hisobni to’ldirish
         </h3>
-        <div className="flex-grow max-md:mb-5">
+        <div className="">
           <input
             type="number"
             placeholder="Summani kiriting"
             value={amount}
             onChange={handleAmountChange}
-            className="text-qora text-[18px] max-md:text-[16px] font-medium py-[10px] px-5 rounded-[10px] border border-kulrang outline-none w-full"
+            className="text-qora text-[18px] max-md:text-[16px] font-medium py-[10px] px-4 rounded-[10px] border border-kulrang outline-none w-full mb-6 "
           />
         </div>
         <button
