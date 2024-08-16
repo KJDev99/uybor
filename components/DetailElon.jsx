@@ -32,9 +32,32 @@ const DetailElon = () => {
   const [error, setError] = useState(null);
   const [saved, setSaved] = useState(false);
 
+  const [backgroundData2, setBackgroundData2] = useState({
+    bannerUrl: "",
+    linkUrl: "",
+  });
+
   const pathname = usePathname();
   const adId = pathname.split("/").pop();
   const currencyNow = useSelector((state) => state.currency);
+
+  useEffect(() => {
+    const fetchBannerData2 = async () => {
+      try {
+        const response = await api.get("/api/v1/banner");
+        const data = response.data;
+
+        setBackgroundData2({
+          bannerUrl: data.banner2_uz,
+          linkUrl: data.url2,
+        });
+      } catch (error) {
+        console.error("Error fetching banner data:", error);
+      }
+    };
+
+    fetchBannerData2();
+  }, []);
 
   useEffect(() => {
     const fetchAdDetail = async () => {
@@ -228,7 +251,7 @@ const DetailElon = () => {
               </div>
             </Link>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col mb-5">
             <h2 className="mt-[30px] mb-5 text-qora font-semibold max-md:mt-5 max-md:mb-2">
               Manzil
             </h2>
@@ -253,6 +276,16 @@ const DetailElon = () => {
               </YMaps>
             )}
           </div>
+          <a
+            href={backgroundData2.linkUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div
+              className="h-[750px] max-md:hidden w-full bg-no-repeat bg-cover bg-center"
+              style={{ backgroundImage: `url(${backgroundData2.bannerUrl})` }}
+            ></div>
+          </a>
         </div>
       </div>
       <div className="flex flex-col mb-10">

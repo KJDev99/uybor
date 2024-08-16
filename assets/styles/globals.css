@@ -118,7 +118,7 @@ body {
     display: none !important;
   }
   .mySwiper2 {
-    height: max-content;
+    height: 240px !important;
   }
   .mySwiper2 .swiper-button-prev {
     margin-left: 0px;
