@@ -146,7 +146,7 @@ const Page = () => {
         style={{ backgroundImage: "url('/images/tolovcard2.jpg')" }}
       >
         <h3 className="text-white text-xl max-md:text-[14px] flex-grow">
-          Hisobni to’ldirish
+          Hisobni to’ldirish.
         </h3>
         <div className="">
           <input
