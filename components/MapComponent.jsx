@@ -66,7 +66,6 @@ function MyMap({ formData, setFormData, value }) {
   // Dropdowndan tanlangan manzilni holatda saqlash
   const handleAddressSelect = (address) => {
     const coords = address.value;
-    console.log(coords, "cahneg");
 
     setFormData({ ...formData, latitude: coords[0], longitude: coords[1] });
 

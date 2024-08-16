@@ -65,7 +65,6 @@ const page = () => {
           },
         });
         setTolovlar(response.data.results);
-        console.log(response.data);
       } catch (err) {
         setError(err.response?.data?.message || "Xatolik yuz berdi.");
       }

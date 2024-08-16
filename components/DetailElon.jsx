@@ -65,7 +65,6 @@ const DetailElon = () => {
         const response = await api.get(`api/v1/ads/${adId}/detail`);
         if (response.data.status == "ACTIVE") {
           setAdDetail(response.data);
-          console.log(response.data.latitude, "test");
         } else {
           setError(true);
         }
@@ -189,8 +188,7 @@ const DetailElon = () => {
               <div className="flex items-center mt-4">
                 <FaEye className="text-[16px] text-kulrang" />
                 <p className="text-sm text-kulrang ml-2 max-md:text-xs line-clamp-1">
-                  {/* {see} */}
-                  1000
+                  {adDetail.views}
                 </p>
               </div>
             </div>

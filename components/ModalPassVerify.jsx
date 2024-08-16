@@ -53,7 +53,6 @@ const ModalPassVerify = ({ setStep, closeModal }) => {
         setMsg("0");
         setStep(2);
       }, 2000);
-      console.log("Success:", response.data);
     } catch (err) {
       setError("Xatolik yuz berdi. Iltimos, qayta urinib ko'ring.");
     } finally {

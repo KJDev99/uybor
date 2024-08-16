@@ -26,8 +26,6 @@ const ModalVerifyTasdiq = ({ setStep, closeModal }) => {
       });
 
       // Debug: print response to debug
-      console.log("Verification Response:", response.data);
-      console.log("Verification Response:", code);
 
       // Check the success condition based on response
       setStep(7); // Proceed if verification is successful

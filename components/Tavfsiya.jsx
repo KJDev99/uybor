@@ -73,7 +73,6 @@ const Tavfsiya = ({ setCount }) => {
       if (district) {
         if (url !== "/api/v1/ads/list?is_top=false?") url += "&"; // Add '&' if url already has parameters
         url += `district=${encodeURIComponent(district)}`;
-        console.log(url);
       }
 
       if (minRoom) {
@@ -113,6 +112,7 @@ const Tavfsiya = ({ setCount }) => {
         price: ad.price,
         currency: ad.currency,
         view: view,
+        views: ad.views,
         id: ad.id,
       }));
       if (currentPage === prevPage) {

@@ -51,7 +51,7 @@ const EditAdPage = () => {
         setGetData(response.data);
         setFormData(response.data);
         // Handle media if necessary
-        console.log(response.data);
+        response.data;
         setSelectedOption(response.data.ad_type);
       } catch (error) {
         console.error("Error fetching ad data:", error);
@@ -67,7 +67,6 @@ const EditAdPage = () => {
       ...prevData,
       ad_type: e.target.id,
     }));
-    console.log(formData, "formData");
   };
 
   const handleDescriptionChange = (event) => {
@@ -79,9 +78,7 @@ const EditAdPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log(media, formData);
     e.preventDefault();
-    console.log(formData, "formData");
     const data = new FormData();
     data.append("ad_type", formData.ad_type);
     data.append("phone", formData.phone);
@@ -104,7 +101,6 @@ const EditAdPage = () => {
     data.append("have_broker_fee", formData.have_broker_fee);
     data.append("description", formData.description);
     data.append("extra_phone", formData.extra_phone);
-    console.log(formData.media, "asdasdasd");
     formData.media?.forEach((fileObj) => {
       data.append("media", fileObj?.file);
     });
@@ -124,7 +120,6 @@ const EditAdPage = () => {
       });
       router.push("/profil/myelon");
     } catch (error) {
-      console.log(data, "data");
       console.error("Error updating ad:", error);
     }
   };

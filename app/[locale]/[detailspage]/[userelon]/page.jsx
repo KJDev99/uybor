@@ -46,7 +46,6 @@ const UserElon = () => {
         id: ad.id,
       }));
       setAds(transformedAds);
-      console.log(transformedAds, "testtstts");
     } catch (err) {
       setError(err.message);
     } finally {

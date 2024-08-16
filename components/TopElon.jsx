@@ -133,6 +133,7 @@ const TopElon = ({ count }) => {
         currency: ad.currency,
         view: view,
         id: ad.id,
+        views: ad.views,
         currencyNow: currencyNow,
       }));
       setCountTop(response.data.count);

@@ -79,7 +79,6 @@ const MyElonItem = ({
       setIsOpenTop(false);
     } catch (error) {
       setSeeMsg("1");
-      console.log(seeMsg);
       setTimeout(() => {
         setSeeMsg("0");
         router.push("/profil/tolovlar");

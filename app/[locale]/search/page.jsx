@@ -21,8 +21,6 @@ const SearchPage = () => {
   const [priceMin, setPriceMin] = useState("");
   const [priceMax, setPriceMax] = useState("");
   const search1 = searchParams.get("search");
-  console.log(search1);
-  console.log(category);
   return (
     <>
       <div className="container pt-[50px] max-md:pt-[30px]">

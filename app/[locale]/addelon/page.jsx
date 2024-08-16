@@ -136,7 +136,6 @@ const page = () => {
       setIsOpenTop(false);
     } catch (error) {
       setSeeMsgW("1");
-      console.log(seeMsg);
       setTimeout(() => {
         setSeeMsgW("0");
         router.push("/profil/tolovlar");

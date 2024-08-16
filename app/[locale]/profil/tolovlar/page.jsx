@@ -49,7 +49,6 @@ const Page = () => {
   //         },
   //       });
   //       setStatus(response.data);
-  //       console.log(response.data);
   //     } catch (err) {
   //       setError(err.response?.data?.message || "Xatolik yuz berdi.");
   //     } finally {

@@ -103,7 +103,6 @@ const ProfilePage = () => {
         const formData = new FormData();
         formData.append("full_name", formValues.fullName || "");
         if (image) {
-          console.log(image);
           formData.append("photo", image1);
         }
         if (formValues.newPassword)

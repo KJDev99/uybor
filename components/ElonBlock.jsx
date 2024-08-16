@@ -20,6 +20,7 @@ const ElonBlock = ({
   price,
   id,
   see,
+  views,
 }) => {
   const [saved, setSaved] = useState(save);
   let view = useSelector((state) => state.view);
@@ -52,6 +53,7 @@ const ElonBlock = ({
             address,
             data,
             price,
+            views,
           },
         ]
       : savedElons.filter((elon) => elon.id !== id);
@@ -109,8 +111,7 @@ const ElonBlock = ({
                 <div className="flex items-center">
                   <FaEye className="text-[16px] text-kulrang" />
                   <p className="text-sm text-kulrang ml-2 max-md:text-xs line-clamp-1">
-                    {/* {see} */}
-                    1000
+                    {views}
                   </p>
                 </div>
               </div>
@@ -182,8 +183,7 @@ const ElonBlock = ({
                 <div className="flex items-center">
                   <FaEye className="text-[16px] text-kulrang" />
                   <p className="text-sm text-kulrang mx-2 max-md:text-xs line-clamp-1">
-                    {/* {see} */}
-                    10000
+                    {views}
                   </p>
                 </div>
               </div>

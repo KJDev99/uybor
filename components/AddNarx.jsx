@@ -41,7 +41,6 @@ const AddNarx = ({ formData, setFormData, value }) => {
   };
 
   useEffect(() => {
-    console.log(value, "value22");
     if (value) {
       setFromValue(value.price);
       setSelectedCategory(value.currency);
