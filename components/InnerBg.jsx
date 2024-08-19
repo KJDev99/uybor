@@ -22,12 +22,22 @@ const InnerBg = () => {
   }, []);
 
   return (
-    <a href={backgroundData.linkUrl} target="blank" rel="noopener noreferrer">
-      <div
-        className="main_bg h-[300px] max-md:h-[151px] bg-no-repeat bg-cover bg-center my-[50px] max-md:mt-5"
-        style={{ backgroundImage: `url(${backgroundData.bannerUrl})` }}
-      ></div>
-    </a>
+    <>
+      {backgroundData.bannerUrl ? (
+        <a
+          href={backgroundData.linkUrl}
+          target="blank"
+          rel="noopener noreferrer"
+        >
+          <div
+            className="main_bg h-[300px] max-md:h-[151px] bg-no-repeat bg-cover bg-center my-[50px] max-md:mt-5"
+            style={{ backgroundImage: `url(${backgroundData.bannerUrl})` }}
+          ></div>
+        </a>
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 
