@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { YMaps, Map, Placemark } from "@pbe/react-yandex-maps";
 import axios from "axios";
 
@@ -15,6 +15,11 @@ function MyMap({ formData, setFormData, value }) {
   });
 
   const apiKey = "dd3d8e42-b837-42e6-8f97-5dab7d542d03";
+
+  useEffect(() => {
+    // setSearchValue(value)
+    console.log(value);
+  }, []);
 
   // API ga so‘rov yuboradigan funksiya
   const getGeoCodeAddressList = async (geocoder) => {

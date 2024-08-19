@@ -16,6 +16,16 @@ const AddManzil = ({ formData, setFormData, value }) => {
   const [districts, setDistricts] = useState({});
 
   useEffect(() => {
+    setSelectedCategory(value.region.id);
+    setSelectedDistrict(value.district.name_uz);
+    setFormData({ ...formData, region: value?.region });
+    setFormData({ ...formData, district: value?.district });
+    console.log("asd", value);
+
+    // setFormData((prevData) => ({
+    //   ...prevData,
+    //   district: value.district.id,
+    // }));
     const fetchCategories = async () => {
       try {
         const response = await api.get("/api/v1/region");

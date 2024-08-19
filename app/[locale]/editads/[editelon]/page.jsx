@@ -11,10 +11,15 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import api from "@/lib/api"; // Ensure this path is correct for your project
 import Cookies from "js-cookie";
+import Msg from "@/components/Msg";
 const getToken = () => Cookies.get("authToken");
 const EditAdPage = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const { editelon } = useParams();
+
+  const [seeMsg, setSeeMsg] = useState("0");
+  const [seeMsgW, setSeeMsgW] = useState("0");
+
   let adId = editelon;
   const [formData, setFormData] = useState({
     ad_type: "",
@@ -67,6 +72,7 @@ const EditAdPage = () => {
       ...prevData,
       ad_type: e.target.id,
     }));
+    console.log(getData);
   };
 
   const handleDescriptionChange = (event) => {
@@ -86,24 +92,42 @@ const EditAdPage = () => {
     data.append("category", formData.category);
     data.append("price", formData.price);
     data.append("currency", formData.currency);
-    data.append("region", formData.region);
-    data.append("district", formData.district);
-    data.append("adress", formData.adress);
-    data.append("room", formData.room);
-    data.append("accommodation_type", formData.accommodation_type);
-    data.append("construction_type", formData.construction_type);
-    data.append("house_built_year", formData.house_built_year);
-    data.append("have_furniture", formData.have_furniture);
-    data.append("living_area", formData.living_area);
-    data.append("total_area", formData.total_area);
-    data.append("floor", formData.floor);
-    data.append("total_floor", formData.total_floor);
-    data.append("have_broker_fee", formData.have_broker_fee);
-    data.append("description", formData.description);
-    data.append("extra_phone", formData.extra_phone);
-    formData.media?.forEach((fileObj) => {
-      data.append("media", fileObj?.file);
-    });
+
+    // data.append("region", formData.region.id);
+    typeof formData.region == "string"
+      ? data.append("region", formData.region)
+      : data.append("region", formData.region.id);
+    typeof formData.district == "number"
+      ? data.append("district", formData.district)
+      : data.append("district", formData.district.id);
+    formData.adress &&
+      formData.adress &&
+      data.append("adress", formData.adress);
+    formData.room && data.append("room", formData.room);
+    formData.accommodation_type &&
+      data.append("accommodation_type", formData.accommodation_type);
+    formData.construction_type &&
+      data.append("construction_type", formData.construction_type);
+    formData.house_built_year &&
+      data.append("house_built_year", formData.house_built_year);
+    formData.have_furniture &&
+      data.append("have_furniture", formData.have_furniture);
+    formData.living_area && data.append("living_area", formData.living_area);
+    formData.total_area && data.append("total_area", formData.total_area);
+    formData.floor && data.append("floor", formData.floor);
+    formData.total_floor && data.append("total_floor", formData.total_floor);
+    formData.have_broker_fee &&
+      data.append("have_broker_fee", formData.have_broker_fee);
+    formData.description && data.append("description", formData.description);
+    formData.extra_phone && data.append("extra_phone", formData.extra_phone);
+    formData.media &&
+      formData.media?.forEach((fileObj) => {
+        data.append("urls", fileObj?.file);
+      });
+    formData.media2 &&
+      formData.media2?.forEach((fileObj) => {
+        data.append("media", fileObj?.file);
+      });
     const token = getToken();
 
     if (!token) {
@@ -112,14 +136,22 @@ const EditAdPage = () => {
     }
     try {
       // PUT request to update the ad
-      await api.put(`/api/v1/ads/${adId}/update`, data, {
+      await api.patch(`/api/v1/ads/${adId}/update`, data, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
       });
-      router.push("/profil/myelon");
+      setSeeMsg("1");
+      setTimeout(() => {
+        setSeeMsg("0");
+        router.push("/profil/myelon");
+      }, 1000);
     } catch (error) {
+      setSeeMsgW(1);
+      setTimeout(() => {
+        setSeeMsgW("0");
+      }, 2000);
       console.error("Error updating ad:", error);
     }
   };
@@ -230,14 +262,15 @@ const EditAdPage = () => {
             <h2 className="text-2xl font-medium ml-5 max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
               Ko’proq ma’lumotlar
             </h2>
-            <KategoriyaTanlash
-              categories={["1", "2", "3", "4", "5"]}
-              heading="Xonalar soni"
+            <SarlavhaKiritish
+              label="Xonalar soni"
+              type="number"
               formData={formData}
               setFormData={setFormData}
               reqName="room"
               value={getData?.room}
             />
+
             <KategoriyaTanlash
               categories={["birlamchi", "Ikkilamchi"]}
               heading="Turarjoy turi"
@@ -335,7 +368,7 @@ const EditAdPage = () => {
               type="text"
               formData={formData}
               setFormData={setFormData}
-              reqName="name"
+              reqName="user"
             />
             <SarlavhaKiritish
               label="Telefon raqam"
@@ -360,6 +393,20 @@ const EditAdPage = () => {
             </div>
           </div>
         </div>
+      )}
+      {seeMsg && (
+        <Msg
+          status="success"
+          seeMsg={seeMsg}
+          text="E'lon Muvofaqqiyatli o'zgartirildi"
+        />
+      )}
+      {seeMsgW && (
+        <Msg
+          status="warning"
+          seeMsg={seeMsgW}
+          text="Barcha ma'lumotlarni to'ldiring"
+        />
       )}
     </div>
   );

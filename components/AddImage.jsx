@@ -24,11 +24,10 @@ const AddImage = ({ textImage, size, formData, setFormData, value }) => {
         [...prevImages, ...newImages.map((img) => img.fileURL)].slice(0, 10)
       );
 
-      // Update formData with new images
-
       setFormData((prevFormData) => ({
         ...prevFormData,
-        media: [...(prevFormData.media || []), ...newImages],
+        media: [...(prevFormData.media || [])],
+        media2: [...newImages],
       }));
     }
   };
