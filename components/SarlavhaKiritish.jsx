@@ -42,7 +42,12 @@ const SarlavhaKiritish = ({
   return (
     <div className="flex flex-col relative mr-[10px]">
       <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm max-md:mt-2">
-        {label}
+        {label}{" "}
+        {(label == "Yashash maydoni" || label == "Umumiy maydoni") && (
+          <>
+            m<sup>2</sup>
+          </>
+        )}
       </h2>
       <div className="flex flex-col">
         <input

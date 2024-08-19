@@ -270,14 +270,14 @@ const page = () => {
             reqName="have_furniture"
           />
           <SarlavhaKiritish
-            label="Yashash maydoni:"
+            label="Yashash maydoni"
             type="number"
             formData={formData}
             setFormData={setFormData}
             reqName="living_area"
           />
           <SarlavhaKiritish
-            label="Umumiy maydoni:"
+            label="Umumiy maydoni"
             type="number"
             formData={formData}
             setFormData={setFormData}

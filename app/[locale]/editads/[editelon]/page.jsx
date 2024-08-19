@@ -271,7 +271,7 @@ const EditAdPage = () => {
               value={getData?.have_furniture}
             />
             <SarlavhaKiritish
-              label="Yashash maydoni:"
+              label="Yashash maydoni"
               type="number"
               formData={formData}
               setFormData={setFormData}
@@ -279,7 +279,7 @@ const EditAdPage = () => {
               value={getData?.living_area}
             />
             <SarlavhaKiritish
-              label="Umumiy maydoni:"
+              label="Umumiy maydoni"
               type="number"
               formData={formData}
               setFormData={setFormData}
