@@ -107,7 +107,9 @@ const Tavfsiya = ({ setCount }) => {
         save: true,
         turi: ad.ad_type.toLowerCase(),
         name: ad.title,
-        address: `${ad.region.name_uz} ${ad.district.name_uz}`,
+        address: `${ad.region?.name_uz ? ad.region?.name_uz : ""} ${
+          ad.district?.name_uz ? ad.district?.name_uz : ""
+        }`,
         data: new Date(ad.created).toLocaleDateString("en-GB"),
         price: ad.price,
         currency: ad.currency,
