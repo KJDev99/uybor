@@ -26,6 +26,7 @@ const page = () => {
   const [seeTop, SetSeeTop] = useState(false);
   const [seeMsg, setSeeMsg] = useState("0");
   const [seeMsgW, setSeeMsgW] = useState("0");
+  const [seeMsgWA, setSeeMsgWA] = useState("0");
 
   const [loading, setLoading] = useState(false);
 
@@ -82,6 +83,26 @@ const page = () => {
   };
 
   const handleSubmit = async (e) => {
+    if (
+      !(
+        formData.ad_type &&
+        formData.category &&
+        formData.currency &&
+        formData.description &&
+        formData.district &&
+        formData.price &&
+        formData.region &&
+        formData.title
+      )
+    ) {
+      console.log("else data", formData);
+      setSeeMsgWA("1");
+      setTimeout(() => {
+        setSeeMsgWA("0");
+      }, 3000);
+      return;
+    }
+
     setLoading(true);
     e.preventDefault();
 
@@ -364,6 +385,13 @@ const page = () => {
           status="warning"
           seeMsg={seeMsgW}
           text="Iltimos Hisobinggizni To'ldiring"
+        />
+      )}
+      {seeMsgWA && (
+        <Msg
+          status="warning"
+          seeMsg={seeMsgWA}
+          text="Bo'sh Ma'lumotlarni To'ldiring"
         />
       )}
       {seeTop && (

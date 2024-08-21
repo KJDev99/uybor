@@ -9,6 +9,11 @@ const AddImage = ({ textImage, size, formData, setFormData, value }) => {
 
   useEffect(() => {
     if (value) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        url: [...(prevFormData.media || [])],
+      }));
+      console.log(formData);
       setImages(value.map((img) => img.file));
     }
   }, [value]);
@@ -26,22 +31,23 @@ const AddImage = ({ textImage, size, formData, setFormData, value }) => {
 
       setFormData((prevFormData) => ({
         ...prevFormData,
-        media: [...(prevFormData.media || [])],
-        media2: [...newImages],
+        url: [...(prevFormData.media || [])],
+        media: [...newImages],
       }));
     }
   };
 
   const removeImage = (index) => {
     const updatedImages = images.filter((_, i) => i !== index);
-    const updatedMedia = formData.media.filter((_, i) => i !== index);
+    const updatedMedia = formData.url.filter((_, i) => i !== index);
 
     setImages(updatedImages);
+    console.log(updatedMedia, "ad");
 
     // Update formData with updated images
     setFormData((prevFormData) => ({
       ...prevFormData,
-      media: updatedMedia,
+      url: updatedMedia,
     }));
   };
 

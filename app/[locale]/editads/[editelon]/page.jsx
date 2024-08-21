@@ -12,6 +12,7 @@ import { useParams, useRouter } from "next/navigation";
 import api from "@/lib/api"; // Ensure this path is correct for your project
 import Cookies from "js-cookie";
 import Msg from "@/components/Msg";
+import Loader from "@/components/Loader";
 const getToken = () => Cookies.get("authToken");
 const EditAdPage = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -19,6 +20,8 @@ const EditAdPage = () => {
 
   const [seeMsg, setSeeMsg] = useState("0");
   const [seeMsgW, setSeeMsgW] = useState("0");
+
+  const [loading, setLoading] = useState(false);
 
   let adId = editelon;
   const [formData, setFormData] = useState({
@@ -120,20 +123,24 @@ const EditAdPage = () => {
       data.append("have_broker_fee", formData.have_broker_fee);
     formData.description && data.append("description", formData.description);
     formData.extra_phone && data.append("extra_phone", formData.extra_phone);
-    formData.media &&
-      formData.media?.forEach((fileObj) => {
+
+    formData.url &&
+      formData.url?.forEach((fileObj) => {
         data.append("urls", fileObj?.file);
       });
-    formData.media2 &&
-      formData.media2?.forEach((fileObj) => {
+    if (!formData.media[0].id) {
+      console.log(formData.media, formData.url, "test");
+      formData.media?.forEach((fileObj) => {
         data.append("media", fileObj?.file);
       });
+    }
     const token = getToken();
 
     if (!token) {
       console.error("User is not authenticated");
       return;
     }
+    setLoading(true);
     try {
       // PUT request to update the ad
       await api.patch(`/api/v1/ads/${adId}/update`, data, {
@@ -147,15 +154,18 @@ const EditAdPage = () => {
         setSeeMsg("0");
         router.push("/profil/myelon");
       }, 1000);
+      setLoading(false);
     } catch (error) {
       setSeeMsgW(1);
       setTimeout(() => {
         setSeeMsgW("0");
       }, 2000);
       console.error("Error updating ad:", error);
+    } finally {
+      setLoading(false);
     }
   };
-
+  if (loading) return <Loader type="ball-grid-pulse" />;
   return (
     <div className="container md:bg-white p-[30px] max-md:p-0">
       <Link
