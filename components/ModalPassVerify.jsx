@@ -8,6 +8,7 @@ import axios from "axios";
 import api from "@/lib/api";
 import Link from "next/link";
 import Msg from "./Msg";
+import { useTranslation } from "react-i18next";
 
 const ModalPassVerify = ({ setStep, closeModal }) => {
   const [code, setCode] = useState("");
@@ -18,6 +19,7 @@ const ModalPassVerify = ({ setStep, closeModal }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [msg, setMsg] = useState("1");
 
+  const { t } = useTranslation();
   const phone = sessionStorage.getItem("phoneUser");
 
   const handleTogglePasswordVisibility = () => {
@@ -68,15 +70,15 @@ const ModalPassVerify = ({ setStep, closeModal }) => {
       >
         <AiOutlineLeft size={24} />
       </button>
-      <h3 className="text-center text-qora text-2xl mb-5">Parolni yangilash</h3>
-      <p className="text-kulrang text-sm">Kirish uchun parolni yangilang</p>
+      <h3 className="text-center text-qora text-2xl mb-5">{t("login25")}</h3>
+      <p className="text-kulrang text-sm">{t("login26")}</p>
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
-        Yangi parol kiriting
+        {t("login27")}
       </p>
       <div className="relative w-full">
         <input
           type={isPasswordVisible ? "text" : "password"}
-          placeholder="Parol"
+          placeholder={t("login4")}
           className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -90,12 +92,12 @@ const ModalPassVerify = ({ setStep, closeModal }) => {
         </button>
       </div>
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
-        Yangi parolni qayta kiriting
+        {t("login28")}
       </p>
       <div className="relative w-full">
         <input
           type={isPasswordVisible ? "text" : "password"}
-          placeholder="Parolni tasdiqlash"
+          placeholder={t("login8")}
           className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
@@ -117,15 +119,15 @@ const ModalPassVerify = ({ setStep, closeModal }) => {
         {loading ? "Yuklanmoqda..." : "Parolni yangilash"}
       </button>
       <p className="text-center text-kulrang text-sm font-semibold max-md:text-xs">
-        Tizimga kirish orqali siz{" "}
+        {t("login11")}{" "}
         <Link
           onClick={closeModal}
           href="/foydalanishshartlari"
           className="text-main  cursor-pointer"
         >
-          Foydalanish shartlarimizga
+          {t("login12")}
         </Link>{" "}
-        rozilik bildirasiz.
+        {t("login13")}
       </p>
     </div>
   );

@@ -9,9 +9,11 @@ import { FaAngleLeft } from "react-icons/fa6";
 import Cookies from "js-cookie";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const itemsPerPage = 20;
 const MyElon = () => {
+  const { t } = useTranslation();
   const [selectedDuration, setSelectedDuration] = useState("aktiv");
   const [myElons, setMyElons] = useState([]);
   const [myElonsCount, setMyElonsCount] = useState({}); // Initialize as an empty object
@@ -115,10 +117,10 @@ const MyElon = () => {
         href={"/profil"}
         className="md:hidden text-lg font-semibold flex items-center"
       >
-        <FaAngleLeft /> Profil
+        <FaAngleLeft /> {t("navbar2")}
       </Link>
       <h2 className="text-qora text-2xl font-semibold mb-10 max-md:mb-5 max-md:text-lg">
-        Jami e’lonlar: {myElonsCount.total || 0}
+        {t("pmenu6")} {myElonsCount.total || 0}
       </h2>
       <div className="flex justify-between mb-[30px] max-md:gap-3 overflow-y-auto">
         <div
@@ -129,7 +131,9 @@ const MyElon = () => {
           }`}
           onClick={() => handleDurationClick("aktiv")}
         >
-          <p className="text-lg">Aktiv e’lonlar: {myElonsCount.active || 0}</p>
+          <p className="text-lg">
+            {t("pmenu7")} {myElonsCount.active || 0}
+          </p>
         </div>
         <div
           className={`flex rounded-[10px] px-4 py-2 max-md:px-2 max-md:py-1 max-md:text-lg max-md:flex-shrink-0 cursor-pointer border text-xl font-semibold ${
@@ -140,7 +144,7 @@ const MyElon = () => {
           onClick={() => handleDurationClick("tasdiq")}
         >
           <p className="text-lg">
-            Tasdiqlanishi Kutilayotgan: {myElonsCount.waiting || 0}
+            {t("pmenu8")} {myElonsCount.waiting || 0}
           </p>
         </div>
         <div
@@ -151,7 +155,9 @@ const MyElon = () => {
           }`}
           onClick={() => handleDurationClick("yakunlangan")}
         >
-          <p className="text-lg">Yakunlangan: {myElonsCount.sold || 0}</p>
+          <p className="text-lg">
+            {t("pmenu9")} {myElonsCount.sold || 0}
+          </p>
         </div>
         <div
           className={`flex rounded-[10px] px-4 py-2 max-md:px-2 max-md:py-1 max-md:text-lg max-md:flex-shrink-0 cursor-pointer border text-xl font-semibold ${
@@ -161,7 +167,9 @@ const MyElon = () => {
           }`}
           onClick={() => handleDurationClick("bekor")}
         >
-          <p className="text-lg">Rad etilgan: {myElonsCount.rejected || 0}</p>
+          <p className="text-lg">
+            {t("pmenu10")} {myElonsCount.rejected || 0}
+          </p>
         </div>
       </div>
       <div className="grid grid-cols-1 gap-5">
@@ -183,7 +191,7 @@ const MyElon = () => {
             />
           ))
         ) : (
-          <NoItems text="Hozircha tanlanganlar yo’q" /> // Display NoItems component if no ads are available
+          <NoItems text={t("pmenu11")} /> // Display NoItems component if no ads are available
         )}
       </div>
     </div>

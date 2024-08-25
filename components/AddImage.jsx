@@ -3,9 +3,11 @@ import Image from "next/image";
 import rasmYuklash from "@/assets/images/rasmyuklash.svg";
 import Camera from "@/assets/images/camera.svg";
 import { FaTimes } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const AddImage = ({ textImage, size, formData, setFormData, value }) => {
   const [images, setImages] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (value) {
@@ -63,12 +65,11 @@ const AddImage = ({ textImage, size, formData, setFormData, value }) => {
   return (
     <div className="flex flex-col">
       <h2 className="text-qora text-2xl font-semibold ml-[20px] mt-5 mb-2 max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
-        Rasmlar
+        {t("add10")}
       </h2>
       {!textImage && (
         <p className="text-lg text-kulrang mb-5 ml-[20px] max-md:text-xs max-md:ml-[10px]">
-          Birinchi yuklangan surat asosiy bo‘ladi. Fayl .jpg yoki .png formatda
-          va hajmi 10MBdan oshmasligi kerak
+          {t("add11")}
         </p>
       )}
       <div className="flex flex-wrap max-md:justify-around">
@@ -87,7 +88,7 @@ const AddImage = ({ textImage, size, formData, setFormData, value }) => {
             onChange={handleImageUpload}
           />
           <Image src={rasmYuklash} alt="rasmlar" />
-          <p className="text-sm text-logoKok mt-3">Rasm yuklash</p>
+          <p className="text-sm text-logoKok mt-3 text-center">{t("add12")}</p>
         </label>
         {Array.from({ length: 10 }).map((_, index) => (
           <div

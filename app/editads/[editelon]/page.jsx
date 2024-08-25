@@ -13,6 +13,7 @@ import api from "@/lib/api"; // Ensure this path is correct for your project
 import Cookies from "js-cookie";
 import Msg from "@/components/Msg";
 import Loader from "@/components/Loader";
+import { useTranslation } from "react-i18next";
 const getToken = () => Cookies.get("authToken");
 const EditAdPage = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -20,6 +21,8 @@ const EditAdPage = () => {
 
   const [seeMsg, setSeeMsg] = useState("0");
   const [seeMsgW, setSeeMsgW] = useState("0");
+
+  const { t } = useTranslation();
 
   const [loading, setLoading] = useState(false);
 
@@ -173,10 +176,10 @@ const EditAdPage = () => {
         className="md:hidden text-lg font-medium flex items-center"
       >
         <FaAngleLeft />
-        Mening e'lonlarim
+        {t("footer4")}
       </Link>
       <h1 className=" text-qora text-2xl font-semibold max-md:my-2 max-md:text-lg px-5">
-        E’lonni tahrirlash
+        {t("add38")}
       </h1>
       {getData && (
         <div className="px-5">
@@ -195,7 +198,7 @@ const EditAdPage = () => {
                   selectedOption === "SELL" ? "text-logoKok" : "text-kulrang"
                 }`}
               >
-                Sotish uchun
+                {t("add2")}
               </span>
             </label>
             <label
@@ -214,20 +217,20 @@ const EditAdPage = () => {
                   selectedOption === "RENT" ? "text-logoKok" : "text-kulrang"
                 }`}
               >
-                Ijaraga berish uchun
+                {t("add3")}
               </span>
             </label>
           </div>
           <div className="w-full">
             <KategoriyaTanlash
               categories={[
-                "Kvartiralar",
-                "Xovlilar",
-                "Ofislar",
-                "Do'konlar",
-                "Mehmonxona va dachalar",
+                t("APARTMENT"),
+                t("HOUSE"),
+                t("OFFICE"),
+                t("SHOP"),
+                t("HOTEL"),
               ]}
-              heading="Kategoriyani tanlang"
+              heading={t("add4")}
               formData={formData}
               setFormData={setFormData}
               reqName="category"
@@ -236,8 +239,8 @@ const EditAdPage = () => {
           </div>
           <div className="w-full">
             <SarlavhaKiritish
-              label="Sarlavhani kiriting"
-              placeholder="Sarlavha"
+              label={t("add5")}
+              placeholder={t("add6")}
               type="text"
               formData={formData}
               setFormData={setFormData}
@@ -270,10 +273,10 @@ const EditAdPage = () => {
           </div>
           <div className="w-full flex flex-col">
             <h2 className="text-2xl font-medium ml-5 max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
-              Ko’proq ma’lumotlar
+              {t("add39")}
             </h2>
             <SarlavhaKiritish
-              label="Xonalar soni"
+              label={t("add14")}
               type="number"
               formData={formData}
               setFormData={setFormData}
@@ -282,23 +285,23 @@ const EditAdPage = () => {
             />
 
             <KategoriyaTanlash
-              categories={["birlamchi", "Ikkilamchi"]}
-              heading="Turarjoy turi"
+              categories={[t("NEW"), t("OLD")]}
+              heading={t("add34")}
               formData={formData}
               setFormData={setFormData}
               reqName="accommodation_type"
               value={getData?.accommodation_type}
             />
             <KategoriyaTanlash
-              categories={["Panel", "G'isht"]}
-              heading="Qurilish turi"
+              categories={[t("PANEL"), t("BRICK"), t("MONOLITH"), t("BLOCK")]}
+              heading={t("add35")}
               formData={formData}
               setFormData={setFormData}
               reqName="construction_type"
               value={getData?.construction_type}
             />
             <SarlavhaKiritish
-              label="Uy qurilgan yil"
+              label={t("add15")}
               type="number"
               formData={formData}
               setFormData={setFormData}
@@ -306,15 +309,15 @@ const EditAdPage = () => {
               value={getData?.house_built_year}
             />
             <KategoriyaTanlash
-              categories={["Bor", "Yo'q"]}
-              heading="Mebel"
+              categories={[t("bor"), t("yoq")]}
+              heading={t("add36")}
               formData={formData}
               setFormData={setFormData}
               reqName="have_furniture"
               value={getData?.have_furniture}
             />
             <SarlavhaKiritish
-              label="Yashash maydoni"
+              label={t("add16")}
               type="number"
               formData={formData}
               setFormData={setFormData}
@@ -322,7 +325,7 @@ const EditAdPage = () => {
               value={getData?.living_area}
             />
             <SarlavhaKiritish
-              label="Umumiy maydoni"
+              label={t("add17")}
               type="number"
               formData={formData}
               setFormData={setFormData}
@@ -330,7 +333,7 @@ const EditAdPage = () => {
               value={getData?.total_area}
             />
             <SarlavhaKiritish
-              label="Qavat"
+              label={t("add18")}
               type="number"
               formData={formData}
               setFormData={setFormData}
@@ -338,7 +341,7 @@ const EditAdPage = () => {
               value={getData?.floor}
             />
             <SarlavhaKiritish
-              label="Binoning qavatlari"
+              label={t("add19")}
               type="number"
               formData={formData}
               setFormData={setFormData}
@@ -346,8 +349,8 @@ const EditAdPage = () => {
               value={getData?.total_floor}
             />
             <KategoriyaTanlash
-              categories={["Bor", "Yo'q"]}
-              heading="Vositachilik haqqi"
+              categories={[t("bor"), t("yoq")]}
+              heading={t("add37")}
               formData={formData}
               setFormData={setFormData}
               reqName="have_broker_fee"
@@ -356,39 +359,37 @@ const EditAdPage = () => {
           </div>
           <div className="w-full flex flex-col">
             <h2 className="text-2xl font-medium ml-5 mt-5 mb-[10px] max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
-              Tavsif
+              {t("add20")}
             </h2>
             <textarea
               value={formData.description}
               onChange={handleDescriptionChange}
-              placeholder="O‘zingizni shu e’lonni ko‘rayotgan odam o’riniga qo’ying va tavsif yozing"
+              placeholder={t("add21")}
               className="w-full h-[177px] px-3 py-4 border-kulrangOch text-kulrang bg-yozish text-sm rounded-[10px] outline-none"
             ></textarea>
-            <p className="ml-5 text-kulrang mt-1 mb-5 text-sm">
-              Kamida 40ta belgi
-            </p>
+            <p className="ml-5 text-kulrang mt-1 mb-5 text-sm">{t("add22")}</p>
           </div>
 
           <div className="w-full flex flex-col">
             <h2 className="text-2xl font-medium ml-5 max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
-              E’lon beruvchi
+              {t("add23")}
             </h2>
             <SarlavhaKiritish
-              label="Ism"
+              label={t("add24")}
               type="text"
               formData={formData}
               setFormData={setFormData}
               reqName="user"
             />
             <SarlavhaKiritish
-              label="Telefon raqam"
+              label={t("add25")}
               type="number"
               formData={formData}
               setFormData={setFormData}
               reqName="phone"
             />
             <SarlavhaKiritish
-              label="Qo’shimcha telefon raqam"
+              label={t("add26")}
               type="number"
               formData={formData}
               setFormData={setFormData}
@@ -399,40 +400,15 @@ const EditAdPage = () => {
 
           <div className="w-full flex justify-center mb-10">
             <div className="w-full h-[50px] mt-3" onClick={handleSubmit}>
-              <Button main text="Saqlash" color="white" />
+              <Button main text={t("add40")} color="white" />
             </div>
           </div>
         </div>
       )}
-      {seeMsg && (
-        <Msg
-          status="success"
-          seeMsg={seeMsg}
-          text="E'lon Muvofaqqiyatli o'zgartirildi"
-        />
-      )}
-      {seeMsgW && (
-        <Msg
-          status="warning"
-          seeMsg={seeMsgW}
-          text="Barcha ma'lumotlarni to'ldiring"
-        />
-      )}
+      {seeMsg && <Msg status="success" seeMsg={seeMsg} text={t("add41")} />}
+      {seeMsgW && <Msg status="warning" seeMsg={seeMsgW} text={t("add42")} />}
     </div>
   );
 };
 
 export default EditAdPage;
-
-// Example usage in Next.js
-// export async function getServerSideProps(context) {
-//   const { adId } = context.params; // Get the adId from the URL
-
-//   return {
-//     props: {
-//       adId,
-//     },
-//   };
-// }
-
-// export default EditAdPage;

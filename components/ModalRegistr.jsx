@@ -1,6 +1,7 @@
 import api from "@/lib/api";
 import Link from "next/link";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   AiOutlineLeft,
   AiOutlineEye,
@@ -20,6 +21,7 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
   const [isChecked, setIsChecked] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [checkboxError, setCheckboxError] = useState(false);
+  const { t } = useTranslation();
 
   const validatePhone = () => {
     const phonePattern = /^\+998\d{2}-\d{3}-\d{2}-\d{2}$/;
@@ -86,7 +88,7 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
           onClick={() => setStep(2)}
           type="button"
         >
-          Kirish
+          {t("login")}
         </button>
         <button
           className={`h-[50px] w-1/2 border border-yozish text-xl font-medium rounded max-md:text-[16px] ${
@@ -95,19 +97,21 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
           onClick={() => setStep(3)}
           type="button"
         >
-          Ro’yxatdan&nbsp;o’tish
+          {t("login1")}
         </button>
       </div>
-      <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">Isminggiz</p>
+      <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
+        {t("login6")}
+      </p>
       <input
         type="text"
-        placeholder="Ism"
+        placeholder={t("login7")}
         value={fullName}
         onChange={(e) => setFullName(e.target.value)}
         className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora  max-md:text-sm"
       />
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
-        Telefon raqamingiz
+        {t("login2")}
       </p>
       <InputMask
         mask="+998__-___-__-__"
@@ -119,14 +123,16 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
         }}
       >
         {(inputProps) => (
-          <input type="tel" placeholder="Telefon raqam" {...inputProps} />
+          <input type="tel" placeholder={t("login3")} {...inputProps} />
         )}
       </InputMask>
-      <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">Parol</p>
+      <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
+        {t("login4")}
+      </p>
       <div className="relative w-full">
         <input
           type={isPasswordVisible ? "text" : "password"}
-          placeholder="Parol"
+          placeholder={t("login4")}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className={`border  outline-none px-5 py-3 rounded-[5px] ${
@@ -142,12 +148,12 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
         </button>
       </div>
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm max-md:text-xs">
-        Parolni tasdiqlash
+        {t("login8")}
       </p>
       <div className="relative w-full">
         <input
           type={isPasswordVisible ? "text" : "password"}
-          placeholder="Parolni tasdiqlash"
+          placeholder={t("login8")}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           className={`border  outline-none px-5 py-3 rounded-[5px] ${
@@ -173,15 +179,15 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
           onChange={(e) => setIsChecked(e.target.checked)}
         />
         <p className="text-sm font-semibold text-kulrang  max-md:text-xs">
-          Men{" "}
+          {t("login14")}{" "}
           <Link
             onClick={closeModal}
             href="/foydalanishshartlari"
             className="text-main cursor-pointer"
           >
-            Foydalanish shartlari
-          </Link>
-          ni qabul qilaman
+            {t("login15")}
+          </Link>{" "}
+          {t("login16")}
         </p>
       </label>
       {error && <p className="text-red-500 text-xs italic">{error}</p>}
@@ -190,7 +196,7 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
         type="submit"
         className="bg-blue-500 text-white px-4 py-2 rounded  max-md:text-[16px]"
       >
-        Ro’yxatdan o’tish
+        {t("login1")}
       </button>
     </form>
   );

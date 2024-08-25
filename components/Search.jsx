@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Button from "./Button";
 import { IoMdClose, IoMdSearch } from "react-icons/io";
 import SearchImg from "@/assets/images/search.svg";
+import { t } from "i18next";
 
 const Search = ({ setSearch, search1 }) => {
   const [searchValue, setSearchValue] = useState("");
@@ -40,7 +41,7 @@ const Search = ({ setSearch, search1 }) => {
       <input
         type="text"
         className="border border-kulrang text-kulrang flex-grow rounded-[10px] h-10 pl-[50px] max-md:px-[15px] mr-5 bg-white"
-        placeholder="Qidirish"
+        placeholder={t("filter1")}
         value={searchValue}
         onChange={handleInputChange}
       />
@@ -56,7 +57,7 @@ const Search = ({ setSearch, search1 }) => {
         }`}
         onClick={handleSearchClick}
       >
-        <Button main image={SearchImg} text="Qidirish" color="white" />
+        <Button main image={SearchImg} text={t("filter1")} color="white" />
       </div>
       <div
         className={`w-10 flex justify-center items-center h-10 md:hidden cursor-pointer absolute right-5 ${

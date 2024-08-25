@@ -2,8 +2,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 import api from "@/lib/api";
+import { useTranslation } from "react-i18next";
 
-const ManzilSelect = ({setRegion, setDistrict}) => {
+const ManzilSelect = ({ setRegion, setDistrict }) => {
+  const { t } = useTranslation();
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Hammasi");
   const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -11,12 +13,13 @@ const ManzilSelect = ({setRegion, setDistrict}) => {
   const [districts, setDistricts] = useState({});
   const categoryRef = useRef(null);
 
+  const language = localStorage.getItem("language");
+
   // Fetch categories from backend
   const fetchCategories = async () => {
     try {
       const response = await api.get("/api/v1/region");
       setCategories(response.data);
-
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -40,7 +43,7 @@ const ManzilSelect = ({setRegion, setDistrict}) => {
   // Handle district click to set the selected category
   const handleDistrictClick = (district) => {
     setDistrict(district.id);
-    setSelectedCategory(district.name_uz);
+    setSelectedCategory(language == "uz" ? district.name_uz : district.name_ru);
     setIsCategoryOpen(false);
   };
 
@@ -79,7 +82,9 @@ const ManzilSelect = ({setRegion, setDistrict}) => {
 
   return (
     <div className="flex flex-col relative mr-[10px]">
-      <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">Manzil</h2>
+      <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">
+        {t("filter5")}
+      </h2>
       <div className="flex flex-col" ref={categoryRef}>
         <div
           className={`flex p-[10px] h-10 w-[200px] max-md:w-full rounded-[10px] justify-between items-center cursor-pointer ${
@@ -121,16 +126,18 @@ const ManzilSelect = ({setRegion, setDistrict}) => {
                       : "text-kulrang"
                   }`}
                 >
-                  {category.name_uz}
-                  {category.name_uz !== "Hammasi" && (
-                    <FaChevronLeft
-                      className={`text-kulrang transition-transform z-10 ${
-                        hoveredCategory === category
-                          ? "rotate-[270deg]"
-                          : "rotate-180"
-                      }`}
-                    />
-                  )}
+                  {/* {category.name_uz} */}
+                  {language == "uz"
+                    ? category.name_uz
+                    : category.name_ru !== t("all") && (
+                        <FaChevronLeft
+                          className={`text-kulrang transition-transform z-10 ${
+                            hoveredCategory === category
+                              ? "rotate-[270deg]"
+                              : "rotate-180"
+                          }`}
+                        />
+                      )}
                 </p>
                 {hoveredCategory === category && districts[category.id] && (
                   <div className="absolute left-full top-0 mt-[-10px] bg-white w-[216px] max-md:w-[80%] shadow-lg p-[10px] rounded-[10px]">
@@ -140,7 +147,7 @@ const ManzilSelect = ({setRegion, setDistrict}) => {
                         className="cursor-pointer text-kulrang hover:bg-ochKok hover:text-qora p-2 rounded-md"
                         onClick={() => handleDistrictClick(district)}
                       >
-                        {district.name_uz}
+                        {language == "uz" ? district.name_uz : district.name_ru}
                       </div>
                     ))}
                   </div>

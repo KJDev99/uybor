@@ -8,12 +8,14 @@ import {
 } from "react-icons/ai";
 import InputMask from "react-input-mask";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 
 const ModalLogin = ({ step, setStep, closeModal }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const { t } = useTranslation();
 
   const validatePhone = () => {
     // Format: +998-__-___-__-__
@@ -39,7 +41,7 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
           password,
         });
         Cookies.set("authToken", response.data.access);
-        localStorage.setItem("user", JSON.stringify(response.data))
+        localStorage.setItem("user", JSON.stringify(response.data));
         closeModal();
         window.location.reload();
       } catch (err) {
@@ -58,7 +60,7 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
           onClick={() => setStep(2)}
           type="button"
         >
-          Kirish
+          {t("login")}
         </button>
         <button
           className={`h-[50px] w-1/2 border border-yozish text-xl font-medium rounded max-md:text-[16px] ${
@@ -67,11 +69,11 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
           onClick={() => setStep(3)}
           type="button"
         >
-          Ro’yxatdan o’tish
+          {t("login1")}
         </button>
       </div>
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
-        Telefon raqamingiz
+        {t("login2")}
       </p>
       <InputMask
         mask="+998__-___-__-__"
@@ -83,15 +85,17 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
         }}
       >
         {(inputProps) => (
-          <input type="tel" placeholder="Telefon raqam" {...inputProps} />
+          <input type="tel" placeholder={t("login3")} {...inputProps} />
         )}
       </InputMask>
 
-      <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">Parol</p>
+      <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
+        {t("login4")}
+      </p>
       <div className="relative w-full">
         <input
           type={isPasswordVisible ? "text" : "password"}
-          placeholder="Parol"
+          placeholder={t("login4")}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="border-none outline-none px-5 py-3 rounded-[5px] bg-yozish text-qora w-full max-md:text-sm"
@@ -109,18 +113,24 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
         className="cursor-pointer mb-3 mt-5 ml-5 font-bold text-main text-sm max-md:text-xs"
         onClick={() => setStep(4)}
       >
-        Parolni unutdingizmi?
+        {t("login5")}
       </p>
       <button
         type="submit"
         className="bg-main text-white h-[50px] mb-2 text-lg rounded-[5px] max-md:text-[16px]"
       >
-        Kirish
+        {t("login1")}
       </button>
       <p className="text-center text-kulrang text-sm font-semibold max-md:text-xs">
-        Tizimga kirish orqali siz{" "}
-        <Link onClick={closeModal} href="/foydalanishshartlari" className="text-main  cursor-pointer">Foydalanish shartlarimizga</Link> rozilik
-        bildirasiz.
+        {t("login11")}
+        <Link
+          onClick={closeModal}
+          href="/foydalanishshartlari"
+          className="text-main  cursor-pointer"
+        >
+          {t("login12")}
+        </Link>{" "}
+        {t("login13")}
       </p>
     </form>
   );

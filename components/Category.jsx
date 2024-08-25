@@ -3,9 +3,11 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import api from "@/lib/api";
+import { useTranslation } from "react-i18next";
 
 const Category = ({ image, text, category }) => {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const handleClick = async () => {
     try {
@@ -29,7 +31,7 @@ const Category = ({ image, text, category }) => {
         alt={text}
       />
       <p className="text-sm font-semibold text-qora md:my-2 max-md:h-[30px] max-md:text-[10px] text-center mdd:leading-3 flex items-center">
-        {text}
+        {t(text)}
       </p>
     </div>
   );

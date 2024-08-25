@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const TopgaChiqarish = ({ text, title, setTopDay }) => {
   const [selectedOption, setSelectedOption] = useState("top");
   const [selectedDuration, setSelectedDuration] = useState("7");
+
+  const { t } = useTranslation();
 
   const handleOptionChange = (e) => {
     setSelectedOption(e.target.id);
@@ -27,12 +30,10 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
       ) : (
         <>
           <h2 className="text-qora text-xl font-semibold max-md:text-lg">
-            Topga chiqarish
+            {t("top1")}
           </h2>
           <p className="text-sm text-kulrang mb-2 ml-[20px] max-md:ml-[10px]">
-            E’loningizni to’lov evaziga topga chiqarish bepul joylangan
-            e’lonlardan ko’ra oldinroq sotish va ko’proq haridorlar oqimi
-            imkonini beradi.
+            {t("top2")}
           </p>
           <form className="flex ml-5 mb-5">
             <label htmlFor="top" className="flex items-center mr-4">
@@ -48,7 +49,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
                   selectedOption === "top" ? "text-logoKok" : "text-kulrang"
                 }`}
               >
-                Topga chiqarish
+                {t("top1")}
               </span>
             </label>
             <label
@@ -66,7 +67,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
                   selectedOption === "oddiy" ? "text-logoKok" : "text-kulrang"
                 }`}
               >
-                Oddiy e’lon
+                {t("top3")}
               </span>
             </label>
           </form>
@@ -86,13 +87,12 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
               selectedDuration === "3" ? "text-logoKok" : "text-kulrang"
             }`}
           >
-            3 kun
+            3 {t("top4")}
           </h2>
-          <h3 className={`text-2xl mb-[10px] font-semibold `}>10 000 so’m</h3>
-          <p className="text-sm text-kulrang">
-            E’loningiz 3 kun davomida Topda turadi. Saytga tashrif buyuruvchilar
-            sizning e’loningizni birinchilardan bo’lib ko’radi.
-          </p>
+          <h3 className={`text-2xl mb-[10px] font-semibold `}>
+            10 000 {t("top5")}
+          </h3>
+          <p className="text-sm text-kulrang">{t("top6")}</p>
         </div>
         <div
           className={`rounded-[10px] p-5 border cursor-pointer ${
@@ -107,13 +107,12 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
               selectedDuration === "7" ? "text-logoKok" : "text-kulrang"
             }`}
           >
-            7 kun
+            7 {t("top4")}
           </h2>
-          <h3 className={`text-2xl mb-[10px] font-semibold`}>18 000 so’m</h3>
-          <p className="text-sm text-kulrang">
-            E’loningiz 7 kun davomida Topda turadi. Saytga tashrif buyuruvchilar
-            sizning e’loningizni birinchilardan bo’lib ko’radi.
-          </p>
+          <h3 className={`text-2xl mb-[10px] font-semibold`}>
+            18 000 {t("top5")}
+          </h3>
+          <p className="text-sm text-kulrang">{t("top7")}</p>
         </div>
         <div
           className={`rounded-[10px] p-5 border cursor-pointer ${
@@ -128,13 +127,12 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
               selectedDuration === "30" ? "text-logoKok" : "text-kulrang"
             }`}
           >
-            30 kun
+            30 {t("top4")}
           </h2>
-          <h3 className={`text-2xl mb-[10px] font-semibold `}>75 000 so’m</h3>
-          <p className="text-sm text-kulrang">
-            E’loningiz 30 kun davomida Topda turadi. Saytga tashrif
-            buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
-          </p>
+          <h3 className={`text-2xl mb-[10px] font-semibold `}>
+            75 000 {t("top5")}
+          </h3>
+          <p className="text-sm text-kulrang">{t("top8")}</p>
         </div>
       </div>
       <div className="w-full gap-5 flex mb-5 md:hidden justify-center">
@@ -151,7 +149,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
               selectedDuration === "3" ? "text-white" : "text-kulrang"
             }`}
           >
-            3 kun
+            3 {t("top4")}
           </h2>
         </div>
         <div
@@ -167,7 +165,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
               selectedDuration === "7" ? "text-white" : "text-kulrang"
             }`}
           >
-            7 kun
+            7 {t("top4")}
           </h2>
         </div>
         <div
@@ -183,36 +181,33 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
               selectedDuration === "30" ? "text-white" : "text-kulrang"
             }`}
           >
-            30 kun
+            30 {t("top4")}
           </h2>
         </div>
       </div>
       <div className="md:hidden">
         {selectedDuration === "3" && (
           <div className="flex flex-col w-full px-5">
-            <h3 className={`text-lg mb-[5px] font-semibold `}>10 000 so’m</h3>
-            <p className="text-sm text-kulrang mb-[30px]">
-              E’loningiz 3 kun davomida Topda turadi. Saytga tashrif
-              buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
-            </p>
+            <h3 className={`text-lg mb-[5px] font-semibold `}>
+              10 000 {t("top5")}
+            </h3>
+            <p className="text-sm text-kulrang mb-[30px]">{t("top6")}</p>
           </div>
         )}
         {selectedDuration === "7" && (
           <div className="flex flex-col w-full px-5">
-            <h3 className={`text-lg mb-[5px] font-semibold`}>18 000 so’m</h3>
-            <p className="text-sm text-kulrang mb-[30px]">
-              E’loningiz 7 kun davomida Topda turadi. Saytga tashrif
-              buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
-            </p>
+            <h3 className={`text-lg mb-[5px] font-semibold`}>
+              18 000 {t("top5")}
+            </h3>
+            <p className="text-sm text-kulrang mb-[30px]">{t("top7")}</p>
           </div>
         )}
         {selectedDuration === "30" && (
           <div className="flex flex-col w-full px-5">
-            <h3 className={`text-lg mb-[5px] font-semibold `}>75 000 so’m</h3>
-            <p className="text-sm text-kulrang mb-[30px]">
-              E’loningiz 30 kun davomida Topda turadi. Saytga tashrif
-              buyuruvchilar sizning e’loningizni birinchilardan bo’lib ko’radi.
-            </p>
+            <h3 className={`text-lg mb-[5px] font-semibold `}>
+              75 000 {t("top5")}
+            </h3>
+            <p className="text-sm text-kulrang mb-[30px]">{t("top8")}</p>
           </div>
         )}
       </div>

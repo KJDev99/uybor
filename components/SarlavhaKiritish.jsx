@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const SarlavhaKiritish = ({
   label,
@@ -13,6 +14,7 @@ const SarlavhaKiritish = ({
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
   const userInfo = JSON.parse(localStorage.getItem("user"));
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (reqName === "user" && userInfo) {
@@ -43,7 +45,7 @@ const SarlavhaKiritish = ({
     <div className="flex flex-col relative mr-[10px]">
       <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm max-md:mt-2">
         {label}{" "}
-        {(label == "Yashash maydoni" || label == "Umumiy maydoni") && (
+        {(label == t("add16") || label == t("add17")) && (
           <>
             m<sup>2</sup>
           </>

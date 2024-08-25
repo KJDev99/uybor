@@ -1,10 +1,13 @@
+"use client";
 import Image from "next/image";
 import LogoImg from "@/assets/images/logo.svg";
 import { FaFacebook } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import Link from "next/link";
+import { useTranslation } from "react-i18next";
 const Footer = () => {
+  const { t } = useTranslation();
   return (
     <div className="h-full bg-[#042037] pt-[50px]">
       <div className="container flex flex-col">
@@ -25,7 +28,7 @@ const Footer = () => {
           </div>
           <div className="flex flex-col max-md:col-span-3">
             <h3 className="text-kulrangOch text-sm font-bold mb-[10px]">
-              Biz haqimizda
+              {t("footer1")}
             </h3>
             <a
               href="tel:+998974667788"
@@ -40,21 +43,17 @@ const Footer = () => {
               topuyofficial@gmail.com
             </a>
             <a href="tel:" className="text-kulrangOch text-sm mb-3"></a>
-            <p className="text-kulrangOch text-sm mb-3">
-              Navoiy viloyat Qiziltepa tuman
-            </p>
+            <p className="text-kulrangOch text-sm mb-3">{t("footer2")}</p>
           </div>
           <div className="flex flex-col max-md:col-span-3">
             <Link href="/foydalanishshartlari">
-              <p className="text-kulrangOch text-sm mb-3">
-                Foydalanish shartlari
-              </p>
+              <p className="text-kulrangOch text-sm mb-3">{t("footer3")}</p>
             </Link>
             <Link href="/profil">
-              <p className="text-kulrangOch text-sm mb-3">Mening e’lonlarim</p>
+              <p className="text-kulrangOch text-sm mb-3">{t("footer4")}</p>
             </Link>
             <Link href="/profil/sozlamalar">
-              <p className="text-kulrangOch text-sm mb-3">Profil</p>
+              <p className="text-kulrangOch text-sm mb-3">{t("footer5")}</p>
             </Link>
           </div>
         </div>

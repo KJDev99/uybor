@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { FaChevronLeft } from "react-icons/fa6";
 
 const AddNarx = ({ formData, setFormData, value }) => {
@@ -10,7 +11,7 @@ const AddNarx = ({ formData, setFormData, value }) => {
 
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
-
+  const { t } = useTranslation();
   const handleFromChange = (event) => {
     const inputValue = event.target.value;
     if (!isNaN(inputValue)) {
@@ -54,7 +55,7 @@ const AddNarx = ({ formData, setFormData, value }) => {
   return (
     <div className="flex flex-col relative mr-[10px]">
       <h2 className="text-kulrang font-medium ml-[20px] mt-5 mb-2 text-sm">
-        Narxi
+        {t("add8")}
       </h2>
       <div className="flex ">
         <input

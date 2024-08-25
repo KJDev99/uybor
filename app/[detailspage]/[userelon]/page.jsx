@@ -12,9 +12,11 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import ElonBlock from "@/components/ElonBlock";
 import api from "@/lib/api";
 import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const UserElon = () => {
   const [valyuta, setValyuta] = useState("uzs");
+  const { t } = useTranslation();
 
   const view = useSelector((state) => state.view);
   const dispatch = useDispatch();
@@ -64,11 +66,11 @@ const UserElon = () => {
     <div className="flex flex-col container">
       <div className="flex max-md:flex-col justify-between mt-[50px] mb-[30px]  max-md:mt-[10px]">
         <h2 className="text-2xl text-qora font-semibold max-md:text-[16px]">
-          Muallifning barcha e’lonlari:
+          {t("muallif1")}
         </h2>
         <div className="flex">
           <div className="flex items-center">
-            <p className="text-qora font-medium">Ko'rinishi:</p>
+            <p className="text-qora font-medium">{t("korish")}:</p>
             <Image
               src={view == "block" ? SeeBlockAct : SeeBlock}
               alt="SeeBlock"
@@ -83,7 +85,7 @@ const UserElon = () => {
             />
           </div>
           <div className="flex items-center">
-            <p className="text-qora font-medium ml-16">Valyuta:</p>
+            <p className="text-qora font-medium ml-16">{t("valyuta")}:</p>
             <p
               className={`mx-5 cursor-pointer font-medium ${
                 valyuta == "uzs" ? "text-logoKok" : "text-kulrang"

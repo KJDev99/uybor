@@ -8,8 +8,10 @@ import NarxSelect from "./NarxSelect";
 import Button from "./Button";
 import FilterImg from "@/assets/images/filter.svg";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 const Filter = () => {
+  const { t } = useTranslation();
   const [selectedOption, setSelectedOption] = useState("");
   const [filterHidden, setFilterHidden] = useState(true);
   const [categories, setCategory] = useState("");
@@ -34,10 +36,14 @@ const Filter = () => {
     // Add filter parameters to query
     const categoryMap = {
       Kvartiralar: "APARTMENT",
+      Квартиры: "APARTMENT",
       Xovlilar: "HOUSE",
+      Дома: "HOUSE",
       "Do'konlar": "SHOP",
+      Магазины: "SHOP",
       Ofislar: "OFFICE",
-      "Mehmonxona va dachalar": "HOTEL",
+      Офисы: "OFFICE",
+      "Гостиницы и дачи": "HOTEL",
     };
 
     // Handle categories
@@ -97,7 +103,7 @@ const Filter = () => {
                 selectedOption === "sotish" ? "text-logoKok" : "text-kulrang"
               }`}
             >
-              Sotish
+              {t("filter2")}
             </span>
           </label>
           <label htmlFor="ijara" className="flex items-center ml-[50px]">
@@ -112,7 +118,7 @@ const Filter = () => {
                 selectedOption === "ijara" ? "text-logoKok" : "text-kulrang"
               }`}
             >
-              Ijara
+              {t("filter3")}
             </span>
           </label>
         </form>
@@ -125,13 +131,13 @@ const Filter = () => {
             className="w-[136px] h-10 mt-12 ml-4 max-md:hidden"
             onClick={handleFilterClick}
           >
-            <Button main image={FilterImg} text="Saralash" color="white" />
+            <Button main image={FilterImg} text={t("filter8")} color="white" />
           </div>
           <div
             className="w-full h-10 my-5 md:hidden"
             onClick={handleFilterClick}
           >
-            <Button main text="Saralash" color="white" />
+            <Button main text={t("filter8")} color="white" />
           </div>
         </div>
       </div>

@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { AiOutlineClose } from "react-icons/ai";
 import Msg from "@/components/Msg";
 import Loader from "@/components/Loader";
+import { useTranslation } from "react-i18next";
 
 const getToken = () => Cookies.get("authToken");
 const page = () => {
@@ -29,6 +30,8 @@ const page = () => {
   const [seeMsgWA, setSeeMsgWA] = useState("0");
 
   const [loading, setLoading] = useState(false);
+
+  const { t } = useTranslation();
 
   const router = useRouter();
   const data = new FormData();
@@ -172,11 +175,11 @@ const page = () => {
   return (
     <div className="container">
       <h1 className="mt-10 text-qora text-3xl font-semibold max-md:my-2 max-md:text-lg">
-        E’lon joylashtirish
+        {t("add0")}
       </h1>
       <form className="md:px-5" onSubmit={handleSubmit}>
         <h2 className="font-semibold text-2xl text-qora my-5 text-[16px] max-md:mt-0 max-md:mb-5">
-          E’loningiz haqida ma’lumot bering
+          {t("add1")}
         </h2>
         <div className="flex">
           <label htmlFor="SELL" className="flex items-center mr-4 ">
@@ -192,7 +195,7 @@ const page = () => {
                 selectedOption === "SELL" ? "text-logoKok" : "text-kulrang"
               }`}
             >
-              Sotish uchun
+              {t("add2")}
             </span>
           </label>
           <label
@@ -211,20 +214,20 @@ const page = () => {
                 selectedOption === "RENT" ? "text-logoKok" : "text-kulrang"
               }`}
             >
-              Ijaraga berish uchun
+              {t("add3")}
             </span>
           </label>
         </div>
         <div className="w-1/2 max-md:w-full">
           <KategoriyaTanlash
             categories={[
-              "Kvartiralar",
-              "Xovlilar",
-              "Ofislar",
-              "Do'konlar",
-              "Mehmonxona va dachalar",
+              t("APARTMENT"),
+              t("HOUSE"),
+              t("OFFICE"),
+              t("SHOP"),
+              t("HOTEL"),
             ]}
-            heading="Kategoriyani tanlang"
+            heading={t("add4")}
             formData={formData}
             setFormData={setFormData}
             reqName="category"
@@ -232,9 +235,9 @@ const page = () => {
         </div>
         <div className="w-1/2 max-md:w-full">
           <SarlavhaKiritish
-            label="Sarlavhani kiriting"
-            placeholder="Sarlavha"
-            message="Kamida 10 belgi"
+            label={t("add5")}
+            placeholder={t("add6")}
+            message={t("add7")}
             type="text"
             formData={formData}
             setFormData={setFormData}
@@ -253,74 +256,74 @@ const page = () => {
         </div>
         <div className="w-1/2 flex flex-col max-md:w-full">
           <h2 className="text-2xl font-medium ml-5 max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
-            Qo’shimcha ma’lumotlar
+            {t("add13")}
           </h2>
           <SarlavhaKiritish
-            label="Xonalar soni"
+            label={t("add14")}
             type="number"
             formData={formData}
             setFormData={setFormData}
             reqName="room"
           />
           <KategoriyaTanlash
-            categories={["birlamchi", "Ikkilamchi"]}
-            heading="Turarjoy turi"
+            categories={[t("NEW"), t("OLD")]}
+            heading={t("add34")}
             formData={formData}
             setFormData={setFormData}
             reqName="accommodation_type"
           />
           <KategoriyaTanlash
-            categories={["Panelli", "G'isht", "Monolit", "Blokli"]}
-            heading="Qurilish turi"
+            categories={[t("PANEL"), t("BRICK"), t("MONOLITH"), t("BLOCK")]}
+            heading={t("add35")}
             formData={formData}
             setFormData={setFormData}
             reqName="construction_type"
           />
           <SarlavhaKiritish
-            label="Uy qurilgan yil"
+            label={t("add15")}
             type="number"
             formData={formData}
             setFormData={setFormData}
             reqName="house_built_year"
           />
           <KategoriyaTanlash
-            categories={["Bor", "Yo'q"]}
-            heading="Mebel"
+            categories={[t("bor"), t("yoq")]}
+            heading={t("add36")}
             formData={formData}
             setFormData={setFormData}
             reqName="have_furniture"
           />
           <SarlavhaKiritish
-            label="Yashash maydoni"
+            label={t("add16")}
             type="number"
             formData={formData}
             setFormData={setFormData}
             reqName="living_area"
           />
           <SarlavhaKiritish
-            label="Umumiy maydoni"
+            label={t("add17")}
             type="number"
             formData={formData}
             setFormData={setFormData}
             reqName="total_area"
           />
           <SarlavhaKiritish
-            label="Qavat"
+            label={t("add18")}
             type="number"
             formData={formData}
             setFormData={setFormData}
             reqName="floor"
           />
           <SarlavhaKiritish
-            label="Binoning qavatlari"
+            label={t("add19")}
             type="number"
             formData={formData}
             setFormData={setFormData}
             reqName="total_floor"
           />
           <KategoriyaTanlash
-            categories={["Bor", "Yo'q"]}
-            heading="Vositachilik haqqi"
+            categories={[t("bor"), t("yoq")]}
+            heading={t("add37")}
             formData={formData}
             setFormData={setFormData}
             reqName="have_broker_fee"
@@ -328,39 +331,37 @@ const page = () => {
         </div>
         <div className="w-3/4 flex flex-col  max-md:w-full">
           <h2 className="text-2xl font-medium ml-5 mt-5 mb-[10px]  max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
-            Tavsif
+            {t("add20")}
           </h2>
           <textarea
-            placeholder="O‘zingizni shu e’lonni ko‘rayotgan odam o’riniga qo’ying va tavsif yozing"
+            placeholder={t("add21")}
             className="w-full h-[177px] px-3 py-4 border-kulrangOch  text-kulrang bg-yozish text-sm rounded-[10px] outline-none"
             value={formData.description}
             onChange={handleDescriptionChange}
           ></textarea>
-          <p className="ml-5 text-kulrang mt-1 mb-5 text-sm">
-            Kamida 40ta belgi
-          </p>
+          <p className="ml-5 text-kulrang mt-1 mb-5 text-sm">{t("add22")}</p>
         </div>
 
         <div className="w-1/2 flex flex-col  max-md:w-full">
           <h2 className="text-2xl font-medium ml-5  max-md:mb-1 max-md:text-[16px] max-md:ml-[0px]">
-            E’lon beruvchi
+            {t("add23")}
           </h2>
           <SarlavhaKiritish
-            label="Ism"
+            label={t("add24")}
             type="text"
             formData={formData}
             setFormData={setFormData}
             reqName="user"
           />
           <SarlavhaKiritish
-            label="Telefon raqam"
+            label={t("add25")}
             type="text"
             formData={formData}
             setFormData={setFormData}
             reqName="phone"
           />
           <SarlavhaKiritish
-            label="Qo’shimcha telefon raqam"
+            label={t("add26")}
             type="number"
             formData={formData}
             setFormData={setFormData}
@@ -369,31 +370,13 @@ const page = () => {
         </div>
         <div className="w-full flex justify-center my-10">
           <div className="w-1/2 h-[50px]" onClick={handleSubmit}>
-            <Button main text="E’lonni joylash" color="white" />
+            <Button main text={t("add27")} color="white" />
           </div>
         </div>
       </form>
-      {seeMsg && (
-        <Msg
-          status="success"
-          seeMsg={seeMsg}
-          text="E'lon Muvofaqqiyatli qo'shildi"
-        />
-      )}
-      {seeMsgW && (
-        <Msg
-          status="warning"
-          seeMsg={seeMsgW}
-          text="Iltimos Hisobinggizni To'ldiring"
-        />
-      )}
-      {seeMsgWA && (
-        <Msg
-          status="warning"
-          seeMsg={seeMsgWA}
-          text="Bo'sh Ma'lumotlarni To'ldiring"
-        />
-      )}
+      {seeMsg && <Msg status="success" seeMsg={seeMsg} text={t("add28")} />}
+      {seeMsgW && <Msg status="warning" seeMsg={seeMsgW} text={t("add29")} />}
+      {seeMsgWA && <Msg status="warning" seeMsg={seeMsgWA} text={t("add30")} />}
       {seeTop && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm z-10">
           <div
@@ -408,15 +391,14 @@ const page = () => {
             </button>
             <TopgaChiqarish
               setTopDay={setTopDay}
-              title="E’loningizni Topga chiqarmoqchimisiz?"
-              text="E’loningizni sotish imkoniyatlarini oshiring va ko’proq xaridorlarni jalb qiling.
-    Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningizni Topga ko’taring."
+              title={t("add31")}
+              text={t("add32")}
             />
             <button
               className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto"
               onClick={handleButtonClick}
             >
-              Topga ko’tarish
+              {t("add33")}
             </button>
           </div>
         </div>

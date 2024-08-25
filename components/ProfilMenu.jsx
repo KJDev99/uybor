@@ -7,8 +7,10 @@ import Sozlamalar from "@/assets/images/sozlamalar.svg";
 import Profilchiqish from "@/assets/images/profilchiqish.svg";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const ProfilMenu = () => {
+  const { t } = useTranslation();
   const pathname = usePathname();
   const [selectedDuration, setSelectedDuration] = useState(pathname);
   const handleDurationClick = (duration) => {
@@ -32,7 +34,7 @@ const ProfilMenu = () => {
             onClick={() => handleDurationClick("/profil")}
           >
             <Image src={MeningElonlarim} alt="MeningElonlarim" />
-            <p className="ml-4">Mening e’lonlarim</p>
+            <p className="ml-4">{t("pmenu1")}</p>
           </div>
         </Link>
         <Link className="md:hidden" href={"/profil/myelon"}>
@@ -45,7 +47,7 @@ const ProfilMenu = () => {
             onClick={() => handleDurationClick("/profil/myelon")}
           >
             <Image src={MeningElonlarim} alt="MeningElonlarim" />
-            <p className="ml-4">Mening e’lonlarim</p>
+            <p className="ml-4">{t("pmenu1")}</p>
           </div>
         </Link>
         <Link href={"/profil/hamkor"}>
@@ -58,7 +60,7 @@ const ProfilMenu = () => {
             onClick={() => handleDurationClick("/profil/hamkor")}
           >
             <Image src={Tolovlar} alt="hamkor" />
-            <p className="ml-4">Hamkorlar</p>
+            <p className="ml-4">{t("pmenu2")}</p>
           </div>
         </Link>
         <Link href={"/profil/tolovlar"}>
@@ -71,7 +73,7 @@ const ProfilMenu = () => {
             onClick={() => handleDurationClick("/profil/tolovlar")}
           >
             <Image src={Tolovlar} alt="tolovlar" />
-            <p className="ml-4">To’lovlar</p>
+            <p className="ml-4">{t("pmenu3")}</p>
           </div>
         </Link>
         <Link href={"/profil/sozlamalar"}>
@@ -84,7 +86,7 @@ const ProfilMenu = () => {
             onClick={() => handleDurationClick("/profil/sozlamalar")}
           >
             <Image src={Sozlamalar} alt="sozlamalar" />
-            <p className="ml-4">Sozlamalar</p>
+            <p className="ml-4">{t("pmenu4")}</p>
           </div>
         </Link>
         <Link href={"/profil/chiqish"}>
@@ -97,7 +99,7 @@ const ProfilMenu = () => {
             onClick={() => handleDurationClick("/profil/chiqish")}
           >
             <Image src={Profilchiqish} alt="profilchiqish" />
-            <p className="ml-4">Profildan chiqish</p>
+            <p className="ml-4">{t("pmenu5")}</p>
           </div>
         </Link>
       </div>

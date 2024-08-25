@@ -2,13 +2,13 @@
 import { useSearchParams } from "next/navigation";
 import Filter from "./Filter";
 import Search from "./Search";
-import { useTranslation } from "next-i18next";
+import { useTranslation } from "react-i18next";
 const Hero = () => {
   const searchParams = useSearchParams();
 
   // Tekshiruvni o'zgartirish
   const isSearchParamsEmpty = !searchParams || searchParams.toString() === "";
-  const { t } = useTranslation("common");
+  const { t } = useTranslation();
   return (
     <div
       className={`main_bg h-[calc(550px-80px)]  bg-no-repeat bg-cover bg-center ${
@@ -28,12 +28,10 @@ const Hero = () => {
         {isSearchParamsEmpty && (
           <div className="flex flex-col">
             <h1 className="mt-7 mb-3 font-semibold text-logoKok text-[42px] max-md:text-2xl max-md:mt-[30px] max-md:mb-[6px]">
-              {/* {t("mainTitle")} */}
-              Istaganingizni oson toping
+              {t("mainTitle")}
             </h1>
             <p className="text-logoKok font-semibold max-md:text-sm">
-              {/* {t("subTitle")} */}
-              Ko’chmas mulklarning katta bozori
+              {t("subTitle")}
             </p>
           </div>
         )}

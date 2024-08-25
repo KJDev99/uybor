@@ -3,6 +3,7 @@ import { AiOutlineLeft } from "react-icons/ai";
 import api from "@/lib/api";
 import Cookies from "js-cookie";
 import { router } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const ModalTastiq = ({ setStep, phone, closeModal }) => {
   // const useQueryParam = (param) => {
@@ -19,6 +20,8 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const { t } = useTranslation();
 
   const handleVerify = async () => {
     if (!code) {
@@ -64,12 +67,10 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
       >
         <AiOutlineLeft size={24} />
       </button>
-      <h3 className="text-center text-qora text-2xl mb-5">Tasdiqlash</h3>
-      <p className="text-kulrang text-sm">
-        Telefon raqamingizga yuborilgan kodni kiriting
-      </p>
+      <h3 className="text-center text-qora text-2xl mb-5">{t("login18")}</h3>
+      <p className="text-kulrang text-sm">{t("login19")}</p>
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
-        Tasdiqlash kodi
+        {t("login20")}
       </p>
       <input
         type="text"
@@ -80,9 +81,9 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
       />
       {error && <p className="text-red-500 mt-2">{error}</p>}
       <p className="mt-5 text-kulrang text-sm font-semibold">
-        Agar kod kelmagan bo'lsa
-        <span className="text-main cursor-pointer"> qayta yuborish</span>{" "}
-        bosing.
+        {t("login21")}
+        <span className="text-main cursor-pointer">{t("login22")}</span>{" "}
+        {t("login23")}
       </p>
       <button
         className="bg-main text-white h-[50px] mb-2 text-lg rounded-[5px] mt-5"

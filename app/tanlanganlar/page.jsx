@@ -11,8 +11,10 @@ import SeeLineAct from "@/assets/images/seelineact.svg";
 import SavedImg from "@/assets/images/saveelon.svg";
 import ElonBlock from "@/components/ElonBlock";
 import EmptyAds from "@/components/EmptyAds";
+import { useTranslation } from "react-i18next";
 
 const Tanlanganlar = () => {
+  const { t } = useTranslation();
   const [savedElons, setSavedElons] = useState([]);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ const Tanlanganlar = () => {
         <>
           <div className="flex max-md:flex-col justify-between mt-[50px] mb-[30px]  max-md:mt-[10px]">
             <h2 className="text-2xl text-qora font-semibold max-md:text-[16px]">
-              Tanlanganlar
+              {t("tanlangan")}
             </h2>
             <div className="flex ">
               <div className="flex items-center">
@@ -122,7 +124,7 @@ const Tanlanganlar = () => {
           </div>
         </>
       ) : (
-        <EmptyAds text="Hozircha tanlanganlar yo’q" />
+        <EmptyAds text={t("tanlanganyoq")} />
       )}
     </div>
   );

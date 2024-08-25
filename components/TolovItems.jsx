@@ -1,6 +1,7 @@
 import React from "react";
 
 const TolovItems = ({ bg, chek, created, users, amount }) => {
+  const { t } = useTranslation();
   // Sanani va vaqtni formatlash uchun yordamchi funksiyalar
   const formatDate = (isoDateString) => {
     const date = new Date(isoDateString);
@@ -51,7 +52,7 @@ const TolovItems = ({ bg, chek, created, users, amount }) => {
           onClick={handleDownload}
           className="bg-white border border-[#015EA8] cursor-pointer text-[#015EA8] rounded-[6px] w-[84px] h-6"
         >
-          Ko’rish
+          {t("hamkor21")}
           <img src={chek} alt="Download" className="w-0 h-0" />
         </button>
       </p>

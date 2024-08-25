@@ -3,6 +3,7 @@ import api from "@/lib/api";
 import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import MapComponent from "./MapComponent";
+import { useTranslation } from "react-i18next";
 const AddManzil = ({ formData, setFormData, value }) => {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isDistrictOpen, setIsDistrictOpen] = useState(false);
@@ -14,6 +15,8 @@ const AddManzil = ({ formData, setFormData, value }) => {
   const districtRef = useRef(null);
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState({});
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     setSelectedCategory(value?.region.id);
@@ -107,10 +110,10 @@ const AddManzil = ({ formData, setFormData, value }) => {
   return (
     <div className="flex flex-col relative mr-[10px]">
       <h2 className="text-qora text-2xl font-semibold ml-[20px] mt-5 mb-2 max-md:ml-0 max-md:text-[16px] max-md:mb-1">
-        Manzil
+        {t("muallif2")}
       </h2>
       <p className="text-sm text-kulrang mb-2 ml-[20px] max-md:ml-0">
-        Manzilni qo’lda yozing yoki xaritadan belgilang
+        {t("add9")}
       </p>
       <div className="flex gap-5 max-md:flex-col mb-5" ref={categoryRef}>
         <div

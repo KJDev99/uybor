@@ -12,6 +12,7 @@ import { AiOutlineClose, AiOutlineLeft } from "react-icons/ai";
 import LoginModal from "./LoginModal";
 import MobileNavBar from "./MobileNavBar";
 import Cookies from "js-cookie";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   const [isOpenLogin, setIsOpenLogin] = useState(false);
@@ -25,6 +26,8 @@ const Navbar = () => {
   };
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const checkAuthStatus = () => {
@@ -70,18 +73,18 @@ const Navbar = () => {
                   {savedElons.length}
                 </span>
               ) : null}
-              <Button color="qora" image={Savedmsg} text="Tanlanganlar" />
+              <Button color="qora" image={Savedmsg} text={t("navbar1")} />
             </div>
           </Link>
           {isAuthenticated ? (
             <Link href="/profil">
               <div className="ml-8">
-                <Button color="qora" image={Profil} text="Profil" />
+                <Button color="qora" image={Profil} text={t("navbar2")} />
               </div>
             </Link>
           ) : (
             <div className="ml-8" onClick={openModalTop}>
-              <Button color="qora" image={Profil} text="Kirish" />
+              <Button color="qora" image={Profil} text={t("navbar3")} />
             </div>
           )}
 
@@ -93,7 +96,7 @@ const Navbar = () => {
                   borderRadiusFull
                   color="white"
                   image={Elonberish}
-                  text="E’lon joylash"
+                  text={t("navbar4")}
                 />
               </div>
             </Link>
@@ -104,7 +107,7 @@ const Navbar = () => {
                 borderRadiusFull
                 color="white"
                 image={Elonberish}
-                text="E’lon joylash"
+                text={t("navbar4")}
               />
             </div>
           )}

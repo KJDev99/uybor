@@ -5,8 +5,11 @@ import ElonBlock from "./ElonBlock";
 import api from "@/lib/api";
 import ElonBlockSkeleton from "./ElonBlockSkeleton";
 import { useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const Tavfsiya = ({ setCount }) => {
+  const { t } = useTranslation();
+
   const view = useSelector((state) => state.view);
 
   const [ads, setAds] = useState([]);
@@ -164,7 +167,7 @@ const Tavfsiya = ({ setCount }) => {
             !nextPageUrl && "hidden h-0"
           }`}
         >
-          Yana ko’rsatish
+          {t("buttonYana")}
         </button>
       </div>
     );
@@ -173,7 +176,7 @@ const Tavfsiya = ({ setCount }) => {
     <div className="flex flex-col container mb-[60px] mt-5">
       <div className="flex flex-col">
         <h2 className="text-main mb-[30px] font-semibold text-2xl max-md:text-sm max-md:mb-[10px]">
-          Tavsiya etamiz
+          {t("tavsiya")}
         </h2>
         <div
           className={`flex flex-wrap ${

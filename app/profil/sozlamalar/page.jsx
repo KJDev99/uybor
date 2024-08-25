@@ -8,6 +8,7 @@ import SarlavhaKiritishEdit from "@/components/SarlavhaKiritishEdit";
 import rasmYuklash from "@/assets/images/rasmyuklash.png";
 import Loader from "@/components/Loader";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
 const ProfilePage = () => {
   const [userData, setUserData] = useState(null);
@@ -16,6 +17,7 @@ const ProfilePage = () => {
   const [image, setImage] = useState(null);
   const [image1, setImage1] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
   const [formValues, setFormValues] = useState({
     fullName: "",
     newPassword: "",
@@ -117,7 +119,7 @@ const ProfilePage = () => {
           },
         });
 
-        setSuccess("Profil ma’lumotlari muvaffaqiyatli yangilandi!");
+        setSuccess(t("sozlamalar1"));
         // Refresh the user data to reflect changes
         window.location.reload();
       } catch (err) {
@@ -142,56 +144,56 @@ const ProfilePage = () => {
         className="md:hidden text-lg font-semibold flex items-center max-md:mb-5"
       >
         <FaAngleLeft />
-        Profil
+        {t("navbar2")}
       </Link>
       <h2 className="text-lg text-[#343434] font-semibold md:hidden">
-        Sozlamalar
+        {t("sozlamalar2")}
       </h2>
       <div className="flex justify-between w-full max-md:flex-col-reverse">
         <div className="w-3/5 flex flex-col max-md:w-full">
           <h2 className="text-xl text-qora font-semibold max-md:hidden">
-            Profil ma’lumotlari
+            {t("sozlamalar7")}
           </h2>
           <SarlavhaKiritishEdit
-            label="Ismingiz"
+            label={t("login6")}
             type="text"
-            placeholder="Ism"
+            placeholder={t("login7")}
             name="fullName"
             value={formValues.fullName}
             onChange={handleInputChange}
           />
           <SarlavhaKiritishEdit
-            label="Telefon raqam"
+            label={t("login3")}
             type="text"
-            placeholder="Telefon raqam"
+            placeholder={t("login3")}
             value={userData.phone} // Displaying phone number, but it's not editable
             disabled
           />
           <h2 className="text-xl text-qora font-semibold mt-[30px]">
-            Parolni yangilash
+            {t("login25")}
           </h2>
           <SarlavhaKiritishEdit
-            label="Yangi parol"
+            label={t("sozlamalar3")}
             type="password"
-            placeholder="Yangi parol"
+            placeholder={t("sozlamalar3")}
             name="newPassword"
             value={formValues.newPassword}
             onChange={handleInputChange}
           />
           <SarlavhaKiritishEdit
-            label="Yangi parolni tasdiqlang"
+            label={t("sozlamalar4")}
             type="password"
-            placeholder="Yangi parolni tasdiqlang"
+            placeholder={t("sozlamalar4")}
             name="confirmPassword"
             value={formValues.confirmPassword}
             onChange={handleInputChange}
-            message={formErrors.passwordError ? "Parollar mos kelmayapti." : ""}
+            message={formErrors.passwordError ? t("sozlamalar8") : ""}
           />
           <button
             className="h-[44px] w-full border-none bg-main outline-none text-white text-lg rounded-[10px] mt-[30px]"
             onClick={handleSubmit}
           >
-            Saqlash
+            {t("sozlamalar5")}
           </button>
         </div>
         <div className="w-2/5 flex flex-col items-center max-md:w-full">
@@ -216,7 +218,7 @@ const ProfilePage = () => {
               className="absolute inset-0 opacity-0 cursor-pointer"
             />
             <div className="cursor-pointer absolute bottom-0 left-0 h-[38px] max-md:h-[30px] max-md:text-[10px] w-full bg-[#ffffffcd] text-lg text-logoKok flex items-center justify-center">
-              O’zgartirish
+              {t("sozlamalar6")}
             </div>
           </div>
         </div>

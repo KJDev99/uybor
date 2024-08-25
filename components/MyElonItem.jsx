@@ -12,6 +12,7 @@ import api from "@/lib/api";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import Msg from "./Msg";
+import { useTranslation } from "react-i18next";
 const MyElonItem = ({
   top,
   image,
@@ -33,6 +34,9 @@ const MyElonItem = ({
   const [topDay, setTopDay] = useState("");
   const router = useRouter();
   const [seeMsg, setSeeMsg] = useState("0");
+
+  const { t } = useTranslation();
+
   const openModalTop = () => {
     setIsOpenTop(true);
     document.body.style.overflow = "hidden";
@@ -98,7 +102,7 @@ const MyElonItem = ({
         <div className="relative max-md:w-[130px] max-md:flex-shrink-0">
           {top && (
             <div className="absolute left-0 top-0 bg-sariq rounded-tl-[20px] rounded-tr-[0px] rounded-br-[15px] rounded-bl-[0px] color-white flex item items-center justify-center font-medium text-white h-[30px] w-[78px] max-md:w-[45px] max-md:h-[22px] max-md:rounded-tl-[5px] max-md:rounded-tr-[0px] max-md:rounded-br-[5px] max-md:rounded-bl-[0px] max-md:text-xs">
-              Top
+              {t("tope")}
             </div>
           )}
           <img
@@ -112,7 +116,7 @@ const MyElonItem = ({
               turi == "RENT" ? "bg-ijara" : "bg-ochYashil"
             }`}
           >
-            {turi == "RENT" ? "Ijara" : "Sotiladi"}
+            {turi == "RENT" ? t("RENT") : t("SOLD")}
           </div>
         </div>
         <div className="py-5 px-5 max-md:p-[10px] flex flex-col flex-grow">
@@ -141,14 +145,14 @@ const MyElonItem = ({
                 className="text text-qora px-4 py-1 rounded-md font-medium bg-[#FFE8BC] outline-none border-none flex justify-center items-center"
               >
                 <Image src={StarImg} alt="edit" className="mr-2" />
-                Topga chiqarish
+                {t("add33")}
               </button>
             )}
             {(status == "aktiv" || status == "tasdiq") && (
               <Link href={`/editads/${id}`}>
                 <button className="text text-qora px-4 py-1 rounded-md font-medium bg-[#E7F4FF] outline-none border-none flex justify-center items-center">
                   <Image src={EditImg} alt="edit" className="mr-2" />
-                  Tahrirlash
+                  {t("myelon1")}
                 </button>
               </Link>
             )}
@@ -158,12 +162,12 @@ const MyElonItem = ({
                 className="text text-qora px-4 py-1 rounded-md font-medium bg-[#CFFFDD] outline-none border-none flex justify-center items-center"
               >
                 <Image src={FinishImg} alt="edit" className="mr-2" />
-                Yakunlash
+                {t("myelon2")}
               </button>
             )}
             {status == "bekor" && (
               <button className="text cursor-not-allowed text-white px-4 py-1 rounded-md font-medium bg-[#FF0000] outline-none border-none flex justify-center items-center">
-                Rad etilgan
+                {t("myelon3")}
               </button>
             )}
           </div>
@@ -186,15 +190,14 @@ const MyElonItem = ({
             </button>
             <TopgaChiqarish
               setTopDay={setTopDay}
-              title="E’loningizni Topga chiqarmoqchimisiz?"
-              text="E’loningizni sotish imkoniyatlarini oshiring va ko’proq xaridorlarni jalb qiling.
-Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningizni Topga ko’taring."
+              title={t("add31")}
+              text={t("add32")}
             />
             <button
               className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto"
               onClick={handleButtonClick}
             >
-              Topga ko’tarish
+              {t("add33")}
             </button>
           </div>
         </div>
@@ -215,23 +218,21 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
               <AiOutlineClose size={24} />
             </button>
             <h2 className="text-3xl font-semibold mb-5 text-qora">
-              E’lonni yakunlash
+              {t("myelon4")}
             </h2>
-            <p className="text-qora mb-[50px]">
-              E’lonni yakunlashni tasdiqlaysizmi?
-            </p>
+            <p className="text-qora mb-[50px]">{t("myelon5")}</p>
             <div className="flex justify-center">
               <button
                 onClick={handleConfirm}
                 className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5"
               >
-                Ha
+                {t("ha")}
               </button>
               <button
                 onClick={closeModal}
                 className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5"
               >
-                Yoq
+                {t("yoq")}
               </button>
             </div>
           </div>
@@ -244,14 +245,14 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
             className="text text-qora px-4 py-1 rounded-md max-md:rounded-[5px] font-medium bg-[#FFE8BC] outline-none border-none flex justify-center items-center max-md:text-xs max-md:px-1 max-md:h-[30px] "
           >
             <Image src={StarImg} alt="edit" className="mr-[6px]" />
-            Topga chiqarish
+            {t("add33")}
           </button>
         )}
         {(status == "aktiv" || status == "tasdiq") && (
           <Link href={`/editads/${id}`}>
             <button className="text text-qora px-4 py-1 rounded-md max-md:rounded-[5px] font-medium bg-[#E7F4FF] outline-none border-none flex justify-center items-center max-md:text-xs max-md:px-1 max-md:h-[30px] ">
               <Image src={EditImg} alt="edit" className="mr-[6px]" />
-              Tahrirlash
+              {t("myelon1")}
             </button>
           </Link>
         )}
@@ -261,7 +262,7 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
             className="text text-qora px-4 py-1 rounded-md max-md:rounded-[5px] font-medium bg-[#CFFFDD] outline-none border-none flex justify-center items-center max-md:text-xs max-md:px-1 max-md:h-[30px]  "
           >
             <Image src={FinishImg} alt="edit" className="mr-[6px]" />
-            Yakunlash
+            {t("myelon2")}
           </button>
         )}
         {isOpenTop && (
@@ -285,7 +286,7 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
 Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningizni Topga ko’taring."
               />
               <button className="bg-logoKok rounded-[10px] text-white w-1/2 h-10 mx-auto">
-                Topga ko’tarish
+                {t("add33")}
               </button>
             </div>
           </div>
@@ -306,23 +307,21 @@ Siz uchun manfaatli bo’lgan quyidagi paketlardan birini tanlang va e’loningi
                 <AiOutlineClose size={24} />
               </button>
               <h2 className="text-3xl font-semibold mb-5 text-qora">
-                E’lonni yakunlash
+                {t("myelon4")}
               </h2>
-              <p className="text-qora mb-[50px]">
-                E’lonni yakunlashni tasdiqlaysizmi?
-              </p>
+              <p className="text-qora mb-[50px]">{t("myelon5")}</p>
               <div className="flex justify-center">
                 <button
                   onClick={handleConfirm}
                   className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5"
                 >
-                  Ha
+                  {t("ha")}
                 </button>
                 <button
                   onClick={closeModal}
                   className="border hover:border-logoKok hover:bg-ochKok border-kulrang text-kulrang  rounded-[10px] transition hover:text-qora w-[150px] h-10 mx-5"
                 >
-                  Yoq
+                  {t("yoq")}
                 </button>
               </div>
             </div>

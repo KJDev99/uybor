@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import Link from "next/link";
 import CurrencyComponent from "./CurrencyComponent";
 import { FaEye } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const ElonBlock = ({
   top,
@@ -24,6 +25,8 @@ const ElonBlock = ({
 }) => {
   const [saved, setSaved] = useState(save);
   let view = useSelector((state) => state.view);
+
+  const { t } = useTranslation();
 
   let currencyNow = useSelector((state) => state.currency);
 
@@ -69,7 +72,7 @@ const ElonBlock = ({
             <div className="relative">
               {top && (
                 <div className="absolute left-0 top-0 bg-sariq rounded-tl-[20px] rounded-tr-[0px] rounded-br-[15px] rounded-bl-[0px] color-white flex item items-center justify-center font-medium text-white h-[30px] w-[78px] max-md:w-[45px] max-md:h-[22px] max-md:rounded-tl-[5px] max-md:rounded-tr-[0px] max-md:rounded-br-[5px] max-md:rounded-bl-[0px] max-md:text-xs">
-                  Top
+                  {t("tope")}
                 </div>
               )}
               <img
@@ -133,7 +136,7 @@ const ElonBlock = ({
             <div className="relative max-md:w-[130px] max-md:flex-shrink-0">
               {top && (
                 <div className="absolute left-0 top-0 bg-sariq rounded-tl-[20px] rounded-tr-[0px] rounded-br-[15px] rounded-bl-[0px] color-white flex item items-center justify-center font-medium text-white h-[30px] w-[78px] max-md:w-[45px] max-md:h-[22px] max-md:rounded-tl-[5px] max-md:rounded-tr-[0px] max-md:rounded-br-[5px] max-md:rounded-bl-[0px] max-md:text-xs">
-                  Top
+                  {t("tope")}
                 </div>
               )}
               <img

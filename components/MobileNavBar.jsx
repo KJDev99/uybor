@@ -6,6 +6,7 @@ import Profil from "@/assets/images/profil.svg";
 import Mediauy from "@/assets/images/mediauy.svg";
 import Mediaelon from "@/assets/images/mediaelon.svg";
 import Savedmsg from "@/assets/images/savedmsg.svg";
+import { t } from "i18next";
 
 const MobileNavBar = ({ isAuthenticated, openModalTop }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -42,8 +43,8 @@ const MobileNavBar = ({ isAuthenticated, openModalTop }) => {
         className="mx-[12px] flex flex-col items-center justify-center my-2"
       >
         <Image src={Mediauy} alt="Image" />
-        <p className="text-[#343434] font-medium mt-2 text-xs">
-          Bosh&nbsp;sahifa
+        <p className="text-[#343434] font-medium mt-2 text-xs text-nowrap">
+          {t("navbar5")}
         </p>
       </Link>
 
@@ -53,8 +54,8 @@ const MobileNavBar = ({ isAuthenticated, openModalTop }) => {
           className="mx-[12px] flex flex-col items-center justify-center my-2"
         >
           <Image src={Mediaelon} alt="Image" />
-          <p className="text-[#343434] font-medium mt-2 text-xs">
-            E'lon&nbsp;joylash
+          <p className="text-[#343434] font-medium mt-2 text-xs text-nowrap">
+            {t("navbar4")}
           </p>
         </Link>
       ) : (
@@ -63,8 +64,8 @@ const MobileNavBar = ({ isAuthenticated, openModalTop }) => {
           className="mx-[12px] flex flex-col items-center justify-center my-2 cursor-pointer"
         >
           <Image src={Mediaelon} alt="Image" />
-          <p className="text-[#343434] font-medium mt-2 text-xs">
-            E'lon&nbsp;joylash
+          <p className="text-[#343434] font-medium mt-2 text-xs text-nowrap">
+            {t("navbar4")}
           </p>
         </div>
       )}
@@ -73,7 +74,9 @@ const MobileNavBar = ({ isAuthenticated, openModalTop }) => {
         className="mx-[12px] flex flex-col items-center justify-center my-2"
       >
         <Image src={Savedmsg} alt="Image" />
-        <p className="text-[#343434] font-medium mt-2 text-xs">Tanlanganlar</p>
+        <p className="text-[#343434] font-medium mt-2 text-xs text-nowrap">
+          {t("navbar1")}
+        </p>
       </Link>
       {isAuthenticated ? (
         <Link
@@ -81,7 +84,9 @@ const MobileNavBar = ({ isAuthenticated, openModalTop }) => {
           className="mx-[12px] flex flex-col items-center justify-center my-2"
         >
           <Image src={Profil} alt="Image" />
-          <p className="text-[#343434] font-medium mt-2 text-xs">Profil</p>
+          <p className="text-[#343434] font-medium mt-2 text-xs text-nowrap">
+            {t("navbar2")}
+          </p>
         </Link>
       ) : (
         <div
@@ -89,7 +94,9 @@ const MobileNavBar = ({ isAuthenticated, openModalTop }) => {
           onClick={openModalTopMedia}
         >
           <Image src={Profil} alt="Image" />
-          <p className="text-[#343434] font-medium mt-2 text-xs">Kirish</p>
+          <p className="text-[#343434] font-medium mt-2 text-xs text-nowrap">
+            {t("navbar3")}
+          </p>
         </div>
       )}
     </div>

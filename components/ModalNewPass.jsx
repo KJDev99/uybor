@@ -44,14 +44,10 @@ const ModalNewPass = ({ setStep }) => {
       >
         <AiOutlineLeft size={24} />
       </button>
-      <h3 className="text-center text-qora text-2xl mb-5">
-        Parolni unutdingizmi?
-      </h3>
-      <p className="text-kulrang text-sm text-center">
-        Tasdiqlash jarayoni uchun telefon raqam kiriting
-      </p>
+      <h3 className="text-center text-qora text-2xl mb-5">{t("login5")}</h3>
+      <p className="text-kulrang text-sm text-center">{t("login10")}</p>
       <p className="mt-5 mb-2 ml-5 text-qora font-medium text-sm">
-        Telefon raqamingiz
+        {t("login2")}
       </p>
       <InputMask
         mask="+998__-___-__-__"
@@ -63,7 +59,7 @@ const ModalNewPass = ({ setStep }) => {
         }}
       >
         {(inputProps) => (
-          <input type="tel" placeholder="Telefon raqam" {...inputProps} />
+          <input type="tel" placeholder={t("login3")} {...inputProps} />
         )}
       </InputMask>
       {error && <p className="text-red-500 text-xs italic mt-2">{error}</p>}
@@ -71,7 +67,7 @@ const ModalNewPass = ({ setStep }) => {
         className="bg-main text-white h-[50px] mb-2 text-lg rounded-[5px] mt-5"
         onClick={handleContinue}
       >
-        Davom etish
+        {t("login17")}
       </button>
     </div>
   );

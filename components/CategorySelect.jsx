@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { FaChevronLeft } from "react-icons/fa6";
 
 const CategorySelect = ({ setCategory }) => {
+  const { t } = useTranslation();
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const categoryRef = useRef(null);
@@ -25,7 +27,9 @@ const CategorySelect = ({ setCategory }) => {
       setSelectedCategories(updatedCategories);
       setCategory(updatedCategories);
     } else {
-      const updatedCategories = selectedCategories.filter((item) => item !== category);
+      const updatedCategories = selectedCategories.filter(
+        (item) => item !== category
+      );
       setSelectedCategories(updatedCategories);
       setCategory(updatedCategories);
     }
@@ -40,7 +44,7 @@ const CategorySelect = ({ setCategory }) => {
 
   const displaySelectedCategories = () => {
     if (selectedCategories.length === 0) {
-      return "Hammasi";
+      return t("all");
     } else if (selectedCategories.length === 1) {
       return selectedCategories[0];
     } else {
@@ -50,7 +54,9 @@ const CategorySelect = ({ setCategory }) => {
 
   return (
     <div className="flex flex-col relative mr-[10px]">
-      <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">Kategoriya</h2>
+      <h2 className="text-qora font-medium ml-[10px] mt-5 mb-1">
+        {t("filter4")}
+      </h2>
       <div className="flex flex-col" ref={categoryRef}>
         <div
           className={`flex p-[10px] h-10 w-[200px] max-md:w-full rounded-[10px] justify-between items-center cursor-pointer ${
@@ -78,11 +84,11 @@ const CategorySelect = ({ setCategory }) => {
         {isCategoryOpen && (
           <div className="flex flex-col p-[10px] mt-2 rounded-[10px] absolute bg-white shadow-lg w-[280px] max-md:w-full top-[90px] z-[11]">
             {[
-              "Kvartiralar",
-              "Xovlilar",
-              "Do'konlar",
-              "Ofislar",
-              "Mehmonxona va dachalar",
+              t("APARTMENT"),
+              t("HOUSE"),
+              t("SHOP"),
+              t("OFFICE"),
+              t("HOTEL"),
             ].map((category, index) => (
               <label
                 key={index}

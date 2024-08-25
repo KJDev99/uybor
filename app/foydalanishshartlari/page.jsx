@@ -1,6 +1,9 @@
+"use client";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const page = () => {
+  const { t } = useTranslation();
   return (
     <div className="container">
       <div className="flex flex-col text-[#343434]">
@@ -200,12 +203,12 @@ const page = () => {
         <p className="mb-5">
           7.1. Shartnoma tomonlar imzolagan paytdan boshlab kuchga kiradi va
           2025-yil 31-dekabrgacha, oʻzaro hisob-kitoblar boʻyicha esa ular
-          toʻliq bajarilgunga qadar amal qiladi. <br />7.2. Ushbu Shartnoma
-          O‘zbekiston Respublikasi fuqarolik qonunchiligida nazarda tutilgan
-          tartibda va asoslarda bekor qilinishi mumkin. <br />7.3. Tizimga kirish
-          faqat Foydalanuvchiga taqdim etiladi, tomonlar boshqa tomonning
-          oldindan roziligisiz shartnoma bo'yicha o'z majburiyatlarini uchinchi
-          shaxslarga topshirishlari mumkin emas;
+          toʻliq bajarilgunga qadar amal qiladi. <br />
+          7.2. Ushbu Shartnoma O‘zbekiston Respublikasi fuqarolik qonunchiligida
+          nazarda tutilgan tartibda va asoslarda bekor qilinishi mumkin. <br />
+          7.3. Tizimga kirish faqat Foydalanuvchiga taqdim etiladi, tomonlar
+          boshqa tomonning oldindan roziligisiz shartnoma bo'yicha o'z
+          majburiyatlarini uchinchi shaxslarga topshirishlari mumkin emas;
         </p>
       </div>
     </div>

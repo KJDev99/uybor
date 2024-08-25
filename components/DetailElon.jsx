@@ -20,6 +20,7 @@ import DeletedAds from "./DeletedAds";
 import Loader from "./Loader";
 import { Map, Placemark, YMaps } from "@pbe/react-yandex-maps";
 import { FaEye } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 const formatDate = (dateString) => {
   const date = parseISO(dateString);
@@ -107,22 +108,27 @@ const DetailElon = () => {
     sessionStorage.setItem("savedElons", JSON.stringify(updatedElons));
   };
 
+  const { t } = useTranslation();
+
   if (loading) return <Loader type="ball-grid-pulse" />;
-  if (error) return <DeletedAds text="Bu e’lon endi mavjud emas" />;
+  if (error) return <DeletedAds text={t("noelon")} />;
 
   const infos = [
-    { text1: "Turarjoy turi:", text2: adDetail.accommodation_type },
-    { text1: "Qurilish turi:", text2: adDetail.construction_type },
-    { text1: "Xonalar soni:", text2: adDetail.room },
-    { text1: "Qavat:", text2: adDetail.floor },
-    { text1: "Binoning qavatlari:", text2: adDetail.total_floor },
-    { text1: "Uy qurilgan yil:", text2: adDetail.house_built_year },
-    { text1: "Yashash maydoni:", text2: adDetail.living_area },
-    { text1: "Umumiy maydoni:", text2: adDetail.total_area },
-    { text1: "Mebel:", text2: adDetail.have_furniture ? "Bor" : "Yo'q" },
+    { text1: t("detail2"), text2: adDetail.accommodation_type },
+    { text1: t("detail3"), text2: adDetail.construction_type },
+    { text1: t("detail4"), text2: adDetail.room },
+    { text1: t("detail5"), text2: adDetail.floor },
+    { text1: t("detail6"), text2: adDetail.total_floor },
+    { text1: t("detail7"), text2: adDetail.house_built_year },
+    { text1: t("detail8"), text2: adDetail.living_area },
+    { text1: t("detail9"), text2: adDetail.total_area },
     {
-      text1: "Vositachilik haqi:",
-      text2: adDetail.have_broker_fee ? "Bor" : "Yo'q",
+      text1: t("detail10"),
+      text2: adDetail.have_furniture ? t("bor") : t("yoq"),
+    },
+    {
+      text1: t("detail11"),
+      text2: adDetail.have_broker_fee ? t("bor") : t("yoq"),
     },
   ];
 
@@ -140,7 +146,7 @@ const DetailElon = () => {
       // alert("URL copied to clipboard!"); // Optional: notify the user
     });
   };
-
+  const language = localStorage.getItem("language");
   return (
     <div className="container">
       <div className="grid grid-cols-3">
@@ -167,7 +173,7 @@ const DetailElon = () => {
               </h2>
               <div className="flex items-center">
                 <p className="text-sm max-md:text-xs font-medium mr-5 text-kulrang">
-                  Joyalangan sana!:
+                  {t("detail")}!
                 </p>
                 <p className="text-qora max-md:text-xs font-medium">
                   {formatDate(adDetail.created)}
@@ -198,20 +204,23 @@ const DetailElon = () => {
           </div>
           <div className="flex flex-col">
             <h2 className="mt-[30px] mb-[10px] text-qora font-semibold max-md:text-lg max-md:mb-3">
-              Qo’shimcha ma’lumotlar
+              {t("detail1")}
             </h2>
-            {infos.map((info, index) => (
-              <AddInfos
-                key={index}
-                bg={index % 2 === 0} // Har ikki element uchun bg klassini qo'shadi
-                text1={info.text1}
-                text2={info.text2}
-              />
-            ))}
+            {infos.map(
+              (info, index) =>
+                info.text2 && (
+                  <AddInfos
+                    key={index}
+                    bg={index % 2 === 0} // Har ikki element uchun bg klassini qo'shadi
+                    text1={info.text1}
+                    text2={info.text2}
+                  />
+                )
+            )}
           </div>
           <div className="flex flex-col">
             <h2 className="mt-[20px] mb-[10px] text-qora font-semibold  max-md:text-lg max-md:mb-3">
-              Tavsif
+              {t("tavsif")}
             </h2>
             <p className="p-5 bg-white rounded-[10px] text-qora text-xl max-md:text-sm max-md:p-[10px]">
               {adDetail.description}
@@ -221,7 +230,7 @@ const DetailElon = () => {
         <div className="col-span-1 max-md:col-span-3 flex flex-col max-md:flex-col-reverse mt-[30px]">
           <div className="bg-white shadow-lg p-[30px] rounded-[10px] max-md:my-5 ">
             <h2 className="text-xl mb-5 font-semibold text-qora ">
-              E’lon muallifi
+              {t("muallif")}
             </h2>
             <div className="flex items-center">
               {adDetail.user.photo && (
@@ -245,20 +254,24 @@ const DetailElon = () => {
             </div>
             <Link href={`/ads/${adDetail.user.id}`}>
               <div className="h-10 w-full border rounded-[10px] flex items-center justify-center text-white bg-main">
-                Muallifning barcha e’lonlari
+                {t("muallif1")}
               </div>
             </Link>
           </div>
           <div className="flex flex-col mb-5">
             <h2 className="mt-[30px] mb-5 text-qora font-semibold max-md:mt-5 max-md:mb-2">
-              Manzil
+              {t("muallif2")}
             </h2>
             <div className="flex">
               <p className="border border-yozish rounded-[10px] bg-white py-[6px] px-5  text-qora text-lg font-medium mr-5 max-md:text-xs max-md:p-1">
-                {adDetail.region.name_uz}
+                {language == "uz"
+                  ? adDetail.region.name_uz
+                  : adDetail.region.name_ru}
               </p>
               <p className="border border-yozish rounded-[10px] bg-white py-[6px] px-5  text-qora text-lg font-medium max-md:text-xs max-md:p-1">
-                {adDetail.district.name_uz}
+                {language == "uz"
+                  ? adDetail.district.name_uz
+                  : adDetail.district.name_ru}
               </p>
             </div>
             <p className="text-qora text-lg font-medium mt-[10px] mb-5 max-md:text-sm">
@@ -288,13 +301,13 @@ const DetailElon = () => {
       </div>
       <div className="flex flex-col mb-10">
         <h2 className="text-main mb-[30px] font-semibold text-2xl">
-          Muallifning boshqa e’lonlari
+          {t("muallif3")}
         </h2>
         <ElonSlider userId={adDetail.user.id} adId={adId} />
       </div>
       <div className="flex flex-col mb-[50px]">
         <h2 className="text-main mb-[30px] font-semibold text-2xl">
-          O’xshash e‘lonlar
+          {t("muallif4")}
         </h2>
         <ElonSlider category={adDetail.category} adId={adId} />
       </div>

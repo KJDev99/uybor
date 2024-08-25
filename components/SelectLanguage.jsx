@@ -1,27 +1,43 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaChevronLeft } from "react-icons/fa6";
 import Image from "next/image";
+import { useTranslation } from "react-i18next";
 
+// Tillar ro'yxati
 const languages = [
-  { code: "O'z", flag: "/images/uzbflag.png", name: "O’zbek tili" },
-  { code: "Ru", flag: "/images/rusflag.png", name: "Pусский язык" },
+  { code: "uz", flag: "/images/uzbflag.png", name: "O’zbek tili" },
+  { code: "ru", flag: "/images/rusflag.png", name: "Pусский язык" },
 ];
 
 const LanguageSelector = () => {
+  const { i18n } = useTranslation();
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem("language");
+    if (savedLanguage) {
+      const lang = languages.find(
+        (language) => language.code === savedLanguage
+      );
+      if (lang) {
+        setSelectedLanguage(lang);
+        i18n.changeLanguage(savedLanguage);
+      }
+    }
+  }, [i18n]);
 
   const toggleLanguage = () => {
     setIsLanguageOpen(!isLanguageOpen);
   };
 
-  const handleLanguageChange = (event) => {
-    const selectedLang = languages.find(
-      (lang) => lang.code === event.target.value
-    );
+  const handleLanguageChange = (lang) => {
+    const selectedLang = languages.find((language) => language.code === lang);
     if (selectedLang) {
       setSelectedLanguage(selectedLang);
+      i18n.changeLanguage(lang);
+      localStorage.setItem("language", lang);
     }
     setIsLanguageOpen(false);
   };
@@ -70,7 +86,7 @@ const LanguageSelector = () => {
                   value={language.code}
                   className="hidden"
                   checked={selectedLanguage.code === language.code}
-                  onChange={handleLanguageChange}
+                  onChange={() => handleLanguageChange(language.code)}
                 />
                 <p
                   className={`w-full px-2 py-2 text-xs rounded-md flex items-center justify-between ${

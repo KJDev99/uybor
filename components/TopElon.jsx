@@ -10,8 +10,10 @@ import ElonBlock from "./ElonBlock";
 import ElonBlockSkeleton from "./ElonBlockSkeleton"; // Importing the skeleton component
 import api from "@/lib/api";
 import { useSearchParams } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
 const TopElon = ({ count }) => {
+  const { t } = useTranslation();
   const view = useSelector((state) => state.view);
   const currencyNow = useSelector((state) => state.currency);
   const dispatch = useDispatch();
@@ -183,7 +185,7 @@ const TopElon = ({ count }) => {
             !nextPageUrl && "hidden h-0"
           }`}
         >
-          Yana ko’rsatish
+          {t("buttonYana")}
         </button>
       </div>
     );
@@ -194,13 +196,13 @@ const TopElon = ({ count }) => {
         <h2 className="text-2xl text-qora font-semibold max-md:text-lg max-md:mt-5 max-md:mb-2">
           {countTop + count == "undefined"
             ? ""
-            : `${countTop + count} ta ${
-                category.length == 1 ? category : ""
-              }  e’lon mavjud`}
+            : `${countTop + count} ${t("ta")} ${
+                category.length == 1 ? t(category) : ""
+              }  ${t("elonmavjud")}`}
         </h2>
         <div className="flex max-md:justify-between">
           <div className="flex items-center ">
-            <p className="text-qora font-medium">Ko'rinishi:</p>
+            <p className="text-qora font-medium">{t("korish")}:</p>
             <Image
               src={view === "block" ? SeeBlockAct : SeeBlock}
               alt="SeeBlock"
@@ -215,7 +217,7 @@ const TopElon = ({ count }) => {
             />
           </div>
           <div className="flex items-center">
-            <p className="text-qora font-medium md:ml-16">Valyuta:</p>
+            <p className="text-qora font-medium md:ml-16">{t("valyuta")}:</p>
             <p
               className={`mx-5 cursor-pointer font-medium ${
                 currencyNow === "UZS" ? "text-logoKok" : "text-kulrang"
@@ -238,7 +240,7 @@ const TopElon = ({ count }) => {
       <div className="flex flex-col">
         {ads.length > 0 && (
           <h2 className="text-main mb-[30px] max-md:mb-[10px] font-semibold text-2xl max-md:text-lg">
-            Top e’lonlar
+            {t("top")}
           </h2>
         )}
         <div

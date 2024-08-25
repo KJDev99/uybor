@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { FaChevronLeft } from "react-icons/fa";
 
 const KategoriyaTanlash = ({
@@ -10,6 +11,7 @@ const KategoriyaTanlash = ({
   reqName,
   value,
 }) => {
+  const { t } = useTranslation();
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -30,47 +32,51 @@ const KategoriyaTanlash = ({
 
     setSelectedCategory(category);
     setIsCategoryOpen(false);
-    if (category == "Kvartiralar")
+    if (category == t("APARTMENT"))
       setFormData({ ...formData, [reqName]: "APARTMENT" });
-    else if (category == "Xovlilar")
+    else if (category == t("HOUSE"))
       setFormData({ ...formData, [reqName]: "HOUSE" });
-    else if (category == "Ofislar")
+    else if (category == t("OFFICE"))
       setFormData({ ...formData, [reqName]: "OFFICE" });
-    else if (category == "Do'konlar")
+    else if (category == t("SHOP"))
       setFormData({ ...formData, [reqName]: "SHOP" });
-    else if (category == "Mehmonxona va dachalar")
+    else if (category == t("HOTEL"))
       setFormData({ ...formData, [reqName]: "HOTEL" });
-    else if (category == "birlamchi")
+    else if (category == t("NEW"))
       setFormData({ ...formData, [reqName]: "NEW" });
-    else if (category == "Ikkilamchi")
+    else if (category == t("OLD"))
       setFormData({ ...formData, [reqName]: "OLD" });
-    else if (category == "G'isht")
+    else if (category == t("BRICK"))
       setFormData({ ...formData, [reqName]: "BRICK" });
-    else if (category == "Panelli")
+    else if (category == t("PANEL"))
       setFormData({ ...formData, [reqName]: "PANEL" });
-    else if (category == "Monolit")
+    else if (category == t("MONOLITH"))
       setFormData({ ...formData, [reqName]: "MONOLITH" });
-    else if (category == "Blokli")
+    else if (category == t("BLOCK"))
       setFormData({ ...formData, [reqName]: "BLOCK" });
-    else if (category == "Bor") setFormData({ ...formData, [reqName]: true });
-    else if (category == "Yo'q") setFormData({ ...formData, [reqName]: false });
+    else if (category == t("bor"))
+      setFormData({ ...formData, [reqName]: true });
+    else if (category == t("yoq"))
+      setFormData({ ...formData, [reqName]: false });
     else setFormData({ ...formData, [reqName]: category });
   };
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     if (value) {
-      if (value == "APARTMENT") setSelectedCategory("Kvartiralar");
-      else if (value == "HOUSE") setSelectedCategory("Xovlilar");
-      else if (value == "OFFICE") setSelectedCategory("Ofislar");
-      else if (value == "SHOP") setSelectedCategory("Do'konlar");
-      else if (value == "HOTEL") setSelectedCategory("Mehmonxona va dachalar");
-      else if (value == "NEW") setSelectedCategory("birlamchi");
-      else if (value == "OLD") setSelectedCategory("Ikkilamchi");
-      else if (value == "BRICK") setSelectedCategory("G'isht");
-      else if (value == "PANEL") setSelectedCategory("Panel");
-      else if (value === true) setSelectedCategory("Bor");
-      else if (value === false) setSelectedCategory("Yo'q");
+      if (value == "APARTMENT") setSelectedCategory(t("APARTMENT"));
+      else if (value == "HOUSE") setSelectedCategory(t("HOUSE"));
+      else if (value == "OFFICE") setSelectedCategory(t("OFFICE"));
+      else if (value == "SHOP") setSelectedCategory(t("SHOP"));
+      else if (value == "HOTEL") setSelectedCategory(t("HOTEL"));
+      else if (value == "NEW") setSelectedCategory(t("NEW"));
+      else if (value == "OLD") setSelectedCategory(t("OLD"));
+      else if (value == "BRICK") setSelectedCategory(t("BRICK"));
+      else if (value == "PANEL") setSelectedCategory(t("PANEL"));
+      else if (value == "MONOLITH") setSelectedCategory(t("MONOLITH"));
+      else if (value == "BLOCK") setSelectedCategory(t("BLOCK"));
+      else if (value === true) setSelectedCategory(t("bor"));
+      else if (value === false) setSelectedCategory(t("yoq"));
       else setSelectedCategory(value); // Default case
     }
     return () => {
