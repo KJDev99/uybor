@@ -1,12 +1,13 @@
 import api from "@/lib/api";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { AiOutlineLeft } from "react-icons/ai";
 import InputMask from "react-input-mask";
 
 const ModalNewPass = ({ setStep }) => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(null);
-
+  const { t } = useTranslation();
   const validatePhone = () => {
     const phonePattern = /^\+998\d{2}-\d{3}-\d{2}-\d{2}$/;
     if (!phonePattern.test(phone)) {
@@ -22,12 +23,12 @@ const ModalNewPass = ({ setStep }) => {
       try {
         // Remove dashes for the payload
         const formattedPhone = phone;
-
+        const cleanPhone = formattedPhone.replace(/-/g, "");
         // Send POST request
         await api.post("/api/v1/user/forgot/password", {
-          phone: formattedPhone,
+          phone: cleanPhone,
         });
-        sessionStorage.setItem("phoneUser", formattedPhone);
+        sessionStorage.setItem("phoneUser", cleanPhone);
         setStep(6);
       } catch (err) {
         console.error(err); // Error logging

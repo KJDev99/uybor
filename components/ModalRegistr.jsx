@@ -55,10 +55,10 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
     if (valid) {
       setError(null);
       setSuccess(null);
-
+      const cleanPhone = phone.replace(/-/g, "");
       try {
         const response = await api.post("/api/v1/user/register", {
-          phone,
+          phone: cleanPhone,
           password,
           confirm_password: confirmPassword,
           full_name: fullName,

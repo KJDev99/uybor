@@ -33,10 +33,11 @@ const ModalTastiq = ({ setStep, phone, closeModal }) => {
     setError("");
 
     try {
+      const cleanPhone = phone.replace(/-/g, "");
       const referral = sessionStorage.getItem("referal");
 
       const payload = {
-        phone,
+        phone: cleanPhone,
         code: parseInt(code, 10),
       };
 

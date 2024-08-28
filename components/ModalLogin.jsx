@@ -36,8 +36,9 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
     if (validatePhone()) {
       setError(null);
       try {
+        const cleanPhone = phone.replace(/-/g, "");
         const response = await api.post("/api/v1/user/login", {
-          phone,
+          phone: cleanPhone,
           password,
         });
         Cookies.set("authToken", response.data.access);
