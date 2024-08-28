@@ -13,7 +13,10 @@ const SarlavhaKiritish = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
-  const userInfo = JSON.parse(localStorage.getItem("user"));
+  const [userInfo, setUser] = useState("");
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("user")));
+  }, []);
   const { t } = useTranslation();
 
   useEffect(() => {

@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { AiOutlineLeft } from "react-icons/ai";
 import api from "@/lib/api";

@@ -28,7 +28,7 @@ const ModalNewPass = ({ setStep }) => {
         await api.post("/api/v1/user/forgot/password", {
           phone: cleanPhone,
         });
-        sessionStorage.setItem("phoneUser", cleanPhone);
+        sessionStorage.setItem("phoneUser", cleanPhone``);
         setStep(6);
       } catch (err) {
         console.error(err); // Error logging

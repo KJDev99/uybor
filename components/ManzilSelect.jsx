@@ -11,9 +11,11 @@ const ManzilSelect = ({ setRegion, setDistrict }) => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
   const [categories, setCategories] = useState([]);
   const [districts, setDistricts] = useState({});
+  const [language, setLanguage] = useState("uz");
   const categoryRef = useRef(null);
-
-  const language = localStorage.getItem("language");
+  useEffect(() => {
+    setLanguage(localStorage.getItem("language"));
+  }, []);
 
   // Fetch categories from backend
   const fetchCategories = async () => {
