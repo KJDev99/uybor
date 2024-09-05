@@ -13,20 +13,23 @@ const SarlavhaKiritish = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
-  const [userInfo, setUser] = useState("");
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("user")));
-  }, []);
+
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (reqName === "user" && userInfo) {
-      setInputValue(userInfo.full_name || "");
-      setFormData({ ...formData, user: userInfo.id });
+    if (reqName === "user" && JSON.parse(localStorage.getItem("user"))) {
+      setInputValue(JSON.parse(localStorage.getItem("user")).full_name || "");
+      setFormData({
+        ...formData,
+        user: JSON.parse(localStorage.getItem("user")).id,
+      });
     }
-    if (reqName === "phone" && userInfo) {
-      setInputValue(userInfo.phone || "");
-      setFormData({ ...formData, phone: userInfo.phone });
+    if (reqName === "phone" && JSON.parse(localStorage.getItem("user"))) {
+      setInputValue(JSON.parse(localStorage.getItem("user")).phone || "");
+      setFormData({
+        ...formData,
+        phone: JSON.parse(localStorage.getItem("user")).phone,
+      });
     }
 
     if (value) {
