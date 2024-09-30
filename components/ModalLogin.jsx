@@ -120,10 +120,10 @@ const ModalLogin = ({ step, setStep, closeModal }) => {
         type="submit"
         className="bg-main text-white h-[50px] mb-2 text-lg rounded-[5px] max-md:text-[16px]"
       >
-        {t("login1")}
+        {t("login")}
       </button>
       <p className="text-center text-kulrang text-sm font-semibold max-md:text-xs">
-        {t("login11")}
+        {t("login11")}{" "}
         <Link
           onClick={closeModal}
           href="/foydalanishshartlari"
