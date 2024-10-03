@@ -22,6 +22,7 @@ const ElonBlock = ({
   id,
   see,
   views,
+  currency,
 }) => {
   const [saved, setSaved] = useState(save);
   let view = useSelector((state) => state.view);
@@ -57,12 +58,36 @@ const ElonBlock = ({
             data,
             price,
             views,
+            currency,
           },
         ]
       : savedElons.filter((elon) => elon.id !== id);
 
     sessionStorage.setItem("savedElons", JSON.stringify(updatedElons));
   };
+
+  const [rate, setRate] = useState(null);
+  useEffect(() => {
+    const fetchRate = async () => {
+      const storedRate = localStorage.getItem("currencyRate");
+      if (storedRate) {
+        setRate(JSON.parse(storedRate));
+      } else {
+        try {
+          const response = await api.get(
+            "https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/"
+          );
+          const newRate = response.data[0]?.Rate || 0;
+          localStorage.setItem("currencyRate", JSON.stringify(newRate));
+          setRate(newRate);
+        } catch (error) {
+          console.error("Error fetching currency rate:", error);
+        }
+      }
+    };
+
+    fetchRate();
+  }, []);
 
   return (
     <>
@@ -100,7 +125,7 @@ const ElonBlock = ({
               </h3>
               <p className="text-sm text-qora font-medium md:hidden">
                 <CurrencyComponent
-                  amount={price}
+                  amount={currency == "USD" ? price * 12 : price}
                   currency={currencyNow == "UZS" ? "USD" : "UZS"}
                 />
               </p>
@@ -122,7 +147,7 @@ const ElonBlock = ({
                 <p className="text-sm text-kulrang">{data}</p>
                 <p className="text-sm text-qora font-medium max-md:hidden">
                   <CurrencyComponent
-                    amount={price}
+                    amount={currency == "USD" ? price * rate : price}
                     currency={currencyNow == "UZS" ? "USD" : "UZS"}
                   />
                 </p>

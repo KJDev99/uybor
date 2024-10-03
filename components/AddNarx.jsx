@@ -19,28 +19,6 @@ const AddNarx = ({ formData, setFormData, value }) => {
       setFromValue(inputValue);
     }
   };
-  const [rate, setRate] = useState(null);
-  useEffect(() => {
-    const fetchRate = async () => {
-      const storedRate = localStorage.getItem("currencyRate");
-      if (storedRate) {
-        setRate(JSON.parse(storedRate));
-      } else {
-        try {
-          const response = await api.get(
-            "https://cbu.uz/uz/arkhiv-kursov-valyut/json/USD/"
-          );
-          const newRate = response.data[0]?.Rate || 0;
-          localStorage.setItem("currencyRate", JSON.stringify(newRate));
-          setRate(newRate);
-        } catch (error) {
-          console.error("Error fetching currency rate:", error);
-        }
-      }
-    };
-
-    fetchRate();
-  }, []);
 
   const categories = ["So'm", "Usd"];
 
@@ -59,10 +37,8 @@ const AddNarx = ({ formData, setFormData, value }) => {
     setSelectedCategory(category);
     setIsCategoryOpen(false);
     // setFormData({...formData, "currency":category});
-    if (category == "So'm")
-      setFormData({ ...formData, currency: "UZS", price: fromValue });
-    else if (category == "Usd")
-      setFormData({ ...formData, currency: "UZS", price: fromValue * rate });
+    if (category == "So'm") setFormData({ ...formData, currency: "UZS" });
+    else if (category == "Usd") setFormData({ ...formData, currency: "USD" });
   };
 
   useEffect(() => {

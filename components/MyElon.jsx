@@ -42,6 +42,7 @@ const MyElon = () => {
       });
       setMyElons(response.data); // Update state with the fetched ads
       response.data.results.reverse(); //);
+      console.log(response.data, "text");
     } catch (error) {
       console.error(
         "Xato:",
@@ -72,6 +73,7 @@ const MyElon = () => {
       });
       router.push("/profil");
       setMyElons(response.data);
+
       fetchMyAdsCount();
     } catch (err) {
       console.log(err);
@@ -180,6 +182,7 @@ const MyElon = () => {
               image={elon.media}
               name={elon.title}
               price={elon.price}
+              currency={elon.currency}
               data={elon.created}
               status={selectedDuration}
               turi={elon.ad_type}
