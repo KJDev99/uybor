@@ -124,7 +124,7 @@ const MyElonItem = ({
             {name}
           </h3>
           <p className="text-2xl text-qora font-semibold md:hidden max-md:text-sm max-md:font-bold max-md:mb-5">
-            {price} So'm
+            {Number(price).toLocaleString()} So'm
           </p>
           <div className="flex mt-2 mb-4 max-md:mb-1">
             <CiLocationOn className="text-lg" />
@@ -135,7 +135,7 @@ const MyElonItem = ({
           <div className="flex justify-between mb-3 items-center">
             <p className="text-sm text-kulrang">{formatDate(data)}</p>
             <p className="text-2xl text-qora font-semibold max-md:hidden ">
-              {price} So'm
+              {Number(price).toLocaleString()} So'm
             </p>
           </div>
           <div className="flex justify-end gap-5 border-t border-kulrang pt-[10px] max-md:hidden">
