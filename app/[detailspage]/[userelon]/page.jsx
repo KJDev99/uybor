@@ -13,16 +13,23 @@ import ElonBlock from "@/components/ElonBlock";
 import api from "@/lib/api";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import { setCurrency } from "@/store";
 
 const UserElon = () => {
   const [valyuta, setValyuta] = useState("uzs");
   const { t } = useTranslation();
+
+  const currencyNow = useSelector((state) => state.currency);
 
   const view = useSelector((state) => state.view);
   const dispatch = useDispatch();
 
   const handleViewChange = (newView) => {
     dispatch(setView(newView));
+  };
+
+  const handleCurrencyChange = (newCurrency) => {
+    dispatch(setCurrency(newCurrency));
   };
 
   const pathname = usePathname();
@@ -43,9 +50,10 @@ const UserElon = () => {
         name: ad.title,
         address: `${ad.region.name_uz} ${ad.district.name_uz}`,
         data: new Date(ad.created).toLocaleDateString("en-GB"),
-        price: `${ad.price.toLocaleString()} ${ad.currency}`,
+        price: ad.price,
         view: "block",
         id: ad.id,
+        currencyNow: currencyNow,
       }));
       setAds(transformedAds);
     } catch (err) {
@@ -85,20 +93,20 @@ const UserElon = () => {
             />
           </div>
           <div className="flex items-center">
-            <p className="text-qora font-medium ml-16">{t("valyuta")}:</p>
+            <p className="text-qora font-medium md:ml-16">{t("valyuta")}:</p>
             <p
               className={`mx-5 cursor-pointer font-medium ${
-                valyuta == "uzs" ? "text-logoKok" : "text-kulrang"
+                currencyNow === "UZS" ? "text-logoKok" : "text-kulrang"
               }`}
-              onClick={() => setValyuta("uzs")}
+              onClick={() => handleCurrencyChange("UZS")}
             >
               UZS
             </p>
             <p
               className={`cursor-pointer font-medium ${
-                valyuta == "usd" ? "text-logoKok" : "text-kulrang"
+                currencyNow === "USD" ? "text-logoKok" : "text-kulrang"
               }`}
-              onClick={() => setValyuta("usd")}
+              onClick={() => handleCurrencyChange("USD")}
             >
               USD
             </p>

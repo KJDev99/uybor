@@ -106,7 +106,7 @@ const Tanlanganlar = () => {
                     elon.region.name_uz + " " + elon.district.name_uz
                   }
                   name={elon.name || elon.title}
-                  image={elon.image || elon.media[0].file}
+                  image={elon.image}
                   price={elon.price || elon.price}
                   top={elon.top || elon.is_top}
                   turi={elon.turi || elon.ad_type}
