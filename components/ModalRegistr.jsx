@@ -67,9 +67,13 @@ const ModalRegistr = ({ setStep, step, setNumber, closeModal }) => {
         setStep(5);
         setNumber(phone);
       } catch (err) {
-        setError(
-          err.response.data.message || "Parol 8 ta belgi bo'lishi kerak!"
-        );
+        // console.log(err.response.data.detail);
+
+        if (err.response.data.detail == "User is already registered") {
+          setError("Ushbu nomerga foydalanuvchi mavjud");
+        } else {
+          setError("Parol 8 ta belgi bo'lishi kerak!");
+        }
       }
     }
   };
