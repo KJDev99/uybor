@@ -3,8 +3,32 @@ import Navbar from "@/components/Navbar";
 import "@/assets/styles/globals.css";
 import Footer from "@/components/Footer";
 import ClientProvider from "@/components/ClientProvider";
+// import { useEffect } from "react";
 
 const MainLayout = ({ children }) => {
+  // useEffect(() => {
+  //   // Google Tag Manager and Analytics initialization
+  //   const gtagScript = document.createElement("script");
+  //   gtagScript.src =
+  //     "https://www.googletagmanager.com/gtag/js?id=AW-16740535290";
+  //   gtagScript.async = true;
+  //   document.head.appendChild(gtagScript);
+
+  //   const gtagInitScript = document.createElement("script");
+  //   gtagInitScript.innerHTML = `
+  //     window.dataLayer = window.dataLayer || [];
+  //     function gtag(){dataLayer.push(arguments);}
+  //     gtag('js', new Date());
+  //     gtag('config', 'AW-16740535290');
+  //   `;
+  //   document.head.appendChild(gtagInitScript);
+
+  //   // Cleanup function to remove scripts on unmount
+  //   return () => {
+  //     document.head.removeChild(gtagScript);
+  //     document.head.removeChild(gtagInitScript);
+  //   };
+  // }, []);
   return (
     <html>
       <head>
@@ -19,16 +43,16 @@ const MainLayout = ({ children }) => {
           content="UkR4dh55Cj77k3gf1-90XU77TKTWqS6iGqR-z1wC7Tw"
         />
         <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
-        {/* <!-- Google tag (gtag.js) --> */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=AW-16740535290"
-        ></script>
-        <script>
-          window.dataLayer = window.dataLayer || []; function gtag()
-          {dataLayer.push(arguments)}
-          gtag('js', new Date()); gtag('config', 'AW-16740535290');
-        </script>
+        {/* <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16740535290">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-16740535290');
+</script> */}
         {/* Yandex.Metrika counter */}
         <script
           type="text/javascript"
