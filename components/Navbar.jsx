@@ -62,7 +62,7 @@ const Navbar = () => {
     <div className="bg-[#EDF7FF] max-md:mx-5 ">
       <div className="container h-20 flex justify-between border-b-[0.5px] border-logoKok max-md:hidden">
         <Link href="/" className="flex items-center">
-          <Image src={LogoImg} alt="Logo" className="w-[74px]" />
+          <Image src={LogoImg} alt="Logo" className="w-[150px]" />
         </Link>
         <div className="flex items-center">
           <LanguageSelector />
