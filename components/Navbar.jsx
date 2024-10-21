@@ -61,8 +61,8 @@ const Navbar = () => {
   return (
     <div className="bg-[#EDF7FF] max-md:mx-5 ">
       <div className="container h-20 flex justify-between border-b-[0.5px] border-logoKok max-md:hidden">
-        <Link href="/">
-          <Image src={LogoImg} alt="Logo" className="w-[74px] ml-[70px] mt-4" />
+        <Link href="/" className="flex items-center">
+          <Image src={LogoImg} alt="Logo" className="w-[74px]" />
         </Link>
         <div className="flex items-center">
           <LanguageSelector />
