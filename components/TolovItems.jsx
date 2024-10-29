@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const TolovItems = ({ bg, chek, created, users, amount }) => {
   const { t } = useTranslation();
@@ -50,7 +51,7 @@ const TolovItems = ({ bg, chek, created, users, amount }) => {
         {/* `chek` rasmni yuklab olish uchun tugma */}
         <button
           onClick={handleDownload}
-          className="bg-white border border-[#015EA8] cursor-pointer text-[#015EA8] rounded-[6px] w-[84px] h-6"
+          className="bg-white border border-[#015EA8] cursor-pointer text-[#015EA8] rounded-[6px] w-[84px] h-6 text-xs"
         >
           {t("hamkor21")}
           <img src={chek} alt="Download" className="w-0 h-0" />
