@@ -1,9 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import MyElonItem from "./MyElonItem";
-import NoItems from "./NoItems"; // Import your NoItems component
-import MainImg from "@/assets/images/asosiyrasm.png";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import NoItems from "./NoItems";
 import Link from "next/link";
 import { FaAngleLeft } from "react-icons/fa6";
 import Cookies from "js-cookie";
@@ -12,7 +10,6 @@ import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import Pagination from "./Pagination";
 
-const itemsPerPage = 20;
 const MyElon = () => {
   const { t } = useTranslation();
   const [selectedDuration, setSelectedDuration] = useState("aktiv");
@@ -21,7 +18,7 @@ const MyElon = () => {
   const [totalAds, setTotalAds] = useState(0);
   const [myElonsCount, setMyElonsCount] = useState({}); // Initialize as an empty object
   const router = useRouter();
-  // Fetch my ads and count
+
   const statusMapping = {
     aktiv: "ACTIVE",
     tasdiq: "WAITING",
@@ -29,12 +26,8 @@ const MyElon = () => {
     yakunlangan: "SOLD",
   };
 
-  const fetchMyAds = async (status, offset) => {
+  const fetchMyAds = async (status = "ACTIVE", offset) => {
     const authToken = Cookies.get("authToken");
-    if (!authToken) {
-      console.error("Foydalanuvchi tizimga kirilgan emas.");
-      return;
-    }
 
     try {
       const response = await api.get(
@@ -46,7 +39,7 @@ const MyElon = () => {
           },
         }
       );
-      setTotalAds(response.data.count); // Update total ads for pagination
+      setTotalAds(response.data.count);
       setMyElons(response.data);
       response.data.results.reverse();
     } catch (error) {
@@ -57,46 +50,16 @@ const MyElon = () => {
     }
   };
 
+  const handleDurationClick = (duration) => {
+    setSelectedDuration(duration);
+  };
+
   const handlePageChange = (page) => {
+    const status = statusMapping[selectedDuration] || "WAITING";
     const offset = (page - 1) * 10;
     setCurrentPage(page);
     fetchMyAds(status, offset);
   };
-
-  useEffect(() => {
-    document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
-    document.body.scrollTo({ top: 0, behavior: "smooth" });
-    const status = statusMapping[selectedDuration] || "WAITING"; // Default to "WAITING" if no match
-    fetchMyAds(status, (currentPage - 1) * 10);
-  }, [status, currentPage]);
-
-  // const fetchMyAds = async (status) => {
-  //   const authToken = Cookies.get("authToken");
-  //   if (!authToken) {
-  //     console.error("Foydalanuvchi tizimga kirilgan emas.");
-  //     return;
-  //   }
-
-  //   try {
-  //     const response = await api.get(
-  //       `/api/v1/ads/my-ads?status=${status}&offset=10&limit=10`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${authToken}`,
-  //           "Content-Type": "application/json",
-  //         },
-  //       }
-  //     );
-  //     setMyElons(response.data);
-  //     response.data.results.reverse();
-  //     console.log(response.data, "text");
-  //   } catch (error) {
-  //     console.error(
-  //       "Xato:",
-  //       error.response ? error.response.data : error.message
-  //     );
-  //   }
-  // };
 
   const handleConfirmAction = async (adId) => {
     const authToken = Cookies.get("authToken");
@@ -129,11 +92,6 @@ const MyElon = () => {
 
   const fetchMyAdsCount = async () => {
     const authToken = Cookies.get("authToken");
-    if (!authToken) {
-      console.error("Foydalanuvchi tizimga kirilgan emas.");
-      return;
-    }
-
     try {
       const response = await api.get("/api/v1/ads/count/ads", {
         headers: {
@@ -141,7 +99,7 @@ const MyElon = () => {
           "Content-Type": "application/json",
         },
       });
-      setMyElonsCount(response.data); // Ensure count is an object
+      setMyElonsCount(response.data);
     } catch (error) {
       console.error(
         "Xato:",
@@ -151,15 +109,13 @@ const MyElon = () => {
   };
 
   useEffect(() => {
-    const status = statusMapping[selectedDuration] || "WAITING"; // Default to "WAITING" if no match
-    fetchMyAds(status);
+    document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+    document.body.scrollTo({ top: 0, behavior: "smooth" });
+
+    const status = statusMapping[selectedDuration] || "WAITING";
+    fetchMyAds(status, (currentPage - 1) * 10);
     fetchMyAdsCount();
   }, [selectedDuration]);
-
-  const handleDurationClick = (duration) => {
-    setSelectedDuration(duration);
-  };
-
   return (
     <div className="bg-white md:px-5 pb-10 pt-[30px] max-md:pt-2 rounded-[10px] flex flex-col">
       <Link
