@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import LogoImg from "@/assets/images/logo.svg";
+import LogoImg from "@/assets/images/logo1.svg";
 import { FaFacebook } from "react-icons/fa";
 import { FaTelegram } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";

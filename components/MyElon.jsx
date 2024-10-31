@@ -10,12 +10,15 @@ import Cookies from "js-cookie";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import Pagination from "./Pagination";
 
 const itemsPerPage = 20;
 const MyElon = () => {
   const { t } = useTranslation();
   const [selectedDuration, setSelectedDuration] = useState("aktiv");
   const [myElons, setMyElons] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalAds, setTotalAds] = useState(0);
   const [myElonsCount, setMyElonsCount] = useState({}); // Initialize as an empty object
   const router = useRouter();
   // Fetch my ads and count
@@ -26,7 +29,7 @@ const MyElon = () => {
     yakunlangan: "SOLD",
   };
 
-  const fetchMyAds = async (status) => {
+  const fetchMyAds = async (status, offset) => {
     const authToken = Cookies.get("authToken");
     if (!authToken) {
       console.error("Foydalanuvchi tizimga kirilgan emas.");
@@ -34,15 +37,18 @@ const MyElon = () => {
     }
 
     try {
-      const response = await api.get(`/api/v1/ads/my-ads?status=${status}`, {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-          "Content-Type": "application/json",
-        },
-      });
-      setMyElons(response.data); // Update state with the fetched ads
-      response.data.results.reverse(); //);
-      console.log(response.data, "text");
+      const response = await api.get(
+        `/api/v1/ads/my-ads?status=${status}&offset=${offset}&limit=10`,
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setTotalAds(response.data.count); // Update total ads for pagination
+      setMyElons(response.data);
+      response.data.results.reverse();
     } catch (error) {
       console.error(
         "Xato:",
@@ -50,6 +56,47 @@ const MyElon = () => {
       );
     }
   };
+
+  const handlePageChange = (page) => {
+    const offset = (page - 1) * 10;
+    setCurrentPage(page);
+    fetchMyAds(status, offset);
+  };
+
+  useEffect(() => {
+    document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+    document.body.scrollTo({ top: 0, behavior: "smooth" });
+    const status = statusMapping[selectedDuration] || "WAITING"; // Default to "WAITING" if no match
+    fetchMyAds(status, (currentPage - 1) * 10);
+  }, [status, currentPage]);
+
+  // const fetchMyAds = async (status) => {
+  //   const authToken = Cookies.get("authToken");
+  //   if (!authToken) {
+  //     console.error("Foydalanuvchi tizimga kirilgan emas.");
+  //     return;
+  //   }
+
+  //   try {
+  //     const response = await api.get(
+  //       `/api/v1/ads/my-ads?status=${status}&offset=10&limit=10`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${authToken}`,
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+  //     setMyElons(response.data);
+  //     response.data.results.reverse();
+  //     console.log(response.data, "text");
+  //   } catch (error) {
+  //     console.error(
+  //       "Xato:",
+  //       error.response ? error.response.data : error.message
+  //     );
+  //   }
+  // };
 
   const handleConfirmAction = async (adId) => {
     const authToken = Cookies.get("authToken");
@@ -194,7 +241,16 @@ const MyElon = () => {
             />
           ))
         ) : (
-          <NoItems text={t("pmenu11")} /> // Display NoItems component if no ads are available
+          <NoItems text={t("pmenu11")} />
+        )}
+        {totalAds > 10 && (
+          <div className="w-full flex justify-end">
+            <Pagination
+              totalAds={totalAds}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+            />
+          </div>
         )}
       </div>
     </div>

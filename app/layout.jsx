@@ -42,7 +42,7 @@ const MainLayout = ({ children }) => {
           name="google-site-verification"
           content="UkR4dh55Cj77k3gf1-90XU77TKTWqS6iGqR-z1wC7Tw"
         />
-        <link rel="icon" href="/images/logo.svg" type="image/svg+xml" />
+        <link rel="icon" href="/images/logo3.png" type="image/svg+xml" />
         {/* <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16740535290">
 </script>
