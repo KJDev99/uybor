@@ -15,13 +15,13 @@ const Footer = () => {
           <div className="flex flex-col items-center max-md:col-span-3 max-md:items-start max-md:mb-[30px]">
             <Image src={LogoImg} alt="Logo" className="w-[74px]" />
             <div className="flex mt-7">
-              <a href="https://t.me/topuy_official" target="blank">
+              <a href="https://t.me/topuy_rasmiy" target="blank">
                 <FaTelegram className="text-white text-3xl mx-5 max-md:text-2xl max-md:mr-5 max-md:ml-0" />
               </a>
-              <a href="https://instagram.com/topuy_official" target="blank">
+              <a href="https://www.instagram.com/topuy_rasmiy/" target="blank">
                 <FaInstagram className="text-white text-3xl mx-5 max-md:text-2xl max-md:mr-5 max-md:ml-0" />
               </a>
-              <a href="https://instagram.com/topuy_official" target="blank">
+              <a href="https://www.facebook.com/topuy.rasmiy" target="blank">
                 <FaFacebook className="text-white text-3xl mx-5 max-md:text-2xl max-md:mr-5 max-md:ml-0" />
               </a>
             </div>

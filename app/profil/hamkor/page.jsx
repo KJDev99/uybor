@@ -120,8 +120,8 @@ const page = () => {
         </h2>
         <p className="max-md:text-sm">
           {t("hamkor3")}
-          <a className="text-logoKok" href="https://t.me/topuy_official">
-            https://t.me/topuy_official
+          <a className="text-logoKok" href="https://t.me/topuy_rasmiy">
+            https://t.me/topuy_rasmiy
           </a>
           {t("hamkor4")}….
         </p>

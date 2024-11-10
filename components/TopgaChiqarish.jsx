@@ -90,7 +90,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
             3 {t("top4")}
           </h2>
           <h3 className={`text-2xl mb-[10px] font-semibold `}>
-            10 000 {t("top5")}
+            4 000 {t("top5")}
           </h3>
           <p className="text-sm text-kulrang">{t("top6")}</p>
         </div>
@@ -110,7 +110,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
             7 {t("top4")}
           </h2>
           <h3 className={`text-2xl mb-[10px] font-semibold`}>
-            18 000 {t("top5")}
+            9 000 {t("top5")}
           </h3>
           <p className="text-sm text-kulrang">{t("top7")}</p>
         </div>
@@ -130,7 +130,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
             30 {t("top4")}
           </h2>
           <h3 className={`text-2xl mb-[10px] font-semibold `}>
-            75 000 {t("top5")}
+            35 000 {t("top5")}
           </h3>
           <p className="text-sm text-kulrang">{t("top8")}</p>
         </div>
@@ -189,7 +189,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
         {selectedDuration === "3" && (
           <div className="flex flex-col w-full px-5">
             <h3 className={`text-lg mb-[5px] font-semibold `}>
-              10 000 {t("top5")}
+              4 000 {t("top5")}
             </h3>
             <p className="text-sm text-kulrang mb-[30px]">{t("top6")}</p>
           </div>
@@ -197,7 +197,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
         {selectedDuration === "7" && (
           <div className="flex flex-col w-full px-5">
             <h3 className={`text-lg mb-[5px] font-semibold`}>
-              18 000 {t("top5")}
+              9 000 {t("top5")}
             </h3>
             <p className="text-sm text-kulrang mb-[30px]">{t("top7")}</p>
           </div>
@@ -205,7 +205,7 @@ const TopgaChiqarish = ({ text, title, setTopDay }) => {
         {selectedDuration === "30" && (
           <div className="flex flex-col w-full px-5">
             <h3 className={`text-lg mb-[5px] font-semibold `}>
-              75 000 {t("top5")}
+              35 000 {t("top5")}
             </h3>
             <p className="text-sm text-kulrang mb-[30px]">{t("top8")}</p>
           </div>
