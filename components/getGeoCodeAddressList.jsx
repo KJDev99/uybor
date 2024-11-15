@@ -8,7 +8,7 @@ export const getGeoCodeAddressList = async (
   try {
     const params = {
       format: "json",
-      apikey: "dd3d8e42-b837-42e6-8f97-5dab7d542d03",
+      apikey: "a2617277-0573-40b0-a017-85d5da6270eb",
       geocode: geocoder,
       sco: "latlong",
       lang: "ru-RU",

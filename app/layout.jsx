@@ -6,29 +6,6 @@ import ClientProvider from "@/components/ClientProvider";
 // import { useEffect } from "react";
 
 const MainLayout = ({ children }) => {
-  // useEffect(() => {
-  //   // Google Tag Manager and Analytics initialization
-  //   const gtagScript = document.createElement("script");
-  //   gtagScript.src =
-  //     "https://www.googletagmanager.com/gtag/js?id=AW-16740535290";
-  //   gtagScript.async = true;
-  //   document.head.appendChild(gtagScript);
-
-  //   const gtagInitScript = document.createElement("script");
-  //   gtagInitScript.innerHTML = `
-  //     window.dataLayer = window.dataLayer || [];
-  //     function gtag(){dataLayer.push(arguments);}
-  //     gtag('js', new Date());
-  //     gtag('config', 'AW-16740535290');
-  //   `;
-  //   document.head.appendChild(gtagInitScript);
-
-  //   // Cleanup function to remove scripts on unmount
-  //   return () => {
-  //     document.head.removeChild(gtagScript);
-  //     document.head.removeChild(gtagInitScript);
-  //   };
-  // }, []);
   return (
     <html>
       <head>
@@ -43,17 +20,7 @@ const MainLayout = ({ children }) => {
           content="UkR4dh55Cj77k3gf1-90XU77TKTWqS6iGqR-z1wC7Tw"
         />
         <link rel="icon" href="/images/logo3.png" type="image/svg+xml" />
-        {/* <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16740535290">
-</script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'AW-16740535290');
-</script> */}
-        {/* Yandex.Metrika counter */}
         <script
           type="text/javascript"
           dangerouslySetInnerHTML={{
@@ -73,6 +40,9 @@ const MainLayout = ({ children }) => {
             `,
           }}
         />
+        {/* <!-- Yandex.RTB --> */}
+        <script>window.yaContextCb=window.yaContextCb||[]</script>
+        <script src="https://yandex.ru/ads/system/context.js" async></script>
         <noscript>
           <div>
             <img
@@ -90,6 +60,21 @@ const MainLayout = ({ children }) => {
           <div className="min-h-[80vh] h-max">{children}</div>
           <Footer />
         </ClientProvider>
+        {/* <!-- Yandex.RTB R-A-12881203-2 --> */}
+        <div id="yandex_rtb_R-A-12881203-2"></div>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.yaContextCb = window.yaContextCb || [];
+              window.yaContextCb.push(() => {
+                Ya.Context.AdvManager.render({
+                  blockId: "R-A-12881203-2",
+                  renderTo: "yandex_rtb_R-A-12881203-2",
+                });
+              });
+            `,
+          }}
+        ></script>
       </body>
     </html>
   );
