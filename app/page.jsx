@@ -23,26 +23,44 @@ const Page = (params) => {
   }, []);
 
   useEffect(() => {
-    // Google Tag Manager and Analytics initialization
-    const gtagScript = document.createElement("script");
-    gtagScript.src =
+    // Google Tag Manager initialization
+    const gtagScript1 = document.createElement("script");
+    gtagScript1.src =
       "https://www.googletagmanager.com/gtag/js?id=AW-16740535290";
-    gtagScript.async = true;
-    document.head.appendChild(gtagScript);
+    gtagScript1.async = true;
+    document.head.appendChild(gtagScript1);
 
-    const gtagInitScript = document.createElement("script");
-    gtagInitScript.innerHTML = `
+    const gtagInitScript1 = document.createElement("script");
+    gtagInitScript1.innerHTML = `
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'AW-16740535290');
     `;
-    document.head.appendChild(gtagInitScript);
+    document.head.appendChild(gtagInitScript1);
+
+    // Additional Google Analytics tag
+    const gtagScript2 = document.createElement("script");
+    gtagScript2.src =
+      "https://www.googletagmanager.com/gtag/js?id=G-MR794LVBPZ";
+    gtagScript2.async = true;
+    document.head.appendChild(gtagScript2);
+
+    const gtagInitScript2 = document.createElement("script");
+    gtagInitScript2.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-MR794LVBPZ');
+    `;
+    document.head.appendChild(gtagInitScript2);
 
     // Cleanup function to remove scripts on unmount
     return () => {
-      document.head.removeChild(gtagScript);
-      document.head.removeChild(gtagInitScript);
+      document.head.removeChild(gtagScript1);
+      document.head.removeChild(gtagInitScript1);
+      document.head.removeChild(gtagScript2);
+      document.head.removeChild(gtagInitScript2);
     };
   }, []);
 
