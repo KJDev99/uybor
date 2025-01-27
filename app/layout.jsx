@@ -19,6 +19,12 @@ const MainLayout = ({ children }) => {
           name="google-site-verification"
           content="UkR4dh55Cj77k3gf1-90XU77TKTWqS6iGqR-z1wC7Tw"
         />
+
+        <meta
+          name="google-site-verification"
+          content="InbzaIkrewXeIjjlHT6PFV17-hHEw8cJXGOQ4TSYo6k"
+        />
+
         <link rel="icon" href="/images/logo3.png" type="image/svg+xml" />
 
         <script

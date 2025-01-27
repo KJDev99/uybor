@@ -14,7 +14,7 @@ const Page = (params) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      const entries = [...params.entries()]; // Barcha parametrlardan massiv yaratamiz
+      const entries = [...params.entries()];
 
       if (entries.length > 0) {
         sessionStorage.setItem("referal", entries[0][0]);
@@ -23,7 +23,6 @@ const Page = (params) => {
   }, []);
 
   useEffect(() => {
-    // Google Tag Manager initialization
     const gtagScript1 = document.createElement("script");
     gtagScript1.src =
       "https://www.googletagmanager.com/gtag/js?id=AW-16740535290";
@@ -39,7 +38,6 @@ const Page = (params) => {
     `;
     document.head.appendChild(gtagInitScript1);
 
-    // Additional Google Analytics tag
     const gtagScript2 = document.createElement("script");
     gtagScript2.src =
       "https://www.googletagmanager.com/gtag/js?id=G-MR794LVBPZ";
@@ -55,7 +53,6 @@ const Page = (params) => {
     `;
     document.head.appendChild(gtagInitScript2);
 
-    // Cleanup function to remove scripts on unmount
     return () => {
       document.head.removeChild(gtagScript1);
       document.head.removeChild(gtagInitScript1);
