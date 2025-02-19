@@ -11,9 +11,12 @@ import ElonBlockSkeleton from "./ElonBlockSkeleton"; // Importing the skeleton c
 import api from "@/lib/api";
 import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 const TopElon = ({ count }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [lang, setLang] = useState(i18n.resolvedLanguage);
+
   const view = useSelector((state) => state.view);
   const currencyNow = useSelector((state) => state.currency);
   const dispatch = useDispatch();
@@ -200,6 +203,7 @@ const TopElon = ({ count }) => {
                 category.length == 1 ? t(category) : ""
               }  ${t("elonmavjud")}`}
         </h2>
+
         <div className="flex max-md:justify-between">
           <div className="flex items-center ">
             <p className="text-qora font-medium">{t("korish")}:</p>
@@ -237,6 +241,78 @@ const TopElon = ({ count }) => {
           </div>
         </div>
       </div>
+
+      {category != "" && (
+        <>
+          {t(category) == "Kvartiralar" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/kvartirauz1">
+                Toshkentda ijaraga kvartira
+              </Link>
+              <Link href="/subcategories/kvartirauz2">
+                Toshkentda ijaraga uy topish
+              </Link>
+              <Link href="/subcategories/kvartirauz3">
+                Toshkentda yangi uylar
+              </Link>
+            </div>
+          )}
+          {t(category) == "Квартиры" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/kvartiraru1">Квартиры в аренду</Link>
+              <Link href="/subcategories/kvartiraru2">Куплю квартиру</Link>
+              <Link href="/subcategories/kvartiraru3">Снять квартиру</Link>
+              <Link href="/subcategories/kvartiraru4">Суточные квартиры</Link>
+            </div>
+          )}
+          {t(category) == "Xovlilar" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/houseuz">Ijaraga dacha</Link>
+            </div>
+          )}
+          {t(category) == "Дома" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/houseru1">Аренда дача</Link>
+              <Link href="/subcategories/houseru2">Евро дом в Ташкенте</Link>
+            </div>
+          )}
+          {t(category) == "Ofislar" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/office">Toshkentda ijaraga ofis</Link>
+            </div>
+          )}
+          {t(category) == "Офисы" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/officeru1">Аренда офис</Link>
+              <Link href="/subcategories/officeru2">Помещение в аренду</Link>
+            </div>
+          )}
+          {t(category) == "Mehmonxona va dachalar" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/hotel">
+                Toshkentdagi arzon mehmonxonalar
+              </Link>
+            </div>
+          )}
+          {t(category) == "Гостиницы и дачи" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/hotelru1">Гостиницы в ташкенте</Link>
+              <Link href="/subcategories/hotelru2">Oтели в ташкенте</Link>
+            </div>
+          )}
+          {t(category) == "Do'konlar" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/shopuz">Ijaraga magazin</Link>
+            </div>
+          )}
+          {t(category) == "Магазины" && (
+            <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
+              <Link href="/subcategories/shopru">Аренда магазина</Link>
+            </div>
+          )}
+        </>
+      )}
+
       <div className="flex flex-col">
         {ads.length > 0 && (
           <h2 className="text-main mb-[30px] max-md:mb-[10px] font-semibold text-2xl max-md:text-lg">
