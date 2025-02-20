@@ -18,9 +18,12 @@ export default function Page() {
           <p>
             Toshkentda ijara kvartira izlayapsizmi? Endi ortiqcha vaqt sarflash,
             o‘nlab e’lonlarni ko‘rib chiqish shart emas!{" "}
-            <strong>Topuy.uz</strong> sizga Chilonzor, Sergeli, Yunusobod,
-            Mirobod, Yakkasaroy, Olmazor va boshqa mashhur hududlarda qulay,
-            xavfsiz va byudjetga mos ijara variantlarini taklif etadi.
+            <strong>Topuy.uz</strong> sizga{" "}
+            <strong>
+              Chilonzor, Sergeli, Yunusobod, Mirobod, Yakkasaroy, Olmazor
+            </strong>{" "}
+            va boshqa mashhur hududlarda qulay, xavfsiz va byudjetga mos ijara
+            variantlarini taklif etadi.
           </p>
 
           <h2 className="text-2xl font-semibold mt-4">Nega Aynan Topuy.uz?</h2>
@@ -100,10 +103,10 @@ export default function Page() {
             Bilan!
           </p>
           <p>
-            Agar siz Toshkentda arenda kvartira izlayotgan bo‘lsangiz,{" "}
-            <strong>Topuy.uz</strong> siz uchun eng yaxshi variantlarni
-            to‘pladi. Endi ortiqcha vaqt sarflash yoki ishonchsiz e’lonlarga
-            duch kelish shart emas.
+            Agar siz <strong>Toshkentda arenda kvartira</strong> izlayotgan
+            bo‘lsangiz, <strong>Topuy.uz</strong> siz uchun eng yaxshi
+            variantlarni to‘pladi. Endi ortiqcha vaqt sarflash yoki ishonchsiz
+            e’lonlarga duch kelish shart emas.
           </p>
           <p className="mt-4">
             Siz ham o‘zingizga mos keladigan kvartirani topish uchun hoziroq{" "}
@@ -111,6 +114,16 @@ export default function Page() {
               Topuy.uz
             </a>{" "}
             saytiga tashrif buyuring! 🏡
+          </p>
+          <p className="mt-4">
+            Arenda uylar Toshkent:{" "}
+            <strong>Eng yaxshi joyda yashash imkoniyatlari</strong>
+          </p>
+          <p>
+            Agar siz Toshkentda arendaga uy izlayotgan bo'lsangiz, Topuyda turli
+            hududlar va turli narxdagi uylar mavjud. Toshkentning barcha
+            tumanlarida arenda uylar bo'yicha keng tanlov mavjud, shuning uchun
+            siz o'zingizga mos uy topishingiz mumkin.
           </p>
         </div>
       </div>

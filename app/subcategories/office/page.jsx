@@ -27,21 +27,18 @@ export default function Page() {
           </h2>
           <ul className="list-disc pl-5">
             <li>
-              🏢 <strong>Ishbilarmonlik markazida</strong> joylashgan ijaraga
-              ofis turlari
+              Ishbilarmonlik markazida joylashgan ijaraga (arenda) ofis
+              turlarilari
             </li>
             <li>
-              💼 <strong>Startaplar va kichik bizneslar</strong> uchun qulay
-              ofis ijarasi
+              Startaplar va kichik bizneslar uchun qulay ofis ijarasi (arenda)
+              takliflari
             </li>
             <li>
-              🏠 <strong>Yangi ta'mirdan chiqqan</strong> va tayyor holda
-              foydalanishga tayyor ofislar
+              Yangi ta'mirdan chiqqan va tayyor holda foydalanishga tayyor
+              ofislar
             </li>
-            <li>
-              ⏳ <strong>Uzoq muddatli va qisqa muddatli</strong> ofis ijarasi
-              imkoniyatlari
-            </li>
+            <li>Uzoq muddatli va qisqa muddatli ofis ijarasi imkoniyatlari</li>
           </ul>
 
           <h2 className="text-2xl font-semibold mt-4">Nima uchun Topuy.uz?</h2>
@@ -61,21 +58,25 @@ export default function Page() {
           </ul>
 
           <p className="mt-4 font-bold text-lg">
-            Toshkentda <strong>ofis arenda</strong> izlayotgan bo‘lsangiz, hozir{" "}
+            <strong>Toshkentda ofis arenda</strong> izlayotgan bo‘lsangiz, hozir{" "}
             <strong>Topuy.uz</strong> saytidan eng yaxshi takliflarni ko‘rib
             chiqing! 🚀
           </p>
 
-          <h2 className="text-2xl font-semibold mt-4">
-            Toshkentda eng yaxshi ofis arenda imkoniyatlari
-          </h2>
+          <p className="mt-4">
+            Bizning Topuy.uz saytida siz o‘zingizga qulay va shinam ijara
+            (arenda) ofis variantlarini topishingiz mumkin. Shahar markazidan
+            tortib, biznes uchun qulay bo‘lgan turli ofis arenda takliflari
+            faqat bizda!
+          </p>
+
           <ul className="list-disc pl-5">
             <li>
-              📍 <strong>Istalgan lokatsiya</strong> – Yunusobod, Chilonzor,
+              🏢 <strong>Istalgan lokatsiya</strong> – Yunusobod, Chilonzor,
               Yashnobod va boshqa tumanlar
             </li>
             <li>
-              🏢 <strong>Shinam va ko‘rkam ofislar</strong> – Yangi va tayyor
+              💼 <strong>Shinam va ko‘rkam ofislar</strong> – Yangi va tayyor
               ishlashga mos variantlar
             </li>
             <li>

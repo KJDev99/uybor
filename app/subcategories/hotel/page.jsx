@@ -31,17 +31,15 @@ export default function Page() {
           </h2>
           <ul className="list-disc pl-5">
             <li>
-              🏨 <strong>Markazga yaqin</strong> arzon mehmonxona variantlari
+              Markazga yaqin <strong>arzon mehmonxona</strong> variantlari
+            </li>
+            <li>Toshkent aeroporti va vokzal yaqinidagi mehmonxonalar</li>
+            <li>
+              Ishbilarmonlar va sayohatchilar uchun qulay{" "}
+              <strong>arzon hotel Tashkent</strong> takliflari
             </li>
             <li>
-              ✈️ <strong>Aeroport va vokzal yaqinidagi</strong> mehmonxonalar
-            </li>
-            <li>
-              💼 <strong>Ishbilarmonlar va sayohatchilar</strong> uchun qulay
-              arzon hotel Tashkent takliflari
-            </li>
-            <li>
-              🛏 <strong>Shinam va qulay</strong> Toshkentdagi arzon mehmonxona
+              Shinam va qulay <strong>Toshkentdagi arzon mehmonxona</strong>
               tanlovlari
             </li>
           </ul>
@@ -49,7 +47,7 @@ export default function Page() {
           <h2 className="text-2xl font-semibold mt-4">
             Nima uchun Topuy.uz orqali mehmonxona tanlash kerak?
           </h2>
-          <ul className="list-disc pl-5">
+          <ul className="pl-5">
             <li>
               ✅ <strong>Eng yaxshi narxlar</strong> – Toshkentdagi
               mehmonxonalarning eng yaxshi takliflari bir joyda!

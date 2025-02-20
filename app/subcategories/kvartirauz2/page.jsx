@@ -26,16 +26,19 @@ export default function Page() {
             Sergeli-2 ijaraga uy – qulay va shinam kvartiralar
           </h2>
           <p>
-            Ijaraga uy qidiryapsizmi? Sergeli-2 dahasida qulay va shinam uylarni
-            ijaraga oling! Xavfsiz hudud, yaxshi infratuzilma va barcha
-            sharoitlarga ega kvartiralar. Tezroq bog‘laning va o‘z orzuingizdagi
-            uyga ega bo‘ling!
+            Ijaraga uy qidiryapsizmi? <strong>Sergeli-2</strong> dahasida qulay
+            va shinam uylarni ijaraga oling! Xavfsiz hudud, yaxshi infratuzilma
+            va barcha sharoitlarga ega kvartiralar. Tezroq bog‘laning va o‘z
+            orzuingizdagi uyga ega bo‘ling!
           </p>
 
           <h2 className="text-2xl font-semibold mt-4">
             Siz izlayotgan eng yaxshi ijara uylari
           </h2>
-          <ul className="list-disc pl-5">
+          <p className="mt-4">
+            Quyidagi hududlarda turli xil uy-joy ijarasi mavjud:
+          </p>
+          <ul className="list-disc pl-5 mt-1">
             <li>
               <strong>Sergeli 2 ijaraga uy</strong> – qulay infratuzilma va
               shinam xonadonlar.
