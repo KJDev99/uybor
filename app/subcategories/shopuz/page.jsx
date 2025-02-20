@@ -24,7 +24,7 @@ export default function Page() {
           <h2 className="text-2xl font-semibold text-gray-800 mt-6">
             Biz taklif qilayotgan magazin arendasining qanday afzalliklari bor?
           </h2>
-          <ul className="list-disc pl-5 space-y-2 text-gray-600">
+          <ul className="pl-5 space-y-2 text-gray-600">
             <li>
               ✔️ Keng tanlov – Turli maydonga ega do‘konlar mavjud: kichik
               butiklardan yirik savdo markazlarigacha.
