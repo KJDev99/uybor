@@ -62,7 +62,7 @@ const Footer = () => {
           <a
             className="text-logoOch font-black text-sm"
             target="blank"
-            href="https://instagram.com/upgrow.uz"
+            href="https://upgrow.uz/"
           >
             Upgrow agency
           </a>
