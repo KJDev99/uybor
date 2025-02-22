@@ -246,68 +246,86 @@ const TopElon = ({ count }) => {
         <>
           {t(category) == "Kvartiralar" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
-              <Link href="/subcategories/kvartirauz1">
+              <Link href="/subcategories/chilonzor-arenda-kvartira">
                 Toshkentda ijaraga kvartira
               </Link>
-              <Link href="/subcategories/kvartirauz2">
+              <Link href="/subcategories/ijaraga-uy">
                 Toshkentda ijaraga uy topish
               </Link>
-              <Link href="/subcategories/kvartirauz3">
+              <Link href="/subcategories/yangi-uylar">
                 Toshkentda yangi uylar
               </Link>
             </div>
           )}
           {t(category) == "Квартиры" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
-              <Link href="/subcategories/kvartiraru1">Квартиры в аренду</Link>
-              <Link href="/subcategories/kvartiraru2">Куплю квартиру</Link>
-              <Link href="/subcategories/kvartiraru3">Снять квартиру</Link>
-              <Link href="/subcategories/kvartiraru4">Суточные квартиры</Link>
+              <Link href="/subcategories/kvartira-arenda-tashkent">
+                Квартиры в аренду
+              </Link>
+              <Link href="/subcategories/kuplyu-kvartiru-v-tashkente">
+                Куплю квартиру
+              </Link>
+              <Link href="/subcategories/snyat-kvartiru-v-tashkente">
+                Снять квартиру
+              </Link>
+              <Link href="/subcategories/sutochnie-kvartiri-v-tashkente">
+                Суточные квартиры
+              </Link>
             </div>
           )}
-          {t(category) == "Xovlilar" && (
+          {/* {t(category) == "Xovlilar" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
               <Link href="/subcategories/houseuz">Ijaraga dacha</Link>
             </div>
-          )}
+          )} */}
           {t(category) == "Дома" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
-              <Link href="/subcategories/houseru1">Аренда дача</Link>
-              <Link href="/subcategories/houseru2">Евро дом в Ташкенте</Link>
+              {/* <Link href="/subcategories/houseru1">Аренда дача</Link> */}
+              <Link href="/subcategories/evrodom-v-tashkente">
+                Евро дом в Ташкенте
+              </Link>
             </div>
           )}
           {t(category) == "Ofislar" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
-              <Link href="/subcategories/office">Toshkentda ijaraga ofis</Link>
+              <Link href="/subcategories/arenda-ofis">
+                Toshkentda ijaraga ofis
+              </Link>
             </div>
           )}
           {t(category) == "Офисы" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
-              <Link href="/subcategories/officeru1">Аренда офис</Link>
-              <Link href="/subcategories/officeru2">Помещение в аренду</Link>
+              <Link href="/subcategories/ofis-v-arendu-tashkent">
+                Аренда офис
+              </Link>
+              <Link href="/subcategories/pomeshenie-v-arendu">
+                Помещение в аренду
+              </Link>
             </div>
           )}
           {t(category) == "Mehmonxona va dachalar" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
-              <Link href="/subcategories/hotel">
+              <Link href="/subcategories/arzon-mehmonxona">
                 Toshkentdagi arzon mehmonxonalar
               </Link>
+              <Link href="/subcategories/dacha-arenda">Ijaraga dacha</Link>
             </div>
           )}
           {t(category) == "Гостиницы и дачи" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
-              <Link href="/subcategories/hotelru1">Гостиницы в ташкенте</Link>
-              <Link href="/subcategories/hotelru2">Oтели в ташкенте</Link>
+              <Link href="/subcategories/gostinitsy-v-tashkente">Гостиницы в ташкенте</Link>
+              <Link href="/subcategories/oteli-tashkenta">Oтели в ташкенте</Link>
+              <Link href="/subcategories/arenda-dachi-v-tashkente">Аренда дача</Link>
             </div>
           )}
           {t(category) == "Do'konlar" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
-              <Link href="/subcategories/shopuz">Ijaraga magazin</Link>
+              <Link href="/subcategories/arenda-magazin">Ijaraga magazin</Link>
             </div>
           )}
           {t(category) == "Магазины" && (
             <div className="flex category_scroll gap-10 text-main italic cursor-pointer underline text-nowrap overflow-x-auto">
-              <Link href="/subcategories/shopru">Аренда магазина</Link>
+              <Link href="/subcategories/magazin-arenda">Аренда магазина</Link>
             </div>
           )}
         </>
